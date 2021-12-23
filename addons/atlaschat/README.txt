@@ -1,0 +1,2 @@
+If you already have atlaschat installed then you only need to copy the cl_init.lua file into your atlaschat addon.
+If you have modified atlaschat files in any way then you have to migrate over your changes. Do not complain to me.

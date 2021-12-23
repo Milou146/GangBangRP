@@ -1,0 +1,1 @@
++ Fixed Error in hook Think: addons/atlaschat/lua/atlaschat/cl_init.lua:997: attempt to call field 'GetValue' (a nil value)
