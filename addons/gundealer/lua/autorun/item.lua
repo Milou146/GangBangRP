@@ -76,7 +76,7 @@ ItemShop[10] = {
 	Price = 800,
 }
 
--- BOI PACK --
+-- BOI PACK -- test - plk
 -- PISTOL : arccw_bo2_browninghp, arccw_bo1_makarov, arccw_bo1_python
 -- SMG : arccw_bo1_uzi, arccw_bo1_mac11, arccw_bo1_spectre, arccw_bo1_skorpion, arccw_bo1_mpl, arccw_bo1_kiparis, arccw_bo1_pm63
 -- ASSAUT RIFLE / DMR: arccw_bo1_ak74u, arccw_bo1_m14
