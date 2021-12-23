@@ -1,0 +1,86 @@
+[22:21:42] New map: rp_southside_day
+[22:22:03] Client "OPDrewski" connected.
+[22:22:31] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned vehicle models/gta4/vehicles/turismo.mdl
+[22:22:43] *** Reacker Smith [Joqueez] se met au garde à vous
+[22:22:49] Client "OPDrewski" spawned in server <STEAM_0:0:48581500> (took 46 seconds).
+[22:23:41] OPDrewski<STEAM_0:0:48581500> spawned vehicle models/gta4/vehicles/caddy.mdl
+[22:25:08] OPDrewski<STEAM_0:0:48581500> spawned vehicle models/gta4/vehicles/caddy.mdl
+[22:25:49] OPDrewski<STEAM_0:0:48581500> spawned vehicle models/gta4/vehicles/caddy.mdl
+[22:27:02] OPDrewski<STEAM_0:0:48581500> spawned vehicle models/gta4/vehicles/gburrito.mdl
+[22:29:41] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned vehicle models/gta4/vehicles/turismo.mdl
+[22:29:46] OPDrewski<STEAM_0:0:48581500> spawned vehicle models/gta4/vehicles/sultan.mdl
+[22:30:47] OPDrewski<STEAM_0:0:48581500> spawned sent arccw_ammo_pistol
+[22:30:48] OPDrewski<STEAM_0:0:48581500> spawned sent arccw_ammo_pistol
+[22:30:49] OPDrewski<STEAM_0:0:48581500> spawned sent arccw_ammo_pistol
+[22:30:49] OPDrewski<STEAM_0:0:48581500> spawned sent arccw_ammo_pistol
+[22:30:49] OPDrewski<STEAM_0:0:48581500> spawned sent arccw_ammo_pistol
+[22:30:49] OPDrewski<STEAM_0:0:48581500> spawned sent arccw_ammo_pistol
+[22:30:50] OPDrewski<STEAM_0:0:48581500> spawned sent arccw_ammo_pistol
+[22:30:50] OPDrewski<STEAM_0:0:48581500> spawned sent arccw_ammo_pistol
+[22:30:50] OPDrewski<STEAM_0:0:48581500> spawned sent arccw_ammo_pistol
+[22:30:50] OPDrewski<STEAM_0:0:48581500> spawned sent arccw_ammo_pistol
+[22:30:50] OPDrewski<STEAM_0:0:48581500> spawned sent arccw_ammo_pistol
+[22:30:50] OPDrewski<STEAM_0:0:48581500> spawned sent arccw_ammo_pistol
+[22:30:50] OPDrewski<STEAM_0:0:48581500> spawned sent arccw_ammo_pistol
+[22:33:35] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:35:29] Reacker Smith [Joqueez] killed OPDrewski using player
+[22:36:26] OPDrewski<STEAM_0:0:48581500> spawned sent item_suit
+[22:36:27] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:36:27] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:36:27] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:36:27] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:36:27] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:36:27] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:36:28] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:36:30] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:36:31] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:36:31] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:36:31] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:36:54] OPDrewski killed Reacker Smith [Joqueez] using player
+[22:38:19] OPDrewski killed Reacker Smith [Joqueez] using player
+[22:38:35] OPDrewski<STEAM_0:0:48581500> spawned sent arccw_ammo_buckshot_large
+[22:38:47] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:38:48] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:38:48] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:38:48] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:38:48] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:38:48] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:38:48] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:38:50] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:38:50] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:38:51] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:38:58] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned model models/props_c17/furniturecouch001a.mdl
+[22:39:10] OPDrewski<STEAM_0:0:48581500> spawned vehicle models/gta4/vehicles/futo.mdl
+[22:40:20] OPDrewski killed Reacker Smith [Joqueez] using player
+[22:41:02] OPDrewski killed Reacker Smith [Joqueez] using arccw_bo1_m202rocket
+[22:41:02] OPDrewski suicided!
+[22:42:12] Reacker Smith [Joqueez] killed OPDrewski using player
+[22:43:12] OPDrewski killed Reacker Smith [Joqueez] using player
+[22:44:10] Reacker Smith [Joqueez] killed OPDrewski using arccw_bo1_40mm_he
+[22:45:07] OPDrewski killed Reacker Smith [Joqueez] using arccw_bo1_bknife_projectile
+[22:47:04] OPDrewski killed Reacker Smith [Joqueez] using player
+[22:47:14] Reacker Smith [Joqueez] suicided!
+[22:47:30] OPDrewski killed Reacker Smith [Joqueez] using player
+[22:47:36] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:47:36] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:47:36] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:47:36] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:47:37] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:47:37] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:47:37] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:47:37] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:47:46] OPDrewski<STEAM_0:0:48581500> spawned sent arccw_ammo_smg1_large
+[22:47:48] OPDrewski<STEAM_0:0:48581500> spawned sent arccw_ammo_pistol_large
+[22:48:22] Reacker Smith [Joqueez] killed OPDrewski using player
+[22:49:03] OPDrewski killed Reacker Smith [Joqueez] using player
+[22:51:58] OPDrewski<STEAM_0:0:48581500> spawned sent arccw_ammo_smg1_large
+[22:52:05] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:52:05] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:52:05] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:52:05] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:52:05] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:52:06] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:52:06] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:52:09] OPDrewski<STEAM_0:0:48581500> spawned sent item_healthvial
+[22:53:56] OPDrewski killed Reacker Smith [Joqueez] using player
+[23:05:16] Server is shutting down/changing levels.

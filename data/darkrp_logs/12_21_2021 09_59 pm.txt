@@ -1,0 +1,5 @@
+Tue Dec 21 21:59:16 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) has joined the game
+Tue Dec 21 21:59:16 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) spawned
+Tue Dec 21 22:01:24 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) spawned SENT cf_cigarette_machine
+Tue Dec 21 22:01:27 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) spawned SENT cf_engine_upgrade
+Tue Dec 21 22:03:32 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) spawned SENT cf_cigarette_machine

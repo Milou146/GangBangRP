@@ -1,0 +1,20 @@
+[22:55:24] New map: rp_southside_day
+[23:03:25] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned model models/props_c17/suitcase_passenger_physics.mdl
+[23:03:29] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned model models/props_combine/breenbust.mdl
+[23:03:31] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned model models/props_combine/breenbust.mdl
+[23:04:03] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned model models/props_lab/binderbluelabel.mdl
+[23:04:04] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned model models/props_lab/binderbluelabel.mdl
+[23:04:05] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned model models/props_lab/binderbluelabel.mdl
+[23:22:13] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned vehicle models/gta4/vehicles/comet.mdl
+[23:25:37] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned vehicle models/gta4/vehicles/apc.mdl
+[23:26:40] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned vehicle models/gta4/vehicles/police.mdl
+[23:28:00] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned vehicle models/gta4/vehicles/police4.mdl
+[23:29:18] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned vehicle models/gta4/vehicles/police.mdl
+[23:29:46] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned vehicle models/gta4/vehicles/fbi.mdl
+[23:30:17] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned vehicle models/gta4/vehicles/perennial.mdl
+[23:31:14] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned vehicle models/gta4/vehicles/turismo.mdl
+[23:31:41] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned vehicle models/gta4/vehicles/infernus.mdl
+[23:32:19] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned vehicle models/gta4/vehicles/f620.mdl
+[23:32:25] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned vehicle models/gta4/vehicles/bullet.mdl
+[23:32:29] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned vehicle models/gta4/vehicles/turismo.mdl
+[23:33:50] Server is shutting down/changing levels.

@@ -1,0 +1,17 @@
+[22:47:15] New map: rp_southside_day
+[22:48:14] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned sent npc_shop
+[23:02:12] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned sent npc_shop
+[23:04:49] Server is shutting down/changing levels.
+
+
+
+[23:05:23] New map: rp_southside_day
+[23:05:46] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned sent npc_shop
+[23:08:59] Server is shutting down/changing levels.
+
+
+
+[23:10:49] New map: rp_southside_day
+[23:11:09] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned sent npc_shop
+[23:21:42] Reacker Smith [Joqueez] suicided!
+[23:31:19] Server is shutting down/changing levels.

@@ -1,0 +1,1 @@
+{"MoveableModel":false,"CacheOnReceive":false,"SpinModel":false,"DefaultDealerTab":1.0,"SortAsc":false,"Language":"french"}

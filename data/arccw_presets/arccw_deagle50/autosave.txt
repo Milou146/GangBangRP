@@ -1,0 +1,10 @@
+
+go_supp_qdss
+foregrip_pistol
+tac_green,0.5,-1
+grip_sturdy
+stock_sturdy
+
+
+
+

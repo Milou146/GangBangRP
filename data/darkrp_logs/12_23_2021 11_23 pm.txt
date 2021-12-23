@@ -1,0 +1,27 @@
+Thu Dec 23 23:23:42 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) has joined the game
+Thu Dec 23 23:23:42 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) spawned
+Thu Dec 23 23:24:24 2021	OPDrewski (STEAM_0:0:48581500) has joined the game
+Thu Dec 23 23:24:24 2021	OPDrewski (STEAM_0:0:48581500) spawned
+Thu Dec 23 23:26:24 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) spawned SENT npc_shop
+Thu Dec 23 23:27:42 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348): /addmoney Reacker 999999999
+Thu Dec 23 23:27:42 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) added €999,999,999 to Reacker Smith [Joqueez]'s wallet
+Thu Dec 23 23:28:30 2021	OPDrewski was killed by Reacker Smith [Joqueez] with a arccw_bo3_bloodhound
+Thu Dec 23 23:28:41 2021	OPDrewski (STEAM_0:0:48581500) spawned
+Thu Dec 23 23:29:34 2021	OPDrewski was killed by Reacker Smith [Joqueez] with a arccw_bo1_makarov
+Thu Dec 23 23:30:04 2021	OPDrewski (STEAM_0:0:48581500) spawned
+Thu Dec 23 23:30:42 2021	Reacker Smith [Joqueez] was killed by OPDrewski with a arccw_waw_tt33
+Thu Dec 23 23:30:52 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) spawned
+Thu Dec 23 23:31:07 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348): /addmoney REACKER 9999
+Thu Dec 23 23:31:07 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) added €9,999 to Reacker Smith [Joqueez]'s wallet
+Thu Dec 23 23:31:39 2021	OPDrewski was killed by Reacker Smith [Joqueez] with a arccw_waw_tt33
+Thu Dec 23 23:32:04 2021	OPDrewski (STEAM_0:0:48581500) spawned
+Thu Dec 23 23:33:12 2021	OPDrewski was killed by Reacker Smith [Joqueez] with a arccw_waw_tt33
+Thu Dec 23 23:33:26 2021	OPDrewski (STEAM_0:0:48581500) spawned
+Thu Dec 23 23:36:30 2021	OPDrewski was killed by Reacker Smith [Joqueez] with a arccw_waw_tt33
+Thu Dec 23 23:36:39 2021	OPDrewski (STEAM_0:0:48581500) spawned
+Thu Dec 23 23:37:42 2021	OPDrewski was killed by Reacker Smith [Joqueez] with a arccw_bo3_c96
+Thu Dec 23 23:37:52 2021	OPDrewski (STEAM_0:0:48581500) spawned
+Thu Dec 23 23:40:47 2021	OPDrewski was killed by Entity [0][worldspawn] with a unknown
+Thu Dec 23 23:40:55 2021	OPDrewski (STEAM_0:0:48581500) disconnected
+Thu Dec 23 23:44:16 2021	Reacker Smith [Joqueez] was killed by Himself with a suicide trick
+Thu Dec 23 23:44:27 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) spawned

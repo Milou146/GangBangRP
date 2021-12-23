@@ -1,0 +1,11 @@
+go_optic_barska,0.5,-1
+
+go_supp_ssq
+
+
+
+
+
+
+
+

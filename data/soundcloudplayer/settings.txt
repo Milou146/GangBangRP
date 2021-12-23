@@ -1,0 +1,1 @@
+{"plrsize":"default","volume":100.0,"visualizer":0.0,"admin":0.0}

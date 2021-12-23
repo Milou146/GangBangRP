@@ -1,0 +1,98 @@
+[
+	{
+		"price": "19.99",
+		"size": "75",
+		"id": "main",
+		"trailer": "https://www.youtube.com/watch?v=MeFI1sXFrAg",
+		"cur_ver": "1.7566",
+		"pos_y": "0.4",
+		"link": "https://scriptfodder.com/scripts/view/21",
+		"title": "Main",
+		"features": [
+			"FastDL already set up",
+			"Trailer attachment",
+			"8 type of lights",
+			"Passenger seats",
+			"Exhaust effects",
+			"3D HUD",
+			"Third person view",
+			"Door sounds",
+			"Car dealer NPC",
+			"Horn",
+			"Multi-language",
+			"Damage system",
+			"Works on any vehicle",
+			"And many more"
+		],
+		"color": {
+			"r": "255",
+			"b": "0",
+			"a": "205",
+			"g": "0"
+		},
+		"pos_x": "0.5",
+		"name": "Main package",
+		"price_full": "25.00"
+	},
+	{
+		"price": "15.99",
+		"size": "65",
+		"id": "els",
+		"trailer": "https://www.youtube.com/watch?v=OpyPaAnpSM0",
+		"cur_ver": "1.1325",
+		"pos_y": "0.5",
+		"link": "https://scriptfodder.com/scripts/view/489",
+		"title": "ELS",
+		"features": [
+			"FastDL already set up",
+			"Trailer attachment",
+			"Real life police radio",
+			"Emergency lights",
+			"High quality sirens",
+			"3D HUD",
+			"Light codes",
+			"Siren codes",
+			"Bodygroup support",
+			"Horn",
+			"Multi-language",
+			"Key selection",
+			"Works on any vehicle",
+			"And many more"
+		],
+		"color": {
+			"r": "255",
+			"b": "0",
+			"a": "205",
+			"g": "155"
+		},
+		"pos_x": "0.2",
+		"name": "Emergency lightening system",
+		"price_full": "20.00"
+	},
+	{
+		"price": "0.00",
+		"size": "65",
+		"id": "hdl",
+		"trailer": "https://www.youtube.com/watch?v=xq8LGjftICI",
+		"cur_ver": "1.101",
+		"pos_y": "0.5",
+		"link": "https://steamcommunity.com/sharedfiles/filedetails/?id=345123840",
+		"title": "Tool",
+		"features": [
+			"Manipulate any vehicle",
+			"Change handling ingame",
+			"Settings applied real-time",
+			"Ingame meniu",
+			"Multi-language"
+		],
+		"color": {
+			"r": "100",
+			"b": "0",
+			"a": "205",
+			"g": "205"
+		},
+		"pos_x": "0.8",
+		"name": "Handling editor",
+		"price_full": "0.00"
+	}
+]

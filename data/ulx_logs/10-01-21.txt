@@ -1,0 +1,58 @@
+[19:55:53] New map: mvsa_cscdesert
+[19:56:06] Client "Milou" connected.
+[19:56:43] Client "Milou" spawned in server <STEAM_0:0:89713489> (took 37 seconds).
+[19:58:40] Reacker Smith [Joqueez] suicided!
+[20:00:53] Dropped "Milou" from server<STEAM_0:0:89713489>
+
+
+
+[20:08:55] New map: mvsa_cscdesert
+[20:09:18] Server is shutting down/changing levels.
+
+
+
+[20:09:29] New map: mvsa_cscdesert
+[20:09:43] Client "Milou" connected.
+[20:10:04] Client "Milou" spawned in server <STEAM_0:0:89713489> (took 21 seconds).
+[20:10:48] Reacker Smith [Joqueez] suicided!
+
+
+
+[20:28:28] New map: mvsa_cscdesert
+
+
+
+[20:29:59] New map: mvsa_cscdesert
+[20:30:29] Server is shutting down/changing levels.
+
+
+
+[20:31:05] New map: mvsa_cscdesert
+[20:31:23] Client "Milou" connected.
+[20:31:42] Client "Milou" spawned in server <STEAM_0:0:89713489> (took 19 seconds).
+[20:32:14] Milou suicided!
+[20:43:58] Reacker Smith [Joqueez] was killed by npc_vj_zss_zombfast2
+[20:44:01] Milou was killed by npc_vj_zss_zombfast2
+[20:45:01] Reacker Smith [Joqueez] suicided!
+[20:46:14] Milou killed Reacker Smith [Joqueez] using player
+[20:53:12] Milou was killed by npc_vj_zss_cfastzombie
+[20:53:31] Milou: !menu
+[20:53:50] (SILENT) Milou began spectating Reacker Smith [Joqueez]
+[20:53:58] Reacker Smith [Joqueez] was killed by npc_vj_zss_zombfast4
+[20:54:15] Milou: !menu
+[20:54:18] (SILENT) Milou stopped spectating Reacker Smith [Joqueez]
+[20:54:18] (SILENT) Milou began spectating Reacker Smith [Joqueez]
+[20:54:36] Milou: !unspectate
+[20:54:43] Reacker Smith [Joqueez]: !menu
+[20:54:46] Milou: !menu
+[20:54:50] (SILENT) Reacker Smith [Joqueez] began spectating Milou
+[20:54:52] (SILENT) Reacker Smith [Joqueez] stopped spectating Milou
+[20:54:52] (SILENT) Reacker Smith [Joqueez] began spectating Milou
+[20:54:56] (SILENT) Reacker Smith [Joqueez] stopped spectating Milou
+[20:54:56] (SILENT) Milou stopped spectating Reacker Smith [Joqueez]
+[20:57:32] Server is shutting down/changing levels.
+
+
+
+[21:16:45] New map: rp_asheville
+[21:31:42] Server is shutting down/changing levels.

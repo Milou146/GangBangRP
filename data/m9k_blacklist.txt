@@ -1,0 +1,1 @@
+This file is used for blacklisting M9K weapons. It will ONLY work on M9K weapons, no other weapons can be blacklisted here!

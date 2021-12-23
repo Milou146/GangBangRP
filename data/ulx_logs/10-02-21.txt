@@ -1,0 +1,51 @@
+[19:43:47] New map: mvsa_cscdesert
+[19:46:23] Reacker Smith [Joqueez] was killed by npc_vj_zss_zombfast1
+[19:49:32] Server is shutting down/changing levels.
+
+
+
+[19:51:04] New map: rp_asheville
+[19:57:04] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC sent_vj_zss_allrand_spawner
+[19:57:07] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC sent_vj_zss_allrand_spawner
+[19:57:10] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC sent_vj_zss_allrand
+[19:57:11] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC sent_vj_zss_allrand
+[19:57:14] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC sent_vj_zss_allrand_spawner
+[19:57:16] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC sent_vj_zss_allrand_spawner
+[19:57:17] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC sent_vj_zss_allrand_spawner
+[20:05:58] Reacker Smith [Joqueez] was killed by npc_vj_zss_zombfast2
+[20:06:07] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC npc_vj_zss_burnzie
+[20:06:15] Reacker Smith [Joqueez] was killed by entityflame
+[20:06:21] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC npc_vj_zss_cfastzombie
+[20:06:28] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC npc_vj_zss_cpzombie
+[20:06:36] Reacker Smith [Joqueez] was killed by npc_vj_zss_cpzombie
+[20:06:40] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC npc_vj_zss_zombfast2
+[20:06:42] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC npc_vj_zss_zombfast2
+[20:07:01] Reacker Smith [Joqueez] was killed by npc_vj_zss_zombfast2
+[20:07:07] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC npc_vj_zss_zombfast3
+[20:07:23] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC npc_vj_zss_zombfast6
+[20:07:28] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC npc_vj_zss_zminiboss
+[20:07:36] Reacker Smith [Joqueez] was killed by npc_vj_zss_zminiboss
+[20:07:44] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC npc_vj_zss_zombie1
+[20:07:51] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC npc_vj_zss_zhulk
+[20:07:56] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC npc_vj_zss_zp1
+[20:08:11] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC npc_vj_zss_undeadstalker
+[20:08:16] Reacker Smith [Joqueez] was killed by npc_vj_zss_undeadstalker
+[20:08:22] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC npc_vj_zss_zboss
+[20:08:28] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned NPC npc_vj_zss_zp2
+[20:13:29] Server is shutting down/changing levels.
+
+
+
+[20:14:15] New map: gm_construct
+[20:15:58] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned model models/vanderagsn/rp_asheville/pipes/c_expos_factory_pipe_16_curve.mdl
+[20:16:03] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned model models/vanderagsn/rp_asheville/port/c_expos_storagebank_05.mdl
+[20:16:19] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned model models/vanderagsn/rp_asheville/teaser/c_expos_tv_01c.mdl
+[20:16:27] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned effect models/vanderagsn/rp_asheville/grass/globalcluster/c_expos_combinedgrass_010.mdl
+[20:16:41] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned effect models/vanderagsn/rp_asheville/grass/globalcluster/c_expos_combinedgrass_06.mdl
+[20:17:00] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned effect models/vanderagsn/rp_asheville/grass/globalcluster/c_expos_combinedgrass_012.mdl
+[20:17:07] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned model models/vanderagsn/rp_asheville/monastery/expos_monastery_windows_03_01a.mdl
+[20:17:21] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned model models/vanderagsn/rp_asheville/monastery/expos_archs_10a.mdl
+[20:17:27] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned model models/vanderagsn/rp_asheville/fixes/table_monitor_02s.mdl
+[20:17:32] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned model models/vanderagsn/rp_asheville/combiners/airduct_hvac_combiner_1b.mdl
+[20:17:43] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned effect models/vanderagsn/rp_asheville/combiners/acunit_lod_cluster_09.mdl
+[20:17:50] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned model models/vanderagsn/rp_asheville/buildthecities/c_expos_building_city_01_base.mdl
