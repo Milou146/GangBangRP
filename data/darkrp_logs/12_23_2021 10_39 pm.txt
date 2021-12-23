@@ -1,0 +1,9 @@
+Thu Dec 23 22:39:11 2021	Milou (STEAM_0:0:89713489) has joined the game
+Thu Dec 23 22:39:11 2021	Milou (STEAM_0:0:89713489) spawned
+Thu Dec 23 22:40:59 2021	Milou (STEAM_0:0:89713489) spawned Vehicle prop_vehicle_airboat (Airboat)
+Thu Dec 23 22:42:48 2021	Milou (STEAM_0:0:89713489) spawned Vehicle prop_vehicle_airboat (Airboat)
+Thu Dec 23 22:43:19 2021	Milou (STEAM_0:0:89713489): /addmoney Milou 100000
+Thu Dec 23 22:43:19 2021	Milou (STEAM_0:0:89713489) added $100,000 to Milou's wallet
+Thu Dec 23 22:43:34 2021	Milou (STEAM_0:0:89713489) spawned SENT atm_reader
+Thu Dec 23 22:43:36 2021	Milou (STEAM_0:0:89713489) spawned SENT atm_wall
+Thu Dec 23 22:44:13 2021	Milou (STEAM_0:0:89713489): !wcd
