@@ -43,7 +43,7 @@ net.Receive("DermaDesign", function(len, ply)
 end
 	local money = DarkRP.formatMoney((LocalPlayer():getDarkRPVar("money") || 0)) //
 	local frame = vgui.Create( "DFrame")
-	frame:SetSize(800,500)
+	frame:SetSize(1300,1000)
 	frame:MakePopup()
 	frame:Center()
 	frame:ShowCloseButton(false)
@@ -75,8 +75,8 @@ end
 	end
 
 	local closeButton = vgui.Create("DButton" , frame)
-	closeButton:SetPos(767,0)
-	closeButton:SetSize(33,33)
+	closeButton:SetPos(1246.375,0) --1,625
+	closeButton:SetSize(55,66)
 	closeButton:SetText("X")
 	closeButton:SetFont("CFont")
 	closeButton:SetTextColor(white)
@@ -97,7 +97,7 @@ end
 	end
 
 	local Scroll = vgui.Create( "DScrollPanel", frame )
-	Scroll:SetSize(750,400)
+	Scroll:SetSize(1250,800)
 	Scroll:Center()
 
 	local sbar = Scroll:GetVBar()
@@ -129,7 +129,7 @@ end
 		local Pos = 0
 
 		Scroll.Button[k] = vgui.Create( "DButton", Scroll )
-		Scroll.Button[k]:SetPos( 600,25 + espace * nothing)
+		Scroll.Button[k]:SetPos( 1100,45 + espace * nothing)
 		Scroll.Button[k]:SetText(NpcShop_Config.Lang_Buy)
 		Scroll.Button[k]:SizeToContents()
 		Scroll.Button[k]:SetSize( 100, 25 )
@@ -184,11 +184,11 @@ end
 							--if ( Entity( 1 ):HasWeapon( ?????????? ) ) then return end -- check if player has allreday a weapon
 				net.SendToServer()
 					frame:Close()
-						chat.AddText( NpcShop_Config.Config_ColorOne, "[Server] ", Color( 255, 255, 255 ), NpcShop_Config.Lang_madeABuy, Color(255, 255, 255), ""..ItemShop[k].Name ) --hier
+						chat.AddText( NpcShop_Config.Config_ColorOne, "[INFO] ", Color( 255, 255, 255 ), NpcShop_Config.Lang_madeABuy, Color(255, 255, 255), ""..ItemShop[k].Name ) --hier
 				else
 					surface.PlaySound("buttons/button10.wav")
 						--for i, ply in ipairs( player.GetAll() ) do --ERROR
-					chat.AddText( NpcShop_Config.Config_ColorOne, "[Server] ", Color( 255, 255, 255 ), NpcShop_Config.Lang_YouNeedLicense )
+					chat.AddText( NpcShop_Config.Config_ColorOne, "[INFO] ", Color( 255, 255, 255 ), NpcShop_Config.Lang_YouNeedLicense )
 				--end --ERROR
 					
 			end
@@ -215,9 +215,10 @@ end
 		Scroll.Prix[k]:SizeToContents()
 
 		Scroll.Model[k] = vgui.Create("SpawnIcon" , Scroll) --Label:SizeToContents()
-		Scroll.Model[k]:SetPos(-20,-20 + espace * nothing) 
-		Scroll.Model[k]:SetSize(150, 150)
+		Scroll.Model[k]:SetPos(-35,-70 + espace * nothing) 
+		Scroll.Model[k]:SetSize(250, 250)
 		Scroll.Model[k]:SetModel(ItemShop[k].Model)
+		Scroll.Model[k].PaintOver = function(self) end
 
 
 		Pos = Pos +1
@@ -227,30 +228,5 @@ end
 
 end)
 
-function ENT:Draw()
-
-	self:DrawModel()
-
-	if LocalPlayer():GetPos():Distance(self:GetPos()) < 550 then
-
-		local alpha = (LocalPlayer():GetPos():Distance(self:GetPos()) / 500.0)
-		alpha = math.Clamp(1.25 - alpha, 0 ,1)
-		local a = Angle(0,0,0)
-		a:RotateAroundAxis(Vector(1,0,0),90) 
-		a.y = LocalPlayer():GetAngles().y - 90
-
-		cam.Start3D2D(self:GetPos() + Vector(0,0,80), a , 0.08)
-			draw.RoundedBox(0,-225,-75,450,75 , NpcShop_Config.Config_ColorTwo )
-			draw.RoundedBox(0,-225,-85,450,10 , NpcShop_Config.Config_ColorOne )
-			local tri = {{x = -25 , y = 0},{x = 25 , y = 0},{x = 0 , y = 25}}
-			surface.SetDrawColor(NpcShop_Config.Config_ColorTwo)
-			draw.NoTexture()
-			surface.DrawPoly( tri )
-			draw.SimpleText(NpcShop_Config.Config_GunDealerName,"weapondealertitle",0,-40, white , 1 , 1)
-		cam.End3D2D()
-
-	end
-
-end
 
 

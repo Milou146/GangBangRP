@@ -6,7 +6,7 @@ include('shared.lua')
 
 function ENT:Initialize( )
 
-	self:SetModel( "models/monk.mdl" )
+	self:SetModel( "models/Eli.mdl" )
 	self:SetHullType( HULL_HUMAN )
 	self:SetHullSizeNormal( )
 	self:SetNPCState( NPC_STATE_SCRIPT )
