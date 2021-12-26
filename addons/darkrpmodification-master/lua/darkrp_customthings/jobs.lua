@@ -1,20 +1,5 @@
---[[---------------------------------------------------------------------------
-DarkRP custom jobs
----------------------------------------------------------------------------
-This file contains your custom jobs.
-This file should also contain jobs from DarkRP that you edited.
+-------------------------------------------------------------------------------
 
-Note: If you want to edit a default DarkRP job, first disable it in darkrp_config/disabled_defaults.lua
-      Once you've done that, copy and paste the job to this file and edit it.
-
-The default jobs can be found here:
-https://github.com/FPtje/DarkRP/blob/master/gamemode/config/jobrelated.lua
-
-For examples and explanation please visit this wiki page:
-https://darkrp.miraheze.org/wiki/DarkRP:CustomJobFields
-
-Add your custom jobs under the following line:
----------------------------------------------------------------------------]]
 
 TEAM_CITIZEN = DarkRP.createJob("Citoyen", {
     color = Color(17, 85, 51, 255),
@@ -28,7 +13,14 @@ TEAM_CITIZEN = DarkRP.createJob("Citoyen", {
     vote = false,
     hasLicense = false,
     candemote = false,
-    category = "Z"
+    category = "Z",
+	        
+	PlayerSpawn = function(ply)
+        ply:SetMaxHealth(100)
+        ply:SetHealth(100)
+        ply:SetArmor(0)
+	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+    end
 })
 --------------------------------------------------------------------------------
 TEAM_NYPD = DarkRP.createJob("N.Y.P.D", {
