@@ -1,6 +1,7 @@
 net.Receive("bankReception", function()
+    ply = LocalPlayer()
     local frame = vgui.Create("DFrame")
-    frame:SetSize(1000,400)
+    frame:SetSize(1000,500)
     frame:Center()
     frame:MakePopup()
     frame:SetTitle("Banque")
@@ -15,7 +16,7 @@ net.Receive("bankReception", function()
         textEntry:Center()
         textEntry.OnEnter = function(self)
             frame:Remove()
-            LocalPlayer():ChatPrint("Vous avez déposé " .. self:GetValue() .. " dollars")
+            LocalPlayer():ChatPrint("Vous avez déposé " .. self:GetValue() .. "$")
         end
     end
     local withdrawButton = vgui.Create("DButton",frame)
@@ -28,8 +29,18 @@ net.Receive("bankReception", function()
         textEntry:SetPlaceholderText("ex: 500")
         textEntry:Center()
         textEntry.OnEnter = function(self)
-            frame:Remove()
-            LocalPlayer():ChatPrint("Vous avez retiré " .. self:GetValue() .. " dollars")
+            ply = LocalPlayer()
+            local amount = self:GetValue()
+            if ply:GetNWInt("BGRP::balance") - amount >= 0 then
+                frame:Remove()
+                ply:ChatPrint("Vous avez retiré " .. amount .. "$.")
+            else
+                ply:ChatPrint("Votre solde est insuffisant.")
+            end
         end
     end
+    local balance = vgui.Create("DLabel",frame)
+    balance:SetText("Solde: " .. tostring(ply:GetNWInt("GBRP::balance")))
+    balance:SetPos(100,400)
+    balance:SetSize(200,25)
 end)
