@@ -27,7 +27,6 @@ TEAM_NYPD = DarkRP.createJob("N.Y.P.D", {
     color = Color(34, 85, 85, 255),
     model = {"models/taggart/police01/male_01.mdl", 
 	"models/taggart/police01/male_02.mdl", 
-	"models/taggart/police01/male_03.mdll", 
 	"models/taggart/police01/male_04.mdl", 
 	"models/taggart/police01/male_05.mdl", 
 	"models/taggart/police01/male_06.mdl", 
@@ -470,7 +469,7 @@ TEAM_GANG3 = DarkRP.createJob("Gangster Médecin", {
     CustomCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 			
 })
---------------------------------------------------------------------------------
+
 TEAM_STAFF = DarkRP.createJob("STAFF", {
     color = Color(14, 81, 11, 255),
     model = {"models/bratplat/cuadrado/cuadrado_colorized.mdl"},
