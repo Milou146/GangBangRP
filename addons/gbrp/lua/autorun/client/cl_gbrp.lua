@@ -1,4 +1,4 @@
-net.Receive("bankReception", function()
+net.Receive("GBRP::bankreception", function()
     ply = LocalPlayer()
     local frame = vgui.Create("DFrame")
     frame:SetSize(1000,500)
@@ -30,17 +30,22 @@ net.Receive("bankReception", function()
         textEntry:Center()
         textEntry.OnEnter = function(self)
             ply = LocalPlayer()
-            local amount = self:GetValue()
-            if ply:GetNWInt("BGRP::balance") - amount >= 0 then
+            local amount = tonumber(self:GetValue())
+            if ply:GetNWInt("GBRP::balance") - amount >= 0 then
+                net.Start("GBRP::bankwithdraw")
+                net.WriteInt(amount,32)
+                net.SendToServer()
                 frame:Remove()
                 ply:ChatPrint("Vous avez retiré " .. amount .. "$.")
+                GAMEMODE:AddNotify("Vous avez retiré " .. amount .. "$.",0,2)
             else
-                ply:ChatPrint("Votre solde est insuffisant.")
+                ply:ChatPrint("Solde insuffisant.")
+                GAMEMODE:AddNotify("Solde insuffisant.",1,2)
             end
         end
     end
     local balance = vgui.Create("DLabel",frame)
-    balance:SetText("Solde: " .. tostring(ply:GetNWInt("GBRP::balance")))
+    balance:SetText("Solde: " .. tostring(ply:GetNWInt("GBRP::balance")) .. "$")
     balance:SetPos(100,400)
     balance:SetSize(200,25)
 end)
