@@ -489,6 +489,200 @@ TEAM_STAFF = DarkRP.createJob("STAFF", {
     CustomCheckFailMsg = "Job staff",
 })
 
+----------VIP---------------------------------------
+TEAM_VIP = DarkRP.createJob("YAMAKASI", {
+    color = Color(34, 85, 85, 255),
+    model = {"models/player/Group03/male_01.mdl","models/player/Group03/male_02.mdl","models/player/Group03/male_04.mdl","models/player/Group03/male_09.mdl","models/player/Group03/female_06.mdl","models/player/Group03/female_02.mdl","models/player/Group03/female_05.mdl"},
+    description = [[]],
+    weapons = {"climb_swep2","pocket", "keys"},
+    command = "yama",
+    max = 2,
+    salary = 0,
+    admin = 0,
+    vote = false,
+    hasLicense = false,
+	candemote = false,
+    category = "vip",
+	      
+	PlayerSpawn = function(ply)
+        ply:SetMaxHealth(100)
+        ply:SetHealth(100)
+        ply:SetArmor(0)
+	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.2, GAMEMODE.Config.runspeed * 1.2)
+    end,
+	customCheck = function(ply) return CLIENT or
+        table.HasValue({"VIP","superadmin","VIP +", "moderateur_VIP","moderateur_VIP+","moderateur_test_VIP","moderateur_test_VIP+","admin"}, ply:GetNWString("usergroup"))
+    end,
+    CustomCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
+			
+})
+-------------------------------------------------
+TEAM_VIP1 = DarkRP.createJob("Chauffeur de taxi", {
+    color = Color(34, 85, 85, 255),
+    model = {"models/sentry/sentryoldmob/greaser/sentrygreasemale2pm.mdl", "models/sentry/sentryoldmob/greaser/sentrygreasemale4pm.mdl", "models/sentry/sentryoldmob/greaser/sentrygreasemale7pm.mdl", "models/sentry/sentryoldmob/greaser/sentrygreasemale9pm.mdl"},
+    description = [[]],
+    weapons = {"pocket", "keys"},
+    command = "cdt",
+    max = 2,
+    salary = 0,
+    admin = 0,
+    vote = false,
+    hasLicense = false,
+	candemote = false,
+    category = "vip",
+	      
+	PlayerSpawn = function(ply)
+        ply:SetMaxHealth(100)
+        ply:SetHealth(100)
+        ply:SetArmor(0)
+	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+    end,
+	customCheck = function(ply) return CLIENT or
+        table.HasValue({"VIP","superadmin","VIP +", "moderateur_VIP","moderateur_VIP+","moderateur_test_VIP","moderateur_test_VIP+","admin"}, ply:GetNWString("usergroup"))
+    end,
+    CustomCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
+			
+})
+-------------------------------------------------
+TEAM_VIP2 = DarkRP.createJob("Vendeur hot dog", {
+    color = Color(34, 85, 85, 255),
+    model = {"models/sentry/sentryoldmob/greaser/sentrygreasemale2pm.mdl", "models/sentry/sentryoldmob/greaser/sentrygreasemale4pm.mdl", "models/sentry/sentryoldmob/greaser/sentrygreasemale7pm.mdl", "models/sentry/sentryoldmob/greaser/sentrygreasemale9pm.mdl"},
+    description = [[]],
+    weapons = {"pocket", "keys"},
+    command = "vhd",
+    max = 1,
+    salary = 0,
+    admin = 0,
+    vote = false,
+    hasLicense = false,
+	candemote = false,
+    category = "vip",
+	      
+	PlayerSpawn = function(ply)
+        ply:SetMaxHealth(100)
+        ply:SetHealth(100)
+        ply:SetArmor(0)
+	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+    end,
+	customCheck = function(ply) return CLIENT or
+        table.HasValue({"VIP","superadmin","VIP +", "moderateur_VIP","moderateur_VIP+","moderateur_test_VIP","moderateur_test_VIP+","admin"}, ply:GetNWString("usergroup"))
+    end,
+    CustomCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
+			
+})
+-------------------------------------------------
+TEAM_VIP3 = DarkRP.createJob("Hacker", {
+    color = Color(34, 85, 85, 255),
+    model = {"models/sentry/sentryoldmob/greaser/sentrygreasemale2pm.mdl", "models/sentry/sentryoldmob/greaser/sentrygreasemale4pm.mdl", "models/sentry/sentryoldmob/greaser/sentrygreasemale7pm.mdl", "models/sentry/sentryoldmob/greaser/sentrygreasemale9pm.mdl"},
+    description = [[]],
+    weapons = {"pocket", "keys"},
+    command = "hac",
+    max = 1,
+    salary = 0,
+    admin = 0,
+    vote = false,
+    hasLicense = false,
+	candemote = false,
+    category = "vip",
+	      
+	PlayerSpawn = function(ply)
+        ply:SetMaxHealth(100)
+        ply:SetHealth(100)
+        ply:SetArmor(0)
+	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+    end,
+	customCheck = function(ply) return CLIENT or
+        table.HasValue({"VIP","superadmin","VIP +", "moderateur_VIP","moderateur_VIP+","moderateur_test_VIP","moderateur_test_VIP+","admin"}, ply:GetNWString("usergroup"))
+    end,
+    CustomCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
+			
+})
+--------------------------------------------------------------------------------
+TEAM_VIP4 = DarkRP.createJob("Agent secret", {
+    color = Color(34, 85, 85, 255),
+    model = {"models/taggart/police01/male_01.mdl", 
+	"models/taggart/police01/male_02.mdl", 
+	"models/taggart/police01/male_04.mdl", 
+	"models/taggart/police01/male_05.mdl", 
+	"models/taggart/police01/male_06.mdl", 
+	"models/taggart/police01/male_07.mdl", 
+	"models/taggart/police01/male_08.mdl", 
+	"models/taggart/police01/male_09.mdl"
+	},
+    description = [[]],
+    weapons = {"disguise_swep","pocket", "keys"},
+    command = "ags",
+    max = 1,
+    salary = 0,
+    admin = 0,
+    vote = false,
+    hasLicense = true,
+	candemote = false,
+    category = "vip+",
+	        
+	PlayerSpawn = function(ply)
+        ply:SetMaxHealth(100)
+        ply:SetHealth(100)
+        ply:SetArmor(20)
+	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
+    end,
+	customCheck = function(ply) return CLIENT or
+        table.HasValue({"superadmin","VIP +","moderateur_VIP+","moderateur_test_VIP+","admin"}, ply:GetNWString("usergroup"))
+    end,
+    CustomCheckFailMsg = "Ce métier est réservé aux membres VIP+ seulement.This job is VIP+ only.",
+})
+--------------------------------------------------------------------------------
+TEAM_VIP5 = DarkRP.createJob("Vendeur d'amres ambulant", {
+    color = Color(34, 85, 85, 255),
+    model = {"models/player/leet.mdl"},
+    description = [[]],
+    weapons = {"arccw_bo2_browninghp","pocket", "keys"},
+    command = "vda",
+    max = 1,
+    salary = 0,
+    admin = 0,
+    vote = false,
+    hasLicense = true,
+	candemote = false,
+    category = "vip+",
+	        
+	PlayerSpawn = function(ply)
+        ply:SetMaxHealth(100)
+        ply:SetHealth(100)
+        ply:SetArmor(0)
+	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+    end,
+	customCheck = function(ply) return CLIENT or
+        table.HasValue({"superadmin","VIP +","moderateur_VIP+","moderateur_test_VIP+","admin"}, ply:GetNWString("usergroup"))
+    end,
+    CustomCheckFailMsg = "Ce métier est réservé aux membres VIP+ seulement.This job is VIP+ only.",
+})
+--------------------------------------------------------------------------------
+TEAM_VIP6 = DarkRP.createJob("Tueur à gage", {
+    color = Color(34, 85, 85, 255),
+    model = {"models/player/gman_high.mdl"},
+    description = [[]],
+    weapons = {"weapon_doiwelrod","pocket", "keys"},
+    command = "tag",
+    max = 1,
+    salary = 0,
+    admin = 0,
+    vote = false,
+    hasLicense = true,
+	candemote = false,
+    category = "vip+",
+	        
+	PlayerSpawn = function(ply)
+        ply:SetMaxHealth(100)
+        ply:SetHealth(100)
+        ply:SetArmor(0)
+	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+    end,
+	customCheck = function(ply) return CLIENT or
+        table.HasValue({"superadmin","VIP +","moderateur_VIP+","moderateur_test_VIP+","admin"}, ply:GetNWString("usergroup"))
+    end,
+    CustomCheckFailMsg = "Ce métier est réservé aux membres VIP+ seulement.This job is VIP+ only.",
+})
 
 
 --[[---------------------------------------------------------------------------
