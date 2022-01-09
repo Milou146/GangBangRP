@@ -1,0 +1,8 @@
+{
+	"BoneOffset": [
+		"[-11.1563 -5.2813 2.4063]",
+		"{2.6875 161.6563 25.7813}"
+	],
+	"Bone": "ValveBiped.Bip01_Spine4",
+	"Model": "models/arma_cup_smgs/mp5/w_mp5cup.mdl"
+}
