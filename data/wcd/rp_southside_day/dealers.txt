@@ -1,1 +1,1 @@
-[{"pos":"[-7462.8291 1769.0452 -31.9688]","platforms":[{"ang":"{359.9399 269.962 358.4605}","pos":"[-7505.4922 1249.7272 -16.6402]"}],"group":1.0,"ang":"{0 0 0}","model":"models/characters/hostage_01.mdl","name":"Unknown Name"}]
+[{"pos":"[-7462.8291 1769.0452 -31.9688]","platforms":[{"ang":"{359.9399 269.962 358.4605}","pos":"[-7505.4922 1249.7272 -16.6402]"}],"group":1.0,"ang":"{0 0 0}","model":"models/barney.mdl","name":"Concessionnaire"}]

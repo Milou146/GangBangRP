@@ -1,6 +1,6 @@
+gbrp = {}
+gbrp.jobs = {}
 -------------------------------------------------------------------------------
-
-
 TEAM_CITIZEN = DarkRP.createJob("Citoyen", {
     color = Color(0, 0, 0, 255),
     model = {"models/sentry/sentryoldmob/greaser/sentrygreasemale2pm.mdl", "models/sentry/sentryoldmob/greaser/sentrygreasemale4pm.mdl", "models/sentry/sentryoldmob/greaser/sentrygreasemale7pm.mdl", "models/sentry/sentryoldmob/greaser/sentrygreasemale9pm.mdl"},
@@ -14,26 +14,22 @@ TEAM_CITIZEN = DarkRP.createJob("Citoyen", {
     hasLicense = false,
     candemote = false,
     category = "CITOYEN",
-	        
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(0)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
 })
+gbrp.jobs["Citoyen"] = {
+    gang = nil,
+    gangChief = nil
+}
+
 --------------------------------------------------------------------------------
 TEAM_NYPD = DarkRP.createJob("N.Y.P.D", {
     color = Color(0, 0, 230, 255),
-    model = {"models/taggart/police01/male_01.mdl", 
-	"models/taggart/police01/male_02.mdl", 
-	"models/taggart/police01/male_04.mdl", 
-	"models/taggart/police01/male_05.mdl", 
-	"models/taggart/police01/male_06.mdl", 
-	"models/taggart/police01/male_07.mdl", 
-	"models/taggart/police01/male_08.mdl", 
-	"models/taggart/police01/male_09.mdl"
-	},
+    model = {"models/taggart/police01/male_01.mdl", "models/taggart/police01/male_02.mdl", "models/taggart/police01/male_04.mdl", "models/taggart/police01/male_05.mdl", "models/taggart/police01/male_06.mdl", "models/taggart/police01/male_07.mdl", "models/taggart/police01/male_08.mdl", "models/taggart/police01/male_09.mdl"},
     description = [[]],
     weapons = {"weapon_tg_fists", "pocket", "keys", "weaponchecker"},
     command = "nypd",
@@ -42,23 +38,24 @@ TEAM_NYPD = DarkRP.createJob("N.Y.P.D", {
     admin = 0,
     vote = false,
     hasLicense = true,
-	candemote = false,
+    candemote = false,
     category = "POLICE",
-	        
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(50)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
     end
 })
+gbrp.jobs["N.Y.P.D"] = {
+    gang = nil,
+    gangChief = nil
+}
+
 --------------------------------------------------------------------------------
 TEAM_NYPD1 = DarkRP.createJob("Commissaire", {
     color = Color(0, 0, 230, 255),
-    model = {"models/sentry/gtav/lspd/fcopbpm.mdl", 
-	"models/sentry/gtav/lspd/fcopwpm.mdl", 
-	"models/sentry/gtav/lspd/vtrafcoppm.mdl" 
-		},
+    model = {"models/sentry/gtav/lspd/fcopbpm.mdl", "models/sentry/gtav/lspd/fcopwpm.mdl", "models/sentry/gtav/lspd/vtrafcoppm.mdl"},
     description = [[]],
     weapons = {"weapon_tg_fists", "pocket", "keys", "weaponchecker"},
     command = "cnypd",
@@ -67,414 +64,453 @@ TEAM_NYPD1 = DarkRP.createJob("Commissaire", {
     admin = 0,
     vote = true,
     hasLicense = true,
-	candemote = false,
+    candemote = false,
     category = "POLICE",
-	        
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(75)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
     end
 })
+gbrp.jobs["N.Y.P.D"] = {
+    gang = nil,
+    gangChief = nil
+}
+
 --------------------------------------------------------------------------------
 TEAM_NYPD2 = DarkRP.createJob("S.W.A.T", {
     color = Color(0, 0, 230, 255),
-    model = {"models/akitos_model_pack/alt_swat.mdl", 
-	"models/akitos_model_pack/modern_swat.mdl", 
-	"models/akitos_model_pack/old_swat.mdl", 
-	"models/akitos_model_pack/swat_hazmat.mdl"
-	},
+    model = {"models/akitos_model_pack/alt_swat.mdl", "models/akitos_model_pack/modern_swat.mdl", "models/akitos_model_pack/old_swat.mdl", "models/akitos_model_pack/swat_hazmat.mdl"},
     description = [[]],
-    weapons = {"weapon_tg_fists","pocket", "keys","weaponchecker"},
+    weapons = {"weapon_tg_fists", "pocket", "keys", "weaponchecker"},
     command = "swat",
     max = 4,
     salary = 10,
     admin = 0,
     vote = false,
     hasLicense = true,
-	candemote = false,
+    candemote = false,
     category = "POLICE",
-	        
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(100)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
     end
 })
+gbrp.jobs["S.W.A.T"] = {
+    gang = nil,
+    gangChief = nil
+}
+
 --------------------------------------------------------------------------------
 TEAM_NYPD3 = DarkRP.createJob("S.W.A.T Médic", {
     color = Color(212, 212, 17, 255),
-    model = {"models/akitos_model_pack/alt_swat.mdl", 
-	"models/akitos_model_pack/modern_swat.mdl", 
-	"models/akitos_model_pack/old_swat.mdl", 
-	"models/akitos_model_pack/swat_hazmat.mdl"
-	},
+    model = {"models/akitos_model_pack/alt_swat.mdl", "models/akitos_model_pack/modern_swat.mdl", "models/akitos_model_pack/old_swat.mdl", "models/akitos_model_pack/swat_hazmat.mdl"},
     description = [[]],
-    weapons = {"weapon_tg_fists", "weapon_medkit","pocket", "keys", "weaponchecker"},
+    weapons = {"weapon_tg_fists", "weapon_medkit", "pocket", "keys", "weaponchecker"},
     command = "swatmed",
     max = 1,
     salary = 12,
     admin = 0,
     vote = false,
     hasLicense = true,
-	candemote = false,
+    candemote = false,
     category = "POLICE",
-	        
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(100)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
     end,
-	cPOLICEtomCheck = function(ply) return CLIENT or
-        table.HasValue({"VIP","superadmin","VIP +", "moderateur_VIP","moderateur_VIP+","moderateur_test_VIP","moderateur_test_VIP+","admin"}, ply:GetNWString("POLICEergroup"))
+    customCheck = function(ply)
+        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
     end,
-    CPOLICEtomCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
+    customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
+gbrp.jobs["S.W.A.T Médic"] = {
+    gang = nil,
+    gangChief = nil
+}
+
 --------------------------------------------------------------------------------
 TEAM_NYPD4 = DarkRP.createJob("S.W.A.T Sniper", {
     color = Color(212, 164, 17, 255),
-    model = {"models/akitos_model_pack/alt_swat.mdl", 
-	"models/akitos_model_pack/modern_swat.mdl", 
-	"models/akitos_model_pack/old_swat.mdl", 
-	"models/akitos_model_pack/swat_hazmat.mdl"
-	},
+    model = {"models/akitos_model_pack/alt_swat.mdl", "models/akitos_model_pack/modern_swat.mdl", "models/akitos_model_pack/old_swat.mdl", "models/akitos_model_pack/swat_hazmat.mdl"},
     description = [[]],
-    weapons = {"weapon_tg_fists","pocket", "keys","weaponchecker"},
+    weapons = {"weapon_tg_fists", "pocket", "keys", "weaponchecker"},
     command = "swatsnip",
     max = 2,
     salary = 15,
     admin = 0,
     vote = false,
     hasLicense = true,
-	candemote = false,
+    candemote = false,
     category = "POLICE",
-	        
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(100)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
     end,
-	cPOLICEtomCheck = function(ply) return CLIENT or
-        table.HasValue({"superadmin","VIP +","moderateur_VIP+","moderateur_test_VIP+","admin"}, ply:GetNWString("POLICEergroup"))
+    customCheck = function(ply)
+        return CLIENT or table.HasValue({"superadmin", "VIP +", "moderateur_VIP+", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
     end,
-    CPOLICEtomCheckFailMsg = "Ce métier est réservé aux membres VIP+ seulement.This job is VIP+ only.",
+    customCheckFailMsg = "Ce métier est réservé aux membres VIP+ seulement.This job is VIP+ only.",
 })
+gbrp.jobs["S.W.A.T Sniper"] = {
+    gang = nil,
+    gangChief = nil
+}
+
 --------------------------------------------------------------------------------
 TEAM_YAKUZA = DarkRP.createJob("Chef des Yakuzas", {
     color = Color(204, 51, 153, 255),
     model = {"models/players/Kimonos_25.mdl"},
     description = [[]],
-    weapons = {"weapon_tg_fists","pocket", "keys","weapon_mse_katana"},
+    weapons = {"weapon_tg_fists", "pocket", "keys", "weapon_mse_katana"},
     command = "chefy",
     max = 1,
     salary = 0,
     admin = 0,
     vote = false,
     hasLicense = false,
-	candemote = false,
+    candemote = false,
     category = "YAKUZA",
-	        
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(10)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
-	
 })
+gbrp.jobs["Chef des Yakuzas"] = {
+    gang = yakuzas,
+    gangChief = true
+}
+
 --------------------------------------------------------------------------------
 TEAM_YAKUZA2 = DarkRP.createJob("Yakuza", {
     color = Color(204, 51, 153, 255),
     model = {"models/players/Kimonos.mdl", "models/players/Kimonos_02.mdl", "models/players/Kimonos_03.mdl", "models/players/Kimonos_04.mdl", "models/players/Kimonos_05.mdl", "models/players/Kimonos_06.mdl", "models/players/Kimonos_07.mdl", "models/players/Kimonos_10.mdl", "models/players/Kimonos_14.mdl", "models/players/Kimonos_15.mdl", "models/players/Kimonos_17.mdl", "models/players/Kimonos_18.mdl", "models/players/Kimonos_19.mdl", "models/players/Kimonos_21.mdl", "models/players/Kimonos_26.mdl"},
     description = [[]],
-    weapons = {"weapon_tg_fists","pocket", "keys"},
+    weapons = {"weapon_tg_fists", "pocket", "keys"},
     command = "YAKUZA",
     max = 10,
     salary = 0,
     admin = 0,
     vote = false,
     hasLicense = false,
-	candemote = false,
+    candemote = false,
     category = "YAKUZA",
-	 skins = {0,1,2,3,4,5,6,7,8,9},
-        bodygroups = {
-				["Casque/Helmet"] = {0,1,2,3,4,5,6,7,8},
-                ["Arme/Weapon"] = {0},
-                ["Arme2/Weapon2"] = {0},
-                                
-        },        
-	PlayerSpawn = function(ply)
+    skins = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9},
+    bodygroups = {
+        ["Casque/Helmet"] = {0, 1, 2, 3, 4, 5, 6, 7, 8},
+        ["Arme/Weapon"] = {0},
+        ["Arme2/Weapon2"] = {0},
+    },
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(0)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
-	
 })
+gbrp.jobs["Yakuza"] = {
+    gang = yakuzas,
+    gangChief = false
+}
+
 --------------------------------------------------------------------------------
 TEAM_YAKUZA3 = DarkRP.createJob("Yakuza Architecte", {
     color = Color(204, 51, 153, 255),
     model = {"models/players/Kimonos.mdl", "models/players/Kimonos_02.mdl", "models/players/Kimonos_03.mdl", "models/players/Kimonos_04.mdl", "models/players/Kimonos_05.mdl", "models/players/Kimonos_06.mdl", "models/players/Kimonos_07.mdl", "models/players/Kimonos_10.mdl", "models/players/Kimonos_14.mdl", "models/players/Kimonos_15.mdl", "models/players/Kimonos_17.mdl", "models/players/Kimonos_18.mdl", "models/players/Kimonos_19.mdl", "models/players/Kimonos_21.mdl", "models/players/Kimonos_26.mdl"},
     description = [[]],
-    weapons = {"weapon_tg_fists","pocket", "keys", "alydPOLICE_fortificationbuildertablet"},
+    weapons = {"weapon_tg_fists", "pocket", "keys", "alydPOLICE_fortificationbuildertablet"},
     command = "YAKUZAarc",
     max = 1,
     salary = 0,
     admin = 0,
     vote = false,
     hasLicense = false,
-	candemote = false,
+    candemote = false,
     category = "YAKUZA",
-	 skins = {0,1,2,3,4,5,6,7,8,9},
-        bodygroups = {
-				["Casque/Helmet"] = {0,1,2,3,4,5,6,7,8},
-                ["Arme/Weapon"] = {0},
-                ["Arme2/Weapon2"] = {0},
-                                
-        },        
-	PlayerSpawn = function(ply)
+    skins = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9},
+    bodygroups = {
+        ["Casque/Helmet"] = {0, 1, 2, 3, 4, 5, 6, 7, 8},
+        ["Arme/Weapon"] = {0},
+        ["Arme2/Weapon2"] = {0},
+    },
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(0)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
-	
 })
+gbrp.jobs["Yakuza Architecte"] = {
+    gang = yakuzas,
+    gangChief = false
+}
+
 --------------------------------------------------------------------------------
 TEAM_YAKUZA4 = DarkRP.createJob("Yakuza Médecin", {
     color = Color(212, 212, 17, 255),
     model = {"models/players/Kimonos.mdl", "models/players/Kimonos_02.mdl", "models/players/Kimonos_03.mdl", "models/players/Kimonos_04.mdl", "models/players/Kimonos_05.mdl", "models/players/Kimonos_06.mdl", "models/players/Kimonos_07.mdl", "models/players/Kimonos_10.mdl", "models/players/Kimonos_14.mdl", "models/players/Kimonos_15.mdl", "models/players/Kimonos_17.mdl", "models/players/Kimonos_18.mdl", "models/players/Kimonos_19.mdl", "models/players/Kimonos_21.mdl", "models/players/Kimonos_26.mdl"},
     description = [[]],
-    weapons = {"weapon_tg_fists","pocket", "keys", "weapon_medkit"},
+    weapons = {"weapon_tg_fists", "pocket", "keys", "weapon_medkit"},
     command = "YAKUZAmed",
     max = 1,
     salary = 0,
     admin = 0,
     vote = false,
     hasLicense = false,
-	candemote = false,
+    candemote = false,
     category = "YAKUZA",
-	 skins = {0,1,2,3,4,5,6,7,8,9},
-        bodygroups = {
-				["Casque/Helmet"] = {0,1,2,3,4,5,6,7,8},
-                ["Arme/Weapon"] = {0},
-                ["Arme2/Weapon2"] = {0},
-                                
-        },        
-	PlayerSpawn = function(ply)
+    skins = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9},
+    bodygroups = {
+        ["Casque/Helmet"] = {0, 1, 2, 3, 4, 5, 6, 7, 8},
+        ["Arme/Weapon"] = {0},
+        ["Arme2/Weapon2"] = {0},
+    },
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(0)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
-	cPOLICEtomCheck = function(ply) return CLIENT or
-        table.HasValue({"VIP","superadmin","VIP +", "moderateur_VIP","moderateur_VIP+","moderateur_test_VIP","moderateur_test_VIP+","admin"}, ply:GetNWString("POLICEergroup"))
+    customCheck = function(ply)
+        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
     end,
-    CPOLICEtomCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
-	
+    customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
+gbrp.jobs["Yakuza Médecin"] = {
+    gang = yakuzas,
+    gangChief = false
+}
+
 --------------------------------------------------------------------------------
 TEAM_MAFIA = DarkRP.createJob("Parrain", {
     color = Color(191, 128, 64, 255),
     model = {"models/vito.mdl"},
     description = [[]],
-    weapons = {"weapon_tg_fists","pocket", "keys","arccw_waw_p38"},
+    weapons = {"weapon_tg_fists", "pocket", "keys", "arccw_waw_p38"},
     command = "cMAFIA",
     max = 1,
     salary = 0,
     admin = 0,
     vote = false,
     hasLicense = false,
-	candemote = false,
+    candemote = false,
     category = "MAFIA",
-	      
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(10)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
-		
 })
+gbrp.jobs["Parrain"] = {
+    gang = mafia,
+    gangChief = true
+}
+
 --------------------------------------------------------------------------------
 TEAM_MAFIA1 = DarkRP.createJob("Mafieux", {
     color = Color(191, 128, 64, 255),
-    model = {"models/sentry/sentryoldmob/irish/sentryirishmale2pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale4pm.mdl","models/sentry/sentryoldmob/irish/sentryirishmale6pm.mdl","models/sentry/sentryoldmob/irish/sentryirishmale7pm.mdl","models/sentry/sentryoldmob/irish/sentryirishmale8pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale9pm.mdl","models/sentry/sentryoldmob/MAFIA/sentrymobmale2pm.mdl","models/sentry/sentryoldmob/MAFIA/sentrymobmale4pm.mdl","models/sentry/sentryoldmob/MAFIA/sentrymobmale6pm.mdl","models/sentry/sentryoldmob/MAFIA/sentrymobmale7pm.mdl","models/sentry/sentryoldmob/MAFIA/sentrymobmale8pm.mdl","models/sentry/sentryoldmob/MAFIA/sentrymobmale9pm.mdl","models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male2pm.mdl","models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male4pm.mdl","models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male6pm.mdl","models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male7pm.mdl","models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male8pm.mdl","models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male9pm.mdl"},
+    model = {"models/sentry/sentryoldmob/irish/sentryirishmale2pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale4pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale6pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale7pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale8pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale9pm.mdl", "models/sentry/sentryoldmob/MAFIA/sentrymobmale2pm.mdl", "models/sentry/sentryoldmob/MAFIA/sentrymobmale4pm.mdl", "models/sentry/sentryoldmob/MAFIA/sentrymobmale6pm.mdl", "models/sentry/sentryoldmob/MAFIA/sentrymobmale7pm.mdl", "models/sentry/sentryoldmob/MAFIA/sentrymobmale8pm.mdl", "models/sentry/sentryoldmob/MAFIA/sentrymobmale9pm.mdl", "models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male2pm.mdl", "models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male4pm.mdl", "models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male6pm.mdl", "models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male7pm.mdl", "models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male8pm.mdl", "models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male9pm.mdl"},
     description = [[]],
-    weapons = {"weapon_tg_fists","pocket", "keys"},
+    weapons = {"weapon_tg_fists", "pocket", "keys"},
     command = "MAFIA",
     max = 10,
     salary = 0,
     admin = 0,
     vote = false,
     hasLicense = false,
-	candemote = false,
+    candemote = false,
     category = "MAFIA",
-	      
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(0)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
-		
 })
+gbrp.jobs["Mafieux"] = {
+    gang = mafia,
+    gangChief = false
+}
+
 --------------------------------------------------------------------------------
 TEAM_MAFIA2 = DarkRP.createJob("Mafieux Architecte", {
     color = Color(191, 128, 64, 255),
-    model = {"models/sentry/sentryoldmob/irish/sentryirishmale2pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale4pm.mdl","models/sentry/sentryoldmob/irish/sentryirishmale6pm.mdl","models/sentry/sentryoldmob/irish/sentryirishmale7pm.mdl","models/sentry/sentryoldmob/irish/sentryirishmale8pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale9pm.mdl","models/sentry/sentryoldmob/MAFIA/sentrymobmale2pm.mdl","models/sentry/sentryoldmob/MAFIA/sentrymobmale4pm.mdl","models/sentry/sentryoldmob/MAFIA/sentrymobmale6pm.mdl","models/sentry/sentryoldmob/MAFIA/sentrymobmale7pm.mdl","models/sentry/sentryoldmob/MAFIA/sentrymobmale8pm.mdl","models/sentry/sentryoldmob/MAFIA/sentrymobmale9pm.mdl","models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male2pm.mdl","models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male4pm.mdl","models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male6pm.mdl","models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male7pm.mdl","models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male8pm.mdl","models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male9pm.mdl"},
+    model = {"models/sentry/sentryoldmob/irish/sentryirishmale2pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale4pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale6pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale7pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale8pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale9pm.mdl", "models/sentry/sentryoldmob/MAFIA/sentrymobmale2pm.mdl", "models/sentry/sentryoldmob/MAFIA/sentrymobmale4pm.mdl", "models/sentry/sentryoldmob/MAFIA/sentrymobmale6pm.mdl", "models/sentry/sentryoldmob/MAFIA/sentrymobmale7pm.mdl", "models/sentry/sentryoldmob/MAFIA/sentrymobmale8pm.mdl", "models/sentry/sentryoldmob/MAFIA/sentrymobmale9pm.mdl", "models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male2pm.mdl", "models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male4pm.mdl", "models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male6pm.mdl", "models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male7pm.mdl", "models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male8pm.mdl", "models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male9pm.mdl"},
     description = [[]],
-    weapons = {"weapon_tg_fists","pocket", "keys","alydPOLICE_fortificationbuildertablet"},
+    weapons = {"weapon_tg_fists", "pocket", "keys", "alydPOLICE_fortificationbuildertablet"},
     command = "MAFIAarc",
     max = 1,
     salary = 0,
     admin = 0,
     vote = false,
     hasLicense = false,
-	candemote = false,
+    candemote = false,
     category = "MAFIA",
-	      
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(0)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
-		
 })
+gbrp.jobs["Mafieux Architecte"] = {
+    gang = mafia,
+    gangChief = false
+}
+
 --------------------------------------------------------------------------------
 TEAM_MAFIA3 = DarkRP.createJob("Mafieux Médecin", {
     color = Color(212, 212, 17, 255),
-    model = {"models/sentry/sentryoldmob/irish/sentryirishmale2pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale4pm.mdl","models/sentry/sentryoldmob/irish/sentryirishmale6pm.mdl","models/sentry/sentryoldmob/irish/sentryirishmale7pm.mdl","models/sentry/sentryoldmob/irish/sentryirishmale8pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale9pm.mdl","models/sentry/sentryoldmob/MAFIA/sentrymobmale2pm.mdl","models/sentry/sentryoldmob/MAFIA/sentrymobmale4pm.mdl","models/sentry/sentryoldmob/MAFIA/sentrymobmale6pm.mdl","models/sentry/sentryoldmob/MAFIA/sentrymobmale7pm.mdl","models/sentry/sentryoldmob/MAFIA/sentrymobmale8pm.mdl","models/sentry/sentryoldmob/MAFIA/sentrymobmale9pm.mdl","models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male2pm.mdl","models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male4pm.mdl","models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male6pm.mdl","models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male7pm.mdl","models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male8pm.mdl","models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male9pm.mdl"},
+    model = {"models/sentry/sentryoldmob/irish/sentryirishmale2pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale4pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale6pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale7pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale8pm.mdl", "models/sentry/sentryoldmob/irish/sentryirishmale9pm.mdl", "models/sentry/sentryoldmob/MAFIA/sentrymobmale2pm.mdl", "models/sentry/sentryoldmob/MAFIA/sentrymobmale4pm.mdl", "models/sentry/sentryoldmob/MAFIA/sentrymobmale6pm.mdl", "models/sentry/sentryoldmob/MAFIA/sentrymobmale7pm.mdl", "models/sentry/sentryoldmob/MAFIA/sentrymobmale8pm.mdl", "models/sentry/sentryoldmob/MAFIA/sentrymobmale9pm.mdl", "models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male2pm.mdl", "models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male4pm.mdl", "models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male6pm.mdl", "models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male7pm.mdl", "models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male8pm.mdl", "models/sentry/sentryoldmob/oldgoons/sentrybPOLICEi1male9pm.mdl"},
     description = [[]],
-    weapons = {"weapon_tg_fists","pocket", "keys","weapon_medkit"},
+    weapons = {"weapon_tg_fists", "pocket", "keys", "weapon_medkit"},
     command = "MAFIAmed",
     max = 1,
     salary = 0,
     admin = 0,
     vote = false,
     hasLicense = false,
-	candemote = false,
+    candemote = false,
     category = "MAFIA",
-	      
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(0)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
-	cPOLICEtomCheck = function(ply) return CLIENT or
-        table.HasValue({"VIP","superadmin","VIP +", "moderateur_VIP","moderateur_VIP+","moderateur_test_VIP","moderateur_test_VIP+","admin"}, ply:GetNWString("POLICEergroup"))
+    customCheck = function(ply)
+        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
     end,
-    CPOLICEtomCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
-		
+    customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
+gbrp.jobs["Mafieux Médecin"] = {
+    gang = mafia,
+    gangChief = false
+}
+
 --------------------------------------------------------------------------------
 TEAM_GANGSTER = DarkRP.createJob("Chef Gangster", {
     color = Color(4, 149, 40, 255),
     model = {"models/sentry/gtav/families/stpunk2pm.mdl"},
     description = [[]],
-    weapons = {"weapon_tg_fists","pocket", "keys","arccw_bo2_browninghp"},
+    weapons = {"weapon_tg_fists", "pocket", "keys", "arccw_bo2_browninghp"},
     command = "cGANGSTER",
     max = 1,
     salary = 0,
     admin = 0,
     vote = false,
     hasLicense = false,
-	candemote = false,
+    candemote = false,
     category = "GANGSTER",
-	      
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(10)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
-			
 })
+gbrp.jobs["Chef Gangster"] = {
+    gang = gang,
+    gangChief = true
+}
+
 --------------------------------------------------------------------------------
 TEAM_GANGSTER1 = DarkRP.createJob("Gangster", {
     color = Color(4, 149, 40, 255),
-    model = {"models/sentry/gtav/ballas/ogbalpm.mdl","models/sentry/gtav/ballas/balfpm.mdl","models/sentry/gtav/ballas/ballaseastpm.mdl","models/sentry/gtav/ballas/ballasorigpm.mdl","models/sentry/gtav/ballas/ballassoutpm.mdl","models/sentry/gtav/families/famfpm.mdl","models/sentry/gtav/families/famcapm.mdl","models/sentry/gtav/families/famfopm.mdl","models/sentry/gtav/families/famdnpm.mdl","models/sentry/gtav/lost/lostgirlbpm.mdl","models/sentry/gtav/lost/lostgirlwpm.mdl"},
+    model = {"models/sentry/gtav/ballas/ogbalpm.mdl", "models/sentry/gtav/ballas/balfpm.mdl", "models/sentry/gtav/ballas/ballaseastpm.mdl", "models/sentry/gtav/ballas/ballasorigpm.mdl", "models/sentry/gtav/ballas/ballassoutpm.mdl", "models/sentry/gtav/families/famfpm.mdl", "models/sentry/gtav/families/famcapm.mdl", "models/sentry/gtav/families/famfopm.mdl", "models/sentry/gtav/families/famdnpm.mdl", "models/sentry/gtav/lost/lostgirlbpm.mdl", "models/sentry/gtav/lost/lostgirlwpm.mdl"},
     description = [[]],
-    weapons = {"weapon_tg_fists","pocket", "keys"},
+    weapons = {"weapon_tg_fists", "pocket", "keys"},
     command = "GANGSTER",
     max = 10,
     salary = 0,
     admin = 0,
     vote = false,
     hasLicense = false,
-	candemote = false,
+    candemote = false,
     category = "GANGSTER",
-	      
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(0)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
-			
 })
+gbrp.jobs["Gangster"] = {
+    gang = gang,
+    gangChief = false
+}
+
 --------------------------------------------------------------------------------
 TEAM_GANGSTER2 = DarkRP.createJob("Gangster Architecte", {
     color = Color(4, 149, 40, 255),
-    model = {"models/sentry/gtav/ballas/ogbalpm.mdl","models/sentry/gtav/ballas/balfpm.mdl","models/sentry/gtav/ballas/ballaseastpm.mdl","models/sentry/gtav/ballas/ballasorigpm.mdl","models/sentry/gtav/ballas/ballassoutpm.mdl","models/sentry/gtav/families/famfpm.mdl","models/sentry/gtav/families/famcapm.mdl","models/sentry/gtav/families/famfopm.mdl","models/sentry/gtav/families/famdnpm.mdl","models/sentry/gtav/lost/lostgirlbpm.mdl","models/sentry/gtav/lost/lostgirlwpm.mdl"},
+    model = {"models/sentry/gtav/ballas/ogbalpm.mdl", "models/sentry/gtav/ballas/balfpm.mdl", "models/sentry/gtav/ballas/ballaseastpm.mdl", "models/sentry/gtav/ballas/ballasorigpm.mdl", "models/sentry/gtav/ballas/ballassoutpm.mdl", "models/sentry/gtav/families/famfpm.mdl", "models/sentry/gtav/families/famcapm.mdl", "models/sentry/gtav/families/famfopm.mdl", "models/sentry/gtav/families/famdnpm.mdl", "models/sentry/gtav/lost/lostgirlbpm.mdl", "models/sentry/gtav/lost/lostgirlwpm.mdl"},
     description = [[]],
-    weapons = {"weapon_tg_fists","pocket", "keys","alydPOLICE_fortificationbuildertablet"},
+    weapons = {"weapon_tg_fists", "pocket", "keys", "alydPOLICE_fortificationbuildertablet"},
     command = "aGANGSTER",
     max = 1,
     salary = 0,
     admin = 0,
     vote = false,
     hasLicense = false,
-	candemote = false,
+    candemote = false,
     category = "GANGSTER",
-	      
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(0)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
-			
 })
+gbrp.jobs["Gangster Architecte"] = {
+    gang = gang,
+    gangChief = false
+}
+
 --------------------------------------------------------------------------------
 TEAM_GANGSTER3 = DarkRP.createJob("Gangster Médecin", {
     color = Color(212, 212, 17, 255),
-    model = {"models/sentry/gtav/ballas/ogbalpm.mdl","models/sentry/gtav/ballas/balfpm.mdl","models/sentry/gtav/ballas/ballaseastpm.mdl","models/sentry/gtav/ballas/ballasorigpm.mdl","models/sentry/gtav/ballas/ballassoutpm.mdl","models/sentry/gtav/families/famfpm.mdl","models/sentry/gtav/families/famcapm.mdl","models/sentry/gtav/families/famfopm.mdl","models/sentry/gtav/families/famdnpm.mdl","models/sentry/gtav/lost/lostgirlbpm.mdl","models/sentry/gtav/lost/lostgirlwpm.mdl"},
+    model = {"models/sentry/gtav/ballas/ogbalpm.mdl", "models/sentry/gtav/ballas/balfpm.mdl", "models/sentry/gtav/ballas/ballaseastpm.mdl", "models/sentry/gtav/ballas/ballasorigpm.mdl", "models/sentry/gtav/ballas/ballassoutpm.mdl", "models/sentry/gtav/families/famfpm.mdl", "models/sentry/gtav/families/famcapm.mdl", "models/sentry/gtav/families/famfopm.mdl", "models/sentry/gtav/families/famdnpm.mdl", "models/sentry/gtav/lost/lostgirlbpm.mdl", "models/sentry/gtav/lost/lostgirlwpm.mdl"},
     description = [[]],
-    weapons = {"weapon_tg_fists","pocket", "keys","weapon_medkit"},
+    weapons = {"weapon_tg_fists", "pocket", "keys", "weapon_medkit"},
     command = "mGANGSTER",
     max = 1,
     salary = 0,
     admin = 0,
     vote = false,
     hasLicense = false,
-	candemote = false,
+    candemote = false,
     category = "GANGSTER",
-	      
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(0)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
-	cPOLICEtomCheck = function(ply) return CLIENT or
-        table.HasValue({"VIP","superadmin","VIP +", "moderateur_VIP","moderateur_VIP+","moderateur_test_VIP","moderateur_test_VIP+","admin"}, ply:GetNWString("POLICEergroup"))
+    customCheck = function(ply)
+        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
     end,
-    CPOLICEtomCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
-			
+    customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
+gbrp.jobs["Gangster Médecin"] = {
+    gang = gang,
+    gangChief = false
+}
 
 TEAM_STAFF = DarkRP.createJob("STAFF", {
     color = Color(255, 0, 0, 255),
     model = {"models/bratplat/cuadrado/cuadrado_colorized.mdl"},
     description = [[STAFF]],
-    weapons = {"weapon_physgun","gmod_tool","weapon_tg_fists","climb_swep2","weaponchecker","keys"},
+    weapons = {"weapon_physgun", "gmod_tool", "weapon_tg_fists", "climb_swep2", "weaponchecker", "keys"},
     command = "STAFF",
     max = 0,
     salary = 0,
@@ -483,39 +519,46 @@ TEAM_STAFF = DarkRP.createJob("STAFF", {
     hasLicense = true,
     candemote = false,
     category = "STAFF",
-    cPOLICEtomCheck = function(ply) return
-        table.HasValue({"superadmin","moderateur","moderateur_VIP+","moderateur_test_VIP+","admin"}, ply:GetNWString("POLICEergroup"))
+    customCheck = function(ply)
+        return table.HasValue({"superadmin", "moderateur", "moderateur_VIP+", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
     end,
-    CPOLICEtomCheckFailMsg = "Job STAFF",
+    customCheckFailMsg = "Job STAFF",
 })
+gbrp.jobs["STAFF"] = {
+    gang = nil,
+    gangChief = nil
+}
 
 ----------VIP---------------------------------------
 TEAM_VIP = DarkRP.createJob("YAMAKASI", {
     color = Color(212, 212, 17, 255),
-    model = {"models/player/Group03/male_01.mdl","models/player/Group03/male_02.mdl","models/player/Group03/male_04.mdl","models/player/Group03/male_09.mdl","models/player/Group03/female_06.mdl","models/player/Group03/female_02.mdl","models/player/Group03/female_05.mdl"},
+    model = {"models/player/Group03/male_01.mdl", "models/player/Group03/male_02.mdl", "models/player/Group03/male_04.mdl", "models/player/Group03/male_09.mdl", "models/player/Group03/female_06.mdl", "models/player/Group03/female_02.mdl", "models/player/Group03/female_05.mdl"},
     description = [[]],
-    weapons = {"climb_swep2","pocket", "keys"},
+    weapons = {"climb_swep2", "pocket", "keys"},
     command = "yama",
     max = 2,
     salary = 0,
     admin = 0,
     vote = false,
     hasLicense = false,
-	candemote = false,
+    candemote = false,
     category = "VIP",
-	      
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(0)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.2, GAMEMODE.Config.runspeed * 1.2)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.2, GAMEMODE.Config.runspeed * 1.2)
     end,
-	cPOLICEtomCheck = function(ply) return CLIENT or
-        table.HasValue({"VIP","superadmin","VIP +", "moderateur_VIP","moderateur_VIP+","moderateur_test_VIP","moderateur_test_VIP+","admin"}, ply:GetNWString("POLICEergroup"))
+    customCheck = function(ply)
+        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
     end,
-    CPOLICEtomCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
-			
+    customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
+gbrp.jobs["YAMAKASI"] = {
+    gang = nil,
+    gangChief = nil
+}
+
 -------------------------------------------------
 TEAM_VIP1 = DarkRP.createJob("Chauffeur de taxi", {
     color = Color(212, 212, 17, 255),
@@ -528,21 +571,24 @@ TEAM_VIP1 = DarkRP.createJob("Chauffeur de taxi", {
     admin = 0,
     vote = false,
     hasLicense = false,
-	candemote = false,
+    candemote = false,
     category = "VIP",
-	      
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(0)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
-	cPOLICEtomCheck = function(ply) return CLIENT or
-        table.HasValue({"VIP","superadmin","VIP +", "moderateur_VIP","moderateur_VIP+","moderateur_test_VIP","moderateur_test_VIP+","admin"}, ply:GetNWString("POLICEergroup"))
+    customCheck = function(ply)
+        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
     end,
-    CPOLICEtomCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
-			
+    customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
+gbrp.jobs["Chauffeur de taxi"] = {
+    gang = nil,
+    gangChief = nil
+}
+
 -------------------------------------------------
 TEAM_VIP2 = DarkRP.createJob("Vendeur hot dog", {
     color = Color(212, 212, 17, 255),
@@ -555,21 +601,24 @@ TEAM_VIP2 = DarkRP.createJob("Vendeur hot dog", {
     admin = 0,
     vote = false,
     hasLicense = false,
-	candemote = false,
+    candemote = false,
     category = "VIP",
-	      
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(0)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
-	cPOLICEtomCheck = function(ply) return CLIENT or
-        table.HasValue({"VIP","superadmin","VIP +", "moderateur_VIP","moderateur_VIP+","moderateur_test_VIP","moderateur_test_VIP+","admin"}, ply:GetNWString("POLICEergroup"))
+    customCheck = function(ply)
+        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
     end,
-    CPOLICEtomCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
-			
+    customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
+gbrp.jobs["Vendeur hot dog"] = {
+    gang = nil,
+    gangChief = nil
+}
+
 -------------------------------------------------
 TEAM_VIP3 = DarkRP.createJob("Hacker", {
     color = Color(212, 212, 17, 255),
@@ -582,113 +631,119 @@ TEAM_VIP3 = DarkRP.createJob("Hacker", {
     admin = 0,
     vote = false,
     hasLicense = false,
-	candemote = false,
+    candemote = false,
     category = "VIP",
-	      
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(0)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
-	cPOLICEtomCheck = function(ply) return CLIENT or
-        table.HasValue({"VIP","superadmin","VIP +", "moderateur_VIP","moderateur_VIP+","moderateur_test_VIP","moderateur_test_VIP+","admin"}, ply:GetNWString("POLICEergroup"))
+    customCheck = function(ply)
+        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
     end,
-    CPOLICEtomCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
-			
+    customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
+gbrp.jobs["Hacker"] = {
+    gang = nil,
+    gangChief = nil
+}
+
 --------------------------------------------------------------------------------
 TEAM_VIP4 = DarkRP.createJob("Agent secret", {
     color = Color(212, 164, 17, 255),
-    model = {"models/taggart/police01/male_01.mdl", 
-	"models/taggart/police01/male_02.mdl", 
-	"models/taggart/police01/male_04.mdl", 
-	"models/taggart/police01/male_05.mdl", 
-	"models/taggart/police01/male_06.mdl", 
-	"models/taggart/police01/male_07.mdl", 
-	"models/taggart/police01/male_08.mdl", 
-	"models/taggart/police01/male_09.mdl"
-	},
+    model = {"models/taggart/police01/male_01.mdl", "models/taggart/police01/male_02.mdl", "models/taggart/police01/male_04.mdl", "models/taggart/police01/male_05.mdl", "models/taggart/police01/male_06.mdl", "models/taggart/police01/male_07.mdl", "models/taggart/police01/male_08.mdl", "models/taggart/police01/male_09.mdl"},
     description = [[]],
-    weapons = {"disguise_swep","pocket", "keys"},
+    weapons = {"disguise_swep", "pocket", "keys"},
     command = "ags",
     max = 1,
     salary = 0,
     admin = 0,
     vote = false,
     hasLicense = true,
-	candemote = false,
+    candemote = false,
     category = "VIP+",
-	        
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(20)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
     end,
-	cPOLICEtomCheck = function(ply) return CLIENT or
-        table.HasValue({"superadmin","VIP +","moderateur_VIP+","moderateur_test_VIP+","admin"}, ply:GetNWString("POLICEergroup"))
+    customCheck = function(ply)
+        return CLIENT or table.HasValue({"superadmin", "VIP +", "moderateur_VIP+", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
     end,
-    CPOLICEtomCheckFailMsg = "Ce métier est réservé aux membres VIP+ seulement.This job is VIP+ only.",
+    customCheckFailMsg = "Ce métier est réservé aux membres VIP+ seulement.This job is VIP+ only.",
 })
+gbrp.jobs["Agent secret"] = {
+    gang = nil,
+    gangChief = nil
+}
+
 --------------------------------------------------------------------------------
 TEAM_VIP5 = DarkRP.createJob("Vendeur d'amres ambulant", {
     color = Color(212, 164, 17, 255),
     model = {"models/player/leet.mdl"},
     description = [[]],
-    weapons = {"arccw_bo2_browninghp","pocket", "keys"},
+    weapons = {"arccw_bo2_browninghp", "pocket", "keys"},
     command = "vda",
     max = 1,
     salary = 0,
     admin = 0,
     vote = false,
     hasLicense = true,
-	candemote = false,
+    candemote = false,
     category = "VIP+",
-	        
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(0)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
-	cPOLICEtomCheck = function(ply) return CLIENT or
-        table.HasValue({"superadmin","VIP +","moderateur_VIP+","moderateur_test_VIP+","admin"}, ply:GetNWString("POLICEergroup"))
+    customCheck = function(ply)
+        return CLIENT or table.HasValue({"superadmin", "VIP +", "moderateur_VIP+", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
     end,
-    CPOLICEtomCheckFailMsg = "Ce métier est réservé aux membres VIP+ seulement.This job is VIP+ only.",
+    customCheckFailMsg = "Ce métier est réservé aux membres VIP+ seulement.This job is VIP+ only.",
 })
+gbrp.jobs["Vendeur d'amres ambulant"] = {
+    gang = nil,
+    gangChief = nil
+}
+
 --------------------------------------------------------------------------------
 TEAM_VIP6 = DarkRP.createJob("Tueur à gage", {
     color = Color(212, 164, 17, 255),
     model = {"models/player/gman_high.mdl"},
     description = [[]],
-    weapons = {"weapon_doiwelrod","pocket", "keys"},
+    weapons = {"weapon_doiwelrod", "pocket", "keys"},
     command = "tag",
     max = 1,
     salary = 0,
     admin = 0,
     vote = false,
     hasLicense = true,
-	candemote = false,
+    candemote = false,
     category = "VIP+",
-	        
-	PlayerSpawn = function(ply)
+    PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(0)
-	GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
-	cPOLICEtomCheck = function(ply) return CLIENT or
-        table.HasValue({"superadmin","VIP +","moderateur_VIP+","moderateur_test_VIP+","admin"}, ply:GetNWString("POLICEergroup"))
+    customCheck = function(ply)
+        return CLIENT or table.HasValue({"superadmin", "VIP +", "moderateur_VIP+", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
     end,
-    CPOLICEtomCheckFailMsg = "Ce métier est réservé aux membres VIP+ seulement.This job is VIP+ only.",
+    customCheckFailMsg = "Ce métier est réservé aux membres VIP+ seulement.This job is VIP+ only.",
 })
-
+gbrp.jobs["Tueur à gage"] = {
+    gang = nil,
+    gangChief = nil
+}
 
 --[[---------------------------------------------------------------------------
 Define which team joining players spawn into and what team you change to if demoted
 ---------------------------------------------------------------------------]]
 GAMEMODE.DefaultTeam = TEAM_CITIZEN
+
 --[[---------------------------------------------------------------------------
 Define which teams belong to civil protection
 Civil protection can set warrants, make people wanted and do some other police related things
@@ -698,6 +753,7 @@ GAMEMODE.CivilProtection = {
     [TEAM_CHIEF] = true,
     [TEAM_MAYOR] = true,
 }
+
 --[[---------------------------------------------------------------------------
 Jobs that are hitmen (enables the hitman menu)
 ---------------------------------------------------------------------------]]
