@@ -1,5 +1,6 @@
 util.AddNetworkString("GBRP::bankreception");
 util.AddNetworkString("GBRP::bankwithdraw");
+util.AddNetworkString("GBRP::bankdeposit");
 
 sql.Query("create table if not exists gbrp(steamid64 bigint not null, balance bigint);")
 
@@ -33,8 +34,14 @@ concommand.Add("gbrp_addlaunderedmoney", function( ply, cmd, args )
 end)
 
 net.Receive("GBRP::bankwithdraw", function(len,ply)
-    local amount = net.ReadInt(32)
+    local amount = net.ReadUInt(32)
     ply:SetNWInt("GBRP::balance",ply:GetNWInt("GBRP::balance") - amount)
     sql.Query("update gbrp set balance = " .. ply:GetNWInt("GBRP::balance") .. " where steamid64 = " .. ply:SteamID64() .. ";")
     ply:addMoney(amount)
+end)
+
+net.Receive("GBRP::bankdeposit", function(len,ply)
+    ply:SetNWInt("GBRP::balance",ply:GetNWInt("GBRP::balance") + net.ReadUInt(32))
+    sql.Query("update gbrp set balance = " .. ply:GetNWInt("GBRP::balance") .. " where steamid64 = " .. ply:SteamID64() .. ";")
+    ply:SetNWInt("GBRP::launderedmoney", 0)
 end)
