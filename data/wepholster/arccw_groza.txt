@@ -1,0 +1,8 @@
+{
+	"BoneOffset": [
+		"[3.5938 -11.75 3.4688]",
+		"{-91 1.3438 180}"
+	],
+	"Bone": "ValveBiped.Bip01_Spine2",
+	"Model": "models/arccw/groza/w_groza.mdl"
+}

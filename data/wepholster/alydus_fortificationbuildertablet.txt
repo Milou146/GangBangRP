@@ -1,0 +1,8 @@
+{
+	"BoneOffset": [
+		"[-1.9375 -0.5938 -5.2813]",
+		"{-179.3125 180 1.3438}"
+	],
+	"Bone": "ValveBiped.Bip01_Pelvis",
+	"Model": "models/nirrti/tablet/tablet_sfm.mdl"
+}

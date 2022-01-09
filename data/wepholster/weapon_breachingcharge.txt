@@ -1,0 +1,8 @@
+{
+	"BoneOffset": [
+		"[-1.1875 3.9063 5.875]",
+		"{90 0 180}"
+	],
+	"Bone": "ValveBiped.Bip01_Pelvis",
+	"Model": "models/minic23/csgo/breach_charge_detonator.mdl"
+}

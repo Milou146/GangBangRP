@@ -1,0 +1,8 @@
+{
+	"BoneOffset": [
+		"[-1.5 1.3438 6.1875]",
+		"{-95 0 0}"
+	],
+	"Bone": "ValveBiped.Bip01_Pelvis",
+	"Model": "models/weapons/arccw_go/w_eq_smokegrenade_thrown.mdl"
+}

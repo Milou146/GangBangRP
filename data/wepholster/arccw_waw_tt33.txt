@@ -1,0 +1,8 @@
+{
+	"BoneOffset": [
+		"[4.2188 -10.5625 -1.5]",
+		"{72 2.6875 0}"
+	],
+	"Bone": "ValveBiped.Bip01_R_Thigh",
+	"Model": "models/weapons/arccw/c_waw_tt33.mdl"
+}
