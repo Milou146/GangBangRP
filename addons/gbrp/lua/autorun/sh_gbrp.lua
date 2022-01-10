@@ -1,5 +1,13 @@
 gbrp = {}
-
+gbrp.yakuzas = {
+    subject = "Les yakuzas"
+}
+gbrp.mafia = {
+    subject = "La Mafia"
+}
+gbrp.gang = {
+    subject = "Le Gang"
+}
 gbrp.jobs = {
     ["Citoyen"] = {gang = "nil",gangChief = nil};
     ["N.Y.P.D"] = {gang = "nil",gangChief = nil};

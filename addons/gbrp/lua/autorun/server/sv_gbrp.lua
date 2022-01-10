@@ -29,12 +29,12 @@ hook.Add("PlayerInitialSpawn", "GBRP::Client Init", function(ply)
     end
 end)
 
-concommand.Add("gbrp_addmoney", function(ply, cmd, args)
+concommand.Add("gbrp_setplayerbalance", function(ply, cmd, args)
     if ply:IsAdmin() then
         local target = DarkRP.findPlayer(args[1])
 
         if IsValid(target) then
-            target:SetNWInt("GBRP::balance", target:GetNWInt("GBRP::balance") + args[2])
+            target:SetNWInt("GBRP::balance", args[2])
             sql.Query("update gbrp set balance = " .. target:GetNWInt("GBRP::balance") .. " where steamid64 = " .. target:SteamID64() .. ";")
         end
     else
@@ -42,15 +42,10 @@ concommand.Add("gbrp_addmoney", function(ply, cmd, args)
     end
 end)
 
-concommand.Add("gbrp_addlaunderedmoney", function(ply, cmd, args)
-    if ply:IsAdmin() then
-        local target = DarkRP.findPlayer(args[1])
-
-        if IsValid(target) then
-            target:addLaunderedMoney(args[2])
-        end
-    else
-        ply:ChatPrint("Tu n'es pas admin baka")
+concommand.Add("gbrp_setgangbalance" ,function(ply,cmd,args)
+    local gang = args[1]
+    if ply:IsAdmin() and gang == "yakuzas" or gang == "mafia" or gang == "gang" then
+            SetGlobalInt(gang .. "Balance", tonumber(args[2]))
     end
 end)
 
@@ -63,26 +58,31 @@ end)
 
 -- the ply is the chief of the gang here
 net.Receive("GBRP::bankdeposit", function(len, ply)
-    gang = ply:GetGang()
-
-    for _, v in pairs(ply.launderedMoney) do
-        SetGlobalInt(gang .. "Balance",GetGlobalInt(gang .. "Balance") + tonumber(v.amount / 2))
-        v.gangster:SetNWInt("GBRP::balance", v.gangster:GetNWInt("GBRP::balance") + tonumber(v.amount * 25 / 100))
-        sql.Query("update gbrp set balance = " .. v.gangster:GetNWInt("GBRP::balance") .. " where steamid64 = " .. v.gangster:SteamID64() .. ";")
-        ply:SetNWInt("GBRP::balance", ply:GetNWInt("GBRP::balance") + tonumber(v.amount * 10 / 100))
-        sql.Query("update gbrp set balance = " .. ply:GetNWInt("GBRP::balance") .. " where steamid64 = " .. ply:SteamID64() .. ";")
-        local members = {}
-        for _,pl in pairs(player.GetAll()) do
-            if pl:GetGang() == gang then
-                table.insert(members,pl)
-            end
-        end
-        v.amount = v.amount * 15 / 100
-        for _,member in pairs(members) do
-            member:SetNWInt("GBRP::balance", member:GetNWInt("GBRP::balance") + tonumber(v.amount / #members))
-            sql.Query("update gbrp set balance = " .. member:GetNWInt("GBRP::balance") .. " where steamid64 = " .. member:SteamID64() .. ";")
+    local gang = ply:GetGang()
+    local gangPay = 0
+    local members = {}
+    for _,pl in pairs(player.GetAll()) do
+        if pl:GetGang() == gang then
+            members[pl] = 0
         end
     end
+    for _, v in pairs(ply.launderedMoney) do
+        gangPay = gangPay + tonumber(v.amount / 2) -- La part du gang
+        members[v.gangster] = members[v.gangster] + tonumber(v.amount * 25 / 100) -- La part de l'initiateur
+        members[ply] = members[ply] + tonumber(v.amount * 10 / 100) -- La part du chef
+
+        -- La part des membres
+        for member,_ in pairs(members) do
+            members[member] = members[member] + tonumber(v.amount * 15 / 100 * #members)
+        end
+    end
+    for member,pay in pairs(members) do
+        member:SetNWInt("GBRP::balance", member:GetNWInt("GBRP::balance") + pay)
+        sql.Query("update gbrp set balance = " .. member:GetNWInt("GBRP::balance") .. " where steamid64 = " .. member:SteamID64() .. ";")
+        member:ChatPrint(gbrp[gang].subject .. " vous rémunère " .. pay .. "$.")
+    end
+    SetGlobalInt(gang .. "Balance",GetGlobalInt(gang .. "Balance") + gangPay)
+    ply:ChatPrint(gbrp[gang].subject .. " gagne " .. gangPay .. "$.")
 
     ply:SetNWInt("GBRP::launderedmoney", 0)
     ply.launderedMoney = {}

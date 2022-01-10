@@ -1,7 +1,7 @@
 include("shared.lua")
 
 ENT.Category = "GangBangRP"
-ENT.PrintName = "Joaillier"
+ENT.PrintName = "Shop"
 ENT.AutomaticFrameAdvance = true
 
 function ENT:Draw()
