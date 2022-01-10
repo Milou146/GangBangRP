@@ -5,10 +5,19 @@ surface.CreateFont("GBRP::bank",{
 
 net.Receive("GBRP::bankreception", function()
     ply = LocalPlayer()
+    local ft = CurTime()
     local frame = vgui.Create("EditablePanel")
     frame:SetSize(1000,550)
     frame:Center()
     frame:MakePopup()
+    frame:SetAlpha(0)
+    frame.Think = function(self)
+        if CurTime() > ft + .1 and self:GetAlpha() != 255 then
+            ft = CurTime()
+            self:SetAlpha(math.Clamp(self:GetAlpha() + 100,0,255))
+            print(self:GetAlpha())
+        end
+    end
     local background = vgui.Create("DImage",frame)
     background:SetImage("gui/gbrp/bankframe.png")
     background:SizeToContents()
