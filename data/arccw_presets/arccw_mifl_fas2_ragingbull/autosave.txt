@@ -1,7 +1,0 @@
-go_optic_awp
-
-
-
-
-
-

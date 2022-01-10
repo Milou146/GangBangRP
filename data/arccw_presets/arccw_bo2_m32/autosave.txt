@@ -1,5 +1,0 @@
-optic_bo2_rangefinder
-
-
-
-optic_bo2_m32

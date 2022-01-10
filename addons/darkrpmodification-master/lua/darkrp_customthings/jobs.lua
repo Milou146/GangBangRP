@@ -1,5 +1,3 @@
-gbrp = {}
-gbrp.jobs = {}
 -------------------------------------------------------------------------------
 TEAM_CITIZEN = DarkRP.createJob("Citoyen", {
     color = Color(0, 0, 0, 255),
@@ -21,10 +19,6 @@ TEAM_CITIZEN = DarkRP.createJob("Citoyen", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
 })
-gbrp.jobs["Citoyen"] = {
-    gang = nil,
-    gangChief = nil
-}
 
 --------------------------------------------------------------------------------
 TEAM_NYPD = DarkRP.createJob("N.Y.P.D", {
@@ -47,10 +41,6 @@ TEAM_NYPD = DarkRP.createJob("N.Y.P.D", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
     end
 })
-gbrp.jobs["N.Y.P.D"] = {
-    gang = nil,
-    gangChief = nil
-}
 
 --------------------------------------------------------------------------------
 TEAM_NYPD1 = DarkRP.createJob("Commissaire", {
@@ -73,10 +63,6 @@ TEAM_NYPD1 = DarkRP.createJob("Commissaire", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
     end
 })
-gbrp.jobs["N.Y.P.D"] = {
-    gang = nil,
-    gangChief = nil
-}
 
 --------------------------------------------------------------------------------
 TEAM_NYPD2 = DarkRP.createJob("S.W.A.T", {
@@ -99,10 +85,6 @@ TEAM_NYPD2 = DarkRP.createJob("S.W.A.T", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
     end
 })
-gbrp.jobs["S.W.A.T"] = {
-    gang = nil,
-    gangChief = nil
-}
 
 --------------------------------------------------------------------------------
 TEAM_NYPD3 = DarkRP.createJob("S.W.A.T Médic", {
@@ -129,10 +111,6 @@ TEAM_NYPD3 = DarkRP.createJob("S.W.A.T Médic", {
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
-gbrp.jobs["S.W.A.T Médic"] = {
-    gang = nil,
-    gangChief = nil
-}
 
 --------------------------------------------------------------------------------
 TEAM_NYPD4 = DarkRP.createJob("S.W.A.T Sniper", {
@@ -159,10 +137,6 @@ TEAM_NYPD4 = DarkRP.createJob("S.W.A.T Sniper", {
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP+ seulement.This job is VIP+ only.",
 })
-gbrp.jobs["S.W.A.T Sniper"] = {
-    gang = nil,
-    gangChief = nil
-}
 
 --------------------------------------------------------------------------------
 TEAM_YAKUZA = DarkRP.createJob("Chef des Yakuzas", {
@@ -185,10 +159,6 @@ TEAM_YAKUZA = DarkRP.createJob("Chef des Yakuzas", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
 })
-gbrp.jobs["Chef des Yakuzas"] = {
-    gang = yakuzas,
-    gangChief = true
-}
 
 --------------------------------------------------------------------------------
 TEAM_YAKUZA2 = DarkRP.createJob("Yakuza", {
@@ -217,10 +187,6 @@ TEAM_YAKUZA2 = DarkRP.createJob("Yakuza", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
 })
-gbrp.jobs["Yakuza"] = {
-    gang = yakuzas,
-    gangChief = false
-}
 
 --------------------------------------------------------------------------------
 TEAM_YAKUZA3 = DarkRP.createJob("Yakuza Architecte", {
@@ -249,10 +215,6 @@ TEAM_YAKUZA3 = DarkRP.createJob("Yakuza Architecte", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
 })
-gbrp.jobs["Yakuza Architecte"] = {
-    gang = yakuzas,
-    gangChief = false
-}
 
 --------------------------------------------------------------------------------
 TEAM_YAKUZA4 = DarkRP.createJob("Yakuza Médecin", {
@@ -285,10 +247,6 @@ TEAM_YAKUZA4 = DarkRP.createJob("Yakuza Médecin", {
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
-gbrp.jobs["Yakuza Médecin"] = {
-    gang = yakuzas,
-    gangChief = false
-}
 
 --------------------------------------------------------------------------------
 TEAM_MAFIA = DarkRP.createJob("Parrain", {
@@ -311,10 +269,6 @@ TEAM_MAFIA = DarkRP.createJob("Parrain", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
 })
-gbrp.jobs["Parrain"] = {
-    gang = mafia,
-    gangChief = true
-}
 
 --------------------------------------------------------------------------------
 TEAM_MAFIA1 = DarkRP.createJob("Mafieux", {
@@ -337,10 +291,6 @@ TEAM_MAFIA1 = DarkRP.createJob("Mafieux", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
 })
-gbrp.jobs["Mafieux"] = {
-    gang = mafia,
-    gangChief = false
-}
 
 --------------------------------------------------------------------------------
 TEAM_MAFIA2 = DarkRP.createJob("Mafieux Architecte", {
@@ -363,10 +313,6 @@ TEAM_MAFIA2 = DarkRP.createJob("Mafieux Architecte", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
 })
-gbrp.jobs["Mafieux Architecte"] = {
-    gang = mafia,
-    gangChief = false
-}
 
 --------------------------------------------------------------------------------
 TEAM_MAFIA3 = DarkRP.createJob("Mafieux Médecin", {
@@ -393,10 +339,6 @@ TEAM_MAFIA3 = DarkRP.createJob("Mafieux Médecin", {
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
-gbrp.jobs["Mafieux Médecin"] = {
-    gang = mafia,
-    gangChief = false
-}
 
 --------------------------------------------------------------------------------
 TEAM_GANGSTER = DarkRP.createJob("Chef Gangster", {
@@ -419,10 +361,6 @@ TEAM_GANGSTER = DarkRP.createJob("Chef Gangster", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
 })
-gbrp.jobs["Chef Gangster"] = {
-    gang = gang,
-    gangChief = true
-}
 
 --------------------------------------------------------------------------------
 TEAM_GANGSTER1 = DarkRP.createJob("Gangster", {
@@ -445,10 +383,6 @@ TEAM_GANGSTER1 = DarkRP.createJob("Gangster", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
 })
-gbrp.jobs["Gangster"] = {
-    gang = gang,
-    gangChief = false
-}
 
 --------------------------------------------------------------------------------
 TEAM_GANGSTER2 = DarkRP.createJob("Gangster Architecte", {
@@ -471,10 +405,6 @@ TEAM_GANGSTER2 = DarkRP.createJob("Gangster Architecte", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
 })
-gbrp.jobs["Gangster Architecte"] = {
-    gang = gang,
-    gangChief = false
-}
 
 --------------------------------------------------------------------------------
 TEAM_GANGSTER3 = DarkRP.createJob("Gangster Médecin", {
@@ -501,10 +431,6 @@ TEAM_GANGSTER3 = DarkRP.createJob("Gangster Médecin", {
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
-gbrp.jobs["Gangster Médecin"] = {
-    gang = gang,
-    gangChief = false
-}
 
 TEAM_STAFF = DarkRP.createJob("STAFF", {
     color = Color(255, 0, 0, 255),
@@ -524,10 +450,6 @@ TEAM_STAFF = DarkRP.createJob("STAFF", {
     end,
     customCheckFailMsg = "Job STAFF",
 })
-gbrp.jobs["STAFF"] = {
-    gang = nil,
-    gangChief = nil
-}
 
 ----------VIP---------------------------------------
 TEAM_VIP = DarkRP.createJob("YAMAKASI", {
@@ -554,10 +476,6 @@ TEAM_VIP = DarkRP.createJob("YAMAKASI", {
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
-gbrp.jobs["YAMAKASI"] = {
-    gang = nil,
-    gangChief = nil
-}
 
 -------------------------------------------------
 TEAM_VIP1 = DarkRP.createJob("Chauffeur de taxi", {
@@ -584,10 +502,6 @@ TEAM_VIP1 = DarkRP.createJob("Chauffeur de taxi", {
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
-gbrp.jobs["Chauffeur de taxi"] = {
-    gang = nil,
-    gangChief = nil
-}
 
 -------------------------------------------------
 TEAM_VIP2 = DarkRP.createJob("Vendeur hot dog", {
@@ -614,10 +528,6 @@ TEAM_VIP2 = DarkRP.createJob("Vendeur hot dog", {
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
-gbrp.jobs["Vendeur hot dog"] = {
-    gang = nil,
-    gangChief = nil
-}
 
 -------------------------------------------------
 TEAM_VIP3 = DarkRP.createJob("Hacker", {
@@ -644,10 +554,6 @@ TEAM_VIP3 = DarkRP.createJob("Hacker", {
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
-gbrp.jobs["Hacker"] = {
-    gang = nil,
-    gangChief = nil
-}
 
 --------------------------------------------------------------------------------
 TEAM_VIP4 = DarkRP.createJob("Agent secret", {
@@ -674,10 +580,6 @@ TEAM_VIP4 = DarkRP.createJob("Agent secret", {
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP+ seulement.This job is VIP+ only.",
 })
-gbrp.jobs["Agent secret"] = {
-    gang = nil,
-    gangChief = nil
-}
 
 --------------------------------------------------------------------------------
 TEAM_VIP5 = DarkRP.createJob("Vendeur d'amres ambulant", {
@@ -704,10 +606,6 @@ TEAM_VIP5 = DarkRP.createJob("Vendeur d'amres ambulant", {
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP+ seulement.This job is VIP+ only.",
 })
-gbrp.jobs["Vendeur d'amres ambulant"] = {
-    gang = nil,
-    gangChief = nil
-}
 
 --------------------------------------------------------------------------------
 TEAM_VIP6 = DarkRP.createJob("Tueur à gage", {
@@ -734,10 +632,6 @@ TEAM_VIP6 = DarkRP.createJob("Tueur à gage", {
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP+ seulement.This job is VIP+ only.",
 })
-gbrp.jobs["Tueur à gage"] = {
-    gang = nil,
-    gangChief = nil
-}
 
 --[[---------------------------------------------------------------------------
 Define which team joining players spawn into and what team you change to if demoted

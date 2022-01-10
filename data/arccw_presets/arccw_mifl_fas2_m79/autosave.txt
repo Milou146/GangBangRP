@@ -1,9 +1,0 @@
-
-
-
-
-mifl_fas2_akimbo_m79_alt,0,-1
-mifl_fas2_m79_stock
-mifl_fas2_m79_ammo_airburst
-
-

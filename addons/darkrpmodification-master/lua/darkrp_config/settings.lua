@@ -364,7 +364,6 @@ GM.Config.DisallowDrop = {
 GM.Config.DefaultWeapons = {
     "keys",
     "pocket",
-   
 }
 
 -- Override categories.

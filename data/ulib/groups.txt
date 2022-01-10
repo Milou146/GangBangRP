@@ -1,10 +1,10 @@
 "admin"	
 {
-	"can_target"	"!%superadmin"
 	"allow"	
 	{
 		"darkrp_admincommands"
 		"darkrp_getadminweapons"
+		"darkrp_getjob_cnypd"
 		"darkrp_getjob_cp"
 		"darkrp_getjob_mayor"
 		"darkrp_seeevents"
@@ -168,6 +168,7 @@
 		"ulx welcomemessage"
 		"ulx whip"
 	}
+	"can_target"	"!%superadmin"
 	"inherit_from"	"operator"
 }
 "superadmin"	
@@ -275,10 +276,17 @@
 }
 "operator"	
 {
-	"can_target"	"!%admin"
 	"allow"	
 	{
 		"ulx seeasay"
+	}
+	"can_target"	"!%admin"
+	"inherit_from"	"user"
+}
+"noaccess"	
+{
+	"allow"	
+	{
 	}
 	"inherit_from"	"user"
 }
@@ -306,11 +314,4 @@
 		"ulx votemute"
 		"ulx who"
 	}
-}
-"noaccess"	
-{
-	"allow"	
-	{
-	}
-	"inherit_from"	"user"
 }

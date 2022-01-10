@@ -631,4 +631,5 @@
 	"climbswep2_slide_allweps"		"0"
 	"climbswep2_maxjumps"		"3"
 	"sv_simfphys_maxmines"		"3"
+	"snte_ulxluarun"		"1"
 }
