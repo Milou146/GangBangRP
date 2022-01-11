@@ -1,0 +1,8 @@
+{
+	"BoneOffset": [
+		"[-4.0625 3.9063 -5.125]",
+		"{67.9063 4.0625 165.7188}"
+	],
+	"Bone": "ValveBiped.Bip01_Pelvis",
+	"Model": "models/weapons/w_flashlight_zm.mdl"
+}

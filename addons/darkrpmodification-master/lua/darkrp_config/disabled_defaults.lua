@@ -23,7 +23,7 @@ In some cases some external addons may overwrite one of the modules below and wi
 In these few cases it will be pretty obvious when you expect something to happen and nothing does.
 ---------------------------------------------------------------------------]]
 DarkRP.disabledDefaults["modules"] = {
-    ["afk"]              = false,
+    ["afk"]              = true,
     ["chatsounds"]       = false,
     ["events"]           = false,
     ["fpp"]              = false,
@@ -31,7 +31,7 @@ DarkRP.disabledDefaults["modules"] = {
     ["f4menu"]           = false,
     ["hitmenu"]          = false,
     ["hud"]              = true,
-    ["hungermod"]        = false,
+    ["hungermod"]        = true,
     ["playerscale"]      = false,
     ["sleep"]            = false,
     ["fadmin"]           = false,
@@ -63,8 +63,8 @@ DarkRP.disabledDefaults["jobs"] = {
 Shipments and pistols
 ---------------------------------------------------------------------------]]
 DarkRP.disabledDefaults["shipments"] = {
-    ["AK47"]         = true,
-    ["Desert eagle"] = true,
+    ["AK47"]         = false,
+    ["Desert eagle"] = false,
     ["Fiveseven"]    = true,
     ["Glock"]        = true,
     ["M4"]           = true,
@@ -81,7 +81,7 @@ Entities
 DarkRP.disabledDefaults["entities"] = {
     ["Drug lab"]      = true,
     ["Gun lab"]       = true,
-    ["Money printer"] = false,
+    ["Money printer"] = true,
     ["Microwave"]     = true, --Hungermod only
     ["Tip Jar"]       = true,
 }
