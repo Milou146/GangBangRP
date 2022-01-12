@@ -1,36 +1,36 @@
 surface.CreateFont("GBRP::bank",{
     font = "Banks Miles Single Line",
-    size = 50
+    size = 36
 })
 
 net.Receive("GBRP::bankreception", function()
     ply = LocalPlayer()
     local ft = CurTime()
     local frame = vgui.Create("EditablePanel")
-    frame:SetSize(1000,550)
-    frame:Center()
+    local SW = ScrW()
+    local SH = ScrH()
+    frame:SetSize(950,550)
+    frame:SetPos(SW / 2 -frame:GetWide() / 2, SH)
     frame:MakePopup()
-    frame:SetAlpha(0)
     frame.Think = function(self)
-        if CurTime() > ft + .1 and self:GetAlpha() != 255 then
+        if CurTime() > ft + .05 and self:GetY() != SH - 550 then
             ft = CurTime()
-            self:SetAlpha(math.Clamp(self:GetAlpha() + 100,0,255))
-            print(self:GetAlpha())
+            self:SetY(self:GetY() - 25)
         end
     end
     local background = vgui.Create("DImage",frame)
     background:SetImage("gui/gbrp/bankframe.png")
     background:SizeToContents()
     local close = vgui.Create("DImageButton",frame)
-    close:SetPos(902,0)
-    close:SetSize(48,53)
+    close:SetPos(739,15)
+    close:SetSize(40,47)
     close.DoClick = function(self)
         frame:Remove()
     end
-    local depositButton = vgui.Create("DButton",frame)
-    depositButton:SetText("Déposer de l'argent")
-    depositButton:SetPos(174,211)
-    depositButton:SetSize(238,137)
+    local depositButton = vgui.Create("DImageButton",frame)
+    depositButton:SetImage("gui/gbrp/deposit.png")
+    depositButton:SetPos(272,182)
+    depositButton:SetSize(166,65)
     depositButton.DoClick = function()
         local amount = ply:GetNWInt("GBRP::launderedmoney")
         if amount > 0 then
@@ -43,10 +43,16 @@ net.Receive("GBRP::bankreception", function()
         end
         frame:Remove()
     end
-    local withdrawButton = vgui.Create("DButton",frame)
-    withdrawButton:SetText("Retirer de l'argent")
-    withdrawButton:SetPos(562,211)
-    withdrawButton:SetSize(238,137)
+    function depositButton:OnCursorEntered()
+        self:SetImage("gui/gbrp/deposit_hover.png")
+    end
+    function depositButton:OnCursorExited()
+        self:SetImage("gui/gbrp/deposit.png")
+    end
+    local withdrawButton = vgui.Create("DImageButton",frame)
+    withdrawButton:SetImage("gui/gbrp/withdraw.png")
+    withdrawButton:SetPos(553,182)
+    withdrawButton:SetSize(166,65)
     withdrawButton.DoClick = function()
         local textEntry = vgui.Create("DTextEntry",frame)
         textEntry:SetSize(200,25)
@@ -67,11 +73,17 @@ net.Receive("GBRP::bankreception", function()
             end
         end
     end
+    function withdrawButton:OnCursorEntered()
+        self:SetImage("gui/gbrp/withdraw_hover.png")
+    end
+    function withdrawButton:OnCursorExited()
+        self:SetImage("gui/gbrp/withdraw.png")
+    end
     local balance = vgui.Create("DLabel",frame)
     balance:SetText("SOLDE: " .. tostring(ply:GetNWInt("GBRP::balance")) .. "$")
     balance:SetFont("GBRP::bank")
-    balance:SetPos(35,507)
-    balance:SetSize(1000,41)
+    balance:SetPos(213,370)
+    balance:SetSize(556,28)
     balance:SetColor(Color(0,0,0,255))
 end)
 
