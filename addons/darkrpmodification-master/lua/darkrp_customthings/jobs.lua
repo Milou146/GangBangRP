@@ -107,7 +107,7 @@ TEAM_NYPD3 = DarkRP.createJob("S.W.A.T Médic", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
     end,
     customCheck = function(ply)
-        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
+        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("usergroup"))
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
@@ -133,7 +133,7 @@ TEAM_NYPD4 = DarkRP.createJob("S.W.A.T Sniper", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
     end,
     customCheck = function(ply)
-        return CLIENT or table.HasValue({"superadmin", "VIP +", "moderateur_VIP+", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
+        return CLIENT or table.HasValue({"superadmin", "VIP +", "moderateur_VIP+", "moderateur_test_VIP+", "admin"}, ply:GetNWString("usergroup"))
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP+ seulement.This job is VIP+ only.",
 })
@@ -243,7 +243,7 @@ TEAM_YAKUZA4 = DarkRP.createJob("Yakuza Médecin", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
     customCheck = function(ply)
-        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
+        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("usergroup"))
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
@@ -335,7 +335,7 @@ TEAM_MAFIA3 = DarkRP.createJob("Mafieux Médecin", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
     customCheck = function(ply)
-        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
+        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("usergroup"))
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
@@ -427,7 +427,7 @@ TEAM_GANGSTER3 = DarkRP.createJob("Gangster Médecin", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
     customCheck = function(ply)
-        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
+        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("usergroup"))
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
@@ -446,7 +446,7 @@ TEAM_STAFF = DarkRP.createJob("STAFF", {
     candemote = false,
     category = "STAFF",
     customCheck = function(ply)
-        return table.HasValue({"superadmin", "moderateur", "moderateur_VIP+", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
+        return table.HasValue({"superadmin", "moderateur", "moderateur_VIP+", "moderateur_test_VIP+", "admin"}, ply:GetNWString("usergroup"))
     end,
     customCheckFailMsg = "Job STAFF",
 })
@@ -472,7 +472,7 @@ TEAM_VIP = DarkRP.createJob("YAMAKASI", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.2, GAMEMODE.Config.runspeed * 1.2)
     end,
     customCheck = function(ply)
-        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
+        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("usergroup"))
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
@@ -498,7 +498,7 @@ TEAM_VIP1 = DarkRP.createJob("Chauffeur de taxi", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
     customCheck = function(ply)
-        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
+        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("usergroup"))
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
@@ -524,7 +524,7 @@ TEAM_VIP2 = DarkRP.createJob("Vendeur hot dog", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
     customCheck = function(ply)
-        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
+        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("usergroup"))
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
@@ -550,7 +550,7 @@ TEAM_VIP3 = DarkRP.createJob("Hacker", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
     customCheck = function(ply)
-        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
+        return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("usergroup"))
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
 })
@@ -576,13 +576,13 @@ TEAM_VIP4 = DarkRP.createJob("Agent secret", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
     end,
     customCheck = function(ply)
-        return CLIENT or table.HasValue({"superadmin", "VIP +", "moderateur_VIP+", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
+        return CLIENT or table.HasValue({"superadmin", "VIP +", "moderateur_VIP+", "moderateur_test_VIP+", "admin"}, ply:GetNWString("usergroup"))
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP+ seulement.This job is VIP+ only.",
 })
 
 --------------------------------------------------------------------------------
-TEAM_VIP5 = DarkRP.createJob("Vendeur d'amres ambulant", {
+TEAM_VIP5 = DarkRP.createJob("Vendeur d'armes ambulant", {
     color = Color(212, 164, 17, 255),
     model = {"models/player/leet.mdl"},
     description = [[]],
@@ -602,7 +602,7 @@ TEAM_VIP5 = DarkRP.createJob("Vendeur d'amres ambulant", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
     customCheck = function(ply)
-        return CLIENT or table.HasValue({"superadmin", "VIP +", "moderateur_VIP+", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
+        return CLIENT or table.HasValue({"superadmin", "VIP +", "moderateur_VIP+", "moderateur_test_VIP+", "admin"}, ply:GetNWString("usergroup"))
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP+ seulement.This job is VIP+ only.",
 })
@@ -628,7 +628,7 @@ TEAM_VIP6 = DarkRP.createJob("Tueur à gage", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
     customCheck = function(ply)
-        return CLIENT or table.HasValue({"superadmin", "VIP +", "moderateur_VIP+", "moderateur_test_VIP+", "admin"}, ply:GetNWString("POLICEergroup"))
+        return CLIENT or table.HasValue({"superadmin", "VIP +", "moderateur_VIP+", "moderateur_test_VIP+", "admin"}, ply:GetNWString("usergroup"))
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP+ seulement.This job is VIP+ only.",
 })

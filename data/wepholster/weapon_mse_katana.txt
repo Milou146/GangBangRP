@@ -1,0 +1,8 @@
+{
+	"BoneOffset": [
+		"[6.4688 3.1563 -4.0625]",
+		"{-23.0938 173.875 -161.6563}"
+	],
+	"Bone": "ValveBiped.Bip01_Spine4",
+	"Model": "models/weapons/w_katana.mdl"
+}
