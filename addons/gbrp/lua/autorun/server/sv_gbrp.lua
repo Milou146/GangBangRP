@@ -68,10 +68,90 @@ gbrp.npcs = {
         class = "gbrp_bank_receptionist",
         gender = "female",
         model = "models/sentry/sentryoldmob/mafia/sentrymobmale2pm.mdl",
-        pos = Vector(-954.399658,2831.927979,-38.031754),
-        ang = Angle(3.926940,-89.345398,0.000000)
+        pos = Vector(-1063.368408,2830.685547,-38.031754),
+        ang = Angle(3.926940,-89.730392,0.000000)
     };
+    [3] = {
+        class = "gbrp_bank_receptionist",
+        gender = "female",
+        model = "models/mossman.mdl",
+        pos = Vector(-1159.221558,2812.594482,-38.031754),
+        ang = Angle(1.616941,-90.346390,0.000000)
+    };
+    [4] = {
+        class = "gbrp_shop",
+        gender = "female",
+        model = "models/sentry/sentryoldmob/mafia/sentrymobmale7pm.mdl",
+        pos = Vector(-576.345520,253.843369,-30.031754),
+        ang = Angle(2.771948,-0.539320,0.000000)
+    };
+    [5] = {
+        class = "gbrp_shop",
+        gender = "male",
+        model = "models/odessa.mdl",
+        pos = Vector(1298.557983,-1579.187866,-29.987122),
+        ang = Angle(12.045322,90.987114,0.000000)
+    };
+    [6] = {
+        class = "gbrp_shop",
+        gender = "male",
+        model = "models/monk.mdl",
+        pos = Vector(-1099.968750,10497.299805,202.012878),
+        ang = Angle(0.971108,-179.686249,0.000000)
+    };
+    [7] = {
+        class = "gbrp_shop",
+        gender = "male",
+        model = "models/Kleiner.mdl",
+        pos = Vector(-6566.270508,3409.478027,42.012878),
+        ang = Angle(6.782911,-90.832703,0.000000)
+    };
+    [8] = {
+        class = "gbrp_shop",
+        gender = "male",
+        model = "models/breen.mdl",
+        pos = Vector(-7678.176758,5545.522461,66.012878),
+        ang = Angle(13.747030,89.205963,0.000000)
+    };
+    [9] = {
+        class = "gbrp_shop",
+        gender = "male",
+        model = "models/p2_chell.mdl",
+        pos = Vector(-7678.176758,5545.522461,66.012878),
+        ang = Angle(12.699938,-5.253576,0.000000)
+    };
+    [10] = {
+        class = "gbrp_shop",
+        gender = "female",
+        model = "models/alyx.mdl",
+        pos = Vector(4955.289063,8042.855957,210.012878),
+        ang = Angle(1.311556,0.218067,0.000000)
+    };
+    [11] = {
+        class = "gbrp_shop",
+        gender = "male",
+        model = "models/eli.mdl",
+        pos = Vector(-5872.972168,1543.199097,50.012878),
+        ang = Angle(1.861327,-92.799614,0.000000)
+    };
+    [12] = {
+        class = "gbrp_shop",
+        gender = "female",
+        model = "models/Group01/female_03.mdl",
+        pos = Vector(3966.805908,6776.076660,81.896027),
+        ang = Angle(1.647831,-89.800575,0.000000)
+    }
 }
+
+for k,v in pairs(gbrp.npcs) do
+    local npc = ents.Create(v.class);
+    npc.gender = v.gender
+    npc.model = v.model
+    npc:Spawn()
+    npc:SetPos(v.pos)
+    npc:SetAngles(v.ang)
+    npc:Initialize()
+end
 
 -- the ply is the chief of the gang here
 net.Receive("GBRP::bankdeposit", function(len, ply)
