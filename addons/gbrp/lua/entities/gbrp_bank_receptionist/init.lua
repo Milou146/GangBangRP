@@ -17,5 +17,6 @@ end
 
 function ENT:Use(ply, caller, useType, value)
     net.Start("GBRP::bankreception")
+    net.WriteEntity(self)
     net.Send(ply)
 end

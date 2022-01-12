@@ -29,7 +29,7 @@ hook.Add("PlayerInitialSpawn", "GBRP::Client Init", function(ply)
     end
 end)
 
-concommand.Add("gbrp_setplayerbalance", function(ply, cmd, args)
+concommand.Add("setplayerbalance", function(ply, cmd, args)
     if ply:IsAdmin() then
         local target = DarkRP.findPlayer(args[1])
 
@@ -42,7 +42,7 @@ concommand.Add("gbrp_setplayerbalance", function(ply, cmd, args)
     end
 end)
 
-concommand.Add("gbrp_setgangbalance" ,function(ply,cmd,args)
+concommand.Add("setgangbalance" ,function(ply,cmd,args)
     local gang = args[1]
     if ply:IsAdmin() and gang == "yakuzas" or gang == "mafia" or gang == "gang" then
             SetGlobalInt(gang .. "Balance", tonumber(args[2]))
@@ -55,6 +55,23 @@ net.Receive("GBRP::bankwithdraw", function(len, ply)
     sql.Query("update gbrp set balance = " .. ply:GetNWInt("GBRP::balance") .. " where steamid64 = " .. ply:SteamID64() .. ";")
     ply:addMoney(amount)
 end)
+
+gbrp.npcs = {
+    [1] = {
+        class = "gbrp_bank_receptionist",
+        gender = "female",
+        model = "models/mossman.mdl",
+        pos = Vector(-954.399658,2831.927979,-38.031754),
+        ang = Angle(3.926940,-89.345398,0.000000)
+    };
+    [2] = {
+        class = "gbrp_bank_receptionist",
+        gender = "female",
+        model = "models/sentry/sentryoldmob/mafia/sentrymobmale2pm.mdl",
+        pos = Vector(-954.399658,2831.927979,-38.031754),
+        ang = Angle(3.926940,-89.345398,0.000000)
+    };
+}
 
 -- the ply is the chief of the gang here
 net.Receive("GBRP::bankdeposit", function(len, ply)

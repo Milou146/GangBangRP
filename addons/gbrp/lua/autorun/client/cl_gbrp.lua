@@ -3,7 +3,19 @@ surface.CreateFont("GBRP::bank",{
     size = 36
 })
 
+gbrp.voices = {
+    female = {
+        "npc/female_speech_1.wav",
+        "npc/female_speech_2.wav"
+    };
+    male = {
+        "npc/male_speech_1.wav"
+    };
+}
+
 net.Receive("GBRP::bankreception", function()
+    receptionist = net.ReadEntity()
+    surface.PlaySound(gbrp.voices[receptionist.gender][math.random(1,#gbrp.voices[receptionist.gender])])
     ply = LocalPlayer()
     local ft = CurTime()
     local frame = vgui.Create("EditablePanel")
@@ -38,8 +50,9 @@ net.Receive("GBRP::bankreception", function()
             net.SendToServer()
             frame:Remove()
             GAMEMODE:AddNotify("Vous avez déposé " .. amount .. "$.",0,2)
+            surface.PlaySound("gui/gbrp/deposit.wav")
         else
-            GAMEMODE:AddNotify("Vous n'avez pas d'argent blanchis sur vous.",1,2)
+            GAMEMODE:AddNotify("Vous n'avez pas d'argent blanchi sur vous.",1,2)
         end
         frame:Remove()
     end
@@ -66,6 +79,7 @@ net.Receive("GBRP::bankreception", function()
                 net.SendToServer()
                 frame:Remove()
                 GAMEMODE:AddNotify("Vous avez retiré " .. amount .. "$.",0,2)
+                surface.PlaySound("gui/gbrp/withdraw.wav")
             elseif amount <= 0 then
                 GAMEMODE:AddNotify("Valeur non valide.",1,2)
             else

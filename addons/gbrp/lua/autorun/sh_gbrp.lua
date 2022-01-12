@@ -46,5 +46,3 @@ end
 function plyMeta:GetGang()
     return gbrp.jobs[team.GetName(self:Team())].gang
 end
-
-PrintTable(BuildNetworkedVarsTable())
