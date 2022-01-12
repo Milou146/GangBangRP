@@ -143,15 +143,17 @@ gbrp.npcs = {
     }
 }
 
-for k,v in pairs(gbrp.npcs) do
-    local npc = ents.Create(v.class);
-    npc.gender = v.gender
-    npc.model = v.model
-    npc:Spawn()
-    npc:SetPos(v.pos)
-    npc:SetAngles(v.ang)
-    npc:Initialize()
-end
+hook.Add( "PlayerInitialSpawn", "FullLoadSetup", function()
+    for k,v in pairs(gbrp.npcs) do
+        local npc = ents.Create(v.class);
+        npc.gender = v.gender
+        npc.model = v.model
+        npc:Spawn()
+        npc:SetPos(v.pos)
+        npc:SetAngles(v.ang)
+        npc:Initialize()
+    end
+end)
 
 -- the ply is the chief of the gang here
 net.Receive("GBRP::bankdeposit", function(len, ply)
