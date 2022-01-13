@@ -15,7 +15,8 @@ gbrp.voices = {
 
 net.Receive("GBRP::bankreception", function()
     receptionist = net.ReadEntity()
-    surface.PlaySound(gbrp.voices[receptionist.gender][math.random(1,#gbrp.voices[receptionist.gender])])
+    gender = net.ReadString()
+    surface.PlaySound(gbrp.voices[gender][math.random(1,#gbrp.voices[gender])])
     ply = LocalPlayer()
     local ft = CurTime()
     local frame = vgui.Create("EditablePanel")

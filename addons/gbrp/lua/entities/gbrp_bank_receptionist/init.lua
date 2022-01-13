@@ -3,6 +3,7 @@ AddCSLuaFile("shared.lua")
 include("shared.lua")
 
 ENT.model = "models/humans/group01/female_01.mdl"
+ENT.gender = "female"
 
 function ENT:Initialize()
     self:SetModel(self.model)
@@ -18,5 +19,6 @@ end
 function ENT:Use(ply, caller, useType, value)
     net.Start("GBRP::bankreception")
     net.WriteEntity(self)
+    net.WriteString(self.gender)
     net.Send(ply)
 end
