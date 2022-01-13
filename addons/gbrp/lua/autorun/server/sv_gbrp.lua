@@ -57,89 +57,96 @@ net.Receive("GBRP::bankwithdraw", function(len, ply)
 end)
 
 gbrp.npcs = {
-    [1] = {
+    [1] = { -- banquière
         class = "gbrp_bank_receptionist",
         gender = "female",
         model = "models/mossman.mdl",
         pos = Vector(-954.399658,2831.927979,-38.031754),
         ang = Angle(0,-89.345398,0)
     };
-    [2] = {
+    [2] = { -- banquier
         class = "gbrp_bank_receptionist",
         gender = "male",
         model = "models/sentry/sentryoldmob/mafia/sentrymobmale2pm.mdl",
         pos = Vector(-1063.368408,2830.685547,-38.031754),
         ang = Angle(0,-89.730392,0)
     };
-    [3] = {
+    [3] = { -- banquière
         class = "gbrp_bank_receptionist",
         gender = "female",
         model = "models/mossman.mdl",
         pos = Vector(-1159.221558,2812.594482,-38.031754),
         ang = Angle(0,-90.346390,0)
     };
-    [4] = {
+    [4] = { -- bijoutier
         class = "gbrp_shop",
         gender = "female",
         model = "models/sentry/sentryoldmob/mafia/sentrymobmale7pm.mdl",
         pos = Vector(-576.345520,253.843369,-30.031754),
         ang = Angle(0,0,0)
     };
-    [5] = {
+    [5] = { -- Quincaillerie
         class = "gbrp_shop",
         gender = "male",
         model = "models/odessa.mdl",
         pos = Vector(1298.557983,-1579.187866,-29.987122),
         ang = Angle(0,90.987114,0)
     };
-    [6] = {
+    [6] = { -- Armurerie
         class = "gbrp_shop",
         gender = "male",
         model = "models/monk.mdl",
         pos = Vector(-1099.968750,10497.299805,202.012878),
         ang = Angle(0,-179.686249,0)
     };
-    [7] = {
+    [7] = { -- Pharmacie
         class = "gbrp_shop",
         gender = "male",
         model = "models/Kleiner.mdl",
         pos = Vector(-6566.270508,3409.478027,42.012878),
         ang = Angle(0,-90.832703,0)
     };
-    [8] = {
+    [8] = { -- Boîte de nuit
         class = "gbrp_shop",
         gender = "male",
         model = "models/breen.mdl",
         pos = Vector(-7678.176758,5545.522461,66.012878),
         ang = Angle(0,89.205963,0)
     };
-    [9] = {
+    [9] = { -- Garagiste
         class = "gbrp_shop",
         gender = "male",
         model = "models/p2_chell.mdl",
-        pos = Vector(-7678.176758,5545.522461,66.012878),
+        pos = Vector(-2378.206543,6402.301758,90.012878),
         ang = Angle(0,-5.253576,0)
     };
-    [10] = {
+    [10] = { -- Bar
         class = "gbrp_shop",
         gender = "female",
         model = "models/alyx.mdl",
         pos = Vector(4955.289063,8042.855957,210.012878),
         ang = Angle(0,0,0)
     };
-    [11] = {
+    [11] = { -- Station service
         class = "gbrp_shop",
         gender = "male",
         model = "models/eli.mdl",
         pos = Vector(-5872.972168,1543.199097,50.012878),
         ang = Angle(0,-92.799614,0)
     };
-    [12] = {
+    [12] = { -- Archiviste
         class = "gbrp_shop",
         gender = "female",
         model = "models/humans/Group01/female_03.mdl",
         pos = Vector(3966.805908,6776.076660,81.896027),
-        ang = Angle(0,-89.800575,0)
+        ang = Angle(0,-90,0)
+    };
+    [12] = { -- ???
+        class = "gbrp_shop",
+        gender = "male",
+        model = "models/player/hostage/hostage_01.mdl",
+        pos = Vector(1505.933350,7163.607422,81.896027),
+        ang = Angle(0,-90,0)
     }
 }
 
