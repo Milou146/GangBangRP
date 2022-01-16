@@ -30,7 +30,7 @@ function ENT:launder(i,amount)
     if self.money[i].wallet >= self.launderingAmount then
         self.money[i].wallet = self.money[1].wallet - self.launderingAmount
         table.insert(self.launderedMoney,{gangster = self.money[i].gangster,amount = self.launderingAmount})
-        self:SetBalance(self:GetBalance() + self.launderingAmount)
+        self:SetBalance(self:GetBalance() + self.launderingAmount * self.launderingRatio)
         self:SetDirtyMoney(self:GetDirtyMoney() - self.launderingAmount)
         if self.money[i].wallet == 0 then
             table.remove(self.money,i)
@@ -38,7 +38,7 @@ function ENT:launder(i,amount)
     else
         amount = amount - self.money[i].wallet
         table.insert(self.launderedMoney,{gangster = self.money[i].gangster,amount = self.money[i].wallet})
-        self:SetBalance(self:GetBalance() + self.money[i].wallet)
+        self:SetBalance(self:GetBalance() + self.money[i].wallet * self.launderingRatio)
         self:SetDirtyMoney(self:GetDirtyMoney() - self.money[i].wallet)
         table.remove(self.money,i)
         if self.money[i] then --s'il y a encore de l'argent à blanchir
