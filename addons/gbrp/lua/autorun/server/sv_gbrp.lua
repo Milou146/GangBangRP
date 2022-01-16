@@ -7,6 +7,7 @@ util.AddNetworkString("GBRP::sellshop")
 util.AddNetworkString("GBRP::shopwithdraw")
 util.AddNetworkString("GBRP::shopdeposit")
 util.AddNetworkString("GBRP::jewelleryReception")
+util.AddNetworkString("GBRP::nightclubReception")
 sql.Query("create table if not exists gbrp(steamid64 bigint not null, balance bigint);")
 
 SetGlobalInt("yakuzasBalance",0);
@@ -113,7 +114,8 @@ gbrp.npcs = {
         gender = "male",
         model = "models/breen.mdl",
         pos = Vector(-7678.176758,5545.522461,66.012878),
-        ang = Angle(0,89.205963,0)
+        ang = Angle(0,89.205963,0),
+        messageName = "nightclubReception"
     };
     [9] = { -- Garagiste
         class = "gbrp_shop",

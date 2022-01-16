@@ -6,6 +6,7 @@ ENT.price = 100000
 ENT.value = 90000
 ENT.launderingAmount = 1000
 ENT.launderingTime = 1
+ENT.launderingRatio = 0.5
 
 function ENT:SetupDataTables()
 	self:NetworkVar( "Int", 0, "Balance" )
