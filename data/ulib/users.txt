@@ -1,10 +1,10 @@
 "STEAM_0:0:89713489"	
 {
-	"allow"	
-	{
-	}
 	"name"	"Milou"
 	"deny"	
+	{
+	}
+	"allow"	
 	{
 	}
 	"group"	"superadmin"

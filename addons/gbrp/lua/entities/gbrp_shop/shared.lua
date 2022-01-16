@@ -9,6 +9,6 @@ ENT.launderingTime = 1
 
 function ENT:SetupDataTables()
 	self:NetworkVar( "Int", 0, "Balance" )
-	self:NetworkVar( "Int", 1, "LaunderedMoney" )
-	self:NetworkVar( "String", 0, "owner" )
+	self:NetworkVar( "Int", 1, "DirtyMoney" )
+	self:NetworkVar( "String", 0, "Gang" )
 end

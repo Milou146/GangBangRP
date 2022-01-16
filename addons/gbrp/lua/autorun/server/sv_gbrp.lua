@@ -6,6 +6,7 @@ util.AddNetworkString("GBRP::buyshop")
 util.AddNetworkString("GBRP::sellshop")
 util.AddNetworkString("GBRP::shopwithdraw")
 util.AddNetworkString("GBRP::shopdeposit")
+util.AddNetworkString("GBRP::jewelleryReception")
 sql.Query("create table if not exists gbrp(steamid64 bigint not null, balance bigint);")
 
 SetGlobalInt("yakuzasBalance",0);
@@ -83,7 +84,8 @@ gbrp.npcs = {
         gender = "female",
         model = "models/sentry/sentryoldmob/mafia/sentrymobmale7pm.mdl",
         pos = Vector(-576.345520,253.843369,-30.031754),
-        ang = Angle(0,0,0)
+        ang = Angle(0,0,0),
+        messageName = "jewelleryReception"
     };
     [5] = { -- Quincaillerie
         class = "gbrp_shop",
@@ -159,6 +161,9 @@ hook.Add( "InitPostEntity", "FullLoadSetup", function()
         npc:SetPos(v.pos)
         npc:SetAngles(v.ang)
         npc:DropToFloor()
+        if v.messageName then
+            npc.messageName = v.messageName
+        end
     end
 end)
 
@@ -195,7 +200,7 @@ net.Receive("GBRP::bankdeposit", function(len, ply)
 end)
 
 net.Receive("GBRP::shopwithdraw", function(len, ply)
-    shop = net.ReadEntity()
+    local shop = net.ReadEntity()
 
     if not ply.launderedMoney then
         ply.launderedMoney = shop.launderedMoney
@@ -203,27 +208,28 @@ net.Receive("GBRP::shopwithdraw", function(len, ply)
         table.Add(ply.launderedMoney, shop.launderedMoney)
     end
     shop.launderedMoney = {}
-    ply:addLaunderedMoney(shop:GetLaunderedMoney())
-    shop:SetLaunderedMoney(0)
+    ply:addLaunderedMoney(shop:GetBalance())
+    shop:SetBalance(0)
 end)
 
 net.Receive("GBRP::shopdeposit", function(len, ply)
-    amount = net.ReadUInt(32)
-    shop = net.ReadEntity()
+    local amount = net.ReadUInt(32)
+    local shop = net.ReadEntity()
     table.insert(shop.money, {gangster = ply,wallet = amount})
+    shop:SetDirtyMoney(shop:GetDirtyMoney() + amount)
     ply:addMoney(-amount)
 end)
 
 net.Receive("GBRP::sellshop", function(len, ply)
-    shop = net.ReadEntity()
-    gang = shop:Getowner()
-    shop:Setowner("nil")
+    local shop = net.ReadEntity()
+    local gang = shop:GetGang()
+    shop:SetGang("nil")
     SetGlobalInt(gang .. "Balance",GetGlobalInt(gang .. "Balance") + shop.value)
 end)
 
 net.Receive("GBRP::buyshop", function(len, ply)
     shop = net.ReadEntity()
     gang = ply:GetGang()
-    shop:Setowner(gang)
+    shop:SetGang(gang)
     SetGlobalInt(gang .. "Balance",GetGlobalInt(gang .. "Balance") - shop.price)
 end)
