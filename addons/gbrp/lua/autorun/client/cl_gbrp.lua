@@ -6,6 +6,22 @@ surface.CreateFont("GBRP::bank small",{
     font = "Banks Miles Single Line",
     size = 24
 })
+surface.CreateFont("GBRP::DermaHuge",{
+    font = "Verdana",
+    size = 48
+})
+
+local hide = {
+    ["CHudHealth"] = true,
+    ["CHudAmmo"] = true,
+    ["CHudCrosshair"] = true,
+    ["CHudBattery"] = true
+}
+hook.Add("HUDShouldDraw","GBRP::HideHUD",function(name)
+    if hide[name] then
+        return false
+    end
+end)
 
 gbrp.voices = {
     female = {
@@ -228,15 +244,15 @@ net.Receive("GBRP::shopReception", function()
     end
 end)
 
-net.Receive("GBRP::jewelleryReception",function()
+net.Receive("GBRP::jewelryReception",function()
     local ply = LocalPlayer()
     local gang = ply:GetGang()
     if gang == "nil" then return end
     local shop = net.ReadEntity()
-    local frameMat = Material("gui/gbrp/jewellery/frame.png")
-    local subpanelMat = Material("gui/gbrp/jewellery/subpanel.png")
-    local launderedmoneyMat = Material("gui/gbrp/jewellery/launderedmoney.png")
-    local shopvalMat = Material("gui/gbrp/jewellery/shopval.png")
+    local frameMat = Material("gui/gbrp/jewelry/frame.png")
+    local subpanelMat = Material("gui/gbrp/jewelry/subpanel.png")
+    local launderedmoneyMat = Material("gui/gbrp/jewelry/launderedmoney.png")
+    local shopvalMat = Material("gui/gbrp/jewelry/shopval.png")
     local frame = vgui.Create("EditablePanel",GetHUDPanel())
     frame:SetSize(1217,964)
     frame:SetPos(371,116)
@@ -259,75 +275,75 @@ net.Receive("GBRP::jewelleryReception",function()
     end
     frame:MakePopup()
     local buyshopButton = vgui.Create("DImageButton",frame)
-    buyshopButton:SetImage("gui/gbrp/jewellery/buyshop.png")
+    buyshopButton:SetImage("gui/gbrp/jewelry/buyshop.png")
     buyshopButton:SizeToContents()
     buyshopButton:SetPos(643,201)
     function buyshopButton:OnCursorEntered()
-        self:SetImage("gui/gbrp/jewellery/buyshoprollover.png")
+        self:SetImage("gui/gbrp/jewelry/buyshoprollover.png")
     end
     function buyshopButton:OnCursorExited()
-        self:SetImage("gui/gbrp/jewellery/buyshop.png")
+        self:SetImage("gui/gbrp/jewelry/buyshop.png")
     end
     function buyshopButton:DoClick()
         shop:GetBought(ply)
     end
 
     local accountaccess = vgui.Create("DImageButton",frame)
-    accountaccess:SetImage("gui/gbrp/jewellery/accountaccess.png")
+    accountaccess:SetImage("gui/gbrp/jewelry/accountaccess.png")
     accountaccess:SetPos(643,416)
     accountaccess:SizeToContents()
     function accountaccess:OnCursorEntered()
-        self:SetImage("gui/gbrp/jewellery/accountaccessrollover.png")
+        self:SetImage("gui/gbrp/jewelry/accountaccessrollover.png")
     end
     function accountaccess:OnCursorExited()
-        self:SetImage("gui/gbrp/jewellery/accountaccess.png")
+        self:SetImage("gui/gbrp/jewelry/accountaccess.png")
     end
     function accountaccess:DoClick()
         if shop:GetGang() == gang then
             buyshopButton:Remove()
             self:Remove()
             local laundermoneyButton = vgui.Create("DImageButton",frame)
-            laundermoneyButton:SetImage("gui/gbrp/jewellery/laundermoney.png")
+            laundermoneyButton:SetImage("gui/gbrp/jewelry/laundermoney.png")
             laundermoneyButton:SizeToContents()
             laundermoneyButton:SetPos(83,166)
             function laundermoneyButton:OnCursorEntered()
-                self:SetImage("gui/gbrp/jewellery/laundermoneyrollover.png")
+                self:SetImage("gui/gbrp/jewelry/laundermoneyrollover.png")
             end
             function laundermoneyButton:OnCursorExited()
-                self:SetImage("gui/gbrp/jewellery/laundermoney.png")
+                self:SetImage("gui/gbrp/jewelry/laundermoney.png")
             end
             function laundermoneyButton:DoClick()
                 shop:Collect(ply,frame)
             end
             local withdraw = vgui.Create("DImageButton",frame)
-            withdraw:SetImage("gui/gbrp/jewellery/withdrawmoney.png")
+            withdraw:SetImage("gui/gbrp/jewelry/withdrawmoney.png")
             withdraw:SizeToContents()
             withdraw:SetPos(448,166)
             function withdraw:OnCursorEntered()
-                self:SetImage("gui/gbrp/jewellery/withdrawmoneyrollover.png")
+                self:SetImage("gui/gbrp/jewelry/withdrawmoneyrollover.png")
             end
             function withdraw:OnCursorExited()
-                self:SetImage("gui/gbrp/jewellery/withdrawmoney.png")
+                self:SetImage("gui/gbrp/jewelry/withdrawmoney.png")
             end
             function withdraw:DoClick()
                 shop:Withdraw(ply)
             end
             local sellshopButton = vgui.Create("DImageButton",frame)
-            sellshopButton:SetImage("gui/gbrp/jewellery/sellshop.png")
+            sellshopButton:SetImage("gui/gbrp/jewelry/sellshop.png")
             sellshopButton:SizeToContents()
             sellshopButton:SetPos(816,166)
             function sellshopButton:OnCursorEntered()
-                self:SetImage("gui/gbrp/jewellery/sellshoprollover.png")
+                self:SetImage("gui/gbrp/jewelry/sellshoprollover.png")
             end
             function sellshopButton:OnCursorExited()
-                self:SetImage("gui/gbrp/jewellery/sellshop.png")
+                self:SetImage("gui/gbrp/jewelry/sellshop.png")
             end
             function sellshopButton:DoClick()
                 shop:GetSelled(ply)
                 frame:Remove()
             end
-            local progressbarframeMat = Material("gui/gbrp/jewellery/progressbarframe.png")
-            local progressbarMat = Material("gui/gbrp/jewellery/progressbar.png")
+            local progressbarframeMat = Material("gui/gbrp/jewelry/progressbarframe.png")
+            local progressbarMat = Material("gui/gbrp/jewelry/progressbar.png")
             function frame:Paint(w,h)
                 Derma_DrawBackgroundBlur(self, CurTime())
                 surface.SetDrawColor(255,255,255,255)
@@ -361,14 +377,14 @@ net.Receive("GBRP::jewelleryReception",function()
     end
 
     local close = vgui.Create("DImageButton",frame)
-    close:SetImage("gui/gbrp/jewellery/close.png")
+    close:SetImage("gui/gbrp/jewelry/close.png")
     close:SetPos(1112,48)
     close:SizeToContents()
     function close:OnCursorEntered()
-        self:SetImage("gui/gbrp/jewellery/closerollover.png")
+        self:SetImage("gui/gbrp/jewelry/closerollover.png")
     end
     function close:OnCursorExited()
-        self:SetImage("gui/gbrp/jewellery/close.png")
+        self:SetImage("gui/gbrp/jewelry/close.png")
     end
     function close:DoClick()
         frame:Remove()
@@ -406,75 +422,75 @@ net.Receive("GBRP::nightclubReception",function()
     end
     frame:MakePopup()
     local buyshopButton = vgui.Create("DImageButton",frame)
-    buyshopButton:SetImage("gui/gbrp/jewellery/buyshop.png")
+    buyshopButton:SetImage("gui/gbrp/jewelry/buyshop.png")
     buyshopButton:SizeToContents()
     buyshopButton:SetPos(716,197)
     function buyshopButton:OnCursorEntered()
-        self:SetImage("gui/gbrp/jewellery/buyshoprollover.png")
+        self:SetImage("gui/gbrp/jewelry/buyshoprollover.png")
     end
     function buyshopButton:OnCursorExited()
-        self:SetImage("gui/gbrp/jewellery/buyshop.png")
+        self:SetImage("gui/gbrp/jewelry/buyshop.png")
     end
     function buyshopButton:DoClick()
         shop:GetBought(ply)
     end
 
     local accountaccess = vgui.Create("DImageButton",frame)
-    accountaccess:SetImage("gui/gbrp/jewellery/accountaccess.png")
+    accountaccess:SetImage("gui/gbrp/jewelry/accountaccess.png")
     accountaccess:SetPos(716,412)
     accountaccess:SizeToContents()
     function accountaccess:OnCursorEntered()
-        self:SetImage("gui/gbrp/jewellery/accountaccessrollover.png")
+        self:SetImage("gui/gbrp/jewelry/accountaccessrollover.png")
     end
     function accountaccess:OnCursorExited()
-        self:SetImage("gui/gbrp/jewellery/accountaccess.png")
+        self:SetImage("gui/gbrp/jewelry/accountaccess.png")
     end
     function accountaccess:DoClick()
         if shop:GetGang() == gang then
             buyshopButton:Remove()
             self:Remove()
             local laundermoneyButton = vgui.Create("DImageButton",frame)
-            laundermoneyButton:SetImage("gui/gbrp/jewellery/laundermoney.png")
+            laundermoneyButton:SetImage("gui/gbrp/jewelry/laundermoney.png")
             laundermoneyButton:SizeToContents()
             laundermoneyButton:SetPos(156,162)
             function laundermoneyButton:OnCursorEntered()
-                self:SetImage("gui/gbrp/jewellery/laundermoneyrollover.png")
+                self:SetImage("gui/gbrp/jewelry/laundermoneyrollover.png")
             end
             function laundermoneyButton:OnCursorExited()
-                self:SetImage("gui/gbrp/jewellery/laundermoney.png")
+                self:SetImage("gui/gbrp/jewelry/laundermoney.png")
             end
             function laundermoneyButton:DoClick()
                 shop:Collect(ply,frame)
             end
             local withdraw = vgui.Create("DImageButton",frame)
-            withdraw:SetImage("gui/gbrp/jewellery/withdrawmoney.png")
+            withdraw:SetImage("gui/gbrp/jewelry/withdrawmoney.png")
             withdraw:SizeToContents()
             withdraw:SetPos(521,162)
             function withdraw:OnCursorEntered()
-                self:SetImage("gui/gbrp/jewellery/withdrawmoneyrollover.png")
+                self:SetImage("gui/gbrp/jewelry/withdrawmoneyrollover.png")
             end
             function withdraw:OnCursorExited()
-                self:SetImage("gui/gbrp/jewellery/withdrawmoney.png")
+                self:SetImage("gui/gbrp/jewelry/withdrawmoney.png")
             end
             function withdraw:DoClick()
                 shop:Withdraw(ply)
             end
             local sellshopButton = vgui.Create("DImageButton",frame)
-            sellshopButton:SetImage("gui/gbrp/jewellery/sellshop.png")
+            sellshopButton:SetImage("gui/gbrp/jewelry/sellshop.png")
             sellshopButton:SizeToContents()
             sellshopButton:SetPos(889,162)
             function sellshopButton:OnCursorEntered()
-                self:SetImage("gui/gbrp/jewellery/sellshoprollover.png")
+                self:SetImage("gui/gbrp/jewelry/sellshoprollover.png")
             end
             function sellshopButton:OnCursorExited()
-                self:SetImage("gui/gbrp/jewellery/sellshop.png")
+                self:SetImage("gui/gbrp/jewelry/sellshop.png")
             end
             function sellshopButton:DoClick()
                 shop:GetSelled(ply)
                 frame:Remove()
             end
-            local progressbarframeMat = Material("gui/gbrp/jewellery/progressbarframe.png")
-            local progressbarMat = Material("gui/gbrp/jewellery/progressbar.png")
+            local progressbarframeMat = Material("gui/gbrp/jewelry/progressbarframe.png")
+            local progressbarMat = Material("gui/gbrp/jewelry/progressbar.png")
             function frame:Paint(w,h)
                 Derma_DrawBackgroundBlur(self, CurTime())
                 surface.SetDrawColor(255,255,255,255)
@@ -508,14 +524,14 @@ net.Receive("GBRP::nightclubReception",function()
     end
 
     local close = vgui.Create("DImageButton",frame)
-    close:SetImage("gui/gbrp/jewellery/close.png")
+    close:SetImage("gui/gbrp/jewelry/close.png")
     close:SetPos(1189,45)
     close:SizeToContents()
     function close:OnCursorEntered()
-        self:SetImage("gui/gbrp/jewellery/closerollover.png")
+        self:SetImage("gui/gbrp/jewelry/closerollover.png")
     end
     function close:OnCursorExited()
-        self:SetImage("gui/gbrp/jewellery/close.png")
+        self:SetImage("gui/gbrp/jewelry/close.png")
     end
     function close:DoClick()
         frame:Remove()

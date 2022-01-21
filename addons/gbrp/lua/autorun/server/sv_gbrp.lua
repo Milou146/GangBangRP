@@ -6,7 +6,7 @@ util.AddNetworkString("GBRP::buyshop")
 util.AddNetworkString("GBRP::sellshop")
 util.AddNetworkString("GBRP::shopwithdraw")
 util.AddNetworkString("GBRP::shopdeposit")
-util.AddNetworkString("GBRP::jewelleryReception")
+util.AddNetworkString("GBRP::jewelryReception")
 util.AddNetworkString("GBRP::nightclubReception")
 sql.Query("create table if not exists gbrp(steamid64 bigint not null, balance bigint);")
 
@@ -86,7 +86,7 @@ gbrp.npcs = {
         model = "models/sentry/sentryoldmob/mafia/sentrymobmale7pm.mdl",
         pos = Vector(-576.345520,253.843369,-30.031754),
         ang = Angle(0,0,0),
-        name = "jewellery"
+        name = "jewelry"
     };
     [5] = { -- Quincaillerie
         class = "gbrp_shop",

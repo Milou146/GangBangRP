@@ -29,9 +29,8 @@ net.Receive("GBRP::selldoor",function(len,ply)
         end
     end
 end)
-
-hook.Add("PlayerInitialSpawn","DoorGroupsDefinition",function(ply)
-    local doors = {}
+hook.Add("InitPostEntity","GBRP::DoorsInit",function()
+    gbrp.doors = {}
     for doorgroupname,doorgroup in pairs(gbrp.doorgroups) do
         for _,door in pairs(doorgroup.doors) do
             local ent = ents.GetMapCreatedEntity(door)
@@ -40,10 +39,12 @@ hook.Add("PlayerInitialSpawn","DoorGroupsDefinition",function(ply)
                 ent:Fire("lock", "", 0)
             end
             ent.groupname = doorgroupname
-            doors[ent:EntIndex()] = doorgroup.attributes
-            net.Start("GBRP::doorsinit")
-            net.WriteTable(doors)
-            net.Send(ply)
+            gbrp.doors[ent:EntIndex()] = doorgroup.attributes
         end
     end
+end)
+hook.Add("PlayerInitialSpawn","GBRP:DoorsInitCS",function(ply)
+    net.Start("GBRP::doorsinit")
+    net.WriteTable(gbrp.doors)
+    net.Send(ply)
 end)
