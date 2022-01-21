@@ -1,7 +1,7 @@
 util.AddNetworkString("GBRP::bankreception")
 util.AddNetworkString("GBRP::bankwithdraw")
 util.AddNetworkString("GBRP::bankdeposit")
-util.AddNetworkString("GBRP::shopreception")
+util.AddNetworkString("GBRP::shopReception")
 util.AddNetworkString("GBRP::buyshop")
 util.AddNetworkString("GBRP::sellshop")
 util.AddNetworkString("GBRP::shopwithdraw")
@@ -86,7 +86,7 @@ gbrp.npcs = {
         model = "models/sentry/sentryoldmob/mafia/sentrymobmale7pm.mdl",
         pos = Vector(-576.345520,253.843369,-30.031754),
         ang = Angle(0,0,0),
-        messageName = "jewelleryReception"
+        name = "jewellery"
     };
     [5] = { -- Quincaillerie
         class = "gbrp_shop",
@@ -115,7 +115,7 @@ gbrp.npcs = {
         model = "models/breen.mdl",
         pos = Vector(-7678.176758,5545.522461,66.012878),
         ang = Angle(0,89.205963,0),
-        messageName = "nightclubReception"
+        name = "nightclub"
     };
     [9] = { -- Garagiste
         class = "gbrp_shop",
@@ -142,7 +142,7 @@ gbrp.npcs = {
         class = "gbrp_shop",
         gender = "female",
         model = "models/humans/Group01/female_03.mdl",
-        pos = Vector(3966.805908,6776.076660,81.896027),
+        pos = Vector(3966.805908,6776.076660,16.896027),
         ang = Angle(0,-90,0)
     };
     [12] = { -- ???
@@ -157,15 +157,15 @@ gbrp.npcs = {
 hook.Add( "InitPostEntity", "FullLoadSetup", function()
     for k,v in pairs(gbrp.npcs) do
         local npc = ents.Create(v.class);
+        if v.name then
+            npc.name = v.name
+        end
         npc.gender = v.gender
         npc.model = v.model
         npc:Spawn()
         npc:SetPos(v.pos)
         npc:SetAngles(v.ang)
         npc:DropToFloor()
-        if v.messageName then
-            npc.messageName = v.messageName
-        end
     end
 end)
 
@@ -195,6 +195,7 @@ net.Receive("GBRP::bankdeposit", function(len, ply)
         member:ChatPrint(gbrp[gang].subject .. " vous rémunère " .. pay .. "$.")
     end
     SetGlobalInt(gang .. "Balance",GetGlobalInt(gang .. "Balance") + gangPay)
+    SetGlobalInt(gang .. "Earnings",GetGlobalInt(gang .. "Earnings") + gangPay)
     ply:ChatPrint(gbrp[gang].subject .. " gagne " .. gangPay .. "$.")
 
     ply:SetNWInt("GBRP::launderedmoney", 0)
@@ -227,6 +228,7 @@ net.Receive("GBRP::sellshop", function(len, ply)
     local gang = shop:GetGang()
     shop:SetGang("nil")
     SetGlobalInt(gang .. "Balance",GetGlobalInt(gang .. "Balance") + shop.value)
+    SetGlobalInt(gang .. "Earnings",GetGlobalInt(gang .. "Earnings") + shop.value)
 end)
 
 net.Receive("GBRP::buyshop", function(len, ply)
@@ -234,4 +236,15 @@ net.Receive("GBRP::buyshop", function(len, ply)
     gang = ply:GetGang()
     shop:SetGang(gang)
     SetGlobalInt(gang .. "Balance",GetGlobalInt(gang .. "Balance") - shop.price)
+    SetGlobalInt(gang .. "Expenses",GetGlobalInt(gang .. "Expenses") - shop.price)
+end)
+
+concommand.Add("getposeye", function(ply,cmd,args,argStr)
+    print(ply:GetEyeTrace().HitPos)
+    ply:ChatPrint(tostring(ply:GetEyeTrace().HitPos))
+end)
+
+concommand.Add("getid", function(ply,cmd,args,argStr)
+    print(tostring(ply:GetEyeTrace().Entity:MapCreationID()))
+    ply:ChatPrint(tostring(ply:GetEyeTrace().Entity:MapCreationID()))
 end)

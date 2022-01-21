@@ -3,7 +3,7 @@ AddCSLuaFile("shared.lua")
 include("shared.lua")
 
 ENT.model = "models/humans/group01/male_01.mdl"
-ENT.messageName = "shopreception"
+ENT.name = "shop"
 
 function ENT:Initialize()
     self:SetModel(self.model)
@@ -14,10 +14,11 @@ function ENT:Initialize()
     self:CapabilitiesAdd(CAP_ANIMATEDFACE or CAP_TURN_HEAD)
     self:SetUseType(SIMPLE_USE)
     self:DropToFloor()
+    self:SetName(self.name)
 end
 
 function ENT:Use(ply, caller, useType, value)
-    net.Start("GBRP::" .. self.messageName)
+    net.Start("GBRP::" .. self.name .. "Reception")
     net.WriteEntity(self)
     net.Send(ply)
 end

@@ -48,7 +48,7 @@ GM.Config.chatsounds                    = false
 -- chiefjailpos - Allow the Chief to set the jail positions.
 GM.Config.chiefjailpos                  = false
 -- cit_propertytax - Enable/disable property tax that is exclusive only for citizens.
-GM.Config.cit_propertytax               = true
+GM.Config.cit_propertytax               = false
 -- copscanunfreeze - Enable/disable the ability of cops to unfreeze other people's props.
 GM.Config.copscanunfreeze               = true
 -- copscanunweld - Enable/disable the ability of cops to unweld other people's props.
@@ -130,7 +130,7 @@ GM.Config.npcarrest                     = true
 -- ooc - Whether or not OOC tags are enabled.
 GM.Config.ooc                           = true
 -- propertytax - Enable/disable property tax.
-GM.Config.propertytax                   = true
+GM.Config.propertytax                   = false
 -- proppaying - Whether or not players should pay for spawning props.
 GM.Config.proppaying                    = true
 -- propspawning - Enable/disable props spawning. Applies to admins too.
@@ -158,7 +158,7 @@ GM.Config.telefromjail                  = true
 -- teletojail - Enable/disable teleporting to jail.
 GM.Config.teletojail                    = true
 -- unlockdoorsonstart - Enable/Disable unlocking all doors on map start.
-GM.Config.unlockdoorsonstart            = true
+GM.Config.unlockdoorsonstart            = false
 -- voiceradius - Enable/disable local voice chat.
 GM.Config.voiceradius                   = true
 -- tax - Whether players pay taxes on their wallets.

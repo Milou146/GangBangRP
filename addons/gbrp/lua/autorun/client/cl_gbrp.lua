@@ -24,7 +24,7 @@ net.Receive("GBRP::bankreception", function()
     local ft = CurTime()
     local SW = ScrW()
     local SH = ScrH()
-    local frame = vgui.Create("EditablePanel")
+    local frame = vgui.Create("EditablePanel",GetHUDPanel())
     local frameMat = Material("gui/gbrp/bank/frame.png")
     frame:SetSize(1016,550)
     frame:SetPos(SW / 2 -frame:GetWide() / 2, SH)
@@ -114,12 +114,12 @@ net.Receive("GBRP::bankreception", function()
     end
 end)
 
-net.Receive("GBRP::shopreception", function()
+net.Receive("GBRP::shopReception", function()
     local shop = net.ReadEntity()
     local ply = LocalPlayer()
     if ply:IsGangChief() then
         if shop:GetGang() == ply:GetGang() then
-            local frame = vgui.Create("DFrame")
+            local frame = vgui.Create("DFrame",GetHUDPanel())
             frame:SetSize(1000,500)
             frame:Center()
             frame:MakePopup()

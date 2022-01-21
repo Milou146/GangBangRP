@@ -11,5 +11,6 @@ ENT.launderingRatio = 0.5
 function ENT:SetupDataTables()
 	self:NetworkVar( "Int", 0, "Balance" )
 	self:NetworkVar( "Int", 1, "DirtyMoney" )
-	self:NetworkVar( "String", 0, "Gang" )
+	self:NetworkVar( "String", 0, "Name" )
+	self:NetworkVar( "String", 1, "Gang" )
 end
