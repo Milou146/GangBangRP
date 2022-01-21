@@ -18,12 +18,12 @@ end)
 net.Receive("GBRP::selldoor",function(len,ply)
     local gang = net.ReadString()
     local doorgroup = net.ReadString()
-    for _,door in gbrp.doorgroups[doorgroup].doors do
-        local ent2 = ents.GetByIndex(door)
+    for _,door in pairs(gbrp.doorgroups[doorgroup].doors) do
+        local ent2 = ents.GetMapCreatedEntity(door)
         ent2:SetNWString("owner","nobody")
     end
     SetGlobalInt(gang .. "Balance",GetGlobalInt(gang .. "Balance") + gbrp.doorgroups[doorgroup].attributes.value)
-    for k,pl in player.GetAll() do
+    for k,pl in pairs(player.GetAll()) do
         if pl:GetGang() == gang then
             pl:ChatPrint("Votre gang a vendu" .. doorgroup)
         end
