@@ -15,6 +15,7 @@ function ENT:Initialize()
     self:SetUseType(SIMPLE_USE)
     self:DropToFloor()
     self:SetName(self.name)
+    self:SetGang("nil")
 end
 
 function ENT:Use(ply, caller, useType, value)

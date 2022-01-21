@@ -10,7 +10,9 @@ end
 
 function ENT:GetBought(ply)
     local gang = ply:GetGang()
-    if self:GetGang() == gang then
+    if self:GetGang() != "nil" then
+        GAMEMODE:AddNotify("Ce magasin appartient à un autre gang.",1,2)
+    elseif self:GetGang() == gang then
         GAMEMODE:AddNotify("Votre gang possède déjà le magasin.",0,2)
     elseif not ply:IsGangChief() then
         GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
