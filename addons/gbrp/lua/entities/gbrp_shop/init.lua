@@ -14,7 +14,7 @@ function ENT:Initialize()
     self:CapabilitiesAdd(CAP_ANIMATEDFACE or CAP_TURN_HEAD)
     self:SetUseType(SIMPLE_USE)
     self:DropToFloor()
-    self:SetName(self.name)
+    self:SetShopName(self.name)
     self:SetGang("nil")
 end
 

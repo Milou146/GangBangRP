@@ -236,7 +236,7 @@ net.Receive("GBRP::buyshop", function(len, ply)
     local gang = ply:GetGang()
     shop:SetGang(gang)
     SetGlobalInt(gang .. "Balance",GetGlobalInt(gang .. "Balance") - shop.price)
-    SetGlobalInt(gang .. "Expenses",GetGlobalInt(gang .. "Expenses") - shop.price)
+    SetGlobalInt(gang .. "Expenses",GetGlobalInt(gang .. "Expenses") + shop.price)
 end)
 
 concommand.Add("getposeye", function(ply,cmd,args,argStr)

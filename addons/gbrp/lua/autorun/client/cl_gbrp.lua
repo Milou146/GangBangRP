@@ -13,6 +13,24 @@ surface.CreateFont("GBRP::DermaHuge",{
 
 net.Receive("GBRP::doorsinit",function()
     gbrp.doors = net.ReadTable()
+    gbrp.gangpanel = {}
+    gbrp.gangpanel.properties = {
+        ["house"] = {mat = Material("gui/gbrp/gangpanel/house.png"),x = 12,y = 30},
+        ["appartment"] = {mat = Material("gui/gbrp/gangpanel/appartment.png"),x = 10,y = 14},
+        ["hangar"] = {mat = Material("gui/gbrp/gangpanel/hangar.png"),x = 7,y = 10},
+        ["hugetower"] = {mat = Material("gui/gbrp/gangpanel/hugetower.png"),x = 18,y = 11},
+        ["garage"] = {mat = Material("gui/gbrp/gangpanel/garage.png"),x = 5,y = 29},
+    }
+    gbrp.gangpanel.shops = {
+        ["gasstation"] = {mat = Material("gui/gbrp/gangpanel/gasstation.png"),x = 10,y = 10},
+        ["sawmill"] = {mat = Material("gui/gbrp/gangpanel/sawmill.png"),x = 15,y = 5},
+        ["jewelry"] = {mat = Material("gui/gbrp/gangpanel/diamond.png"),x = 5,y = 9},
+        ["garage"] = {mat = Material("gui/gbrp/gangpanel/tire.png"),x = 6,y = 7},
+        ["pharmacy"] = {mat = Material("gui/gbrp/gangpanel/pharmacy.png"),x = 8,y = 10},
+        ["bar"] = {mat = Material("gui/gbrp/gangpanel/beer.png"),x = 15,y = 7},
+        ["nightclub"] = {mat = Material("gui/gbrp/gangpanel/cocktail.png"),x = 7,y = 7},
+        ["armory"] = {mat = Material("gui/gbrp/gangpanel/gun.png"),x = 7,y = 17},
+    }
 end)
 
 local hide = {
@@ -101,8 +119,10 @@ gbrp.voices = {
         "npc/male_speech_1.wav"
     };
 }
-
+local isnpcmenuopen = false
 net.Receive("GBRP::bankreception", function()
+    if isnpcmenuopen then return end
+    isnpcmenuopen = true
     local gender = net.ReadString()
     surface.PlaySound(gbrp.voices[gender][math.random(1,#gbrp.voices[gender])])
     local ply = LocalPlayer()
@@ -142,6 +162,7 @@ net.Receive("GBRP::bankreception", function()
     end
     close.DoClick = function(self)
         frame:Remove()
+        isnpcmenuopen = false
     end
     local depositButton = vgui.Create("DImageButton",frame)
     depositButton:SetImage("gui/gbrp/bank/deposit.png")
@@ -153,6 +174,7 @@ net.Receive("GBRP::bankreception", function()
             net.Start("GBRP::bankdeposit")
             net.SendToServer()
             frame:Remove()
+            isnpcmenuopen = false
             GAMEMODE:AddNotify("Vous avez déposé " .. amount .. "$.",0,2)
             surface.PlaySound("gui/gbrp/deposit.wav")
         else
@@ -200,6 +222,8 @@ net.Receive("GBRP::bankreception", function()
 end)
 
 net.Receive("GBRP::shopReception", function()
+    if isnpcmenuopen then return end
+    isnpcmenuopen = true
     local shop = net.ReadEntity()
     local ply = LocalPlayer()
     if ply:IsGangChief() then
@@ -216,6 +240,7 @@ net.Receive("GBRP::shopReception", function()
             withdrawButton.DoClick = function()
                 shop:Withdraw(ply)
                 frame:Remove()
+                isnpcmenuopen = false
             end
             local depositButton = vgui.Create("DButton",frame)
             depositButton:SetText("Déposer de l'argent sâle")
@@ -234,6 +259,7 @@ net.Receive("GBRP::shopReception", function()
                         net.WriteEntity(shop)
                         net.SendToServer()
                         frame:Remove()
+                        isnpcmenuopen = false
                         GAMEMODE:AddNotify("Vous avez déposé " .. amount .. "$.",0,2)
                     elseif amount <= 0 then
                         GAMEMODE:AddNotify("Valeur non valide.",1,2)
@@ -249,6 +275,7 @@ net.Receive("GBRP::shopReception", function()
             sellButton.DoClick = function()
                 shop:GetSelled(ply)
                 frame:Remove()
+                isnpcmenuopen = false
             end
             local shopVal = vgui.Create("DLabel",frame)
             shopVal:SetText("Valeur: " .. shop.value .. "$")
@@ -271,6 +298,7 @@ net.Receive("GBRP::shopReception", function()
             buyButton.DoClick = function()
                 shop:GetBought(ply)
                 frame:Remove()
+                isnpcmenuopen = false
             end
             local accessButton = vgui.Create("DButton",frame)
             accessButton:SetText("Accéder au magasin")
@@ -314,6 +342,8 @@ net.Receive("GBRP::shopReception", function()
 end)
 
 net.Receive("GBRP::jewelryReception",function()
+    if isnpcmenuopen then return end
+    isnpcmenuopen = true
     local ply = LocalPlayer()
     local gang = ply:GetGang()
     if not gang then return end
@@ -411,6 +441,7 @@ net.Receive("GBRP::jewelryReception",function()
             function sellshopButton:DoClick()
                 shop:GetSelled(ply)
                 frame:Remove()
+                isnpcmenuopen = false
             end
             local progressbarframeMat = Material("gui/gbrp/jewelry/progressbarframe.png")
             local progressbarMat = Material("gui/gbrp/jewelry/progressbar.png")
@@ -458,10 +489,13 @@ net.Receive("GBRP::jewelryReception",function()
     end
     function close:DoClick()
         frame:Remove()
+        isnpcmenuopen = false
     end
 end)
 
 net.Receive("GBRP::nightclubReception",function()
+    if isnpcmenuopen then return end
+    isnpcmenuopen = true
     local ply = LocalPlayer()
     local gang = ply:GetGang()
     if not gang then return end
@@ -558,6 +592,7 @@ net.Receive("GBRP::nightclubReception",function()
             function sellshopButton:DoClick()
                 shop:GetSelled(ply)
                 frame:Remove()
+                isnpcmenuopen = false
             end
             local progressbarframeMat = Material("gui/gbrp/jewelry/progressbarframe.png")
             local progressbarMat = Material("gui/gbrp/jewelry/progressbar.png")
@@ -605,5 +640,6 @@ net.Receive("GBRP::nightclubReception",function()
     end
     function close:DoClick()
         frame:Remove()
+        isnpcmenuopen = false
     end
 end)

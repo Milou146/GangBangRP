@@ -1,22 +1,15 @@
-local ft = 0
-gangmenuisopen = false
+local gangmenuisopen = false
 hook.Add("Think","GBRP::GangMenu",function()
     local ply = LocalPlayer()
-    if input.IsKeyDown(KEY_M) and CurTime() > ft + 1 and ply:IsGangChief() and not gangmenuisopen then
+    if input.IsKeyDown(KEY_M) and ply:IsGangChief() and not gangmenuisopen then
         gangmenuisopen = true
-        ft = CurTime()
         local gangclass = gbrp[ply:GetGang()]
         local gangproperties = gangclass:GetProperties()
         local gangshops = gangclass:GetShops()
         local panelMat = Material("gui/gbrp/gangpanel/panel.png")
         local panel = vgui.Create("EditablePanel",GetHUDPanel())
-        local propertieslist = {
-            ["house"] = {mat = Material("gui/gbrp/gangpanel/house.png"),x = 12,y = 30},
-            ["appartment"] = {mat = Material("gui/gbrp/gangpanel/appartment.png"),x = 10,y = 14},
-            ["hangar"] = {mat = Material("gui/gbrp/gangpanel/hangar.png"),x = 7,y = 10},
-            ["hugetower"] = {mat = Material("gui/gbrp/gangpanel/hugetower.png"),x = 18,y = 11},
-            ["garage"] = {mat = Material("gui/gbrp/gangpanel/garage.png"),x = 5,y = 29},
-        }
+        local earningsbarMat = Material("gui/gbrp/gangpanel/earningsbar.png")
+        local expensesbarMat = Material("gui/gbrp/gangpanel/expensesbar.png")
         panel:SetSize(1080,720)
         panel:Center()
         function panel:Paint(w,h)
@@ -41,11 +34,21 @@ hook.Add("Think","GBRP::GangMenu",function()
             local i = 0
             local j = 0
             for k,v in pairs(gangproperties) do
-                surface.SetMaterial(propertieslist[v].mat)
-                surface.DrawTexturedRect(319 + propertieslist[v].x + i * 72,504 + propertieslist[v].y + j * 70,propertieslist[v].mat:Width(),propertieslist[v].mat:Height())
+                surface.SetMaterial(gbrp.gangpanel.properties[v].mat)
+                surface.DrawTexturedRect(319 + gbrp.gangpanel.properties[v].x + i * 72,504 + gbrp.gangpanel.properties[v].y + j * 70,gbrp.gangpanel.properties[v].mat:Width(),gbrp.gangpanel.properties[v].mat:Height())
                 i = i + 1
                 if i == 4 then i = 0; j = 1 end
             end
+            i = 0
+            j = 0
+            for k,v in pairs(gangshops) do
+                surface.SetMaterial(gbrp.gangpanel.shops[v].mat)
+                surface.DrawTexturedRect(319 + gbrp.gangpanel.shops[v].x + i * 72,324 + gbrp.gangpanel.shops[v].y + j * 70,gbrp.gangpanel.shops[v].mat:Width(),gbrp.gangpanel.shops[v].mat:Height())
+                i = i + 1
+                if i == 4 then i = 0; j = 1 end
+            end
+            GWEN.CreateTextureBorder(0,0,24,275,8,8,8,8,earningsbarMat)(803,344 + 330 * gangclass:GetExpenses() / (gangclass:GetEarnings() + gangclass:GetExpenses()),24,330 - 330 * gangclass:GetExpenses() / (gangclass:GetEarnings() + gangclass:GetExpenses()))
+            GWEN.CreateTextureBorder(0,0,24,208,8,8,8,8,expensesbarMat)(912,344 + 330 * gangclass:GetEarnings() / (gangclass:GetEarnings() + gangclass:GetExpenses()),24,330 - 330 * gangclass:GetEarnings() / (gangclass:GetEarnings() + gangclass:GetExpenses()))
         end
         panel:MakePopup()
         local close = vgui.Create("DImageButton",panel)

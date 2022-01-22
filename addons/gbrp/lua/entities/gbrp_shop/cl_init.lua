@@ -38,6 +38,7 @@ function ENT:Withdraw(ply)
 end
 
 function ENT:Collect(ply,panel)
+    panel:SetKeyboardInputEnabled(true)
     local textEntry = vgui.Create("DTextEntry",panel)
     textEntry:SetSize(200,25)
     textEntry:SetPlaceholderText("ex: 500")
@@ -56,6 +57,7 @@ function ENT:Collect(ply,panel)
         else
             GAMEMODE:AddNotify("Solde insuffisant.",1,2)
         end
+        panel:SetKeyboardInputEnabled(false)
         textEntry:Remove()
     end
 end

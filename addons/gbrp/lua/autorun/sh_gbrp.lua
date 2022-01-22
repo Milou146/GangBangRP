@@ -10,7 +10,7 @@ end
 function gbrp_gang:GetShops()
     local shops = {}
     for _,ent in pairs(ents.GetAll()) do
-        if ent:GetClass() == "gbrp_shop" and ent:GetGang() == self.name then table.insert(shops,ent:GetName()) end
+        if ent:GetClass() == "gbrp_shop" and ent:GetGang() == self.name then table.insert(shops,ent:GetShopName()) end
     end
     return shops
 end
