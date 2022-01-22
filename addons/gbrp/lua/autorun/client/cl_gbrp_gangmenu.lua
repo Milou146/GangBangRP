@@ -1,4 +1,16 @@
 local gangmenuisopen = false
+local function FormatNumber(n)
+    n = tostring(n)
+    if #n < 3 then
+        return n
+    elseif #n <= 6 then
+        return string.Left(n,#n - 3) .. "k"
+    elseif #n <= 9 then
+        return string.Left(n,#n - 6) .. "M"
+    else
+        return string.Left(n,#n - 9) .. "Mds"
+    end
+end
 hook.Add("Think","GBRP::GangMenu",function()
     local ply = LocalPlayer()
     if input.IsKeyDown(KEY_M) and ply:IsGangChief() and not gangmenuisopen then
@@ -7,7 +19,9 @@ hook.Add("Think","GBRP::GangMenu",function()
         local gangproperties = gangclass:GetProperties()
         local gangshops = gangclass:GetShops()
         local panelMat = Material("gui/gbrp/gangpanel/panel.png")
+        local graduationMat = Material("gui/gbrp/gangpanel/graduation.png")
         local panel = vgui.Create("EditablePanel",GetHUDPanel())
+        local membersbarMat = Material("gui/gbrp/gangpanel/membersbar.png")
         local earningsbarMat = Material("gui/gbrp/gangpanel/earningsbar.png")
         local expensesbarMat = Material("gui/gbrp/gangpanel/expensesbar.png")
         panel:SetSize(1080,720)
@@ -37,7 +51,7 @@ hook.Add("Think","GBRP::GangMenu",function()
                 surface.SetMaterial(gbrp.gangpanel.properties[v].mat)
                 surface.DrawTexturedRect(319 + gbrp.gangpanel.properties[v].x + i * 72,504 + gbrp.gangpanel.properties[v].y + j * 70,gbrp.gangpanel.properties[v].mat:Width(),gbrp.gangpanel.properties[v].mat:Height())
                 i = i + 1
-                if i == 4 then i = 0; j = 1 end
+                if i == 5 then i = 0; j = 1 end
             end
             i = 0
             j = 0
@@ -45,10 +59,22 @@ hook.Add("Think","GBRP::GangMenu",function()
                 surface.SetMaterial(gbrp.gangpanel.shops[v].mat)
                 surface.DrawTexturedRect(319 + gbrp.gangpanel.shops[v].x + i * 72,324 + gbrp.gangpanel.shops[v].y + j * 70,gbrp.gangpanel.shops[v].mat:Width(),gbrp.gangpanel.shops[v].mat:Height())
                 i = i + 1
-                if i == 4 then i = 0; j = 1 end
+                if i == 5 then i = 0; j = 1 end
             end
-            GWEN.CreateTextureBorder(0,0,24,275,8,8,8,8,earningsbarMat)(803,344 + 330 * gangclass:GetExpenses() / (gangclass:GetEarnings() + gangclass:GetExpenses()),24,330 - 330 * gangclass:GetExpenses() / (gangclass:GetEarnings() + gangclass:GetExpenses()))
-            GWEN.CreateTextureBorder(0,0,24,208,8,8,8,8,expensesbarMat)(912,344 + 330 * gangclass:GetEarnings() / (gangclass:GetEarnings() + gangclass:GetExpenses()),24,330 - 330 * gangclass:GetEarnings() / (gangclass:GetEarnings() + gangclass:GetExpenses()))
+            GWEN.CreateTextureBorder(0,0,24,275,8,8,8,8,earningsbarMat)(803,364 + 300 * gangclass:GetExpenses() / (gangclass:GetEarnings() + gangclass:GetExpenses()),24,300 - 300 * gangclass:GetExpenses() / (gangclass:GetEarnings() + gangclass:GetExpenses()))
+            surface.SetFont("DermaLarge")
+            surface.SetTextColor(0,255,0)
+            surface.SetTextPos(803,364 + 300 * gangclass:GetExpenses() / (gangclass:GetEarnings() + gangclass:GetExpenses()) - 40)
+            surface.DrawText(FormatNumber(gangclass:GetEarnings()))
+            GWEN.CreateTextureBorder(0,0,24,208,8,8,8,8,expensesbarMat)(912,364 + 300 * gangclass:GetEarnings() / (gangclass:GetEarnings() + gangclass:GetExpenses()),24,300 - 300 * gangclass:GetEarnings() / (gangclass:GetEarnings() + gangclass:GetExpenses()))
+            surface.SetFont("DermaLarge")
+            surface.SetTextColor(255,0,0)
+            surface.SetTextPos(912,364 + 300 * gangclass:GetEarnings() / (gangclass:GetEarnings() + gangclass:GetExpenses()) - 40)
+            surface.DrawText(FormatNumber(gangclass:GetExpenses()))
+            GWEN.CreateTextureBorder(0,0,155,15,8,8,8,8,membersbarMat)(303,205,16,15)
+            GWEN.CreateTextureBorder(0,0,155,15,8,8,8,8,membersbarMat)(318,205,721 * gangclass:GetMembersCount() / 10,15)
+            surface.SetMaterial(graduationMat)
+            surface.DrawTexturedRect(388,205,570,75)
         end
         panel:MakePopup()
         local close = vgui.Create("DImageButton",panel)

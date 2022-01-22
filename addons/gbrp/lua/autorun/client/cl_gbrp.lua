@@ -12,7 +12,10 @@ surface.CreateFont("GBRP::DermaHuge",{
 })
 
 net.Receive("GBRP::doorsinit",function()
-    gbrp.doors = net.ReadTable()
+    gbrp.doors = {}
+    for k = 1,doorscount do
+        gbrp.doors[net.ReadInt(32)] = net.ReadTable()
+    end
     gbrp.gangpanel = {}
     gbrp.gangpanel.properties = {
         ["house"] = {mat = Material("gui/gbrp/gangpanel/house.png"),x = 12,y = 30},
@@ -52,7 +55,6 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,frame)
         if not gbrp.doors[ent:EntIndex()].buyable then
             GAMEMODE:AddNotify("Cette propriété n'est pas à vendre.",1,2)
         elseif not ent:getDoorData().groupOwn then
-            PrintTable(ent:getDoorData())
             local panel = vgui.Create("DFrame",GetHUDPanel())
             panel:Center()
             panel:SetSize(400,400)
@@ -68,10 +70,13 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,frame)
             button:SetPos(20,100)
             button:SetText("Acheter")
             function button:DoClick()
+                local gangclass = gbrp[gang]
                 if not ply:IsGangChief() then
                     GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
                 elseif GetGlobalInt(gang .. "Balance") - gbrp.doors[ent:EntIndex()].price < 0 then
                     GAMEMODE:AddNotify("Solde insuffisant.",1,2)
+                elseif #gangclass:GetProperties() >= 10 then
+                    GAMEMODE:AddNotify("Votre gang a atteint le nombre maximal de propriétés en sa possession.",1,2)
                 else
                     net.Start("GBRP::buydoor")
                     net.WriteString(gbrp.doors[ent:EntIndex()].doorgroup)
@@ -79,7 +84,7 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,frame)
                 end
                 panel:Remove()
             end
-        elseif ent:getDoorData().groupOwn == gbrp[gang].subject then
+        elseif ent:getDoorData().groupOwn == gang then
             local panel = vgui.Create("DFrame",GetHUDPanel())
             panel:Center()
             panel:SetSize(400,400)

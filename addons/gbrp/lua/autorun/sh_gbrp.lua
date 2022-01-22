@@ -18,7 +18,7 @@ function gbrp_gang:GetProperties()
     local propertylist = {}
     for k,v in pairs(gbrp.doors) do
         local door = ents.GetByIndex(k)
-        if door:getDoorData().groupOwn == self.subject then
+        if door:getDoorData().groupOwn == self.name and gbrp.doors[k].typ ~= "shop" then
             propertylist[gbrp.doors[k].doorgroup] = gbrp.doors[k].typ
         end
     end
@@ -89,13 +89,31 @@ function plyMeta:GetGang()
 end
 
 gbrp.doorgroups = {
-    ["1 MAPPLE RD"] = {doors = {2237,2236,2240,2243,2244,2246},owner = "nobody",locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "1 MAPPLE RD",typ = "house"}};
-    ["2 MAPPLE RD"] = {doors = {2261,2245,2264,2265,2263,2262},owner = "nobody",locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "2 MAPPLE RD",typ = "house"}};
-    ["3 MAPPLE RD"] = {doors = {2268,2271,2272,2270,2269,2267},owner = "nobody",locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "3 MAPPLE RD",typ = "house"}};
-    ["4 MAPPLE RD"] = {doors = {2238,2277,2278,4875,2276,2274},owner = "nobody",locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "4 MAPPLE RD",typ = "house"}};
-    ["5 MAPPLE RD"] = {doors = {2313,2318,2319,2317,2316,2314},owner = "nobody",locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "5 MAPPLE RD",typ = "house"}};
-    ["6 MAPPLE RD"] = {doors = {2414,2409,4876,4873,2410,2239},owner = "nobody",locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "6 MAPPLE RD",typ = "house"}};
-    ["7 MAPPLE RD"] = {doors = {2286,2288,2291,2290,2289,2287},owner = "nobody",locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "7 MAPPLE RD",typ = "house"}};
-    ["8 MAPPLE RD"] = {doors = {2534,2304,2307,2306,2305,2287},owner = "nobody",locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "8 MAPPLE RD",typ = "house"}};
+    ["1 MAPPLE RD"] = {doors = {2237,2236,2240,2243,2244,2246},owner = nil,locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "1 MAPPLE RD",typ = "house"}};
+    ["2 MAPPLE RD"] = {doors = {2261,2245,2264,2265,2263,2262},owner = nil,locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "2 MAPPLE RD",typ = "house"}};
+    ["3 MAPPLE RD"] = {doors = {2268,2271,2272,2270,2269,2267},owner = nil,locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "3 MAPPLE RD",typ = "house"}};
+    ["4 MAPPLE RD"] = {doors = {2238,2277,2278,4875,2276,2274},owner = nil,locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "4 MAPPLE RD",typ = "house"}};
+    ["5 MAPPLE RD"] = {doors = {2313,2318,2319,2317,2316,2314},owner = nil,locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "5 MAPPLE RD",typ = "house"}};
+    ["6 MAPPLE RD"] = {doors = {2414,2409,4876,4873,2410,2239},owner = nil,locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "6 MAPPLE RD",typ = "house"}};
+    ["7 MAPPLE RD"] = {doors = {2286,2288,2291,2290,2289,2287},owner = nil,locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "7 MAPPLE RD",typ = "house"}};
+    ["8 MAPPLE RD"] = {doors = {2534,2304,2307,2306,2305,2287},owner = nil,locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "8 MAPPLE RD",typ = "house"}};
     ["9 MAPPLE RD"] = {doors = {2509,2417,4874,4877,2416,2415},owner = "gang",locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "9 MAPPLE RD",typ = "house"}};
+    ["armory"] = {doors = {2608,2610,2609},owner = nil,locked = false,attributes = {buyable = false,price = 10000,value = 8000,doorgroup = "armory",typ = "shop"}};
+    ["bar"] = {doors = {2712,2742,2779,2771,2744},owner = nil,locked = false,attributes = {buyable = false,price = 10000,value = 8000,doorgroup = "bar",typ = "shop"}};
+    ["NYPD open"] = {doors = {2791,2790},owner = "NYPD",locked = false,attributes = {buyable = false,price = 10000,value = 8000,doorgroup = "NYPD open",typ = "NYPD"}};
+    ["NYPD closed"] = {doors = {2792,2793,2811,4200,2806,2808,2807,2875,2796,2797,2846,2847,2845,2849,2844,2848,2824,2822,2819,2812,2798,2917,2918,2916,2915,2801,2853,2802,2803,2809,2810},owner = "NYPD",locked = true,attributes = {buyable = false,price = 10000,value = 8000,doorgroup = "NYPD closed",typ = "NYPD"}};
+    ["Caserne des pompiers"] = {doors = {2214,2227,2226,2213},owner = "NYPD",locked = true,attributes = {buyable = false,price = 10000,value = 8000,doorgroup = "Caserne des pompiers",typ = "NYPD"}};
+    ["Hangar HAVITURE WAY"] = {doors = {2002,2001},owner = nil,locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "Hangar HAVITURE WAY",typ = "hangar"}};
+    ["1 LE GRANDE"] = {doors = {3569,3574},owner = nil,locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "1 LE GRANDE",typ = "appartment"}};
+    ["2 LE GRANDE"] = {doors = {3600,3577},owner = nil,locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "2 LE GRANDE",typ = "appartment"}};
+    ["3 LE GRANDE"] = {doors = {3601,3583},owner = nil,locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "3 LE GRANDE",typ = "appartment"}};
+    ["4 LE GRANDE"] = {doors = {3602,3581},owner = nil,locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "4 LE GRANDE",typ = "appartment"}};
+    ["5 LE GRANDE"] = {doors = {3603,3560},owner = "yakuzas",locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "5 LE GRANDE",typ = "appartment"}};
+    ["6 LE GRANDE"] = {doors = {3604,3565},owner = nil,locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "5 LE GRANDE",typ = "appartment"}};
 }
+doorscount = 0
+for i,doorgroup in pairs(gbrp.doorgroups) do
+    for j,door in pairs(doorgroup.doors) do
+        doorscount = doorscount + 1
+    end
+end

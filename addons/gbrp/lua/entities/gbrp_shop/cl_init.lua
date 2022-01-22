@@ -10,19 +10,22 @@ end
 
 function ENT:GetBought(ply)
     local gang = ply:GetGang()
+    local gangclass = gbrp[gang]
     if self:GetGang() != "nil" then
         GAMEMODE:AddNotify("Ce magasin appartient à un autre gang.",1,2)
     elseif self:GetGang() == gang then
         GAMEMODE:AddNotify("Votre gang possède déjà le magasin.",0,2)
     elseif not ply:IsGangChief() then
         GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
-    elseif GetGlobalInt(gang .. "Balance") - self.price >= 0 then
+    elseif GetGlobalInt(gang .. "Balance") - self.price < 0 then
+        GAMEMODE:AddNotify("Solde insuffisant.",1,2)
+    elseif #gangclass:GetShops() >= 5 then
+        GAMEMODE:AddNotify("Votre gang a atteint le nombre maximal de magasins en sa possession.",1,2)
+    else
         net.Start("GBRP::buyshop")
         net.WriteEntity(self)
         net.SendToServer()
         GAMEMODE:AddNotify("Vous avez acheté le magasin.",0,2)
-    else
-        GAMEMODE:AddNotify("Solde insuffisant.",1,2)
     end
 end
 

@@ -229,6 +229,12 @@ net.Receive("GBRP::sellshop", function(len, ply)
     shop:SetGang("nil")
     SetGlobalInt(gang .. "Balance",GetGlobalInt(gang .. "Balance") + shop.value)
     SetGlobalInt(gang .. "Earnings",GetGlobalInt(gang .. "Earnings") + shop.value)
+    for k,v in pairs(gbrp.doorgroups[shop:GetShopName()]) do
+        for _,door in pairs(v.doors) do
+            local ent = ents.GetMapCreatedEntity(door)
+            ent:setDoorGroup(nil)
+        end
+    end
 end)
 
 net.Receive("GBRP::buyshop", function(len, ply)
@@ -237,6 +243,12 @@ net.Receive("GBRP::buyshop", function(len, ply)
     shop:SetGang(gang)
     SetGlobalInt(gang .. "Balance",GetGlobalInt(gang .. "Balance") - shop.price)
     SetGlobalInt(gang .. "Expenses",GetGlobalInt(gang .. "Expenses") + shop.price)
+    for k,v in pairs(gbrp.doorgroups[shop:GetShopName()]) do
+        for _,door in pairs(v.doors) do
+            local ent = ents.GetMapCreatedEntity(door)
+            ent:setDoorGroup(gang)
+        end
+    end
 end)
 
 concommand.Add("getposeye", function(ply,cmd,args,argStr)
