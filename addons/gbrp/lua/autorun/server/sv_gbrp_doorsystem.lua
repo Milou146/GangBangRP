@@ -47,10 +47,12 @@ hook.Add("InitPostEntity","GBRP::DoorsInit",function()
     end
 end)
 hook.Add("PlayerInitialSpawn","GBRP:DoorsInitCS",function(ply)
-    net.Start("GBRP::doorsinit")
-    for k,v in pairs(gbrp.doors) do
-        net.WriteInt(k,32)
-        net.WriteTable(v)
-    end
-    net.Send(ply)
+    timer.Simple(4, function()
+        net.Start("GBRP::doorsinit")
+        for k,v in pairs(gbrp.doors) do
+            net.WriteInt(k,32)
+            net.WriteTable(v)
+        end
+        net.Send(ply)
+    end)
 end)
