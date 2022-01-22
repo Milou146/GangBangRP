@@ -18,7 +18,7 @@ function gbrp_gang:GetProperties()
     local propertylist = {}
     for k,v in pairs(gbrp.doors) do
         local door = ents.GetByIndex(k)
-        if door:GetNWString("owner") == self.name then
+        if door:getDoorData().groupOwn == self.subject then
             propertylist[gbrp.doors[k].doorgroup] = gbrp.doors[k].typ
         end
     end
@@ -44,17 +44,17 @@ gbrp.mafia = {
 }
 table.Merge(gbrp.mafia,gbrp_gang)
 gbrp.gang = {
-    subject = "Le Gang",
+    subject = "Les gangsters",
     name = "gang"
 }
 table.Merge(gbrp.gang,gbrp_gang)
 
 gbrp.jobs = {
-    ["Citoyen"] = {gang = "nil",gangChief = nil};
-    ["N.Y.P.D"] = {gang = "nil",gangChief = nil};
-    ["S.W.A.T"] = {gang = "nil",gangChief = nil};
-    ["S.W.A.T Médic"] = {gang = "nil",gangChief = nil};
-    ["S.W.A.T Sniper"] = {gang = "nil",gangChief = nil};
+    ["Citoyen"] = {gang = nil,gangChief = nil};
+    ["N.Y.P.D"] = {gang = nil,gangChief = nil};
+    ["S.W.A.T"] = {gang = nil,gangChief = nil};
+    ["S.W.A.T Médic"] = {gang = nil,gangChief = nil};
+    ["S.W.A.T Sniper"] = {gang = nil,gangChief = nil};
     ["Chef des Yakuzas"] = {gang = "yakuzas",gangChief = true};
     ["Yakuza"] = {gang = "yakuzas",gangChief = false};
     ["Yakuza Architecte"] = {gang = "yakuzas",gangChief = false};
@@ -67,14 +67,14 @@ gbrp.jobs = {
     ["Gangster"] = {gang = "gang",gangChief = false};
     ["Gangster Architecte"] = {gang = "gang",gangChief = false};
     ["Gangster Médecin"] = {gang = "gang",gangChief = false};
-    ["STAFF"] = {gang = "nil",gangChief = nil};
-    ["YAMAKASI"] = {gang = "nil",gangChief = nil};
-    ["Chauffeur de taxi"] = {gang = "nil",gangChief = nil};
-    ["Vendeur hot dog"] = {gang = "nil",gangChief = nil};
-    ["Hacker"] = {gang = "nil",gangChief = nil};
-    ["Agent secret"] = {gang = "nil",gangChief = nil};
-    ["Vendeur d'amres ambulant"] = {gang = "nil",gangChief = nil};
-    ["Tueur à gage"] = {gang = "nil",gangChief = nil};
+    ["STAFF"] = {gang = nil,gangChief = nil};
+    ["YAMAKASI"] = {gang = nil,gangChief = nil};
+    ["Chauffeur de taxi"] = {gang = nil,gangChief = nil};
+    ["Vendeur hot dog"] = {gang = nil,gangChief = nil};
+    ["Hacker"] = {gang = nil,gangChief = nil};
+    ["Agent secret"] = {gang = nil,gangChief = nil};
+    ["Vendeur d'amres ambulant"] = {gang = nil,gangChief = nil};
+    ["Tueur à gage"] = {gang = nil,gangChief = nil};
 }
 gbrp.doors = {}
 

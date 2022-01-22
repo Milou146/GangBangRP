@@ -11,6 +11,10 @@ surface.CreateFont("GBRP::DermaHuge",{
     size = 48
 })
 
+net.Receive("GBRP::doorsinit",function()
+    gbrp.doors = net.ReadTable()
+end)
+
 local hide = {
     ["CHudHealth"] = true,
     ["CHudAmmo"] = true,
@@ -20,6 +24,71 @@ local hide = {
 hook.Add("HUDShouldDraw","GBRP::HideHUD",function(name)
     if hide[name] then
         return false
+    end
+end)
+hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,frame)
+    local ply = LocalPlayer()
+    frame:Close()
+    if gbrp.doors[ent:EntIndex()] then
+        local gang = ply:GetGang()
+        if not gbrp.doors[ent:EntIndex()].buyable then
+            GAMEMODE:AddNotify("Cette propriété n'est pas à vendre.",1,2)
+        elseif not ent:getDoorData().groupOwn then
+            PrintTable(ent:getDoorData())
+            local panel = vgui.Create("DFrame",GetHUDPanel())
+            panel:Center()
+            panel:SetSize(400,400)
+            panel:SetTitle("")
+            function panel:Paint(w,h)
+                surface.SetTextPos(50,50)
+                surface.SetTextColor(255,255,255)
+                surface.SetFont("Trebuchet18")
+                surface.DrawText("Prix: " .. tostring(gbrp.doors[ent:EntIndex()].price) .. "$")
+            end
+            panel:MakePopup()
+            local button = vgui.Create("DButton",panel)
+            button:SetPos(20,100)
+            button:SetText("Acheter")
+            function button:DoClick()
+                if not ply:IsGangChief() then
+                    GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
+                elseif GetGlobalInt(gang .. "Balance") - gbrp.doors[ent:EntIndex()].price < 0 then
+                    GAMEMODE:AddNotify("Solde insuffisant.",1,2)
+                else
+                    net.Start("GBRP::buydoor")
+                    net.WriteString(gbrp.doors[ent:EntIndex()].doorgroup)
+                    net.SendToServer()
+                end
+                panel:Remove()
+            end
+        elseif ent:getDoorData().groupOwn == gbrp[gang].subject then
+            local panel = vgui.Create("DFrame",GetHUDPanel())
+            panel:Center()
+            panel:SetSize(400,400)
+            panel:SetTitle("")
+            function panel:Paint(w,h)
+                surface.SetTextPos(50,50)
+                surface.SetTextColor(255,255,255)
+                surface.SetFont("Trebuchet18")
+                surface.DrawText("Valeur: " .. tostring(gbrp.doors[ent:EntIndex()].value) .. "$")
+            end
+            panel:MakePopup()
+            local button = vgui.Create("DButton",panel)
+            button:SetPos(20,100)
+            button:SetText("Vendre")
+            function button:DoClick()
+                if not ply:IsGangChief() then
+                    GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
+                else
+                    net.Start("GBRP::selldoor")
+                    net.WriteString(gbrp.doors[ent:EntIndex()].doorgroup)
+                    net.SendToServer()
+                end
+                panel:Remove()
+            end
+        else
+            GAMEMODE:AddNotify("Cette propriété appartient à un autre gang.",1,2)
+        end
     end
 end)
 
@@ -247,7 +316,7 @@ end)
 net.Receive("GBRP::jewelryReception",function()
     local ply = LocalPlayer()
     local gang = ply:GetGang()
-    if gang == "nil" then return end
+    if not gang then return end
     local shop = net.ReadEntity()
     local frameMat = Material("gui/gbrp/jewelry/frame.png")
     local subpanelMat = Material("gui/gbrp/jewelry/subpanel.png")
@@ -274,6 +343,7 @@ net.Receive("GBRP::jewelryReception",function()
         surface.DrawText("REVENTE: " .. tostring(shop.value) .. "$")
     end
     frame:MakePopup()
+    frame:SetKeyboardInputEnabled(false)
     local buyshopButton = vgui.Create("DImageButton",frame)
     buyshopButton:SetImage("gui/gbrp/jewelry/buyshop.png")
     buyshopButton:SizeToContents()
@@ -394,7 +464,7 @@ end)
 net.Receive("GBRP::nightclubReception",function()
     local ply = LocalPlayer()
     local gang = ply:GetGang()
-    if gang == "nil" then return end
+    if not gang then return end
     local shop = net.ReadEntity()
     local frameMat = Material("gui/gbrp/nightclub/frame.png")
     local subpanelMat = Material("gui/gbrp/nightclub/subpanel.png")

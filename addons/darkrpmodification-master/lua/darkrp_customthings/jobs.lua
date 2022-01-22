@@ -161,7 +161,7 @@ TEAM_YAKUZA = DarkRP.createJob("Chef des Yakuzas", {
 })
 
 --------------------------------------------------------------------------------
-TEAM_YAKUZA2 = DarkRP.createJob("Yakuza", {
+TEAM_YAKUZA1 = DarkRP.createJob("Yakuza", {
     color = Color(204, 51, 153, 255),
     model = {"models/players/Kimonos.mdl", "models/players/Kimonos_02.mdl", "models/players/Kimonos_03.mdl", "models/players/Kimonos_04.mdl", "models/players/Kimonos_05.mdl", "models/players/Kimonos_06.mdl", "models/players/Kimonos_07.mdl", "models/players/Kimonos_10.mdl", "models/players/Kimonos_14.mdl", "models/players/Kimonos_15.mdl", "models/players/Kimonos_17.mdl", "models/players/Kimonos_18.mdl", "models/players/Kimonos_19.mdl", "models/players/Kimonos_21.mdl", "models/players/Kimonos_26.mdl"},
     description = [[]],
@@ -189,7 +189,7 @@ TEAM_YAKUZA2 = DarkRP.createJob("Yakuza", {
 })
 
 --------------------------------------------------------------------------------
-TEAM_YAKUZA3 = DarkRP.createJob("Yakuza Architecte", {
+TEAM_YAKUZA2 = DarkRP.createJob("Yakuza Architecte", {
     color = Color(204, 51, 153, 255),
     model = {"models/players/Kimonos.mdl", "models/players/Kimonos_02.mdl", "models/players/Kimonos_03.mdl", "models/players/Kimonos_04.mdl", "models/players/Kimonos_05.mdl", "models/players/Kimonos_06.mdl", "models/players/Kimonos_07.mdl", "models/players/Kimonos_10.mdl", "models/players/Kimonos_14.mdl", "models/players/Kimonos_15.mdl", "models/players/Kimonos_17.mdl", "models/players/Kimonos_18.mdl", "models/players/Kimonos_19.mdl", "models/players/Kimonos_21.mdl", "models/players/Kimonos_26.mdl"},
     description = [[]],
@@ -217,7 +217,7 @@ TEAM_YAKUZA3 = DarkRP.createJob("Yakuza Architecte", {
 })
 
 --------------------------------------------------------------------------------
-TEAM_YAKUZA4 = DarkRP.createJob("Yakuza Médecin", {
+TEAM_YAKUZA3 = DarkRP.createJob("Yakuza Médecin", {
     color = Color(212, 212, 17, 255),
     model = {"models/players/Kimonos.mdl", "models/players/Kimonos_02.mdl", "models/players/Kimonos_03.mdl", "models/players/Kimonos_04.mdl", "models/players/Kimonos_05.mdl", "models/players/Kimonos_06.mdl", "models/players/Kimonos_07.mdl", "models/players/Kimonos_10.mdl", "models/players/Kimonos_14.mdl", "models/players/Kimonos_15.mdl", "models/players/Kimonos_17.mdl", "models/players/Kimonos_18.mdl", "models/players/Kimonos_19.mdl", "models/players/Kimonos_21.mdl", "models/players/Kimonos_26.mdl"},
     description = [[]],
