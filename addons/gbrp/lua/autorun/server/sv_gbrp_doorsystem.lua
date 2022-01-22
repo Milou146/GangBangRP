@@ -32,7 +32,7 @@ net.Receive("GBRP::selldoor",function(len,ply)
         end
     end
 end)
-hook.Add("loadCustomDarkRPItems","GBRP::DoorsInit",function()
+hook.Add("InitPostEntity","GBRP::DoorsInit",function()
     gbrp.doors = {}
     for doorgroupname,doorgroup in pairs(gbrp.doorgroups) do
         for _,door in pairs(doorgroup.doors) do
@@ -47,12 +47,10 @@ hook.Add("loadCustomDarkRPItems","GBRP::DoorsInit",function()
     end
 end)
 hook.Add("PlayerInitialSpawn","GBRP:DoorsInitCS",function(ply)
-    timer.Simple(4,function()
-        net.Start("GBRP::doorsinit")
-        for k,v in pairs(gbrp.doors) do
-            net.WriteInt(k,32)
-            net.WriteTable(v)
-        end
-        net.Send(ply)
-    end)
+    net.Start("GBRP::doorsinit")
+    for k,v in pairs(gbrp.doors) do
+        net.WriteInt(k,32)
+        net.WriteTable(v)
+    end
+    net.Send(ply)
 end)
