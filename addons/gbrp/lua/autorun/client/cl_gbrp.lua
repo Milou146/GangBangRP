@@ -16,24 +16,6 @@ net.Receive("GBRP::doorsinit",function()
     for k = 1,doorscount do
         gbrp.doors[net.ReadInt(32)] = net.ReadTable()
     end
-    gbrp.gangpanel = {}
-    gbrp.gangpanel.properties = {
-        ["house"] = {mat = Material("gui/gbrp/gangpanel/house.png"),x = 12,y = 30},
-        ["appartment"] = {mat = Material("gui/gbrp/gangpanel/appartment.png"),x = 10,y = 14},
-        ["hangar"] = {mat = Material("gui/gbrp/gangpanel/hangar.png"),x = 7,y = 10},
-        ["hugetower"] = {mat = Material("gui/gbrp/gangpanel/hugetower.png"),x = 18,y = 11},
-        ["garage"] = {mat = Material("gui/gbrp/gangpanel/garage.png"),x = 5,y = 29},
-    }
-    gbrp.gangpanel.shops = {
-        ["gasstation"] = {mat = Material("gui/gbrp/gangpanel/gasstation.png"),x = 10,y = 10},
-        ["sawmill"] = {mat = Material("gui/gbrp/gangpanel/sawmill.png"),x = 15,y = 5},
-        ["jewelry"] = {mat = Material("gui/gbrp/gangpanel/diamond.png"),x = 5,y = 9},
-        ["garage"] = {mat = Material("gui/gbrp/gangpanel/tire.png"),x = 6,y = 7},
-        ["pharmacy"] = {mat = Material("gui/gbrp/gangpanel/pharmacy.png"),x = 8,y = 10},
-        ["bar"] = {mat = Material("gui/gbrp/gangpanel/beer.png"),x = 15,y = 7},
-        ["nightclub"] = {mat = Material("gui/gbrp/gangpanel/cocktail.png"),x = 7,y = 7},
-        ["armory"] = {mat = Material("gui/gbrp/gangpanel/gun.png"),x = 7,y = 17},
-    }
 end)
 
 local hide = {
@@ -63,7 +45,7 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,frame)
                 surface.SetTextPos(50,50)
                 surface.SetTextColor(255,255,255)
                 surface.SetFont("Trebuchet18")
-                surface.DrawText("Prix: " .. tostring(gbrp.doors[ent:EntIndex()].price) .. "$")
+                surface.DrawText("Prix: " .. gbrp.formatMoney(gbrp.doors[ent:EntIndex()].price))
             end
             panel:MakePopup()
             local button = vgui.Create("DButton",panel)
@@ -93,7 +75,7 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,frame)
                 surface.SetTextPos(50,50)
                 surface.SetTextColor(255,255,255)
                 surface.SetFont("Trebuchet18")
-                surface.DrawText("Valeur: " .. tostring(gbrp.doors[ent:EntIndex()].value) .. "$")
+                surface.DrawText("Valeur: " .. gbrp.formatMoney(gbrp.doors[ent:EntIndex()].value))
             end
             panel:MakePopup()
             local button = vgui.Create("DButton",panel)
@@ -115,15 +97,6 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,frame)
     end
 end)
 
-gbrp.voices = {
-    female = {
-        "npc/female_speech_1.wav",
-        "npc/female_speech_2.wav"
-    };
-    male = {
-        "npc/male_speech_1.wav"
-    };
-}
 local isnpcmenuopen = false
 net.Receive("GBRP::bankreception", function()
     if isnpcmenuopen then return end
@@ -153,7 +126,7 @@ net.Receive("GBRP::bankreception", function()
         surface.SetFont("GBRP::bank")
         surface.SetTextPos(233,366)
         surface.SetTextColor(0,0,0,255)
-        surface.DrawText("SOLDE: " .. tostring(ply:GetNWInt("GBRP::balance")) .. "$")
+        surface.DrawText("SOLDE: " .. gbrp.formatMoney(ply:GetNWInt("GBRP::balance")))
     end
     local close = vgui.Create("DImageButton",frame)
     close:SetImage("gui/gbrp/bank/close.png")
@@ -180,7 +153,7 @@ net.Receive("GBRP::bankreception", function()
             net.SendToServer()
             frame:Remove()
             isnpcmenuopen = false
-            GAMEMODE:AddNotify("Vous avez déposé " .. amount .. "$.",0,2)
+            GAMEMODE:AddNotify("Vous avez déposé $" .. amount .. ".",0,2)
             surface.PlaySound("gui/gbrp/deposit.wav")
         else
             GAMEMODE:AddNotify("Vous n'avez pas d'argent blanchi sur vous.",1,2)
@@ -208,7 +181,7 @@ net.Receive("GBRP::bankreception", function()
                 net.Start("GBRP::bankwithdraw")
                 net.WriteUInt(amount,32)
                 net.SendToServer()
-                GAMEMODE:AddNotify("Vous avez retiré " .. amount .. "$.",0,2)
+                GAMEMODE:AddNotify("Vous avez retiré $" .. amount .. ".",0,2)
                 surface.PlaySound("gui/gbrp/withdraw.wav")
             elseif amount <= 0 then
                 GAMEMODE:AddNotify("Valeur non valide.",1,2)
@@ -265,7 +238,7 @@ net.Receive("GBRP::shopReception", function()
                         net.SendToServer()
                         frame:Remove()
                         isnpcmenuopen = false
-                        GAMEMODE:AddNotify("Vous avez déposé " .. amount .. "$.",0,2)
+                        GAMEMODE:AddNotify("Vous avez déposé " .. gbrp.formatMoney(amount) .. ".",0,2)
                     elseif amount <= 0 then
                         GAMEMODE:AddNotify("Valeur non valide.",1,2)
                     else
@@ -283,11 +256,11 @@ net.Receive("GBRP::shopReception", function()
                 isnpcmenuopen = false
             end
             local shopVal = vgui.Create("DLabel",frame)
-            shopVal:SetText("Valeur: " .. shop.value .. "$")
+            shopVal:SetText("Valeur: $" .. shop.value)
             shopVal:SetPos(100,400)
             shopVal:SetSize(200,25)
             local balance = vgui.Create("DLabel",frame)
-            balance:SetText("Argent blanchis: " .. shop:GetLaunderedMoney() .. "$")
+            balance:SetText("Argent blanchis: " .. gbrp.formatMoney(shop:GetLaunderedMoney()))
             balance:SetPos(100,420)
             balance:SetSize(200,25)
         else
@@ -312,15 +285,15 @@ net.Receive("GBRP::shopReception", function()
             accessButton.DoClick = function()
             end
             local shopPrice = vgui.Create("DLabel",frame)
-            shopPrice:SetText("Prix du magasin: " .. shop.price .. "$")
+            shopPrice:SetText("Prix du magasin: $" .. shop.price)
             shopPrice:SetPos(100,400)
             shopPrice:SetSize(200,25)
             local balance = vgui.Create("DLabel",frame)
-            balance:SetText("Votre solde: " .. ply:GetNWInt("GBRP::balance") .. "$")
+            balance:SetText("Votre solde: $" .. ply:GetNWInt("GBRP::balance"))
             balance:SetPos(100,420)
             balance:SetSize(200,25)
             local gangBalance = vgui.Create("DLabel",frame)
-            gangBalance:SetText("Le solde du gang: " .. GetGlobalInt(ply:GetGang() .. "Balance") .. "$")
+            gangBalance:SetText("Le solde du gang: " .. gbrp.formatMoney(GetGlobalInt(ply:GetGang() .. "Balance")))
             gangBalance:SetPos(100,440)
             gangBalance:SetSize(200,25)
         end
@@ -370,12 +343,12 @@ net.Receive("GBRP::jewelryReception",function()
         surface.SetFont("GBRP::bank")
         surface.SetTextColor(0,0,0,255)
         surface.SetTextPos(93,644)
-        surface.DrawText("SOLDE DU GANG: " .. tostring(GetGlobalInt(gang .. "Balance") .. "$"))
+        surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(GetGlobalInt(gang .. "Balance")))
         surface.SetFont("GBRP::bank small")
         surface.SetTextPos(193,322)
-        surface.DrawText("PRIX: " .. tostring(shop.price) .. "$")
+        surface.DrawText("PRIX: " .. gbrp.formatMoney(shop.price))
         surface.SetTextPos(193,352)
-        surface.DrawText("REVENTE: " .. tostring(shop.value) .. "$")
+        surface.DrawText("REVENTE: " .. gbrp.formatMoney(shop.value))
     end
     frame:MakePopup()
     frame:SetKeyboardInputEnabled(false)
@@ -458,14 +431,14 @@ net.Receive("GBRP::jewelryReception",function()
                 surface.SetFont("GBRP::bank")
                 surface.SetTextColor(0,0,0,255)
                 surface.SetTextPos(93,644)
-                surface.DrawText("SOLDE DU GANG: " .. tostring(GetGlobalInt(gang .. "Balance")) .. "$")
+                surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(GetGlobalInt(gang .. "Balance")))
                 surface.SetMaterial(launderedmoneyMat)
                 surface.DrawTexturedRect(238,489,321,68)
                 surface.SetMaterial(shopvalMat)
                 surface.DrawTexturedRect(682,489,321,68)
                 surface.SetFont("GBRP::bank small")
                 surface.SetTextPos(349,525)
-                surface.DrawText(tostring(shop:GetBalance()) .. "$")
+                surface.DrawText(gbrp.formatMoney(shop:GetBalance()))
                 GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarframeMat)(84,385,1053,27)
                 GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(84,385,1053 * shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()), 27)
                 surface.SetFont("GBRP::bank")
@@ -475,7 +448,7 @@ net.Receive("GBRP::jewelryReception",function()
                 surface.SetFont("GBRP::bank small")
                 surface.SetTextColor(255,0,0,255)
                 surface.SetTextPos(805,525)
-                surface.DrawText(tostring(shop.value) .. "$")
+                surface.DrawText(gbrp.formatMoney(shop.value))
             end
         else
             GAMEMODE:AddNotify("Vous n'êtes pas membre.",1,2)
@@ -522,12 +495,12 @@ net.Receive("GBRP::nightclubReception",function()
         surface.SetFont("GBRP::bank")
         surface.SetTextColor(0,0,0,255)
         surface.SetTextPos(166,640)
-        surface.DrawText("SOLDE DU GANG: " .. tostring(GetGlobalInt(gang .. "Balance") .. "$"))
+        surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(GetGlobalInt(gang .. "Balance")))
         surface.SetFont("GBRP::bank small")
         surface.SetTextPos(266,319)
-        surface.DrawText("PRIX: " .. tostring(shop.price) .. "$")
+        surface.DrawText("PRIX: " .. gbrp.formatMoney(shop.price))
         surface.SetTextPos(266,349)
-        surface.DrawText("REVENTE: " .. tostring(shop.value) .. "$")
+        surface.DrawText("REVENTE: " .. gbrp.formatMoney(shop.value))
     end
     frame:MakePopup()
     local buyshopButton = vgui.Create("DImageButton",frame)
@@ -609,14 +582,14 @@ net.Receive("GBRP::nightclubReception",function()
                 surface.SetFont("GBRP::bank")
                 surface.SetTextColor(0,0,0,255)
                 surface.SetTextPos(166,640)
-                surface.DrawText("SOLDE DU GANG: " .. tostring(GetGlobalInt(gang .. "Balance")) .. "$")
+                surface.DrawText("SOLDE DU GANG: " .. tostring(GetGlobalInt(gang .. "Balance")))
                 surface.SetMaterial(shopbalanceMat)
                 surface.DrawTexturedRect(238,489,321,68)
                 surface.SetMaterial(shopvalMat)
                 surface.DrawTexturedRect(682,489,321,68)
                 surface.SetFont("GBRP::bank small")
                 surface.SetTextPos(349,525)
-                surface.DrawText(tostring(shop:GetBalance()) .. "$")
+                surface.DrawText(gbrp.formatMoney(shop:GetBalance()))
                 GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarframeMat)(84,385,1053,27)
                 GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(84,385,1053 * shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()), 27)
                 surface.SetFont("GBRP::bank")
@@ -626,7 +599,7 @@ net.Receive("GBRP::nightclubReception",function()
                 surface.SetFont("GBRP::bank small")
                 surface.SetTextColor(255,0,0,255)
                 surface.SetTextPos(805,525)
-                surface.DrawText(tostring(shop.value) .. "$")
+                surface.DrawText(gbrp.formatMoney(shop.value))
             end
         else
             GAMEMODE:AddNotify("Vous n'êtes pas membre.",1,2)

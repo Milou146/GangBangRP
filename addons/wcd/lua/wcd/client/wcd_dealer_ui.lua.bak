@@ -155,7 +155,7 @@ function WCD:OpenDealer( dealer )
 				color_white, 0, 0, 1, color_black );
 		end
 
-		draw.SimpleTextOutlined( WCD:Translate( WCD.Lang.dealerVarious.wallet, DarkRP.formatMoney( LocalPlayer():GetNWInt( "GBRP::balance" ) ) ), "WCD::FontGenericSmall", 13, h - 14 - 13,
+		draw.SimpleTextOutlined( WCD:Translate( WCD.Lang.dealerVarious.wallet, DarkRP.formatMoney( LocalPlayer():getDarkRPVar( "money" ) ) ), "WCD::FontGenericSmall", 13, h - 14 - 13,
 			color_white, 0, 0, 1, color_black );
 	end
 

@@ -192,11 +192,11 @@ net.Receive("GBRP::bankdeposit", function(len, ply)
     for member,pay in pairs(members) do
         member:SetNWInt("GBRP::balance", member:GetNWInt("GBRP::balance") + pay)
         sql.Query("update gbrp set balance = " .. member:GetNWInt("GBRP::balance") .. " where steamid64 = " .. member:SteamID64() .. ";")
-        member:ChatPrint(gbrp[gang].subject .. " vous rémunère " .. pay .. "$.")
+        member:ChatPrint(gbrp[gang].subject .. " vous rémunère $" .. pay .. ".")
     end
     SetGlobalInt(gang .. "Balance",GetGlobalInt(gang .. "Balance") + gangPay)
     SetGlobalInt(gang .. "Earnings",GetGlobalInt(gang .. "Earnings") + gangPay)
-    ply:ChatPrint(gbrp[gang].subject .. " gagne " .. gangPay .. "$.")
+    ply:ChatPrint(gbrp[gang].subject .. " gagne $" .. gangPay .. ".")
 
     ply:SetNWInt("GBRP::launderedmoney", 0)
     ply.launderedMoney = {}
@@ -229,11 +229,9 @@ net.Receive("GBRP::sellshop", function(len, ply)
     shop:SetGang("nil")
     SetGlobalInt(gang .. "Balance",GetGlobalInt(gang .. "Balance") + shop.value)
     SetGlobalInt(gang .. "Earnings",GetGlobalInt(gang .. "Earnings") + shop.value)
-    for k,v in pairs(gbrp.doorgroups[shop:GetShopName()]) do
-        for _,door in pairs(v.doors) do
-            local ent = ents.GetMapCreatedEntity(door)
-            ent:setDoorGroup(nil)
-        end
+    for k,door in pairs(gbrp.doorgroups[shop:GetShopName()].doors) do
+        local ent = ents.GetMapCreatedEntity(door)
+        ent:setDoorGroup(nil)
     end
 end)
 
@@ -243,11 +241,9 @@ net.Receive("GBRP::buyshop", function(len, ply)
     shop:SetGang(gang)
     SetGlobalInt(gang .. "Balance",GetGlobalInt(gang .. "Balance") - shop.price)
     SetGlobalInt(gang .. "Expenses",GetGlobalInt(gang .. "Expenses") + shop.price)
-    for k,v in pairs(gbrp.doorgroups[shop:GetShopName()]) do
-        for _,door in pairs(v.doors) do
-            local ent = ents.GetMapCreatedEntity(door)
-            ent:setDoorGroup(gang)
-        end
+    for k,door in pairs(gbrp.doorgroups[shop:GetShopName()].doors) do
+        local ent = ents.GetMapCreatedEntity(door)
+        ent:setDoorGroup(gang)
     end
 end)
 

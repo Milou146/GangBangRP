@@ -264,8 +264,7 @@ net.Receive( "WCD::SellVehicle", function( _, _p )
 
 	local pay = math.Round( data:GetPrice() * ( WCD.Settings.percentage / 100 ), 0 );
 	_p:WCD_RemoveVehicle( id );
-	--_p:addMoney( pay );
-	_p:BankTransfer( pay );
+	_p:addMoney( pay );
 	_p:WCD_Notify( WCD:Translate( WCD.Lang.various.youSold, data:GetName(), DarkRP.formatMoney( pay ) ) );
 
 	net.Start( "WCD::UnOwned" );
@@ -285,7 +284,6 @@ net.Receive( "WCD::BuyVehicle", function( _, _p )
 		return;
 	end
 
-	--_p:addMoney( -data:GetPrice() );
 	_p:BankTransfer( -data:GetPrice() );
 	_p:WCD_AddVehicle( id );
 	_p:WCD_Notify( WCD:Translate( WCD.Lang.various.youBought, data:GetName(), DarkRP.formatMoney( data:GetPrice() ) ) );

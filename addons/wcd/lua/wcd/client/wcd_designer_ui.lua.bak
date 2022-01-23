@@ -727,7 +727,7 @@ hook.Add( "HUDPaint", "WCD::CursorStatus", function()
 		draw.SimpleTextOutlined( WCD:Translate( WCD.Lang.designer.totalPrice, DarkRP.formatMoney( WCD.DesignerUI.total ) ), "WCD::FontDealer", ScrW() / 2, ScrH() - 250, color_white,
 			TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 2, color_black );
 
-		draw.SimpleTextOutlined( WCD:Translate( WCD.Lang.dealerVarious.wallet, DarkRP.formatMoney( LocalPlayer():GetNWInt( "GBRP::balance" ) ) ), "WCD::FontDealer", ScrW() / 2, ScrH() - 280, color_white,
+		draw.SimpleTextOutlined( WCD:Translate( WCD.Lang.dealerVarious.wallet, DarkRP.formatMoney( LocalPlayer():getDarkRPVar( "money" ) ) ), "WCD::FontDealer", ScrW() / 2, ScrH() - 280, color_white,
 			TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 2, color_black );
 
 		if( WCD.DesignerUI.children[ "underglow" ]

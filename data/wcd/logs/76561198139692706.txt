@@ -1,3 +1,27 @@
+12:52:03 - 23/01/2022:
+BOUGHT vehicle '708853' for $0.
+
+12:45:46 - 23/01/2022:
+BOUGHT vehicle '195565' for $883.
+
+12:43:08 - 23/01/2022:
+BOUGHT vehicle '870670' for $1,000.
+
+12:41:46 - 23/01/2022:
+BOUGHT vehicle '950079' for $920.
+
+12:39:26 - 23/01/2022:
+ BOUGHT DESIGN for vehicle '943030', cost: $$38,250.
+
+12:38:23 - 23/01/2022:
+BOUGHT vehicle '474072' for $1,040.
+
+12:38:15 - 23/01/2022:
+BOUGHT vehicle '943030' for $100,000.
+
+12:36:53 - 23/01/2022:
+BOUGHT vehicle '909016' for $1,061.
+
 17:20:31 - 09/01/2022:
  SOLD vehicle '870670' for €1,000.
 

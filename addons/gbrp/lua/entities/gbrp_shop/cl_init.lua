@@ -54,7 +54,7 @@ function ENT:Collect(ply,panel)
             net.WriteUInt(amount,32)
             net.WriteEntity(self)
             net.SendToServer()
-            GAMEMODE:AddNotify("Vous avez déposé " .. amount .. "$.",0,2)
+            GAMEMODE:AddNotify("Vous avez déposé " .. DarkRP.formatMoney( amount ) .. ".",0,2)
         elseif amount <= 0 then
             GAMEMODE:AddNotify("Valeur non valide.",1,2)
         else
