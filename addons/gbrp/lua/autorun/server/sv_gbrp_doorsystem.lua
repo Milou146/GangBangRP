@@ -6,10 +6,9 @@ net.Receive("GBRP::buydoor",function(len,ply)
     local doorgroup = net.ReadString()
     for _,door in pairs(gbrp.doorgroups[doorgroup].doors) do
         local ent = ents.GetMapCreatedEntity(door)
-        ent:setDoorGroup(gang)
+        ent:setDoorGroup(gang.name)
     end
-    SetGlobalInt(gang .. "Balance",GetGlobalInt(gang .. "Balance") - gbrp.doorgroups[doorgroup].attributes.price)
-    SetGlobalInt(gang .. "Expenses",GetGlobalInt(gang .. "Expenses") + gbrp.doorgroups[doorgroup].attributes.price)
+    gang:Pay(gbrp.doorgroups[doorgroup].attributes.price)
     for k,pl in pairs(player.GetAll()) do
         if pl:GetGang() == gang then
             pl:ChatPrint([[Votre gang a acheté ']] .. doorgroup .. [[']])
@@ -24,8 +23,7 @@ net.Receive("GBRP::selldoor",function(len,ply)
         ent2:setDoorGroup(nil)
         ent2:Fire("lock", "", 0)
     end
-    SetGlobalInt(gang .. "Balance",GetGlobalInt(gang .. "Balance") + gbrp.doorgroups[doorgroup].attributes.value)
-    SetGlobalInt(gang .. "Earnings",GetGlobalInt(gang .. "Earnings") + gbrp.doorgroups[doorgroup].attributes.value)
+    gang:Cash(gbrp.doorgroups[doorgroup].attributes.value)
     for k,pl in pairs(player.GetAll()) do
         if pl:GetGang() == gang then
             pl:ChatPrint([[Votre gang a vendu ']] .. doorgroup .. [[']])

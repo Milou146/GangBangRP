@@ -29,35 +29,43 @@ hook.Add("HUDShouldDraw","GBRP::HideHUD",function(name)
         return false
     end
 end)
+
+local panelOpen = false
 hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,frame)
-    local ply = LocalPlayer()
     frame:Close()
+    if panelOpen then return end
+    local ply = LocalPlayer()
     if gbrp.doors[ent:EntIndex()] then
         local gang = ply:GetGang()
         if not gbrp.doors[ent:EntIndex()].buyable then
             GAMEMODE:AddNotify("Cette propriété n'est pas à vendre.",1,2)
         elseif not ent:getDoorData().groupOwn then
+            panelOpen = true
             local panel = vgui.Create("DFrame",GetHUDPanel())
             panel:Center()
-            panel:SetSize(400,400)
+            panel:SetSize(400,130)
             panel:SetTitle("")
             function panel:Paint(w,h)
+                derma.SkinHook( "Paint", "Frame", self, w, h )
                 surface.SetTextPos(50,50)
                 surface.SetTextColor(255,255,255)
                 surface.SetFont("Trebuchet18")
                 surface.DrawText("Prix: " .. gbrp.formatMoney(gbrp.doors[ent:EntIndex()].price))
             end
+            function panel:OnClose()
+                panelOpen = false
+            end
             panel:MakePopup()
+            panel:SetKeyboardInputEnabled(false)
             local button = vgui.Create("DButton",panel)
             button:SetPos(20,100)
             button:SetText("Acheter")
             function button:DoClick()
-                local gangclass = gbrp[gang]
                 if not ply:IsGangChief() then
                     GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
-                elseif GetGlobalInt(gang .. "Balance") - gbrp.doors[ent:EntIndex()].price < 0 then
+                elseif not gang:CanAfford(gbrp.doors[ent:EntIndex()].price) then
                     GAMEMODE:AddNotify("Solde insuffisant.",1,2)
-                elseif #gangclass:GetProperties() >= 10 then
+                elseif #gang:GetProperties() >= 10 then
                     GAMEMODE:AddNotify("Votre gang a atteint le nombre maximal de propriétés en sa possession.",1,2)
                 else
                     net.Start("GBRP::buydoor")
@@ -65,19 +73,26 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,frame)
                     net.SendToServer()
                 end
                 panel:Remove()
+                panelOpen = false
             end
-        elseif ent:getDoorData().groupOwn == gang then
+        elseif ent:getDoorData().groupOwn == gang.name then
+            panelOpen = true
             local panel = vgui.Create("DFrame",GetHUDPanel())
             panel:Center()
-            panel:SetSize(400,400)
+            panel:SetSize(400,130)
             panel:SetTitle("")
             function panel:Paint(w,h)
+                derma.SkinHook( "Paint", "Frame", self, w, h )
                 surface.SetTextPos(50,50)
                 surface.SetTextColor(255,255,255)
                 surface.SetFont("Trebuchet18")
                 surface.DrawText("Valeur: " .. gbrp.formatMoney(gbrp.doors[ent:EntIndex()].value))
             end
+            function panel:OnClose()
+                panelOpen = false
+            end
             panel:MakePopup()
+            panel:SetKeyboardInputEnabled(false)
             local button = vgui.Create("DButton",panel)
             button:SetPos(20,100)
             button:SetText("Vendre")
@@ -90,17 +105,16 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,frame)
                     net.SendToServer()
                 end
                 panel:Remove()
+                panelOpen = false
             end
         else
             GAMEMODE:AddNotify("Cette propriété appartient à un autre gang.",1,2)
         end
     end
 end)
-
-local isnpcmenuopen = false
 net.Receive("GBRP::bankreception", function()
-    if isnpcmenuopen then return end
-    isnpcmenuopen = true
+    if panelOpen then return end
+    panelOpen = true
     local gender = net.ReadString()
     surface.PlaySound(gbrp.voices[gender][math.random(1,#gbrp.voices[gender])])
     local ply = LocalPlayer()
@@ -140,7 +154,7 @@ net.Receive("GBRP::bankreception", function()
     end
     close.DoClick = function(self)
         frame:Remove()
-        isnpcmenuopen = false
+        panelOpen = false
     end
     local depositButton = vgui.Create("DImageButton",frame)
     depositButton:SetImage("gui/gbrp/bank/deposit.png")
@@ -152,7 +166,7 @@ net.Receive("GBRP::bankreception", function()
             net.Start("GBRP::bankdeposit")
             net.SendToServer()
             frame:Remove()
-            isnpcmenuopen = false
+            panelOpen = false
             GAMEMODE:AddNotify("Vous avez déposé $" .. amount .. ".",0,2)
             surface.PlaySound("gui/gbrp/deposit.wav")
         else
@@ -198,134 +212,13 @@ net.Receive("GBRP::bankreception", function()
         self:SetImage("gui/gbrp/bank/withdraw.png")
     end
 end)
-
-net.Receive("GBRP::shopReception", function()
-    if isnpcmenuopen then return end
-    isnpcmenuopen = true
-    local shop = net.ReadEntity()
-    local ply = LocalPlayer()
-    if ply:IsGangChief() then
-        if shop:GetGang() == ply:GetGang() then
-            local frame = vgui.Create("DFrame",GetHUDPanel())
-            frame:SetSize(1000,500)
-            frame:Center()
-            frame:MakePopup()
-            frame:SetTitle(shop.PrintName)
-            local withdrawButton = vgui.Create("DButton",frame)
-            withdrawButton:SetText("Retirer l'argent blanchis")
-            withdrawButton:SetPos(100,100)
-            withdrawButton:SetSize(200,200)
-            withdrawButton.DoClick = function()
-                shop:Withdraw(ply)
-                frame:Remove()
-                isnpcmenuopen = false
-            end
-            local depositButton = vgui.Create("DButton",frame)
-            depositButton:SetText("Déposer de l'argent sâle")
-            depositButton:SetPos(350,100)
-            depositButton:SetSize(200,200)
-            depositButton.DoClick = function()
-                local textEntry = vgui.Create("DTextEntry",frame)
-                textEntry:SetSize(200,25)
-                textEntry:SetPlaceholderText("ex: 500")
-                textEntry:Center()
-                textEntry.OnEnter = function(self)
-                    local amount = tonumber(self:GetValue())
-                    if amount > 0 and ply:getDarkRPVar("money") - amount >= 0 then
-                        net.Start("GBRP::shopdeposit")
-                        net.WriteUInt(amount,32)
-                        net.WriteEntity(shop)
-                        net.SendToServer()
-                        frame:Remove()
-                        isnpcmenuopen = false
-                        GAMEMODE:AddNotify("Vous avez déposé " .. gbrp.formatMoney(amount) .. ".",0,2)
-                    elseif amount <= 0 then
-                        GAMEMODE:AddNotify("Valeur non valide.",1,2)
-                    else
-                        GAMEMODE:AddNotify("Solde insuffisant.",1,2)
-                    end
-                end
-            end
-            local sellButton = vgui.Create("DButton",frame)
-            sellButton:SetText("Vendre le magasin")
-            sellButton:SetPos(600,100)
-            sellButton:SetSize(200,200)
-            sellButton.DoClick = function()
-                shop:GetSelled(ply)
-                frame:Remove()
-                isnpcmenuopen = false
-            end
-            local shopVal = vgui.Create("DLabel",frame)
-            shopVal:SetText("Valeur: $" .. shop.value)
-            shopVal:SetPos(100,400)
-            shopVal:SetSize(200,25)
-            local balance = vgui.Create("DLabel",frame)
-            balance:SetText("Argent blanchis: " .. gbrp.formatMoney(shop:GetLaunderedMoney()))
-            balance:SetPos(100,420)
-            balance:SetSize(200,25)
-        else
-            local frame = vgui.Create("DFrame")
-            frame:SetSize(1000,500)
-            frame:Center()
-            frame:MakePopup()
-            frame:SetTitle(shop.PrintName)
-            local buyButton = vgui.Create("DButton",frame)
-            buyButton:SetText("Acheter le magasin")
-            buyButton:SetPos(100,100)
-            buyButton:SetSize(350,200)
-            buyButton.DoClick = function()
-                shop:GetBought(ply)
-                frame:Remove()
-                isnpcmenuopen = false
-            end
-            local accessButton = vgui.Create("DButton",frame)
-            accessButton:SetText("Accéder au magasin")
-            accessButton:SetPos(550,100)
-            accessButton:SetSize(350,200)
-            accessButton.DoClick = function()
-            end
-            local shopPrice = vgui.Create("DLabel",frame)
-            shopPrice:SetText("Prix du magasin: $" .. shop.price)
-            shopPrice:SetPos(100,400)
-            shopPrice:SetSize(200,25)
-            local balance = vgui.Create("DLabel",frame)
-            balance:SetText("Votre solde: $" .. ply:GetNWInt("GBRP::balance"))
-            balance:SetPos(100,420)
-            balance:SetSize(200,25)
-            local gangBalance = vgui.Create("DLabel",frame)
-            gangBalance:SetText("Le solde du gang: " .. gbrp.formatMoney(GetGlobalInt(ply:GetGang() .. "Balance")))
-            gangBalance:SetPos(100,440)
-            gangBalance:SetSize(200,25)
-        end
-    elseif shop:GetGang() == ply:GetGang() then
-        local frame = vgui.Create("DFrame")
-        frame:SetSize(1000,500)
-        frame:Center()
-        frame:MakePopup()
-        frame:SetTitle(shop.PrintName)
-        local accessButton = vgui.Create("DButton",frame)
-        accessButton:SetText("Accéder au magasin")
-        accessButton:SetPos(100,100)
-        accessButton:SetSize(350,200)
-        accessButton.DoClick = function()
-        end
-        local depositButton = vgui.Create("DButton",frame)
-        depositButton:SetText("Déposer de l'argent sâle")
-        depositButton:SetPos(550,100)
-        depositButton:SetSize(350,200)
-        depositButton.DoClick = function()
-            shop:Collect(ply)
-        end
-    end
-end)
-
 net.Receive("GBRP::jewelryReception",function()
-    if isnpcmenuopen then return end
-    isnpcmenuopen = true
+    local shop = net.ReadEntity()
+    if panelOpen then return end
     local ply = LocalPlayer()
     local gang = ply:GetGang()
     if not gang then return end
-    local shop = net.ReadEntity()
+    panelOpen = true
     local frameMat = Material("gui/gbrp/jewelry/frame.png")
     local subpanelMat = Material("gui/gbrp/jewelry/subpanel.png")
     local launderedmoneyMat = Material("gui/gbrp/jewelry/launderedmoney.png")
@@ -343,7 +236,7 @@ net.Receive("GBRP::jewelryReception",function()
         surface.SetFont("GBRP::bank")
         surface.SetTextColor(0,0,0,255)
         surface.SetTextPos(93,644)
-        surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(GetGlobalInt(gang .. "Balance")))
+        surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
         surface.SetFont("GBRP::bank small")
         surface.SetTextPos(193,322)
         surface.DrawText("PRIX: " .. gbrp.formatMoney(shop.price))
@@ -419,7 +312,7 @@ net.Receive("GBRP::jewelryReception",function()
             function sellshopButton:DoClick()
                 shop:GetSelled(ply)
                 frame:Remove()
-                isnpcmenuopen = false
+                panelOpen = false
             end
             local progressbarframeMat = Material("gui/gbrp/jewelry/progressbarframe.png")
             local progressbarMat = Material("gui/gbrp/jewelry/progressbar.png")
@@ -431,7 +324,7 @@ net.Receive("GBRP::jewelryReception",function()
                 surface.SetFont("GBRP::bank")
                 surface.SetTextColor(0,0,0,255)
                 surface.SetTextPos(93,644)
-                surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(GetGlobalInt(gang .. "Balance")))
+                surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
                 surface.SetMaterial(launderedmoneyMat)
                 surface.DrawTexturedRect(238,489,321,68)
                 surface.SetMaterial(shopvalMat)
@@ -467,17 +360,16 @@ net.Receive("GBRP::jewelryReception",function()
     end
     function close:DoClick()
         frame:Remove()
-        isnpcmenuopen = false
+        panelOpen = false
     end
 end)
-
 net.Receive("GBRP::nightclubReception",function()
-    if isnpcmenuopen then return end
-    isnpcmenuopen = true
+    local shop = net.ReadEntity()
+    if panelOpen then return end
     local ply = LocalPlayer()
     local gang = ply:GetGang()
     if not gang then return end
-    local shop = net.ReadEntity()
+    panelOpen = true
     local frameMat = Material("gui/gbrp/nightclub/frame.png")
     local subpanelMat = Material("gui/gbrp/nightclub/subpanel.png")
     local shopbalanceMat = Material("gui/gbrp/nightclub/shopbalance.png")
@@ -495,7 +387,7 @@ net.Receive("GBRP::nightclubReception",function()
         surface.SetFont("GBRP::bank")
         surface.SetTextColor(0,0,0,255)
         surface.SetTextPos(166,640)
-        surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(GetGlobalInt(gang .. "Balance")))
+        surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
         surface.SetFont("GBRP::bank small")
         surface.SetTextPos(266,319)
         surface.DrawText("PRIX: " .. gbrp.formatMoney(shop.price))
@@ -503,6 +395,7 @@ net.Receive("GBRP::nightclubReception",function()
         surface.DrawText("REVENTE: " .. gbrp.formatMoney(shop.value))
     end
     frame:MakePopup()
+    frame:SetKeyboardInputEnabled(false)
     local buyshopButton = vgui.Create("DImageButton",frame)
     buyshopButton:SetImage("gui/gbrp/jewelry/buyshop.png")
     buyshopButton:SizeToContents()
@@ -570,7 +463,7 @@ net.Receive("GBRP::nightclubReception",function()
             function sellshopButton:DoClick()
                 shop:GetSelled(ply)
                 frame:Remove()
-                isnpcmenuopen = false
+                panelOpen = false
             end
             local progressbarframeMat = Material("gui/gbrp/jewelry/progressbarframe.png")
             local progressbarMat = Material("gui/gbrp/jewelry/progressbar.png")
@@ -582,7 +475,7 @@ net.Receive("GBRP::nightclubReception",function()
                 surface.SetFont("GBRP::bank")
                 surface.SetTextColor(0,0,0,255)
                 surface.SetTextPos(166,640)
-                surface.DrawText("SOLDE DU GANG: " .. tostring(GetGlobalInt(gang .. "Balance")))
+                surface.DrawText("SOLDE DU GANG: " .. tostring(gang:GetBalance()))
                 surface.SetMaterial(shopbalanceMat)
                 surface.DrawTexturedRect(238,489,321,68)
                 surface.SetMaterial(shopvalMat)
@@ -618,6 +511,6 @@ net.Receive("GBRP::nightclubReception",function()
     end
     function close:DoClick()
         frame:Remove()
-        isnpcmenuopen = false
+        panelOpen = false
     end
 end)

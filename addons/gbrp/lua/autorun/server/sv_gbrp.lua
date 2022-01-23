@@ -1,24 +1,15 @@
 util.AddNetworkString("GBRP::bankreception")
 util.AddNetworkString("GBRP::bankwithdraw")
 util.AddNetworkString("GBRP::bankdeposit")
-util.AddNetworkString("GBRP::shopReception")
 util.AddNetworkString("GBRP::buyshop")
 util.AddNetworkString("GBRP::sellshop")
 util.AddNetworkString("GBRP::shopwithdraw")
 util.AddNetworkString("GBRP::shopdeposit")
-util.AddNetworkString("GBRP::jewelryReception")
-util.AddNetworkString("GBRP::nightclubReception")
 sql.Query("create table if not exists gbrp(steamid64 bigint not null, balance bigint);")
 
 SetGlobalInt("yakuzasBalance",0);
 SetGlobalInt("mafiaBalance",0);
 SetGlobalInt("gangBalance",0);
-
-local plyMeta = FindMetaTable("Player")
-
-function plyMeta:addLaunderedMoney(amount)
-    self:SetNWInt("GBRP::launderedmoney", self:GetNWInt("GBRP::launderedmoney") + amount)
-end
 
 hook.Add("PlayerInitialSpawn", "GBRP::Client Init", function(ply)
     local data = sql.QueryRow("select * from gbrp where steamid64 = " .. ply:SteamID64() .. ";")
@@ -136,7 +127,8 @@ gbrp.npcs = {
         gender = "male",
         model = "models/eli.mdl",
         pos = Vector(-5872.972168,1543.199097,50.012878),
-        ang = Angle(0,-92.799614,0)
+        ang = Angle(0,-92.799614,0),
+        name = "gasstation"
     };
     [12] = { -- Archiviste
         class = "gbrp_shop",
@@ -159,6 +151,7 @@ hook.Add( "InitPostEntity", "FullLoadSetup", function()
         local npc = ents.Create(v.class);
         if v.name then
             npc.name = v.name
+            util.AddNetworkString("GBRP::" .. npc.name .. "Reception")
         end
         npc.gender = v.gender
         npc.model = v.model
@@ -192,11 +185,10 @@ net.Receive("GBRP::bankdeposit", function(len, ply)
     for member,pay in pairs(members) do
         member:SetNWInt("GBRP::balance", member:GetNWInt("GBRP::balance") + pay)
         sql.Query("update gbrp set balance = " .. member:GetNWInt("GBRP::balance") .. " where steamid64 = " .. member:SteamID64() .. ";")
-        member:ChatPrint(gbrp[gang].subject .. " vous rémunère $" .. pay .. ".")
+        member:ChatPrint(gang.subject .. " vous rémunère $" .. pay .. ".")
     end
-    SetGlobalInt(gang .. "Balance",GetGlobalInt(gang .. "Balance") + gangPay)
-    SetGlobalInt(gang .. "Earnings",GetGlobalInt(gang .. "Earnings") + gangPay)
-    ply:ChatPrint(gbrp[gang].subject .. " gagne $" .. gangPay .. ".")
+    gang:Cash(gangPay)
+    ply:ChatPrint(gang.subject .. " gagne " .. gbrp.formatMoney(gangPay) .. ".")
 
     ply:SetNWInt("GBRP::launderedmoney", 0)
     ply.launderedMoney = {}
@@ -211,7 +203,7 @@ net.Receive("GBRP::shopwithdraw", function(len, ply)
         table.Add(ply.launderedMoney, shop.launderedMoney)
     end
     shop.launderedMoney = {}
-    ply:addLaunderedMoney(shop:GetBalance())
+    ply:AddLaunderedMoney(shop:GetBalance())
     shop:SetBalance(0)
 end)
 
@@ -226,9 +218,8 @@ end)
 net.Receive("GBRP::sellshop", function(len, ply)
     local shop = net.ReadEntity()
     local gang = shop:GetGang()
-    shop:SetGang("nil")
-    SetGlobalInt(gang .. "Balance",GetGlobalInt(gang .. "Balance") + shop.value)
-    SetGlobalInt(gang .. "Earnings",GetGlobalInt(gang .. "Earnings") + shop.value)
+    shop:SetGang(nil)
+    gang:Cash(shop.value)
     for k,door in pairs(gbrp.doorgroups[shop:GetShopName()].doors) do
         local ent = ents.GetMapCreatedEntity(door)
         ent:setDoorGroup(nil)
@@ -239,11 +230,10 @@ net.Receive("GBRP::buyshop", function(len, ply)
     local shop = net.ReadEntity()
     local gang = ply:GetGang()
     shop:SetGang(gang)
-    SetGlobalInt(gang .. "Balance",GetGlobalInt(gang .. "Balance") - shop.price)
-    SetGlobalInt(gang .. "Expenses",GetGlobalInt(gang .. "Expenses") + shop.price)
+    gang:Pay(shop.price)
     for k,door in pairs(gbrp.doorgroups[shop:GetShopName()].doors) do
         local ent = ents.GetMapCreatedEntity(door)
-        ent:setDoorGroup(gang)
+        ent:setDoorGroup(gang.name)
     end
 end)
 

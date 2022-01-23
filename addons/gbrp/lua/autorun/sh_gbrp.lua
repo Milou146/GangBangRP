@@ -1,54 +1,4 @@
 gbrp = {}
-local gbrp_gang = {}
-function gbrp_gang:GetMembersCount()
-    local count = 0
-    for _,ply in pairs(player.GetAll()) do
-        if gbrp.jobs[team.GetName(ply:Team())].gang == self.name then count = count + 1 end
-    end
-    return count
-end
-function gbrp_gang:GetShops()
-    local shops = {}
-    for _,ent in pairs(ents.GetAll()) do
-        if ent:GetClass() == "gbrp_shop" and ent:GetGang() == self.name then table.insert(shops,ent:GetShopName()) end
-    end
-    return shops
-end
-function gbrp_gang:GetProperties()
-    local propertylist = {}
-    for k,v in pairs(gbrp.doors) do
-        local door = ents.GetByIndex(k)
-        if door:getDoorData().groupOwn == self.name and gbrp.doors[k].typ ~= "shop" then
-            propertylist[gbrp.doors[k].doorgroup] = gbrp.doors[k].typ
-        end
-    end
-    return propertylist
-end
-function gbrp_gang:GetBalance()
-    return GetGlobalInt(self.name .. "Balance")
-end
-function gbrp_gang:GetExpenses()
-    return GetGlobalInt(self.name .. "Expenses")
-end
-function gbrp_gang:GetEarnings()
-    return GetGlobalInt(self.name .. "Earnings")
-end
-gbrp.yakuzas = {
-    subject = "Les yakuzas",
-    name = "yakuzas"
-}
-table.Merge(gbrp.yakuzas,gbrp_gang)
-gbrp.mafia = {
-    subject = "La Mafia",
-    name = "mafia"
-}
-table.Merge(gbrp.mafia,gbrp_gang)
-gbrp.gang = {
-    subject = "Les gangsters",
-    name = "gang"
-}
-table.Merge(gbrp.gang,gbrp_gang)
-
 gbrp.jobs = {
     ["Citoyen"] = {gang = nil,gangChief = nil};
     ["N.Y.P.D"] = {gang = nil,gangChief = nil};
@@ -76,27 +26,28 @@ gbrp.jobs = {
     ["Vendeur d'amres ambulant"] = {gang = nil,gangChief = nil};
     ["Tueur à gage"] = {gang = nil,gangChief = nil};
 }
-gbrp.doors = {}
+function gbrp.formatMoney(n)
+    if not n then return "$0" end
 
-local plyMeta = FindMetaTable("Player")
+    if n >= 1e14 then return "$" .. tostring(n) end
+    if n <= -1e14 then return "-" .. "$" .. tostring(math.abs(n)) end
 
-function plyMeta:IsGangChief()
-    return gbrp.jobs[team.GetName(self:Team())].gangChief;
+    local negative = n < 0
+
+    n = tostring(math.abs(n))
+    local dp = string.find(n, "%.") or #n + 1
+
+    for i = dp - 4, 1, -3 do
+        n = n:sub(1, i) .. "." .. n:sub(i + 1)
+    end
+
+    -- Make sure the amount is padded with zeroes
+    if n[#n - 1] == "." then
+        n = n .. "0"
+    end
+
+    return (negative and "-" or "") .. "$" .. n
 end
-
-function plyMeta:GetGang()
-    return gbrp.jobs[team.GetName(self:Team())].gang;
-end
-
-function plyMeta:BankTransfer(value)
-    self:SetNWInt("GBRP::balance",self:GetNWInt("GBRP::balance") + value);
-    sql.Query("update gbrp set balance = " .. self:GetNWInt("GBRP::balance") .. " where steamid64 = " .. self:SteamID64() .. ";");
-end
-
-function plyMeta:canBankAccountAfford(value)
-    return self:GetNWInt("GBRP::balance") - value >= 0;
-end
-
 gbrp.doorgroups = {
     ["1 Mapple Rd"] = {doors = {2237,2236,2240,2243,2244,2246},owner = nil,locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "1 Mapple Rd",typ = "house"}};
     ["2 Mapple Rd"] = {doors = {2261,2245,2264,2265,2263,2262},owner = nil,locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "2 Mapple Rd",typ = "house"}};
@@ -187,6 +138,7 @@ gbrp.doorgroups = {
     ["9 13th St"] = {doors = {2048,2381,2053},owner = nil,locked = true,attributes = {buyable = true,price = 10000,value = 8000,doorgroup = "1 13th St",typ = "garage"}};
     ["garage"] = {doors = {2060,2062,2066,2061,2067,2065},owner = nil,locked = false,attributes = {buyable = false,price = 10000,value = 8000,doorgroup = "garage",typ = "shop"}};
 }
+gbrp.doors = {}
 if SERVER then
     hook.Add("InitPostEntity","GBRP::DoorsInit",function()
         gbrp.doors = {}
@@ -248,26 +200,101 @@ if CLIENT then
             doorscount = doorscount + 1
         end
     end
-    function gbrp.formatMoney(n)
-        if not n then return "$0" end
+end
 
-        if n >= 1e14 then return "$" .. tostring(n) end
-        if n <= -1e14 then return "-" .. "$" .. tostring(math.abs(n)) end
+local gang = {}
+local plyMeta = FindMetaTable("Player")
 
-        local negative = n < 0
-
-        n = tostring(math.abs(n))
-        local dp = string.find(n, "%.") or #n + 1
-
-        for i = dp - 4, 1, -3 do
-            n = n:sub(1, i) .. "." .. n:sub(i + 1)
+function gang:GetMembersCount()
+    local count = 0
+    for _,ply in pairs(player.GetAll()) do
+        if gbrp.jobs[team.GetName(ply:Team())].gang == self.name then count = count + 1 end
+    end
+    return count
+end
+function gang:GetShops()
+    local shops = {}
+    for _,ent in pairs(ents.GetAll()) do
+        if ent:GetClass() == "gbrp_shop" and ent:GetGang() == self then table.insert(shops,ent:GetShopName()) end
+    end
+    return shops
+end
+function gang:GetProperties()
+    local propertylist = {}
+    for k,v in pairs(gbrp.doors) do
+        local door = ents.GetByIndex(k)
+        if door:getDoorData().groupOwn == self.name and gbrp.doors[k].typ ~= "shop" then
+            propertylist[gbrp.doors[k].doorgroup] = gbrp.doors[k].typ
         end
-
-        -- Make sure the amount is padded with zeroes
-        if n[#n - 1] == "." then
-            n = n .. "0"
-        end
-
-        return (negative and "-" or "") .. "$" .. n
+    end
+    return propertylist
+end
+function gang:GetBalance()
+    return GetGlobalInt(self.name .. "Balance")
+end
+function gang:GetExpenses()
+    return GetGlobalInt(self.name .. "Expenses")
+end
+function gang:GetEarnings()
+    return GetGlobalInt(self.name .. "Earnings")
+end
+function gang:CanAfford(amount)
+    return self:GetBalance() - amount >= 0
+end
+function plyMeta:IsGangChief()
+    return gbrp.jobs[team.GetName(self:Team())].gangChief;
+end
+function plyMeta:GetGang()
+    return gbrp[gbrp.jobs[team.GetName(self:Team())].gang];
+end
+function plyMeta:GetBalance()
+    return self:GetNWInt("GBRP::balance")
+end
+function plyMeta:CanAfford(amount)
+    return self:GetBalance() - amount >= 0;
+end
+if SERVER then
+    function gang:AddEarnings(amount)
+        SetGlobalInt(self.name .. "Earnings",self:GetEarnings() + amount)
+    end
+    function gang:AddExpenses(amount)
+        SetGlobalInt(self.name .. "Expenses",self:GetExpenses() + amount)
+    end
+    function gang:SetBalance(val)
+        SetGlobalInt(self.name .. "Balance",val)
+    end
+    function gang:Cash(amount)
+        self:SetBalance(self:GetBalance() + amount)
+        self:AddEarnings(amount)
+    end
+    function gang:Pay(amount)
+        self:SetBalance(self:GetBalance() + amount)
+        self:AddExpenses(amount)
+    end
+    function plyMeta:AddLaunderedMoney(amount)
+        self:SetNWInt("GBRP::launderedmoney", self:GetNWInt("GBRP::launderedmoney") + amount)
+    end
+    function plyMeta:Cash(pay)
+        self:SetNWInt("GBRP::balance",self:GetBalance() + pay);
+        sql.Query("update gbrp set balance = " .. self:GetNWInt("GBRP::balance") .. " where steamid64 = " .. self:SteamID64() .. ";");
+    end
+    function plyMeta:Pay(amount)
+        self:SetNWInt("GBRP::balance",self:GetBalance() - amount);
+        sql.Query("update gbrp set balance = " .. self:GetNWInt("GBRP::balance") .. " where steamid64 = " .. self:SteamID64() .. ";");
     end
 end
+gbrp.yakuzas = {
+    subject = "Les yakuzas",
+    name = "yakuzas"
+}
+table.Merge(gbrp.yakuzas,gang)
+gbrp.mafia = {
+    subject = "La Mafia",
+    name = "mafia"
+}
+table.Merge(gbrp.mafia,gang)
+gbrp.gang = {
+    subject = "Les gangsters",
+    name = "gang"
+}
+table.Merge(gbrp.gang,gang)

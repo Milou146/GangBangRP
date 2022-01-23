@@ -15,7 +15,7 @@ function ENT:Initialize()
     self:SetUseType(SIMPLE_USE)
     self:DropToFloor()
     self:SetShopName(self.name)
-    self:SetGang("nil")
+    self:SetGang(nil)
 end
 
 function ENT:Use(ply, caller, useType, value)
@@ -54,5 +54,13 @@ function ENT:Think()
     if #self.money >= 1 and CurTime() > self.lastTime + self.launderingTime then
         self.lastTime = CurTime()
         self:launder(1,self.launderingAmount)
+    end
+end
+
+function ENT:SetGang(gang)
+    if gang then
+        self:SetGangName(gang.name)
+    else
+        self:SetGangName("")
     end
 end
