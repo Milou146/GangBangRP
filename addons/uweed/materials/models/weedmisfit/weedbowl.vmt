@@ -1,0 +1,9 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/weedmisfit/weedbowltexture.png"
+
+"$envmap" "env_cubemap"
+ 
+"$envmaptint" "[.5 .5 .5]"
+}
+

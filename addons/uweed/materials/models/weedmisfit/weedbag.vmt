@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+ "$basetexture" "models\weedmisfit\weedbag"
+ "$bumpmap" "models\weedmisfit\weedbagnrm"
+ "$surfaceprop" "metal" 
+
+}

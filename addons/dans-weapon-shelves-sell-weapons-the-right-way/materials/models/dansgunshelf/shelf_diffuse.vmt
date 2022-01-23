@@ -1,0 +1,17 @@
+//MODELS AND MATERIALS MADE BY II_PYRO_II\\
+//DO NOT REUPLOAD ANYWHERE\\
+//MADE FOR DAN \\
+
+"VertexlitGeneric"
+{
+	"$basetexture" "models/dansgunshelf/shelf_diffuse"
+	"$bumpmap" "models/dansgunshelf/shelf_normal"
+	"$surfaceprop" "Metal"
+
+	"$phong" "1"
+	"$phongboost" "1"
+	"$phongexponent" "10"
+	"$phongtint" "[ .5 .5 .5 ]"
+	"$phongalbedotint" "1"
+	"$phongfresnelranges" "[ .5 .5 .5 ]"
+}

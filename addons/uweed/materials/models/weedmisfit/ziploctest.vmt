@@ -1,0 +1,6 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/weedmisfit/ziploc"
+	"$alphatest" 1
+	"$translucent" 1
+}

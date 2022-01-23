@@ -1,0 +1,11 @@
+{
+	"title"		:	"Shelf Assets",
+	"type"		:	"Model",
+	"tags"		:	[ "Roleplay", "Realism" ],
+	"ignore"	:
+	[
+		"*.psd",
+		"*.vcproj",
+		"*.svn*"
+	]
+}

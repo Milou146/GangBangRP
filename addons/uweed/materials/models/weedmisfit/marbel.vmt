@@ -1,0 +1,9 @@
+"VertexLitGeneric"
+{
+ "$basetexture" "models\weedmisfit\marbel"
+
+ "$surfaceprop" "metal" 
+
+"$envmap" "env_cubemap"
+ 
+}

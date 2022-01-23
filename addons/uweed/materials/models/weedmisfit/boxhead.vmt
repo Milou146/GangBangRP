@@ -1,0 +1,10 @@
+"UnlitGeneric"
+{
+ "$basetexture" "models\weedmisfit\boxhead"
+
+ "$surfaceprop" "metal" 
+
+"$envmap" "env_cubemap"
+ 
+"$envmaptint" "[.75 .75 .75]"
+}

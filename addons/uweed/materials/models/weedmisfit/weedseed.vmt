@@ -1,0 +1,10 @@
+"VertexLitGeneric"
+{
+ "$basetexture" "models\weedmisfit\weedseed"
+ "$bumpmap" "models\weedmisfit\weedseednrm"
+ "$surfaceprop" "metal" 
+
+"$envmap" "env_cubemap"
+ 
+"$envmaptint" "[.5 .5 .5]"
+}

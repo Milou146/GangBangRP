@@ -1,0 +1,10 @@
+"VertexLitGeneric"
+{
+ "$basetexture" "models\weedmisfit\scalebottom"
+
+ "$surfaceprop" "metal" 
+
+"$envmap" "env_cubemap"
+ 
+"$envmaptint" "[.7 .7 .7]"
+}
