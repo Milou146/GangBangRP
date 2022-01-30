@@ -246,3 +246,10 @@ concommand.Add("getid", function(ply,cmd,args,argStr)
     print(tostring(ply:GetEyeTrace().Entity:MapCreationID()))
     ply:ChatPrint(tostring(ply:GetEyeTrace().Entity:MapCreationID()))
 end)
+
+hook.Add("PlayerDisconnected","GBRP::PlayerDisconnected",function(ply)
+    if ply:IsGangChief() then ply:GetGang():Reset() end
+end)
+hook.Add("PlayerDeath","GBRP::PlayerDeath",function(ply)
+    if ply:IsGangChief() then ply:GetGang():Reset() end
+end)

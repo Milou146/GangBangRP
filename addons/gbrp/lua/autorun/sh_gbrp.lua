@@ -268,8 +268,23 @@ if SERVER then
         self:AddEarnings(amount)
     end
     function gang:Pay(amount)
-        self:SetBalance(self:GetBalance() + amount)
+        self:SetBalance(self:GetBalance() - amount)
         self:AddExpenses(amount)
+    end
+    function gang:Reset()
+        for k,v in pairs(gbrp.doors) do
+            local door = ents.GetByIndex(k)
+            if door:getDoorData().groupOwn == self.name and gbrp.doorgroups[gbrp.doors[k].doorgroup].owner ~= self.name then
+                door:setDoorGroup(nil)
+            end
+        end
+        local shops = ents.FindByClass("gbrp_shop")
+        for i,shop in pairs(shops) do
+            if shop:GetGang() == self then
+                shop:SetGang(nil)
+            end
+        end
+        gang:SetBalance(100000)
     end
     function plyMeta:AddLaunderedMoney(amount)
         self:SetNWInt("GBRP::launderedmoney", self:GetNWInt("GBRP::launderedmoney") + amount)

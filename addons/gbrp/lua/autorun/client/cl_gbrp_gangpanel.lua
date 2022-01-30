@@ -1,4 +1,10 @@
 local gangPanelOpen = false
+hook.Add("StartChat","GBRP::StartChat",function()
+    gangPanelOpen = true
+end)
+hook.Add("FinishChat","GBRP::FinishChat",function()
+    gangPanelOpen = false
+end)
 local function FormatNumber(n)
     n = tostring(n)
     if #n < 3 then
