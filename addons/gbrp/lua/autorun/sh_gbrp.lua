@@ -284,7 +284,6 @@ if SERVER then
                 shop:SetGang(nil)
             end
         end
-        gang:SetBalance(100000)
     end
     function plyMeta:AddLaunderedMoney(amount)
         self:SetNWInt("GBRP::launderedmoney", self:GetNWInt("GBRP::launderedmoney") + amount)
