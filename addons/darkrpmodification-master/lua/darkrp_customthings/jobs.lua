@@ -39,7 +39,8 @@ TEAM_NYPD = DarkRP.createJob("N.Y.P.D", {
         ply:SetHealth(100)
         ply:SetArmor(50)
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
-    end
+    end,
+
 })
 
 --------------------------------------------------------------------------------
@@ -152,12 +153,21 @@ TEAM_YAKUZA = DarkRP.createJob("Chef des Yakuzas", {
     hasLicense = false,
     candemote = false,
     category = "YAKUZA",
+	PlayerDeath = function(ply)
+   			ply.LastTimeHasChief = CurTime()
+			ply:changeTeam( TEAM_CITIZEN, true )
+			for k,v in pairs( player.GetAll() ) do
+				DarkRP.notify(v, 1, 4, "Le chef Yakuza est décédé.")
+			end
+	end,
+	
     PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(10)
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
-    end
+    end,
+		
 })
 
 --------------------------------------------------------------------------------
