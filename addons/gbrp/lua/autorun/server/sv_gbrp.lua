@@ -149,7 +149,7 @@ hook.Add("PlayerSpawn","GBRP:PlayerSpawn",function(ply)
         ply:GetGang():SetBalance(gbrp.startingFunds)
     end
 end)
-hook.Add("PlayerDeath","GBRP:PlayerDeath",function()
+hook.Add("PlayerDeath","GBRP:PlayerDeath",function(ply)
     if ply:IsGangLeader() then
         ply:GetGang():Reset()
     end
