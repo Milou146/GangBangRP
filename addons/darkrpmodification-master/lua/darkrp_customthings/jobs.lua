@@ -158,7 +158,6 @@ TEAM_YAKUZA = DarkRP.createJob("Chef des Yakuzas", {
         for k, v in pairs(player.GetAll()) do
             DarkRP.notify(v, 1, 4, "Le chef Yakuza est décédé.")
         end
-        gbrp.yakuzas:Reset()
     end,
     customCheck = function(ply)
         if ply.LastTimeHasLeader then
@@ -173,7 +172,6 @@ TEAM_YAKUZA = DarkRP.createJob("Chef des Yakuzas", {
         ply:SetHealth(100)
         ply:SetArmor(10)
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
-        gbrp.yakuzas:SetBalance(gbrp.startingFunds)
     end
 })
 
@@ -285,7 +283,6 @@ TEAM_MAFIA = DarkRP.createJob("Parrain", {
         for k, v in pairs(player.GetAll()) do
             DarkRP.notify(v, 1, 4, "Le chef Yakuza est décédé.")
         end
-        gbrp.yakuzas:Reset()
     end,
     customCheck = function(ply)
         if ply.LastTimeHasLeader then
@@ -300,7 +297,6 @@ TEAM_MAFIA = DarkRP.createJob("Parrain", {
         ply:SetHealth(100)
         ply:SetArmor(10)
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
-        gbrp.yakuzas:SetBalance(gbrp.startingFunds)
     end
 })
 
@@ -394,7 +390,6 @@ TEAM_GANGSTER = DarkRP.createJob("Chef Gangster", {
         for k, v in pairs(player.GetAll()) do
             DarkRP.notify(v, 1, 4, "Le chef Yakuza est décédé.")
         end
-        gbrp.yakuzas:Reset()
     end,
     customCheck = function(ply)
         if ply.LastTimeHasLeader then
@@ -409,7 +404,6 @@ TEAM_GANGSTER = DarkRP.createJob("Chef Gangster", {
         ply:SetHealth(100)
         ply:SetArmor(10)
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
-        gbrp.yakuzas:SetBalance(gbrp.startingFunds)
     end
 })
 
