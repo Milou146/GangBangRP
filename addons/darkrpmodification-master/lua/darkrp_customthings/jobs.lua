@@ -40,7 +40,6 @@ TEAM_NYPD = DarkRP.createJob("N.Y.P.D", {
         ply:SetArmor(50)
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.1, GAMEMODE.Config.runspeed * 1.1)
     end,
-
 })
 
 --------------------------------------------------------------------------------
@@ -153,21 +152,29 @@ TEAM_YAKUZA = DarkRP.createJob("Chef des Yakuzas", {
     hasLicense = false,
     candemote = false,
     category = "YAKUZA",
-	PlayerDeath = function(ply)
-   			ply.LastTimeHasChief = CurTime()
-			ply:changeTeam( TEAM_CITIZEN, true )
-			for k,v in pairs( player.GetAll() ) do
-				DarkRP.notify(v, 1, 4, "Le chef Yakuza est décédé.")
-			end
-	end,
-	
+    PlayerDeath = function(ply)
+        ply.LastTimeHasLeader = CurTime()
+        ply:changeTeam(TEAM_CITIZEN, true)
+        for k, v in pairs(player.GetAll()) do
+            DarkRP.notify(v, 1, 4, "Le chef Yakuza est décédé.")
+        end
+        gbrp.yakuzas:Reset()
+    end,
+    customCheck = function(ply)
+        if ply.LastTimeHasLeader then
+            return CurTime() - ply.LastTimeHasLeader > 900
+        else
+            return true
+        end
+    end,
+    customCheckFailMsg = "Il vous faut attendre 15 minutes après avoir quitté ce job.",
     PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(10)
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
-    end,
-		
+        gbrp.yakuzas:SetBalance(gbrp.startingFunds)
+    end
 })
 
 --------------------------------------------------------------------------------
@@ -272,11 +279,28 @@ TEAM_MAFIA = DarkRP.createJob("Parrain", {
     hasLicense = false,
     candemote = false,
     category = "MAFIA",
+    PlayerDeath = function(ply)
+        ply.LastTimeHasLeader = CurTime()
+        ply:changeTeam(TEAM_CITIZEN, true)
+        for k, v in pairs(player.GetAll()) do
+            DarkRP.notify(v, 1, 4, "Le chef Yakuza est décédé.")
+        end
+        gbrp.yakuzas:Reset()
+    end,
+    customCheck = function(ply)
+        if ply.LastTimeHasLeader then
+            return CurTime() - ply.LastTimeHasLeader > 900
+        else
+            return true
+        end
+    end,
+    customCheckFailMsg = "Il vous faut attendre 15 minutes après avoir quitté ce job.",
     PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(10)
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        gbrp.yakuzas:SetBalance(gbrp.startingFunds)
     end
 })
 
@@ -364,11 +388,28 @@ TEAM_GANGSTER = DarkRP.createJob("Chef Gangster", {
     hasLicense = false,
     candemote = false,
     category = "GANGSTER",
+    PlayerDeath = function(ply)
+        ply.LastTimeHasLeader = CurTime()
+        ply:changeTeam(TEAM_CITIZEN, true)
+        for k, v in pairs(player.GetAll()) do
+            DarkRP.notify(v, 1, 4, "Le chef Yakuza est décédé.")
+        end
+        gbrp.yakuzas:Reset()
+    end,
+    customCheck = function(ply)
+        if ply.LastTimeHasLeader then
+            return CurTime() - ply.LastTimeHasLeader > 900
+        else
+            return true
+        end
+    end,
+    customCheckFailMsg = "Il vous faut attendre 15 minutes après avoir quitté ce job.",
     PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
         ply:SetArmor(10)
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        gbrp.yakuzas:SetBalance(gbrp.startingFunds)
     end
 })
 

@@ -61,7 +61,7 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,frame)
             button:SetPos(20,100)
             button:SetText("Acheter")
             function button:DoClick()
-                if not ply:IsGangChief() then
+                if not ply:IsGangLeader() then
                     GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
                 elseif not gang:CanAfford(gbrp.doors[ent:EntIndex()].price) then
                     GAMEMODE:AddNotify("Solde insuffisant.",1,2)
@@ -97,8 +97,10 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,frame)
             button:SetPos(20,100)
             button:SetText("Vendre")
             function button:DoClick()
-                if not ply:IsGangChief() then
+                if not ply:IsGangLeader() then
                     GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
+                elseif gbrp.doors[ent:EntIndex()].owner == gang.name then
+                    ply:ChatPrint("Vous ne pouvez pas vendre la résidence principale du gang.")
                 else
                     net.Start("GBRP::selldoor")
                     net.WriteString(gbrp.doors[ent:EntIndex()].doorgroup)
@@ -127,7 +129,7 @@ net.Receive("GBRP::bankreception", function()
     frame:SetPos(SW / 2 -frame:GetWide() / 2, SH)
     frame:MakePopup()
     frame.Think = function(self)
-        if CurTime() > ft + .05 and self:GetY() != SH - 550 then
+        if CurTime() > ft + .05 and self:GetY() ~= SH - 550 then
             ft = CurTime()
             self:SetY(self:GetY() - 25)
         end
@@ -142,6 +144,10 @@ net.Receive("GBRP::bankreception", function()
         surface.SetTextColor(0,0,0,255)
         surface.DrawText("SOLDE: " .. gbrp.formatMoney(ply:GetNWInt("GBRP::balance")))
     end
+    function frame:OnClose()
+        panelOpen = false
+    end
+
     local close = vgui.Create("DImageButton",frame)
     close:SetImage("gui/gbrp/bank/close.png")
     close:SetPos(745,22)
@@ -245,17 +251,21 @@ net.Receive("GBRP::jewelryReception",function()
     end
     frame:MakePopup()
     frame:SetKeyboardInputEnabled(false)
-    local buyshopButton = vgui.Create("DImageButton",frame)
-    buyshopButton:SetImage("gui/gbrp/jewelry/buyshop.png")
-    buyshopButton:SizeToContents()
-    buyshopButton:SetPos(643,201)
-    function buyshopButton:OnCursorEntered()
+    function frame:OnClose()
+        panelOpen = false
+    end
+
+    local buyshop = vgui.Create("DImageButton",frame)
+    buyshop:SetImage("gui/gbrp/jewelry/buyshop.png")
+    buyshop:SizeToContents()
+    buyshop:SetPos(643,201)
+    function buyshop:OnCursorEntered()
         self:SetImage("gui/gbrp/jewelry/buyshoprollover.png")
     end
-    function buyshopButton:OnCursorExited()
+    function buyshop:OnCursorExited()
         self:SetImage("gui/gbrp/jewelry/buyshop.png")
     end
-    function buyshopButton:DoClick()
+    function buyshop:DoClick()
         shop:GetBought(ply)
     end
 
@@ -271,7 +281,7 @@ net.Receive("GBRP::jewelryReception",function()
     end
     function accountaccess:DoClick()
         if shop:GetGang() == gang then
-            buyshopButton:Remove()
+            buyshop:Remove()
             self:Remove()
             local laundermoneyButton = vgui.Create("DImageButton",frame)
             laundermoneyButton:SetImage("gui/gbrp/jewelry/laundermoney.png")
@@ -396,17 +406,21 @@ net.Receive("GBRP::nightclubReception",function()
     end
     frame:MakePopup()
     frame:SetKeyboardInputEnabled(false)
-    local buyshopButton = vgui.Create("DImageButton",frame)
-    buyshopButton:SetImage("gui/gbrp/jewelry/buyshop.png")
-    buyshopButton:SizeToContents()
-    buyshopButton:SetPos(716,197)
-    function buyshopButton:OnCursorEntered()
+    function frame:OnClose()
+        panelOpen = false
+    end
+
+    local buyshop = vgui.Create("DImageButton",frame)
+    buyshop:SetImage("gui/gbrp/jewelry/buyshop.png")
+    buyshop:SizeToContents()
+    buyshop:SetPos(716,197)
+    function buyshop:OnCursorEntered()
         self:SetImage("gui/gbrp/jewelry/buyshoprollover.png")
     end
-    function buyshopButton:OnCursorExited()
+    function buyshop:OnCursorExited()
         self:SetImage("gui/gbrp/jewelry/buyshop.png")
     end
-    function buyshopButton:DoClick()
+    function buyshop:DoClick()
         shop:GetBought(ply)
     end
 
@@ -422,7 +436,7 @@ net.Receive("GBRP::nightclubReception",function()
     end
     function accountaccess:DoClick()
         if shop:GetGang() == gang then
-            buyshopButton:Remove()
+            buyshop:Remove()
             self:Remove()
             local laundermoneyButton = vgui.Create("DImageButton",frame)
             laundermoneyButton:SetImage("gui/gbrp/jewelry/laundermoney.png")
@@ -512,5 +526,300 @@ net.Receive("GBRP::nightclubReception",function()
     function close:DoClick()
         frame:Remove()
         panelOpen = false
+    end
+end)
+net.Receive("GBRP::gasstationReception",function()
+    local shop = net.ReadEntity()
+    if panelOpen then return end
+    local ply = LocalPlayer()
+    local gang = ply:GetGang()
+    if not gang then return end
+    panelOpen = true
+    local frameMat = Material("gui/gbrp/gasstation/frame.png")
+    local leftpanelMat = Material("gui/gbrp/gasstation/page1/leftpanel.png")
+    local rightpanelMat = Material("gui/gbrp/gasstation/page1/rightpanel.png")
+    local frame = vgui.Create("EditablePanel",GetHUDPanel())
+    frame:SetSize(1376,1005)
+    frame:SetPos(287,75)
+    function frame:Paint(w,h)
+        Derma_DrawBackgroundBlur(self, CurTime())
+        -- F R A M E --
+        surface.SetDrawColor(255,255,255,255)
+        surface.SetMaterial(frameMat)
+        surface.DrawTexturedRect(0,0,w,h)
+        -- L E F T -- P A N E L --
+        surface.SetMaterial(leftpanelMat)
+        surface.DrawTexturedRect(167,127,465,539)
+        -- R I G H T -- P A N E L --
+        surface.SetMaterial(rightpanelMat)
+        surface.DrawTexturedRect(853,274,382,373)
+        -- S O L D E -- D U -- G A N G --
+        surface.SetFont("GBRP::bank")
+        surface.SetTextColor(255,255,255)
+        surface.SetTextPos(177,681)
+        surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
+        -- V A L E U R --
+        surface.SetFont("GBRP::bank small")
+        surface.SetTextColor(0,0,0)
+        surface.SetTextPos(943,280)
+        surface.DrawText("REVENTE: " .. gbrp.formatMoney(shop.value))
+        -- P R I X --
+        surface.SetTextColor(255,0,0,255)
+        surface.SetTextPos(194,630)
+        surface.DrawText("PRIX: " .. gbrp.formatMoney(shop.price))
+    end
+    frame:MakePopup()
+    frame:SetKeyboardInputEnabled(false)
+    function frame:OnClose()
+        panelOpen = false
+    end
+
+    local close = vgui.Create("DImageButton",frame)
+    close:SetImage("gui/gbrp/jewelry/close.png")
+    close:SetPos(178,135)
+    close:SizeToContents()
+    function close:OnCursorEntered()
+        self:SetImage("gui/gbrp/jewelry/closerollover.png")
+    end
+    function close:OnCursorExited()
+        self:SetImage("gui/gbrp/jewelry/close.png")
+    end
+    function close:DoClick()
+        frame:Remove()
+        panelOpen = false
+    end
+
+    local function LoadPageThree()
+        close:SetPos(178,135)
+
+        leftpanelMat = Material("gui/gbrp/gasstation/page3/leftpanel.png")
+        rightpanelMat = Material("gui/gbrp/gasstation/page3/rightpanel.png")
+        local dollar = Material("gui/gbrp/gasstation/page3/dollar.png")
+        local bluecard = Material("gui/gbrp/gasstation/page3/bluecard.png")
+        local cheque = Material("gui/gbrp/gasstation/page3/cheque.png")
+        function frame:Paint(w,h)
+            Derma_DrawBackgroundBlur(self, CurTime())
+            -- F R A M E --
+            surface.SetDrawColor(255,255,255,255)
+            surface.SetMaterial(frameMat)
+            surface.DrawTexturedRect(0,0,w,h)
+            -- L E F T -- P A N E L --
+            surface.SetMaterial(leftpanelMat)
+            surface.DrawTexturedRect(168,127,464,506)
+            -- R I G H T -- P A N E L --
+            surface.SetMaterial(rightpanelMat)
+            surface.DrawTexturedRect(837,256,382,373)
+
+            surface.SetMaterial(dollar)
+            surface.DrawTexturedRect(692,306,83,320)
+
+            surface.SetMaterial(bluecard)
+            surface.DrawTexturedRect(1030,156,191,69)
+
+            surface.SetMaterial(cheque)
+            surface.DrawTexturedRect(837,156,191,69)
+            -- S O L D E -- D U -- J O U E U R --
+            surface.SetFont("GBRP::bank")
+            surface.SetTextColor(255,255,255)
+            surface.SetTextPos(177,681)
+            surface.DrawText("VOTRE SOLDE: " .. gbrp.formatMoney(ply:GetBalance()))
+        end
+        local food = {
+            [1] =   {classname = "eft_food_mre",y = 195,price = 15},
+            [2] =   {classname = "eft_food_beefstew", y = 237,price = 7},
+            [3] =   {classname = "eft_food_beefstew_family", y = 278, price = 10},
+            [4] =   {classname = "eft_food_canned_fish", y = 318, price = 3},
+            [5] =   {classname = "eft_food_peas", y = 358, price = 8},
+            [6] =   {classname = "eft_food_squash", y = 397, price = 9},
+            [7] =   {classname = "eft_food_hotrod", y = 444, price = 12},
+            [8] =   {classname = "eft_food_juice", y = 489, price = 6},
+            [9] =   {classname = "eft_food_oatmeal", y = 532, price = 3},
+            [10] =   {classname = "eft_food_water", y = 575, price = 6}
+        }
+        local bill = 0
+        local pretext = ""
+        for k = 1,(10 - #tostring(bill)) do
+            pretext = pretext .. " "
+        end
+        local shoppingBasket = ""
+        local foodButtons = {}
+        local billLabel = vgui.Create("DLabel",frame)
+        billLabel:SetFont("GBRP::bank")
+        billLabel:SetText( pretext .. "$" .. tostring(bill))
+        billLabel:SetTextColor(Color(0,0,0))
+        billLabel:SetPos(1030,258)
+        billLabel:SizeToContents()
+        for k,v in pairs(food) do
+            foodButtons[k] = vgui.Create("DImageButton",frame)
+            foodButtons[k]:SetSize(71,28)
+            foodButtons[k]:SetPos(486,v.y)
+            foodButtons[k].DoClick = function(self)
+                shoppingBasket = v.classname
+                bill = v.price
+                pretext = ""
+                for key = 1,(10 - #tostring(bill)) do
+                    pretext = pretext .. " "
+                end
+                billLabel:SetText( pretext .. "$" .. tostring(bill))
+                billLabel:SizeToContents()
+            end
+        end
+
+        local confirm = vgui.Create("DImageButton",frame)
+        confirm:SetImage("gui/gbrp/gasstation/page3/confirm.png")
+        confirm:SetPos(1094,422)
+        confirm:SizeToContents()
+        function confirm:OnCursorEntered()
+            self:SetImage("gui/gbrp/gasstation/page3/confirmrollover.png")
+        end
+        function confirm:OnCursorExited()
+            self:SetImage("gui/gbrp/gasstation/page3/confirm.png")
+        end
+        function confirm:DoClick()
+            if shoppingBasket ~= "" and ply:canAfford(bill) then
+                frame:Remove()
+                panelOpen = false
+                net.Start("GBRP::buyfood")
+                net.WriteString(shoppingBasket)
+                net.WriteInt(bill,7)
+                net.SendToServer()
+            end
+        end
+    end
+    local function LoadPageTwo()
+        local laundermoneyButton = vgui.Create("DImageButton",frame)
+        laundermoneyButton:SetImage("gui/gbrp/jewelry/laundermoney.png")
+        laundermoneyButton:SizeToContents()
+        laundermoneyButton:SetPos(817,181)
+        function laundermoneyButton:OnCursorEntered()
+            self:SetImage("gui/gbrp/jewelry/laundermoneyrollover.png")
+        end
+        function laundermoneyButton:OnCursorExited()
+            self:SetImage("gui/gbrp/jewelry/laundermoney.png")
+        end
+        function laundermoneyButton:DoClick()
+            shop:Collect(ply,frame)
+        end
+        local withdraw = vgui.Create("DImageButton",frame)
+        withdraw:SetImage("gui/gbrp/jewelry/withdrawmoney.png")
+        withdraw:SizeToContents()
+        withdraw:SetPos(817,315)
+        function withdraw:OnCursorEntered()
+            self:SetImage("gui/gbrp/jewelry/withdrawmoneyrollover.png")
+        end
+        function withdraw:OnCursorExited()
+            self:SetImage("gui/gbrp/jewelry/withdrawmoney.png")
+        end
+        function withdraw:DoClick()
+            shop:Withdraw(ply)
+        end
+        local sellshopButton = vgui.Create("DImageButton",frame)
+        sellshopButton:SetImage("gui/gbrp/jewelry/sellshop.png")
+        sellshopButton:SizeToContents()
+        sellshopButton:SetPos(817,447)
+        function sellshopButton:OnCursorEntered()
+            self:SetImage("gui/gbrp/jewelry/sellshoprollover.png")
+        end
+        function sellshopButton:OnCursorExited()
+            self:SetImage("gui/gbrp/jewelry/sellshop.png")
+        end
+        function sellshopButton:DoClick()
+            shop:GetSelled(ply)
+            frame:Remove()
+            panelOpen = false
+        end
+
+        close:SetPos(786,101)
+
+        local shopaccess = vgui.Create("DImageButton",frame)
+        shopaccess:SetImage("gui/gbrp/gasstation/page2/shopaccess.png")
+        shopaccess:SetPos(226,169)
+        shopaccess:SizeToContents()
+        function shopaccess:OnCursorEntered()
+            self:SetImage("gui/gbrp/gasstation/page2/shopaccessrollover.png")
+        end
+        function shopaccess:OnCursorExited()
+            self:SetImage("gui/gbrp/gasstation/page2/shopaccess.png")
+        end
+        function shopaccess:DoClick()
+            self:Remove()
+            laundermoneyButton:Remove()
+            withdraw:Remove()
+            sellshopButton:Remove()
+            LoadPageThree()
+        end
+        local progressbarframeMat = Material("gui/gbrp/jewelry/progressbarframe.png")
+        local progressbarMat = Material("gui/gbrp/jewelry/progressbar.png")
+        local shopbalanceMat = Material("gui/gbrp/gasstation/page2/shopbalance.png")
+        rightpanelMat = Material("gui/gbrp/gasstation/page2/rightpanel.png")
+        function frame:Paint(w,h)
+            Derma_DrawBackgroundBlur(self, CurTime())
+
+            surface.SetDrawColor(255,255,255)
+            surface.SetMaterial(frameMat)
+            surface.DrawTexturedRect(0,0,w,h)
+
+            surface.SetMaterial(rightpanelMat)
+            surface.DrawTexturedRect(776,93,465,539)
+
+            surface.SetFont("GBRP::bank")
+            surface.SetTextColor(255,255,255)
+            surface.SetTextPos(177,681)
+            surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
+
+            surface.SetMaterial(shopbalanceMat)
+            surface.DrawTexturedRect(174,548,321,68)
+
+            surface.SetFont("GBRP::bank small")
+            surface.SetTextColor(255,255,255)
+            surface.SetTextPos(285,587)
+            surface.DrawText(gbrp.formatMoney(shop:GetBalance()))
+
+            GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarframeMat)(174,637,1053,27)
+            GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(174,637,1053 * shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()), 27)
+
+            surface.SetFont("GBRP::bank")
+            surface.SetTextPos(616,563)
+            surface.DrawText(tostring(math.Round(100 * shop:GetBalance() / (1 + shop:GetBalance() + shop:GetDirtyMoney()))) .. "%")
+
+            surface.SetFont("GBRP::bank small")
+            surface.SetTextColor(255,0,0,255)
+            surface.SetTextPos(836,601)
+            surface.DrawText(gbrp.formatMoney(shop.value))
+        end
+    end
+
+    local buyshop = vgui.Create("DImageButton",frame)
+    buyshop:SetImage("gui/gbrp/jewelry/buyshop.png")
+    buyshop:SizeToContents()
+    buyshop:SetPos(853,129)
+    function buyshop:OnCursorEntered()
+        self:SetImage("gui/gbrp/jewelry/buyshoprollover.png")
+    end
+    function buyshop:OnCursorExited()
+        self:SetImage("gui/gbrp/jewelry/buyshop.png")
+    end
+    function buyshop:DoClick()
+        shop:GetBought(ply)
+    end
+
+    local customerarea = vgui.Create("DImageButton",frame)
+    customerarea:SetImage("gui/gbrp/gasstation/page1/customerarea.png")
+    customerarea:SetPos(670,129)
+    customerarea:SizeToContents()
+    function customerarea:OnCursorEntered()
+        self:SetImage("gui/gbrp/gasstation/page1/customerarearollover.png")
+    end
+    function customerarea:OnCursorExited()
+        self:SetImage("gui/gbrp/gasstation/page1/customerarea.png")
+    end
+    function customerarea:DoClick()
+        if shop:GetGang() == gang then
+            self:Remove()
+            buyshop:Remove()
+            LoadPageTwo()
+        else
+            GAMEMODE:AddNotify("Vous n'êtes pas membre.",1,2)
+        end
     end
 end)

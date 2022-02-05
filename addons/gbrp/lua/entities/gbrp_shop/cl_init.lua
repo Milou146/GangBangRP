@@ -14,7 +14,7 @@ function ENT:GetBought(ply)
         GAMEMODE:AddNotify("Ce magasin appartient à un autre gang.",1,2)
     elseif self:GetGang() == gang then
         GAMEMODE:AddNotify("Votre gang possède déjà le magasin.",0,2)
-    elseif not ply:IsGangChief() then
+    elseif not ply:IsGangLeader() then
         GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
     elseif not gang:CanAfford(self.price) then
         GAMEMODE:AddNotify("Solde insuffisant.",1,2)
@@ -29,7 +29,7 @@ function ENT:GetBought(ply)
 end
 
 function ENT:Withdraw(ply)
-    if ply:IsGangChief() then
+    if ply:IsGangLeader() then
         net.Start("GBRP::shopwithdraw")
         net.WriteEntity(self)
         net.SendToServer()
@@ -65,7 +65,7 @@ function ENT:Collect(ply,panel)
 end
 
 function ENT:GetSelled(ply)
-    if ply:IsGangChief() then
+    if ply:IsGangLeader() then
         net.Start("GBRP::sellshop")
         net.WriteEntity(self)
         net.SendToServer()

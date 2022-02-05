@@ -19,7 +19,8 @@ local function FormatNumber(n)
 end
 hook.Add("Think","GBRP::GangMenu",function()
     local ply = LocalPlayer()
-    if input.IsKeyDown(KEY_M) and ply:IsGangChief() and not gangPanelOpen then
+    if input.IsKeyDown(KEY_M) and not gangPanelOpen then
+        if not ply:IsGangLeader() then ply:ChatPrint("Ce menu est réservé au chef de gang ;)") return end
         gangPanelOpen = true
         local gang = ply:GetGang()
         local gangproperties = gang:GetProperties()
