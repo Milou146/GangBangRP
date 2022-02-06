@@ -479,7 +479,7 @@ TEAM_GANGSTER3 = DarkRP.createJob("Gangster Médecin", {
 
 TEAM_STAFF = DarkRP.createJob("STAFF", {
     color = Color(255, 0, 0, 255),
-    model = {"models/bratplat/cuadrado/cuadrado_colorized.mdl"},
+    model = {"models/bratplat/cuadrado/cuadrado.mdl"},
     description = [[STAFF]],
     weapons = {"weapon_physgun", "gmod_tool", "weapon_tg_fists", "climb_swep2", "weaponchecker", "keys"},
     command = "STAFF",

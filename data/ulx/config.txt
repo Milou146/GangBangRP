@@ -17,8 +17,8 @@ ulx motdfile ulx_motd.txt ; The MOTD to show, if using a file. Put this file in 
 ulx motdurl ulyssesmod.net ; The MOTD to show, if using a URL.
 
 
-ulx chattime 0 ; Players can only chat every x seconds (anti-spam). 0 to disable
-ulx meChatEnabled 1 ; Allow players to use '/me' in chat. 0 = Disabled, 1 = Sandbox only (Default), 2 = Enabled
+ulx chattime 1.0 ; Players can only chat every x seconds (anti-spam). 0 to disable
+ulx meChatEnabled 2 ; Allow players to use '/me' in chat. 0 = Disabled, 1 = Sandbox only (Default), 2 = Enabled
 
 
 ; This is what the players will see when they join, set it to "" to disable.
@@ -86,13 +86,13 @@ ulx rslotsVisible 1 ; When this is 0, sv_visiblemaxplayers will be set to maxpla
 
 
 
-ulx votemapEnabled 1 ; Enable/Disable the entire votemap command
+ulx votemapEnabled 0 ; Enable/Disable the entire votemap command
 ulx votemapMintime 10 ; Time after map change before votes count.
 ulx votemapWaittime 5 ; Time before a user must wait before they can change their vote.
 ulx votemapSuccessratio 0.4 ; Ratio of (votes for map)/(total players) needed to change map. (Rounds up)
 ulx votemapMinvotes 3 ; Number of minimum votes needed to change map (Prevents llamas). This supercedes the above convar on small servers.
 ulx votemapVetotime 30 ; Time in seconds an admin has after a successful votemap to veto the vote. Set to 0 to disable.
-ulx votemapMapmode 1 ; 1 = Use all maps but what's specified in votemaps.txt, 2 = Use only the maps specified in votemaps.txt.
+ulx votemapMapmode 2 ; 1 = Use all maps but what's specified in votemaps.txt, 2 = Use only the maps specified in votemaps.txt.
 
 ulx voteEcho 0 ; 1 = Echo what every player votes (this does not apply to votemap). 0 = Don't echo
 

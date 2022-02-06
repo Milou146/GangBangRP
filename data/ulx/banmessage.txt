@@ -6,10 +6,17 @@
 ; {{STEAMID}} - The banned player's Steam ID (excluding non-number characters)
 ; {{STEAMID64}} - The banned player's 64-bit Steam ID
 ; The two steam ID vairables are useful for constructing URLs for appealing bans
--------===== [ BANNED ] =====-------
+-------===== [ BANNI le {{BAN_START}} ] =====-------
 
----= Reason =---
+---= Vous avez été banni par {{BANNED_BY}} pour la raison ci-dessous indiquée : =---
+
 {{REASON}}
 
----= Time Left =---
+---= Votre banissement expire dans : =---
+
 {{TIME_LEFT}}
+
+
+En cas de litige nous vous conseillions de contacter un membre de l'équipe d'administration directement depuis notre forum ou discord. 
+
+Bien cordialement,

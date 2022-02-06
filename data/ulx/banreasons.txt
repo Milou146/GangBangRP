@@ -1,8 +1,12 @@
 ; This file is used to store default reasons for kicking and banning users.
 ; These reasons show up in console autocomplete and in XGUI dropdowns.
-Spammer
-Crashed server
-Minge
-Griefer
-Foul language
-Disobeying the rules
+
+AFK.
+Atteinte à la pérénité du serveur.
+Exploitation de bugs.
+Injures.
+Manque de respect.
+Mauvais comportement role play.
+Mauvais joueur.
+Non application des règles.
+Spam.
