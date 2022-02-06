@@ -1,14 +1,63 @@
 "administrateur"	
 {
-	"can_target"	"!%superadmin"
 	"allow"	
 	{
 	}
+	"can_target"	"!%superadmin"
 	"inherit_from"	"admin"
+}
+"VIP+"	
+{
+	"allow"	
+	{
+	}
+	"inherit_from"	"user"
+}
+"user"	
+{
+	"allow"	
+	{
+		"ulx asay"
+		"ulx donate"
+		"ulx help"
+		"ulx motd"
+		"ulx profile"
+		"ulx psay"
+		"ulx thetime"
+		"ulx thirdperson"
+		"ulx urs_overwrite_sbox"
+		"ulx urs_weaponpickups"
+		"ulx usermanagementhelp"
+		"ulx version"
+		"ulx votemute"
+		"ulx who"
+	}
+}
+"VIP"	
+{
+	"allow"	
+	{
+	}
+	"inherit_from"	"user"
+}
+"moderateur"	
+{
+	"can_target"	"!%admin"
+	"allow"	
+	{
+	}
+	"inherit_from"	"operator"
+}
+"moderateur_vip"	
+{
+	"can_target"	"!%admin"
+	"allow"	
+	{
+	}
+	"inherit_from"	"operator"
 }
 "admin"	
 {
-	"can_target"	"!%superadmin"
 	"allow"	
 	{
 		"darkrp_admincommands"
@@ -167,6 +216,31 @@
 		"xgui_gmsettings"
 		"xgui_managebans"
 	}
+	"can_target"	"!%superadmin"
+	"inherit_from"	"operator"
+}
+"noaccess"	
+{
+	"allow"	
+	{
+	}
+	"inherit_from"	"user"
+}
+"operator"	
+{
+	"allow"	
+	{
+		"ulx seeasay"
+	}
+	"can_target"	"!%admin"
+	"inherit_from"	"user"
+}
+"moderateur_vip+"	
+{
+	"can_target"	"!%admin"
+	"allow"	
+	{
+	}
 	"inherit_from"	"operator"
 }
 "superadmin"	
@@ -271,40 +345,4 @@
 		"xgui_urs"
 	}
 	"inherit_from"	"admin"
-}
-"operator"	
-{
-	"can_target"	"!%admin"
-	"allow"	
-	{
-		"ulx seeasay"
-	}
-	"inherit_from"	"user"
-}
-"user"	
-{
-	"allow"	
-	{
-		"ulx asay"
-		"ulx donate"
-		"ulx help"
-		"ulx motd"
-		"ulx profile"
-		"ulx psay"
-		"ulx thetime"
-		"ulx thirdperson"
-		"ulx urs_overwrite_sbox"
-		"ulx urs_weaponpickups"
-		"ulx usermanagementhelp"
-		"ulx version"
-		"ulx votemute"
-		"ulx who"
-	}
-}
-"noaccess"	
-{
-	"allow"	
-	{
-	}
-	"inherit_from"	"user"
 }
