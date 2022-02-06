@@ -82,9 +82,9 @@ GM.Config.dropmoneyondeath              = true
 -- droppocketarrest - Enable/disable whether people drop the stuff in their pockets when they get arrested.
 GM.Config.droppocketarrest              = true
 -- droppocketdeath - Enable/disable whether people drop the stuff in their pockets when they die.
-GM.Config.droppocketdeath               = true
+GM.Config.droppocketdeath               = false
 -- dropweapondeath - Enable/disable whether people drop their current weapon when they die.
-GM.Config.dropweapondeath               = true
+GM.Config.dropweapondeath               = false
 -- Whether players can drop the weapons they spawn with.
 GM.Config.dropspawnedweapons            = false
 -- dynamicvoice - Enable/disable whether only people in the same room as you can hear your mic.
