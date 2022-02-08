@@ -125,3 +125,11 @@ DarkRP.createCategory{
     canSee = function(ply) return true end,
     sortOrder = 5,
 }
+DarkRP.createCategory{
+    name = "METHAMPHETAMINE",
+    categorises = "entities",
+    startExpanded = false,
+    color = Color(0, 107, 0, 255),
+    canSee = function(ply) return true end,
+    sortOrder = 1,
+}
