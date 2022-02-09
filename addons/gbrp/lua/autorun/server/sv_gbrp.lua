@@ -9,6 +9,7 @@ util.AddNetworkString("GBRP::sellshop")
 util.AddNetworkString("GBRP::shopdeposit")
 util.AddNetworkString("GBRP::shopwithdraw")
 util.AddNetworkString("GBRP::buyfood")
+util.AddNetworkString("GBRP::buywep")
 
 sql.Query("create table if not exists gbrp(steamid64 bigint not null, balance bigint);")
 
@@ -72,7 +73,8 @@ gbrp.npcs = {
         gender = "male",
         model = "models/monk.mdl",
         pos = Vector(-1099.968750,10497.299805,202.012878),
-        ang = Angle(0,-179.686249,0)
+        ang = Angle(0,-179.686249,0),
+        name = "armory"
     };
     [7] = { -- Pharmacie
         class = "gbrp_shop",
@@ -267,7 +269,11 @@ net.Receive("GBRP::buyfood",function(len,ply)
     local food = ents.Create(net.ReadString())
     food:Spawn()
     food:SetPos(Vector(-5872.747070,1485.609375,20.000000))
-    ply:addMoney(-net.ReadInt(7))
+    ply:Pay(net.ReadInt(7))
+end)
+net.Receive("GBRP::buywep",function(len,ply)
+    ply:Give(net.ReadString())
+    ply:Pay(net.ReadInt(7))
 end)
 
 -------------------------

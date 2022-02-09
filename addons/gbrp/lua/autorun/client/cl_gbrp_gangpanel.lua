@@ -5,6 +5,12 @@ end)
 hook.Add("FinishChat","GBRP::FinishChat",function()
     gangPanelOpen = false
 end)
+hook.Add("OnSpawnMenuOpen","GBRP::OnSpawnMenuOpen",function()
+    gangPanelOpen = true
+end)
+hook.Add("OnSpawnMenuClose","GBRP::OnSpawnMenuClose",function()
+    gangPanelOpen = false
+end)
 local function FormatNumber(n)
     n = tostring(n)
     if #n < 3 then
@@ -42,7 +48,7 @@ hook.Add("Think","GBRP::GangMenu",function()
             surface.SetTextColor(255,255,255)
             surface.SetTextPos(19,25)
             surface.DrawText(string.upper(gang.name))
-            surface.SetFont("GBRP::DermaHuge")
+            surface.SetFont("DermaHuge")
             surface.SetTextColor(250,165,0)
             surface.SetTextPos(336,15)
             surface.DrawText(": " .. gbrp.formatMoney(gang:GetBalance()))
