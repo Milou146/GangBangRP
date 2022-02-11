@@ -44,36 +44,43 @@ hook.Add("HUDShouldDraw","GBRP::HideHUD",function(name)
 end)
 
 local panelOpen = false
-hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,frame)
-    frame:Close()
+hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,darkrpframe)
+    darkrpframe:Close()
     if panelOpen then return end
     local ply = LocalPlayer()
     if gbrp.doors[ent:EntIndex()] then
         local gang = ply:GetGang()
         if not gbrp.doors[ent:EntIndex()].buyable then
             GAMEMODE:AddNotify("Cette propriété n'est pas à vendre.",1,2)
-        elseif not ent:getDoorData().groupOwn then
+        elseif not ent:getDoorData().groupOwn and not ent:getDoorData().owner then
             panelOpen = true
-            local panel = vgui.Create("DFrame",GetHUDPanel())
-            panel:Center()
-            panel:SetSize(400,130)
-            panel:SetTitle("")
-            function panel:Paint(w,h)
-                derma.SkinHook( "Paint", "Frame", self, w, h )
-                surface.SetTextPos(50,50)
+            local frameMat = Material("gui/gbrp/property/frame.jpg")
+
+            local frame = vgui.Create("EditablePanel",GetHUDPanel())
+            frame:SetSize(800,400)
+            frame:Center()
+            frame:MakePopup()
+            function frame:Paint(w,h)
+                surface.SetDrawColor(Color(255,255,255,255))
+                surface.SetMaterial(frameMat)
+                surface.DrawTexturedRect(0,0,w,h)
+
+                surface.SetTextPos(275,134)
                 surface.SetTextColor(255,255,255)
-                surface.SetFont("Trebuchet18")
-                surface.DrawText("Prix: " .. gbrp.formatMoney(gbrp.doors[ent:EntIndex()].price))
+                surface.SetFont("Trebuchet24")
+                surface.DrawText(gbrp.formatMoney(gbrp.doors[ent:EntIndex()].price))
+
+                surface.SetTextPos(51,362)
+                surface.SetTextColor(255,255,255)
+                surface.SetFont("Bank")
+                surface.DrawText(gbrp.formatMoney(gang:GetBalance()))
             end
-            function panel:OnClose()
-                panelOpen = false
-            end
-            panel:MakePopup()
-            panel:SetKeyboardInputEnabled(false)
-            local button = vgui.Create("DButton",panel)
-            button:SetPos(20,100)
-            button:SetText("Acheter")
-            function button:DoClick()
+
+            local buy = vgui.Create("GBRP::DImageButton",frame)
+            buy:SetPos(242,86)
+            buy:SetImage("gui/gbrp/property/buy.png")
+            buy:SizeToContents()
+            function buy:DoClick()
                 if not ply:IsGangLeader() then
                     GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
                 elseif not gang:CanAfford(gbrp.doors[ent:EntIndex()].price) then
@@ -81,49 +88,96 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,frame)
                 elseif #gang:GetProperties() >= 10 then
                     GAMEMODE:AddNotify("Votre gang a atteint le nombre maximal de propriétés en sa possession.",1,2)
                 else
-                    net.Start("GBRP::buydoor")
+                    net.Start("GBRP::buyproperty")
                     net.WriteString(gbrp.doors[ent:EntIndex()].doorgroup)
                     net.SendToServer()
                 end
-                panel:Remove()
+                frame:Remove()
                 panelOpen = false
             end
-        elseif ent:getDoorData().groupOwn == gang.name then
+
+            local close = vgui.Create("GBRP::DImageButton",frame)
+            close:SetImage("gui/gbrp/jewelry/close.png")
+            close:SetPos(766,9)
+            close:SizeToContents()
+            close.DoClick = function()
+                frame:Remove()
+                panelOpen = false
+            end
+        elseif ent:getDoorData().groupOwn == gang.name or ent:getDoorData().owner == ply:UserID() then
             panelOpen = true
-            local panel = vgui.Create("DFrame",GetHUDPanel())
-            panel:Center()
-            panel:SetSize(400,130)
-            panel:SetTitle("")
-            function panel:Paint(w,h)
-                derma.SkinHook( "Paint", "Frame", self, w, h )
-                surface.SetTextPos(50,50)
+            local frameMat = Material("gui/gbrp/property/frame.jpg")
+            local counter = {
+                frame = Material("gui/gbrp/property/counter.png"),
+                [0] = Material("gui/gbrp/property/0.png"),
+                [1] = Material("gui/gbrp/property/1.png"),
+                [2] = Material("gui/gbrp/property/2.png")
+            }
+
+            local frame = vgui.Create("EditablePanel",GetHUDPanel())
+            frame:SetSize(800,400)
+            frame:Center()
+            frame:MakePopup()
+            function frame:Paint(w,h)
+                surface.SetDrawColor(Color(255,255,255,255))
+                surface.SetMaterial(frameMat)
+                surface.DrawTexturedRect(0,0,w,h)
+
+                surface.SetTextPos(275,134)
                 surface.SetTextColor(255,255,255)
-                surface.SetFont("Trebuchet18")
-                surface.DrawText("Valeur: " .. gbrp.formatMoney(gbrp.doors[ent:EntIndex()].value))
+                surface.SetFont("Trebuchet24")
+                surface.DrawText(gbrp.formatMoney(gbrp.doors[ent:EntIndex()].value))
+
+                surface.SetTextPos(51,362)
+                surface.SetTextColor(255,255,255)
+                surface.SetFont("Bank")
+                surface.DrawText(gbrp.formatMoney(gang:GetBalance()))
+
+                surface.SetMaterial(counter.frame)
+                surface.DrawTexturedRect(419,45,27,35)
+
+                surface.SetMaterial(counter[gang:GetPrivateDoorsCount()])
+                surface.DrawTexturedRect(418,47,15,18)
             end
-            function panel:OnClose()
-                panelOpen = false
-            end
-            panel:MakePopup()
-            panel:SetKeyboardInputEnabled(false)
-            local button = vgui.Create("DButton",panel)
-            button:SetPos(20,100)
-            button:SetText("Vendre")
-            function button:DoClick()
+
+            local sell = vgui.Create("GBRP::DImageButton",frame)
+            sell:SetPos(259,86)
+            sell:SetImage("gui/gbrp/property/sell.png")
+            sell:SizeToContents()
+            function sell:DoClick()
                 if not ply:IsGangLeader() then
                     GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
                 elseif gbrp.doors[ent:EntIndex()].owner == gang.name then
                     ply:ChatPrint("Vous ne pouvez pas vendre la résidence principale du gang.")
                 else
-                    net.Start("GBRP::selldoor")
+                    net.Start("GBRP::sellproperty")
                     net.WriteString(gbrp.doors[ent:EntIndex()].doorgroup)
                     net.SendToServer()
                 end
-                panel:Remove()
+                frame:Remove()
                 panelOpen = false
             end
+
+            local close = vgui.Create("GBRP::DImageButton",frame)
+            close:SetImage("gui/gbrp/jewelry/close.png")
+            close:SetPos(766,9)
+            close:SizeToContents()
+            close.DoClick = function()
+                frame:Remove()
+                panelOpen = false
+            end
+
+            local privatize = vgui.Create("GBRP::DImageButton",frame)
+            privatize:SetPos(237,45)
+            privatize:SetImage("gui/gbrp/property/privatize.png")
+            privatize:SizeToContents()
+            privatize.DoClick = function()
+                RunConsoleCommand("privatizedoor",tostring(ent:EntIndex()))
+                privatize:SetEnabled(false)
+            end
+            privatize:SetEnabled(ent:getDoorData().owner ~= ply:UserID() and gang:GetPrivateDoorsCount() < 2)
         else
-            GAMEMODE:AddNotify("Cette propriété appartient à un autre gang.",1,2)
+            GAMEMODE:AddNotify("Cette propriété a déjà un propriétaire.",1,2)
         end
     end
 end)

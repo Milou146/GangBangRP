@@ -202,6 +202,12 @@ if CLIENT then
         end
     end
 end
+SetGlobalInt("yakuzasBalance",0);
+SetGlobalInt("yakuzasPrivateDoorsCount",0);
+SetGlobalInt("mafiaBalance",0);
+SetGlobalInt("mafiaPrivateDoorsCount",0);
+SetGlobalInt("gangBalance",0);
+SetGlobalInt("gangPrivateDoorsCount",0);
 
 local gang = {}
 local plyMeta = FindMetaTable("Player")
@@ -246,29 +252,10 @@ end
 function gang:CanAfford(amount)
     return self:GetBalance() - amount >= 0
 end
-
---------------------------
----- P L Y -- M E T A ----
---------------------------
-
-function plyMeta:IsGangLeader()
-    return gbrp.jobs[team.GetName(self:Team())].gangLeader;
+function gang:GetPrivateDoorsCount()
+    return GetGlobalInt(self.name .. "PrivateDoorsCount")
 end
-function plyMeta:GetGang()
-    return gbrp[gbrp.jobs[team.GetName(self:Team())].gang];
-end
-function plyMeta:GetBalance()
-    return self:GetNWInt("GBRP::balance")
-end
-function plyMeta:CanAfford(amount)
-    return self:GetBalance() - amount >= 0;
-end
-
 if SERVER then
-    ----------------------------
-    ---- G A N G -- M E T A ----
-    ----------------------------
-
     function gang:AddEarnings(amount)
         SetGlobalInt(self.name .. "Earnings",self:GetEarnings() + amount)
     end
@@ -300,11 +287,31 @@ if SERVER then
             end
         end
     end
+    function gang:SetPrivateDoorsCount(count)
+        return SetGlobalInt(self.name .. "PrivateDoorsCount",count)
+    end
+    function gang:AddPrivateDoor(amount)
+        self:SetPrivateDoorsCount(self:GetPrivateDoorsCount() + amount)
+    end
+end
 
-    --------------------------
-    ---- P L Y -- M E T A ----
-    --------------------------
+--------------------------
+---- P L Y -- M E T A ----
+--------------------------
 
+function plyMeta:IsGangLeader()
+    return gbrp.jobs[team.GetName(self:Team())].gangLeader;
+end
+function plyMeta:GetGang()
+    return gbrp[gbrp.jobs[team.GetName(self:Team())].gang];
+end
+function plyMeta:GetBalance()
+    return self:GetNWInt("GBRP::balance")
+end
+function plyMeta:CanAfford(amount)
+    return self:GetBalance() - amount >= 0;
+end
+if SERVER then
     function plyMeta:AddLaunderedMoney(amount)
         self:SetNWInt("GBRP::launderedmoney", self:GetNWInt("GBRP::launderedmoney") + amount)
     end

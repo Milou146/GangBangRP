@@ -1,6 +1,6 @@
 util.AddNetworkString("GBRP::doorsinit") -- server to client
-util.AddNetworkString("GBRP::buydoor")
-util.AddNetworkString("GBRP::selldoor")
+util.AddNetworkString("GBRP::buyproperty")
+util.AddNetworkString("GBRP::sellproperty")
 util.AddNetworkString("GBRP::bankreception") -- server to client
 util.AddNetworkString("GBRP::bankdeposit")
 util.AddNetworkString("GBRP::bankwithdraw")
@@ -12,10 +12,6 @@ util.AddNetworkString("GBRP::buyfood")
 util.AddNetworkString("GBRP::buywep")
 
 sql.Query("create table if not exists gbrp(steamid64 bigint not null, balance bigint);")
-
-SetGlobalInt("yakuzasBalance",0);
-SetGlobalInt("mafiaBalance",0);
-SetGlobalInt("gangBalance",0);
 
 -------------------
 ---- H O O K S ----
@@ -161,7 +157,7 @@ end)
 ---- N E T ----
 ---------------
 
-net.Receive("GBRP::buydoor",function(len,ply)
+net.Receive("GBRP::buyproperty",function(len,ply)
     local gang = ply:GetGang()
     local doorgroup = net.ReadString()
     for _,door in pairs(gbrp.doorgroups[doorgroup].doors) do
@@ -175,13 +171,17 @@ net.Receive("GBRP::buydoor",function(len,ply)
         end
     end
 end)
-net.Receive("GBRP::selldoor",function(len,ply)
+net.Receive("GBRP::sellproperty",function(len,ply)
     local gang = ply:GetGang()
     local doorgroup = net.ReadString()
-    for _,door in pairs(gbrp.doorgroups[doorgroup].doors) do
-        local ent2 = ents.GetMapCreatedEntity(door)
-        ent2:setDoorGroup(nil)
-        ent2:Fire("lock", "", 0)
+    for _,doorid in pairs(gbrp.doorgroups[doorgroup].doors) do
+        local door = ents.GetMapCreatedEntity(doorid)
+        door:setDoorGroup(nil)
+        if door:getDoorOwner() then
+            door:keysUnOwn(ply)
+            gang:AddPrivateDoor(-1)
+        end
+        door:Fire("lock", "", 0)
     end
     gang:Cash(gbrp.doorgroups[doorgroup].attributes.value)
     for k,pl in pairs(player.GetAll()) do
@@ -294,7 +294,7 @@ concommand.Add("setgangbalance" ,function(ply,cmd,args)
             SetGlobalInt(gang .. "Balance", tonumber(args[2]))
     end
 end)
-concommand.Add("setplayerbalance", function(ply, cmd, args)
+concommand.Add("setplayerbalance", function(ply,cmd,args)
     if ply:IsAdmin() then
         local target = DarkRP.findPlayer(args[1])
 
@@ -304,5 +304,13 @@ concommand.Add("setplayerbalance", function(ply, cmd, args)
         end
     else
         ply:ChatPrint("Tu n'es pas admin baka")
+    end
+end)
+concommand.Add("privatizedoor",function(ply,cmd,args)
+    local door = ents.GetByIndex(args[1])
+    if ply:IsAdmin() or ply:IsGangChief() and door:getDoorData().groupOwn == ply:GetGang().name then
+        door:setDoorGroup(nil)
+        door:keysOwn(ply)
+        ply:GetGang():AddPrivateDoor(1)
     end
 end)
