@@ -539,16 +539,16 @@ net.Receive("GBRP::gasstationReception",function()
             surface.DrawText("VOTRE SOLDE: " .. gbrp.formatMoney(ply:GetBalance()))
         end
         local food = {
-            [1] =   {classname = "eft_food_mre",y = 195,price = 15},
-            [2] =   {classname = "eft_food_beefstew", y = 237,price = 7},
-            [3] =   {classname = "eft_food_beefstew_family", y = 278, price = 10},
-            [4] =   {classname = "eft_food_canned_fish", y = 318, price = 3},
-            [5] =   {classname = "eft_food_peas", y = 358, price = 8},
-            [6] =   {classname = "eft_food_squash", y = 397, price = 9},
-            [7] =   {classname = "eft_food_hotrod", y = 444, price = 12},
-            [8] =   {classname = "eft_food_juice", y = 489, price = 6},
-            [9] =   {classname = "eft_food_oatmeal", y = 532, price = 3},
-            [10] =   {classname = "eft_food_water", y = 575, price = 6}
+            [1] =   {classname = "eft_food_mre",            y = 195, price = 15},
+            [2] =   {classname = "eft_food_beefstew",       y = 236, price = 7},
+            [3] =   {classname = "eft_food_beefstew_family",y = 277, price = 10},
+            [4] =   {classname = "eft_food_canned_fish",    y = 317, price = 3},
+            [5] =   {classname = "eft_food_peas",           y = 357, price = 8},
+            [6] =   {classname = "eft_food_squash",         y = 396, price = 9},
+            [7] =   {classname = "eft_food_hotrod",         y = 443, price = 12},
+            [8] =   {classname = "eft_food_juice",          y = 488, price = 6},
+            [9] =   {classname = "eft_food_oatmeal",        y = 531, price = 3},
+            [10] =  {classname = "eft_food_water",          y = 574, price = 6}
         }
         local bill = 0
         local pretext = ""
@@ -556,7 +556,6 @@ net.Receive("GBRP::gasstationReception",function()
             pretext = pretext .. " "
         end
         local shoppingBasket = ""
-        local foodButtons = {}
         local billLabel = vgui.Create("DLabel",frame)
         billLabel:SetFont("Bank")
         billLabel:SetText( pretext .. "$" .. tostring(bill))
@@ -564,10 +563,11 @@ net.Receive("GBRP::gasstationReception",function()
         billLabel:SetPos(1030,258)
         billLabel:SizeToContents()
         for k,v in pairs(food) do
-            foodButtons[k] = vgui.Create("DImageButton",frame)
-            foodButtons[k]:SetSize(71,28)
-            foodButtons[k]:SetPos(486,v.y)
-            foodButtons[k].DoClick = function(self)
+            v.button = vgui.Create("GBRP::DImageButton",frame)
+            v.button:SetImage("gui/gbrp/gasstation/page3/button.png")
+            v.button:SetSize(71,28)
+            v.button:SetPos(482,v.y)
+            function v.button:DoClick()
                 shoppingBasket = v.classname
                 bill = v.price
                 pretext = ""
@@ -577,6 +577,12 @@ net.Receive("GBRP::gasstationReception",function()
                 billLabel:SetText( pretext .. "$" .. tostring(bill))
                 billLabel:SizeToContents()
             end
+            v.priceLabel = vgui.Create("DLabel",frame)
+            v.priceLabel:SetText(gbrp.formatMoney(v.price))
+            v.priceLabel:SetFont("Trebuchet24")
+            v.priceLabel:SizeToContents()
+            v.priceLabel:SetPos(518 - v.priceLabel:GetWide() / 2,v.y)
+            v.priceLabel:SetColor(Color(0,0,0))
         end
 
         local confirm = vgui.Create("GBRP::DImageButton",frame)

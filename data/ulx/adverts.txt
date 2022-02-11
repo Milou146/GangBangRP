@@ -22,15 +22,3 @@
 ;     }
 ; }
 
-{
-	"text" "You're playing on %host%, enjoy your stay!"
-	"red" "100"
-	"green" "255"
-	"blue" "200"
-	"time_on_screen" "10"
-	"time" "300"
-}
-{
-	"text" "This server is running ULX Admin Mod %ulx_version% by Team Ulysses from ulyssesmod.net"
-	"time" "635"
-}
