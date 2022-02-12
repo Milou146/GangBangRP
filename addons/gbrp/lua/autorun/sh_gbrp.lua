@@ -172,7 +172,7 @@ if SERVER then
             model = "models/sentry/sentryoldmob/mafia/sentrymobmale7pm.mdl",
             pos = Vector(-576.345520,253.843369,-30.031754),
             ang = Angle(0,0,0),
-            name = "jewelry"
+            name = "jewelrystore"
         };
         [5] = { -- Quincaillerie
             class = "gbrp_shop",
@@ -187,14 +187,15 @@ if SERVER then
             model = "models/monk.mdl",
             pos = Vector(-1099.968750,10497.299805,202.012878),
             ang = Angle(0,-179.686249,0),
-            name = "armory"
+            name = "gunshop"
         };
         [7] = { -- Pharmacie
             class = "gbrp_shop",
             gender = "male",
             model = "models/Kleiner.mdl",
             pos = Vector(-6566.270508,3409.478027,42.012878),
-            ang = Angle(0,-90.832703,0)
+            ang = Angle(0,-90.832703,0),
+            name = "drugstore"
         };
         [8] = { -- Boîte de nuit
             class = "gbrp_shop",
@@ -202,7 +203,7 @@ if SERVER then
             model = "models/breen.mdl",
             pos = Vector(-7678.176758,5545.522461,66.012878),
             ang = Angle(0,89.205963,0),
-            name = "nightclub"
+            name = "club"
         };
         [9] = { -- Garagiste
             class = "gbrp_shop",
@@ -210,7 +211,7 @@ if SERVER then
             model = "models/odessa.mdl",
             pos = Vector(-2378.206543,6402.301758,90.012878),
             ang = Angle(0,-5.253576,0),
-            name = "garage"
+            name = "repairgarage"
         };
         [10] = { -- Bar
             class = "gbrp_shop",
@@ -255,12 +256,12 @@ if CLIENT then
     gbrp.gangpanel.shops = {
         ["gasstation"] = {mat = Material("gui/gbrp/gangpanel/gasstation.png"),x = 10,y = 10},
         ["hardwarestore"] = {mat = Material("gui/gbrp/gangpanel/saw.png"),x = 15,y = 5},
-        ["jewelry"] = {mat = Material("gui/gbrp/gangpanel/diamond.png"),x = 5,y = 9},
-        ["garage"] = {mat = Material("gui/gbrp/gangpanel/tire.png"),x = 6,y = 7},
-        ["pharmacy"] = {mat = Material("gui/gbrp/gangpanel/pharmacy.png"),x = 8,y = 10},
+        ["jewelrystore"] = {mat = Material("gui/gbrp/gangpanel/diamond.png"),x = 5,y = 9},
+        ["repairgarage"] = {mat = Material("gui/gbrp/gangpanel/tire.png"),x = 6,y = 7},
+        ["drugstore"] = {mat = Material("gui/gbrp/gangpanel/drugstore.png"),x = 8,y = 10},
         ["bar"] = {mat = Material("gui/gbrp/gangpanel/beer.png"),x = 15,y = 7},
-        ["nightclub"] = {mat = Material("gui/gbrp/gangpanel/cocktail.png"),x = 7,y = 7},
-        ["armory"] = {mat = Material("gui/gbrp/gangpanel/gun.png"),x = 7,y = 17},
+        ["club"] = {mat = Material("gui/gbrp/gangpanel/cocktail.png"),x = 7,y = 7},
+        ["gunshop"] = {mat = Material("gui/gbrp/gangpanel/gun.png"),x = 7,y = 17},
     }
     gbrp.voices = {
         female = {
