@@ -62,7 +62,7 @@ gbrp.doorgroups = {
     ["7 Mapple Rd"] = {doors = {2286,2288,2291,2290,2289,2287},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "7 Mapple Rd",typ = "house"}};
     ["8 Mapple Rd"] = {doors = {2534,2304,2307,2306,2305,2287},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "8 Mapple Rd",typ = "house"}};
     ["9 Mapple Rd"] = {doors = {2509,2417,4874,4877,2416,2415},locked = true,attributes = {owner = "gang",buyable = true,price = 10000,value = 8000,doorgroup = "9 Mapple Rd",typ = "house"}};
-    ["armory"] = {doors = {2608,2610,2609},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "armory",typ = "shop"}};
+    ["gunshop"] = {doors = {2608,2610,2609},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "armory",typ = "shop"}};
     ["bar"] = {doors = {2712,2742,2779,2771,2744},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "bar",typ = "shop"}};
     ["NYPD open"] = {doors = {2791,2790},locked = false,attributes = {owner = "NYPD",buyable = false,price = 10000,value = 8000,doorgroup = "NYPD open",typ = "NYPD"}};
     ["NYPD closed"] = {doors = {2792,2793,2811,4200,2806,2808,2807,2875,2796,2797,2846,2847,2845,2849,2844,2848,2824,2822,2819,2812,2798,2917,2918,2916,2915,2801,2853,2802,2803,2809,2810},locked = true,attributes = {owner = "NYPD",buyable = false,price = 10000,value = 8000,doorgroup = "NYPD closed",typ = "NYPD"}};
@@ -100,7 +100,7 @@ gbrp.doorgroups = {
     ["hardwarestore"] = {doors = {2049,2571,2570},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "hardwarestore",typ = "shop"}};
     ["gasstation"] = {doors = {2111,2112,2113},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "gasstation",typ = "shop"}};
     ["14 Any Way"] = {doors = {1290,1291,1288,1289,2231,2299},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "14 Any Way",typ = "hangar"}};
-    ["nightclub"] = {doors = {2100,2101,3539,3466,3465,3546,3545,3551,3468,3481},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "nightclub",typ = "shop"}};
+    ["club"] = {doors = {2100,2101,3539,3466,3465,3546,3545,3551,3468,3481},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "nightclub",typ = "shop"}};
     ["1 Pleasant Rd"] = {doors = {2699,2698,2700},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "1 Pleasant Rd",typ = "hangar"}};
     ["1 South St"] = {doors = {2025,2026,2027,2170},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "1 South St",typ = "hangar"}};
     ["bank"] = {doors = {3114,3115},locked = true,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "bank",typ = "shop"}};
@@ -112,7 +112,7 @@ gbrp.doorgroups = {
     ["10-1 Crooked Ln"] = {doors = {3268},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "10-1 Crooked Ln",typ = "hugetower"}};
     ["10-2 Crooked Ln"] = {doors = {3269},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "10-2 Crooked Ln",typ = "hugetower"}};
     ["12 Crooked Ln"] = {doors = {3298,3305},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "12 Crooked Ln",typ = "hugetower"}};
-    ["jewelry"] = {doors = {2050,2195,2059},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "jewelry",typ = "shop"}};
+    ["jewelrystore"] = {doors = {2050,2195,2059},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "jewelry",typ = "shop"}};
     ["A Union Sq"] = {doors = {3135,3137,3136},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "A Union Sq",typ = "appartment"}};
     ["B Union Sq"] = {doors = {3138,3139,3140},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "B Union Sq",typ = "appartment"}};
     ["C Union Sq"] = {doors = {3132,3133,3134},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "C Union Sq",typ = "appartment"}};
@@ -140,7 +140,8 @@ gbrp.doorgroups = {
     ["7 13th St"] = {doors = {1977,1978,1294},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "7 13th St",typ = "appartment"}};
     ["8 13th St"] = {doors = {1971,1297,1973},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "8 13th St",typ = "appartment"}};
     ["9 13th St"] = {doors = {2048,2381,2053},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "1 13th St",typ = "garage"}};
-    ["garage"] = {doors = {2060,2062,2066,2061,2067,2065},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "garage",typ = "shop"}};
+    ["repairgarage"] = {doors = {2060,2062,2066,2061,2067,2065},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "garage",typ = "shop"}};
+    ["drugstore"] = {doors = {2166,2582,2167},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "drugstore",typ = "shop"}};
 }
 gbrp.doors = {}
 if SERVER then

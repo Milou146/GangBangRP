@@ -14,6 +14,7 @@ util.AddNetworkString("GBRP::shopdeposit")
 util.AddNetworkString("GBRP::shopwithdraw")
 util.AddNetworkString("GBRP::buyfood")
 util.AddNetworkString("GBRP::buywep")
+util.AddNetworkString("GBRP::heal")
 
 sql.Query("create table if not exists gbrp(steamid64 bigint not null, balance bigint);")
 
@@ -206,6 +207,9 @@ end)
 net.Receive("GBRP::buywep",function(len,ply)
     ply:Give(net.ReadString())
     ply:Pay(net.ReadInt(7))
+end)
+net.Receive("GBRP::heal",function(len,ply)
+    ply:SetHealth(100)
 end)
 
 -------------------------
