@@ -22,6 +22,7 @@ surface.CreateFont("DermaHuge",{
 local ft = 0
 local panelOpen = false
 local gangPanelOpen = false
+local woundedMat = Material("gui/gbrp/wounded.png")
 local function FormatNumber(n)
     n = tostring(n)
     if #n < 3 then
@@ -310,6 +311,13 @@ hook.Add("Think","GBRP::GangMenu",function()
             panel:Remove()
             gangPanelOpen = false
         end
+    end
+end)
+hook.Add("HUDPaint","GBRP::HUD",function()
+    if LocalPlayer():Health() < 100 then
+        surface.SetDrawColor(255,255,255)
+        surface.SetMaterial(woundedMat)
+        surface.DrawTexturedRect(1842,981,46,84)
     end
 end)
 
