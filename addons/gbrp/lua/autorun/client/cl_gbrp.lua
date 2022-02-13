@@ -19,6 +19,7 @@ surface.CreateFont("DermaHuge",{
     size = 48
 })
 
+local ft = 0
 local panelOpen = false
 local gangPanelOpen = false
 local function FormatNumber(n)
@@ -236,7 +237,8 @@ hook.Add("OnSpawnMenuClose","GBRP::OnSpawnMenuClose",function()
 end)
 hook.Add("Think","GBRP::GangMenu",function()
     local ply = LocalPlayer()
-    if input.IsKeyDown(KEY_M) and not gangPanelOpen then
+    if input.IsKeyDown(KEY_M) and not gangPanelOpen and CurTime() - ft > 2 then
+        ft = CurTime()
         if not ply:IsGangLeader() then ply:ChatPrint("Ce menu est réservé au chef de gang ;)") return end
         gangPanelOpen = true
         local gang = ply:GetGang()
@@ -476,7 +478,11 @@ net.Receive("GBRP::jewelrystoreReception",function()
                 surface.SetFont("Bank")
                 surface.SetTextColor(0,0,0,255)
                 surface.SetTextPos(93,644)
-                surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
+                if ply:IsGangLeader() then
+                    surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
+                else
+                    surface.DrawText("ARGENT SALE: " .. gbrp.formatMoney(ply.DarkRPVars.money))
+                end
 
                 surface.SetMaterial(shopbalMat)
                 surface.DrawTexturedRect(238,489,321,68)
@@ -586,7 +592,11 @@ net.Receive("GBRP::clubReception",function()
                 surface.SetFont("Bank")
                 surface.SetTextColor(0,0,0,255)
                 surface.SetTextPos(166,640)
-                surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
+                if ply:IsGangLeader() then
+                    surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
+                else
+                    surface.DrawText("ARGENT SALE: " .. gbrp.formatMoney(ply.DarkRPVars.money))
+                end
 
                 surface.SetMaterial(shopbalMat)
                 surface.DrawTexturedRect(311,485,321,68)
@@ -815,7 +825,11 @@ net.Receive("GBRP::gasstationReception",function()
             surface.SetFont("Bank")
             surface.SetTextColor(255,255,255)
             surface.SetTextPos(177,681)
-            surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
+            if ply:IsGangLeader() then
+                surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
+            else
+                surface.DrawText("ARGENT SALE: " .. gbrp.formatMoney(ply.DarkRPVars.money))
+            end
 
             surface.SetMaterial(shopbalMat)
             surface.DrawTexturedRect(174,548,321,68)
@@ -1084,7 +1098,11 @@ net.Receive("GBRP::gunshopReception",function()
             surface.SetFont("Bank")
             surface.SetTextColor(0,0,0)
             surface.SetTextPos(93,670)
-            surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
+            if ply:IsGangLeader() then
+                surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
+            else
+                surface.DrawText("ARGENT SALE: " .. gbrp.formatMoney(ply.DarkRPVars.money))
+            end
         end
 
         local dropcash = vgui.Create("DropCashButton",frame)
@@ -1248,7 +1266,11 @@ net.Receive("GBRP::repairgarageReception",function()
                 surface.SetFont("Bank")
                 surface.SetTextColor(0,0,0)
                 surface.SetTextPos(94,664)
-                surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
+                if ply:IsGangLeader() then
+                    surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
+                else
+                    surface.DrawText("ARGENT SALE: " .. gbrp.formatMoney(ply.DarkRPVars.money))
+                end
             end
 
             local dropcash = vgui.Create("DropCashButton",frame)
@@ -1399,7 +1421,11 @@ net.Receive("GBRP::drugstoreReception",function()
                 surface.SetFont("Bank")
                 surface.SetTextColor(0,0,0)
                 surface.SetTextPos(93,644)
-                surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
+                if ply:IsGangLeader() then
+                    surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
+                else
+                    surface.DrawText("ARGENT SALE: " .. gbrp.formatMoney(ply.DarkRPVars.money))
+                end
             end
 
             local dropcash = vgui.Create("DropCashButton",frame)
