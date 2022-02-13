@@ -348,7 +348,15 @@ if SERVER then
         for k,v in pairs(gbrp.doors) do
             local door = ents.GetByIndex(k)
             if door:getDoorData().groupOwn == self.name and gbrp.doorgroups[gbrp.doors[k].doorgroup].owner ~= self.name then
-                door:setDoorGroup(nil)
+                for _,doorid in pairs(gbrp.doorgroups[gbrp.doors[k].doorgroup].doors) do
+                    door = ents.GetMapCreatedEntity(doorid)
+                    door:setDoorGroup(nil)
+                    if door:getDoorOwner() then
+                        door:keysUnOwn(ply)
+                        self:AddPrivateDoor(-1)
+                    end
+                    door:Fire("lock", "", 0)
+                end
             end
         end
         local shops = ents.FindByClass("gbrp_shop")
@@ -394,7 +402,7 @@ if CLIENT then
             GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
         elseif not gang:CanAfford(shop.price) then
             GAMEMODE:AddNotify("Solde insuffisant.",1,2)
-        elseif #gang:GetShops() >= 5 then
+        elseif #gang:GetShops() >= 4 then
             GAMEMODE:AddNotify("Votre gang a atteint le nombre maximal de magasins en sa possession.",1,2)
         else
             net.Start("GBRP::buyshop")

@@ -104,6 +104,7 @@ local function LoadShops()
         end
     end
 end
+
 -------------------
 ---- H O O K S ----
 -------------------
@@ -312,7 +313,7 @@ concommand.Add("setplayerbalance", function(ply,cmd,args)
 end)
 concommand.Add("privatizedoor",function(ply,cmd,args)
     local door = ents.GetByIndex(args[1])
-    if ply:IsAdmin() or ply:IsGangChief() and door:getDoorData().groupOwn == ply:GetGang().name then
+    if ply:IsAdmin() or ply:IsGangLeader() and door:getDoorData().groupOwn == ply:GetGang().name then
         door:setDoorGroup(nil)
         door:keysOwn(ply)
         ply:GetGang():AddPrivateDoor(1)

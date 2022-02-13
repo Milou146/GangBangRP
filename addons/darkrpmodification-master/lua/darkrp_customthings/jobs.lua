@@ -153,15 +153,13 @@ TEAM_YAKUZA = DarkRP.createJob("Chef des Yakuzas", {
     candemote = false,
     category = "YAKUZA",
     PlayerDeath = function(ply)
-        ply.LastTimeHasLeader = CurTime()
+        ply.LastTimeAsYakuzaLeader = CurTime()
         ply:changeTeam(TEAM_CITIZEN, true)
-        for k, v in pairs(player.GetAll()) do
-            DarkRP.notify(v, 1, 4, "Le chef Yakuza est décédé.")
-        end
+        DarkRP.notifyAll(1, 4, "Le chef Yakuza est décédé.")
     end,
     customCheck = function(ply)
-        if ply.LastTimeHasLeader then
-            return CurTime() - ply.LastTimeHasLeader > 900
+        if ply.LastTimeAsYakuzaLeader then
+            return CurTime() - ply.LastTimeAsYakuzaLeader > 900
         else
             return true
         end
@@ -278,15 +276,13 @@ TEAM_MAFIA = DarkRP.createJob("Parrain", {
     candemote = false,
     category = "MAFIA",
     PlayerDeath = function(ply)
-        ply.LastTimeHasLeader = CurTime()
+        ply.LastTimeAsMafiaLeader = CurTime()
         ply:changeTeam(TEAM_CITIZEN, true)
-        for k, v in pairs(player.GetAll()) do
-            DarkRP.notify(v, 1, 4, "Le chef Yakuza est décédé.")
-        end
+        DarkRP.notifyAll(1, 4, "Le parrain est décédé.")
     end,
     customCheck = function(ply)
-        if ply.LastTimeHasLeader then
-            return CurTime() - ply.LastTimeHasLeader > 900
+        if ply.LastTimeAsMafiaLeader then
+            return CurTime() - ply.LastTimeAsMafiaLeader > 900
         else
             return true
         end
@@ -385,15 +381,18 @@ TEAM_GANGSTER = DarkRP.createJob("Chef Gangster", {
     candemote = false,
     category = "GANGSTER",
     PlayerDeath = function(ply)
-        ply.LastTimeHasLeader = CurTime()
+        ply.LastTimeAsGangsterLeader = CurTime()
         ply:changeTeam(TEAM_CITIZEN, true)
-        for k, v in pairs(player.GetAll()) do
-            DarkRP.notify(v, 1, 4, "Le chef Yakuza est décédé.")
-        end
+        DarkRP.notifyAll(1, 4, "Le chef gangster est décédé.")
+        umsg.Start("_Notify")
+            umsg.String("Le chef gangster est décédé.")
+            umsg.Short(1)
+            umsg.Long(4)
+        umsg.End()
     end,
     customCheck = function(ply)
-        if ply.LastTimeHasLeader then
-            return CurTime() - ply.LastTimeHasLeader > 900
+        if ply.LastTimeAsGangsterLeader then
+            return CurTime() - ply.LastTimeAsGangsterLeader > 900
         else
             return true
         end
