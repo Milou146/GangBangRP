@@ -319,7 +319,7 @@ end)
 
 net.Receive("GBRP::doorsinit",function()
     gbrp.doors = {}
-    for k = 1,doorscount do
+    for k = 1,net.ReadInt(32) do
         gbrp.doors[net.ReadInt(32)] = net.ReadTable()
     end
 end)

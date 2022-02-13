@@ -17,7 +17,93 @@ util.AddNetworkString("GBRP::buywep")
 util.AddNetworkString("GBRP::heal")
 
 sql.Query("create table if not exists gbrp(steamid64 bigint not null, balance bigint);")
-
+local function InitDoors()
+    gbrp.doors = {}
+    local counter = 0
+    for doorgroupname,doorgroup in pairs(gbrp.doorgroups) do
+        for _,doormapid in pairs(doorgroup.doors) do
+            counter = counter + 1
+            local door = ents.GetMapCreatedEntity(doormapid)
+            if not IsValid(door) then print("[GBRP] This door is causing problems" .. tostring(doormapid)) break end
+            door:setDoorGroup(doorgroup.attributes.owner)
+            if doorgroup.locked then
+                door:Fire("lock", "", 0)
+            end
+            gbrp.doors[door:EntIndex()] = doorgroup.attributes
+        end
+    end
+end
+local function SendDoorsData(ply)
+    net.Start("GBRP::doorsinit")
+    net.WriteInt(table.Count(gbrp.doors),32)
+    for k,v in pairs(gbrp.doors) do
+        net.WriteInt(k,32)
+        net.WriteTable(v)
+    end
+    net.Send(ply)
+end
+local function SaveDoors()
+    gbrp.savedDoors = {}
+    for doorgroupname,doorgroup in pairs(gbrp.doorgroups) do
+        for _,doormapid in pairs(doorgroup.doors) do
+            local door = ents.GetMapCreatedEntity(doormapid)
+            if not table.IsEmpty(door:getDoorData()) then
+                gbrp.savedDoors[doormapid] = {}
+                gbrp.savedDoors[doormapid].darkrpvars = door:getDoorData()
+                gbrp.savedDoors[doormapid].locked = door:GetInternalVariable("m_bLocked")
+            end
+        end
+    end
+end
+local function LoadDoors()
+    for doormapid,tab in pairs(gbrp.savedDoors) do
+        local door = ents.GetMapCreatedEntity(doormapid)
+        door:setDoorGroup(tab.darkrpvars.groupOwn)
+        if tab.darkrpvars.owner then
+            door:keysOwn(tab.darkrpvars.owner)
+        end
+        if tab.locked then
+            door:Fire("Lock", "", 0)
+        else
+            door:Fire("Unlock", "", 0)
+        end
+    end
+end
+local function InitNpcs()
+    for k,v in pairs(gbrp.npcs) do
+        local npc = ents.Create(v.class);
+        if v.name then
+            npc.name = v.name
+            util.AddNetworkString("GBRP::" .. npc.name .. "Reception")
+        end
+        npc.gender = v.gender
+        npc.model = v.model
+        npc:Spawn()
+        npc:SetPos(v.pos)
+        npc:SetAngles(v.ang)
+        npc:DropToFloor()
+    end
+end
+local function SaveShops()
+    gbrp.savedShops = {}
+    for _,ent in pairs(ents.FindByClass("gbrp_shop")) do
+        gbrp.savedShops[ent:GetShopName()] = {}
+        gbrp.savedShops[ent:GetShopName()].balance = ent:GetBalance()
+        gbrp.savedShops[ent:GetShopName()].dirtyMoney = ent:GetDirtyMoney()
+        gbrp.savedShops[ent:GetShopName()].gangName = ent:GetGangName()
+    end
+end
+local function LoadShops()
+    for _,ent in pairs(ents.FindByClass("gbrp_shop")) do
+        for name,val in pairs(gbrp.savedShops) do
+            if name == ent:GetShopName() then
+                ent:SetBalance(val.balance)
+                ent:SetDirtyMoney(val.dirtyMoney)
+                ent:SetGangName(val.gangName)
+            end
+        end
+    end
+end
 -------------------
 ---- H O O K S ----
 -------------------
@@ -32,20 +118,9 @@ hook.Add("PlayerInitialSpawn", "GBRP::Client Init", function(ply)
         ply:SetNWInt("GBRP::balance", tonumber(data.balance))
     end
 end)
-hook.Add( "InitPostEntity", "GBRP::NPCSetup", function()
-    for k,v in pairs(gbrp.npcs) do
-        local npc = ents.Create(v.class);
-        if v.name then
-            npc.name = v.name
-            util.AddNetworkString("GBRP::" .. npc.name .. "Reception")
-        end
-        npc.gender = v.gender
-        npc.model = v.model
-        npc:Spawn()
-        npc:SetPos(v.pos)
-        npc:SetAngles(v.ang)
-        npc:DropToFloor()
-    end
+hook.Add( "InitPostEntity", "GBRP::InitPostEntity", function()
+    InitNpcs()
+    InitDoors()
 end)
 hook.Add("PlayerDisconnected","GBRP::PlayerDisconnected",function(ply)
     if ply:IsGangLeader() then ply:GetGang():Reset() end
@@ -60,30 +135,23 @@ hook.Add("PlayerDeath","GBRP:PlayerDeath",function(ply)
         ply:GetGang():Reset()
     end
 end)
-hook.Add("InitPostEntity","GBRP::DoorsInit",function()
-    gbrp.doors = {}
-    for doorgroupname,doorgroup in pairs(gbrp.doorgroups) do
-        for _,door in pairs(doorgroup.doors) do
-            local ent = ents.GetMapCreatedEntity(door)
-            if not IsValid(ent) then print("[GBRP] This door is causing problems" .. tostring(door)) break end
-            ent:setDoorGroup(doorgroup.attributes.owner)
-            if doorgroup.locked then
-                ent:Fire("lock", "", 0)
-            end
-            ent.groupname = doorgroupname
-            gbrp.doors[ent:EntIndex()] = doorgroup.attributes
-        end
-    end
-end)
 hook.Add("PlayerInitialSpawn","GBRP:DoorsInitCS",function(ply)
     timer.Simple(4, function()
-        net.Start("GBRP::doorsinit")
-        for k,v in pairs(gbrp.doors) do
-            net.WriteInt(k,32)
-            net.WriteTable(v)
-        end
-        net.Send(ply)
+        SendDoorsData(ply)
     end)
+end)
+hook.Add( "PreCleanupMap", "GBRP::PreCleanupMap", function()
+    SaveDoors()
+    SaveShops()
+end)
+hook.Add( "PostCleanupMap", "GBRP::PostCleanupMap", function()
+    InitNpcs()
+    InitDoors() --build the new gbrp.doors table
+    for _,ply in pairs(player.GetAll()) do
+        SendDoorsData(ply) --send the new table to the clients
+    end
+    LoadDoors()
+    LoadShops()
 end)
 
 ---------------

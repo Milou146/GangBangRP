@@ -273,12 +273,6 @@ if CLIENT then
             "npc/male_speech_1.wav"
         };
     }
-    doorscount = 0
-    for i,doorgroup in pairs(gbrp.doorgroups) do
-        for j,door in pairs(doorgroup.doors) do
-            doorscount = doorscount + 1
-        end
-    end
 end
 SetGlobalInt("yakuzasBalance",0);
 SetGlobalInt("yakuzasPrivateDoorsCount",0);
