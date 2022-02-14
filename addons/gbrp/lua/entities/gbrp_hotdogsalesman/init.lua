@@ -40,7 +40,7 @@ function ENT:Use(ply, caller, useType, value)
         SpawnedFood:SetModel(food.model)
 
         -- for backwards compatibility
-        SpawnedFood.FoodName = food.name
+        SpawnedFood.FoodName = "hotdog"
         SpawnedFood.FoodEnergy = food.energy
         SpawnedFood.FoodPrice = food.price
 
@@ -48,7 +48,7 @@ function ENT:Use(ply, caller, useType, value)
         SpawnedFood:Spawn()
 
         ply:Pay(food.price)
-        DarkRP.notify(ply, 0, 4, DarkRP.getPhrase("you_bought", food.FoodName, gbrp.formatMoney(food.price), ""))
+        DarkRP.notify(ply, 0, 4, DarkRP.getPhrase("you_bought", "hotdog", gbrp.formatMoney(food.price), ""))
 
         hook.Call("playerBoughtFood", nil, ply, food, SpawnedFood, food.price)
     else

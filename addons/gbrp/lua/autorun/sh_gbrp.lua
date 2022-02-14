@@ -253,6 +253,41 @@ if SERVER then
         salesman1:SetPos(Vector(1953.749268,5490.832520,8.031250))
         salesman1:SetAngles(Angle(0,90,0))
         salesman1:Spawn()
+
+        local salesman2 = ents.Create("gbrp_hotdogsalesman")
+        salesman2:SetModel("models/Eli.mdl")
+        salesman2.hotdogpos = Vector(3762.856201,5870.750000,46.440498)
+        salesman2:SetPos(Vector(3740.848389,5814.738281,8.031242))
+        salesman2:SetAngles(Angle(0,90,0))
+        salesman2:Spawn()
+
+        local salesman3 = ents.Create("gbrp_hotdogsalesman")
+        salesman3:SetModel("models/Eli.mdl")
+        salesman3.hotdogpos = Vector(5800.159668,4402.841309,-17.559513)
+        salesman3:SetPos(Vector(5840.312500,4459.221191,-55.968750))
+        salesman3:SetAngles(Angle(0,-90,0))
+        salesman3:Spawn()
+
+        local salesman4 = ents.Create("gbrp_hotdogsalesman")
+        salesman4:SetModel("models/Eli.mdl")
+        salesman4.hotdogpos = Vector(-6306.340332,2667.020508,-1.559502)
+        salesman4:SetPos(Vector(-6298.107910,2717.878174,-40))
+        salesman4:SetAngles(Angle(0,-90,0))
+        salesman4:Spawn()
+
+        local salesman5 = ents.Create("gbrp_hotdogsalesman")
+        salesman5:SetModel("models/Eli.mdl")
+        salesman5.hotdogpos = Vector(-6306.340332,2667.020508,-7)
+        salesman5:SetPos(Vector(-6298.107910,2717.878174,-40))
+        salesman5:SetAngles(Angle(0,-90,0))
+        salesman5:Spawn()
+
+        local salesman6 = ents.Create("gbrp_hotdogsalesman")
+        salesman6:SetModel("models/Eli.mdl")
+        salesman6.hotdogpos = Vector(5211.087402,8753.347656,166.440491)
+        salesman6:SetPos(Vector(5186.979492,8707.676758,128))
+        salesman6:SetAngles(Angle(0,90,0))
+        salesman6:Spawn()
     end
     function gbrp.RemoveHotdogSalesmans()
         for _,npc in pairs(ents.FindByClass("gbrp_hotdogsalesman")) do

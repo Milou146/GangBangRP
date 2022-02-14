@@ -35,7 +35,6 @@ local function FormatNumber(n)
         return string.Left(n,#n - 9) .. "Mds"
     end
 end
-
 -----------------
 -- P A N E L S --
 -----------------
@@ -102,7 +101,7 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,darkrpframe)
         local gang = ply:GetGang()
         if not gbrp.doors[ent:EntIndex()].buyable then
             GAMEMODE:AddNotify("Cette propriété n'est pas à vendre.",1,2)
-        elseif not ent:getDoorData().groupOwn and not ent:getDoorData().owner then
+        elseif gang and not ent:getDoorData().groupOwn and not ent:getDoorData().owner then
             panelOpen = true
 
             local frame = vgui.Create("EditablePanel",GetHUDPanel())
@@ -150,7 +149,7 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,darkrpframe)
             remove:SetImage("gui/gbrp/jewelrystore/remove.png")
             remove:SetPos(766,9)
             remove:SizeToContents()
-        elseif ent:getDoorData().groupOwn == gang.name or ent:getDoorData().owner == ply:UserID() then
+        elseif gang and ent:getDoorData().groupOwn == gang.name or ent:getDoorData().owner == ply:UserID() then
             panelOpen = true
 
             local counter = {

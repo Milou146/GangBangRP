@@ -267,7 +267,8 @@ net.Receive("GBRP::shopwithdraw", function(len, ply)
     shop:SetBalance(0)
 end)
 net.Receive("GBRP::buyfood",function(len,ply)
-    local food = gbrp.foods[net.ReadString()]
+    local foodName = net.ReadString()
+    local food = gbrp.foods[foodName]
 
     local foodTable = {
         cmd = "buyfood",
@@ -291,7 +292,7 @@ net.Receive("GBRP::buyfood",function(len,ply)
     SpawnedFood:SetModel(food.model)
 
     -- for backwards compatibility
-    SpawnedFood.FoodName = food.name
+    SpawnedFood.FoodName = foodName
     SpawnedFood.FoodEnergy = food.energy
     SpawnedFood.FoodPrice = food.price
 
@@ -299,7 +300,7 @@ net.Receive("GBRP::buyfood",function(len,ply)
     SpawnedFood:Spawn()
 
     ply:Pay(food.price)
-    DarkRP.notify(ply, 0, 4, DarkRP.getPhrase("you_bought", food.FoodName, gbrp.formatMoney(cost), ""))
+    DarkRP.notify(ply, 0, 4, DarkRP.getPhrase("you_bought", foodName, gbrp.formatMoney(cost), ""))
 
     hook.Call("playerBoughtFood", nil, ply, food, SpawnedFood, food.price)
 end)
