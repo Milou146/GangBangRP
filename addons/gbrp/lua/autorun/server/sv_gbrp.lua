@@ -15,6 +15,12 @@ util.AddNetworkString("GBRP::shopwithdraw")
 util.AddNetworkString("GBRP::buyfood")
 util.AddNetworkString("GBRP::buywep")
 util.AddNetworkString("GBRP::heal")
+util.AddNetworkString("GBRP::jewelrystoreReception")
+util.AddNetworkString("GBRP::gunshopReception")
+util.AddNetworkString("GBRP::gasstationReception")
+util.AddNetworkString("GBRP::clubReception")
+util.AddNetworkString("GBRP::drugstoreReception")
+util.AddNetworkString("GBRP::repairgarageReception")
 
 sql.Query("create table if not exists gbrp(steamid64 bigint not null, balance bigint);")
 local function InitDoors()
@@ -69,21 +75,6 @@ local function LoadDoors()
         end
     end
 end
-local function InitNpcs()
-    for k,v in pairs(gbrp.npcs) do
-        local npc = ents.Create(v.class);
-        if v.name then
-            npc.name = v.name
-            util.AddNetworkString("GBRP::" .. npc.name .. "Reception")
-        end
-        npc.gender = v.gender
-        npc.model = v.model
-        npc:Spawn()
-        npc:SetPos(v.pos)
-        npc:SetAngles(v.ang)
-        npc:DropToFloor()
-    end
-end
 local function SaveShops()
     gbrp.savedShops = {}
     for _,ent in pairs(ents.FindByClass("gbrp_shop")) do
@@ -120,7 +111,8 @@ hook.Add("PlayerInitialSpawn", "GBRP::Client Init", function(ply)
     end
 end)
 hook.Add( "InitPostEntity", "GBRP::InitPostEntity", function()
-    InitNpcs()
+    gbrp.SpawnNPCs()
+    gbrp.SpawnHotdogSalesmans()
     InitDoors()
 end)
 hook.Add("PlayerDisconnected","GBRP::PlayerDisconnected",function(ply)
@@ -146,13 +138,20 @@ hook.Add( "PreCleanupMap", "GBRP::PreCleanupMap", function()
     SaveShops()
 end)
 hook.Add( "PostCleanupMap", "GBRP::PostCleanupMap", function()
-    InitNpcs()
+    gbrp.SpawnNPCs()
     InitDoors() --build the new gbrp.doors table
     for _,ply in pairs(player.GetAll()) do
         SendDoorsData(ply) --send the new table to the clients
     end
     LoadDoors()
     LoadShops()
+    for _,ply in pairs(player.GetAll()) do if ply:isCook() then return end end
+    gbrp.SpawnHotdogSalesmans()
+end)
+hook.Add( "PlayerChangedTeam", "GBRP::PlayerChangedTeam", function(ply,oldTeam,newTeam)
+    if oldTeam == TEAM_VIP2 then
+        gbrp.SpawnHotdogSalesmans()
+    end
 end)
 
 ---------------

@@ -145,105 +145,107 @@ gbrp.doorgroups = {
 }
 gbrp.doors = {}
 if SERVER then
-    gbrp.npcs = {
-        [1] = { -- banquière
-            class = "gbrp_bank_receptionist",
-            gender = "female",
-            model = "models/mossman.mdl",
-            pos = Vector(-954.399658,2831.927979,-38.031754),
-            ang = Angle(0,-89.345398,0)
-        };
-        [2] = { -- banquier
-            class = "gbrp_bank_receptionist",
-            gender = "male",
-            model = "models/sentry/sentryoldmob/mafia/sentrymobmale2pm.mdl",
-            pos = Vector(-1063.368408,2830.685547,-38.031754),
-            ang = Angle(0,-89.730392,0)
-        };
-        [3] = { -- banquière
-            class = "gbrp_bank_receptionist",
-            gender = "female",
-            model = "models/mossman.mdl",
-            pos = Vector(-1159.221558,2812.594482,-38.031754),
-            ang = Angle(0,-90.346390,0)
-        };
-        [4] = { -- bijoutier
-            class = "gbrp_shop",
-            gender = "female",
-            model = "models/sentry/sentryoldmob/mafia/sentrymobmale7pm.mdl",
-            pos = Vector(-576.345520,253.843369,-30.031754),
-            ang = Angle(0,0,0),
-            name = "jewelrystore"
-        };
-        [5] = { -- Quincaillerie
-            class = "gbrp_shop",
-            gender = "male",
-            model = "models/odessa.mdl",
-            pos = Vector(1298.557983,-1579.187866,-29.987122),
-            ang = Angle(0,90.987114,0)
-        };
-        [6] = { -- Armurerie
-            class = "gbrp_shop",
-            gender = "male",
-            model = "models/monk.mdl",
-            pos = Vector(-1099.968750,10497.299805,202.012878),
-            ang = Angle(0,-179.686249,0),
-            name = "gunshop"
-        };
-        [7] = { -- Pharmacie
-            class = "gbrp_shop",
-            gender = "male",
-            model = "models/Kleiner.mdl",
-            pos = Vector(-6566.270508,3409.478027,42.012878),
-            ang = Angle(0,-90.832703,0),
-            name = "drugstore"
-        };
-        [8] = { -- Boîte de nuit
-            class = "gbrp_shop",
-            gender = "male",
-            model = "models/breen.mdl",
-            pos = Vector(-7678.176758,5545.522461,66.012878),
-            ang = Angle(0,89.205963,0),
-            name = "club"
-        };
-        [9] = { -- Garagiste
-            class = "gbrp_shop",
-            gender = "male",
-            model = "models/odessa.mdl",
-            pos = Vector(-2378.206543,6402.301758,90.012878),
-            ang = Angle(0,-5.253576,0),
-            name = "repairgarage"
-        };
-        [10] = { -- Bar
-            class = "gbrp_shop",
-            gender = "female",
-            model = "models/alyx.mdl",
-            pos = Vector(4955.289063,8042.855957,210.012878),
-            ang = Angle(0,0,0)
-        };
-        [11] = { -- Station service
-            class = "gbrp_shop",
-            gender = "male",
-            model = "models/eli.mdl",
-            pos = Vector(-5872.972168,1543.199097,50.012878),
-            ang = Angle(0,-92.799614,0),
-            name = "gasstation"
-        };
-        [12] = { -- Archiviste
-            class = "gbrp_shop",
-            gender = "female",
-            model = "models/humans/Group01/female_03.mdl",
-            pos = Vector(3966.805908,6776.076660,16.896027),
-            ang = Angle(0,-90,0)
-        };
-        [12] = { -- ???
-            class = "gbrp_shop",
-            gender = "male",
-            model = "models/player/hostage/hostage_01.mdl",
-            pos = Vector(1505.933350,7163.607422,81.896027),
-            ang = Angle(0,-90,0)
-        }
-    }
+    function gbrp.SpawnNPCs()
+        local bank1 = ents.Create("gbrp_bank_receptionist")
+        bank1.gender = "female"
+        bank1:SetModel("models/mossman.mdl")
+        bank1:SetPos(Vector(-954.399658,2831.927979,-38.031754))
+        bank1:SetAngles(Angle(0,-89.345398,0))
+        bank1:Spawn()
+
+        local bank2 = ents.Create("gbrp_bank_receptionist")
+        bank2.gender = "male"
+        bank2:SetModel("models/sentry/sentryoldmob/mafia/sentrymobmale2pm.mdl")
+        bank2:SetPos(Vector(-1063.368408,2830.685547,-38.031754))
+        bank2:SetAngles(Angle(0,-89.730392,0))
+        bank2:Spawn()
+
+        local bank3 = ents.Create("gbrp_bank_receptionist")
+        bank3.gender = "female"
+        bank3:SetModel("models/mossman.mdl")
+        bank3:SetPos(Vector(-1159.221558,2812.594482,-38.031754))
+        bank3:SetAngles(Angle(0,-90,0))
+        bank3:Spawn()
+
+        local jewelry = ents.Create("gbrp_shop")
+        jewelry:SetModel("models/sentry/sentryoldmob/mafia/sentrymobmale7pm.mdl")
+        jewelry:SetPos(Vector(-576.345520,253.843369,-30.031754))
+        jewelry:SetAngles(Angle(0,0,0))
+        jewelry:SetShopName("jewelrystore")
+        jewelry:Spawn()
+
+        local hardwarestore = ents.Create("gbrp_shop")
+        hardwarestore:SetModel("models/odessa.mdl")
+        hardwarestore:SetPos(Vector(1298.557983,-1579.187866,-29.987122))
+        hardwarestore:SetAngles(Angle(0,90.987114,0))
+        hardwarestore:Spawn()
+
+        local gunshop = ents.Create("gbrp_shop")
+        gunshop:SetModel("models/monk.mdl")
+        gunshop:SetPos(Vector(-1099.968750,10497.299805,202.012878))
+        gunshop:SetAngles(Angle(0,-179.686249,0))
+        gunshop:SetShopName("gunshop")
+        gunshop:Spawn()
+
+        local drugstore = ents.Create("gbrp_shop")
+        drugstore:SetModel("models/Kleiner.mdl")
+        drugstore:SetPos(Vector(-6566.270508,3409.478027,42.012878))
+        drugstore:SetAngles(Angle(0,-90.832703,0))
+        drugstore:SetShopName("drugstore")
+        drugstore:Spawn()
+
+        local club = ents.Create("gbrp_shop")
+        club:SetModel("models/breen.mdl")
+        club:SetPos(Vector(-7678.176758,5545.522461,66.012878))
+        club:SetAngles(Angle(0,89.205963,0))
+        club:SetShopName("club")
+        club:Spawn()
+
+        local repairgarage = ents.Create("gbrp_shop")
+        repairgarage:SetModel("models/odessa.mdl")
+        repairgarage:SetPos(Vector(-2378.206543,6402.301758,90.012878))
+        repairgarage:SetAngles(Angle(0,-5.253576,0))
+        repairgarage:SetShopName("repairgarage")
+        repairgarage:Spawn()
+
+        local bar = ents.Create("gbrp_shop")
+        bar:SetModel("models/alyx.mdl")
+        bar:SetPos(Vector(4955.289063,8042.855957,210.012878))
+        bar:SetAngles(Angle(0,0,0))
+        bar:Spawn()
+
+        local gasstation = ents.Create("gbrp_shop")
+        gasstation:SetModel("models/eli.mdl")
+        gasstation:SetPos(Vector(-5872.972168,1543.199097,50.012878))
+        gasstation:SetAngles(Angle(0,-92.799614,0))
+        gasstation:SetShopName("gasstation")
+        gasstation:Spawn()
+
+        local archivist = ents.Create("gbrp_shop")
+        archivist:SetModel("models/humans/Group01/female_03.mdl")
+        archivist:SetPos(Vector(3966.805908,6776.076660,16.896027))
+        archivist:SetAngles(Angle(0,-90,0))
+        archivist:Spawn()
+
+        local unknown = ents.Create("gbrp_shop")
+        unknown:SetModel("models/player/hostage/hostage_01.mdl")
+        unknown:SetPos(Vector(1505.933350,7163.607422,81.896027))
+        unknown:SetAngles(Angle(0,-90,0))
+        unknown:Spawn()
+    end
+    function gbrp.SpawnHotdogSalesmans()
+        local salesman1 = ents.Create("gbrp_hotdogsalesman")
+        salesman1:SetModel("models/Eli.mdl")
+        salesman1.hotdogpos = Vector(1985.312012,5540.983398,46.440498)
+        salesman1:SetPos(Vector(1953.749268,5490.832520,8.031250))
+        salesman1:SetAngles(Angle(0,90,0))
+        salesman1:Spawn()
+    end
+    function gbrp.RemoveHotdogSalesman()
+        for _,npc in pairs(ents.FindByClass("gbrp_hotdogsalesman")) do
+            npc:Remove()
+        end
+    end
 end
 if CLIENT then
     gbrp.gangpanel = {}

@@ -2,11 +2,7 @@ AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
 include("shared.lua")
 
-ENT.model = "models/humans/group01/male_01.mdl"
-ENT.name = "shop"
-
 function ENT:Initialize()
-    self:SetModel(self.model)
     self:SetHullType(HULL_HUMAN)
     self:SetHullSizeNormal()
     self:SetNPCState(NPC_STATE_SCRIPT)
@@ -14,12 +10,11 @@ function ENT:Initialize()
     self:CapabilitiesAdd(CAP_ANIMATEDFACE or CAP_TURN_HEAD)
     self:SetUseType(SIMPLE_USE)
     self:DropToFloor()
-    self:SetShopName(self.name)
     self:SetGang(nil)
 end
 
 function ENT:Use(ply, caller, useType, value)
-    net.Start("GBRP::" .. self.name .. "Reception")
+    net.Start("GBRP::" .. self:GetShopName() .. "Reception")
     net.WriteEntity(self)
     net.Send(ply)
 end

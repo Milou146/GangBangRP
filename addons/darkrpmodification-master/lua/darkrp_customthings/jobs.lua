@@ -566,6 +566,7 @@ TEAM_VIP2 = DarkRP.createJob("Vendeur hot dog", {
         ply:SetHealth(100)
         ply:SetArmor(0)
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
+        gbrp.RemoveHotdogSalesman()
     end,
     customCheck = function(ply)
         return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("usergroup"))
