@@ -723,16 +723,16 @@ net.Receive("GBRP::gasstationReception",function()
             surface.DrawText("VOTRE SOLDE: " .. gbrp.formatMoney(ply:GetBalance()))
         end
         local food = {
-            [1] =   {classname = "eft_food_mre",            y = 195, price = 15},
-            [2] =   {classname = "eft_food_beefstew",       y = 236, price = 7},
-            [3] =   {classname = "eft_food_beefstew_family",y = 277, price = 10},
-            [4] =   {classname = "eft_food_canned_fish",    y = 317, price = 3},
-            [5] =   {classname = "eft_food_peas",           y = 357, price = 8},
-            [6] =   {classname = "eft_food_squash",         y = 396, price = 9},
-            [7] =   {classname = "eft_food_hotrod",         y = 443, price = 12},
-            [8] =   {classname = "eft_food_juice",          y = 488, price = 6},
-            [9] =   {classname = "eft_food_oatmeal",        y = 531, price = 3},
-            [10] =  {classname = "eft_food_water",          y = 574, price = 6}
+            [1] =   {name = "mre",            y = 195},
+            [2] =   {name = "beefstew",       y = 236},
+            [3] =   {name = "beefstew_family",y = 277},
+            [4] =   {name = "canned_fish",    y = 317},
+            [5] =   {name = "peas",           y = 357},
+            [6] =   {name = "squash",         y = 396},
+            [7] =   {name = "hotrod",         y = 443},
+            [8] =   {name = "juice",          y = 488},
+            [9] =   {name = "oatmeal",        y = 531},
+            [10] =  {name = "water",          y = 574}
         }
         local bill = 0
         local pretext = ""
@@ -752,17 +752,16 @@ net.Receive("GBRP::gasstationReception",function()
             v.button:SetSize(71,28)
             v.button:SetPos(482,v.y)
             function v.button:DoClick()
-                shoppingBasket = v.classname
-                bill = v.price
+                shoppingBasket = v.name
                 pretext = ""
                 for key = 1,(10 - #tostring(bill)) do
                     pretext = pretext .. " "
                 end
-                billLabel:SetText( pretext .. "$" .. tostring(bill))
+                billLabel:SetText( pretext .. "$" .. tostring(gbrp.foods[v.name].price))
                 billLabel:SizeToContents()
             end
             v.priceLabel = vgui.Create("DLabel",frame)
-            v.priceLabel:SetText(gbrp.formatMoney(v.price))
+            v.priceLabel:SetText(gbrp.formatMoney(gbrp.foods[v.name].price))
             v.priceLabel:SetFont("Trebuchet24")
             v.priceLabel:SizeToContents()
             v.priceLabel:SetPos(518 - v.priceLabel:GetWide() / 2,v.y)
@@ -780,7 +779,6 @@ net.Receive("GBRP::gasstationReception",function()
                 panelOpen = false
                 net.Start("GBRP::buyfood")
                 net.WriteString(shoppingBasket)
-                net.WriteInt(bill,7)
                 net.SendToServer()
             else
                 GAMEMODE:AddNotify("Solde insuffisant.",1,2)

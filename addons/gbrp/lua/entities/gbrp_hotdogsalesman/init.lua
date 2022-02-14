@@ -15,11 +15,42 @@ function ENT:Initialize()
 end
 
 function ENT:Use(ply, caller, useType, value)
-    if ply:CanAfford(50) then
-        ply:Pay(50)
-        local hotdog = ents.Create("hotdog")
-        hotdog:Spawn()
-        hotdog:SetPos(self.hotdogpos)
+    local food = gbrp.foods["hotdog"]
+    if ply:CanAfford(food.price) then
+
+        local foodTable = {
+            cmd = "buyfood",
+            max = GAMEMODE.Config.maxfooditems
+        }
+
+        if ply:customEntityLimitReached(foodTable) then
+            DarkRP.notify(ply, 1, 4, DarkRP.getPhrase("limit", GAMEMODE.Config.chatCommandPrefix .. "buyfood"))
+
+            return ""
+        end
+
+        ply:addCustomEntity(foodTable)
+
+        local SpawnedFood = ents.Create("spawned_food")
+        SpawnedFood.DarkRPItem = foodTable
+        SpawnedFood:Setowning_ent(ply)
+        SpawnedFood:SetPos(self.hotdogpos)
+        SpawnedFood.onlyremover = true
+        SpawnedFood.SID = ply.SID
+        SpawnedFood:SetModel(food.model)
+
+        -- for backwards compatibility
+        SpawnedFood.FoodName = food.name
+        SpawnedFood.FoodEnergy = food.energy
+        SpawnedFood.FoodPrice = food.price
+
+        SpawnedFood.foodItem = food
+        SpawnedFood:Spawn()
+
+        ply:Pay(food.price)
+        DarkRP.notify(ply, 0, 4, DarkRP.getPhrase("you_bought", food.FoodName, gbrp.formatMoney(food.price), ""))
+
+        hook.Call("playerBoughtFood", nil, ply, food, SpawnedFood, food.price)
     else
         DarkRP.notify(ply,1,4,"Solde insuffisant.")
     end

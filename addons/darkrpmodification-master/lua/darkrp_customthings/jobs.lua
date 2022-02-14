@@ -384,11 +384,6 @@ TEAM_GANGSTER = DarkRP.createJob("Chef Gangster", {
         ply.LastTimeAsGangsterLeader = CurTime()
         ply:changeTeam(TEAM_CITIZEN, true)
         DarkRP.notifyAll(1, 4, "Le chef gangster est décédé.")
-        umsg.Start("_Notify")
-            umsg.String("Le chef gangster est décédé.")
-            umsg.Short(1)
-            umsg.Long(4)
-        umsg.End()
     end,
     customCheck = function(ply)
         if ply.LastTimeAsGangsterLeader then
@@ -566,7 +561,7 @@ TEAM_VIP2 = DarkRP.createJob("Vendeur hot dog", {
         ply:SetHealth(100)
         ply:SetArmor(0)
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
-        gbrp.RemoveHotdogSalesman()
+        gbrp.RemoveHotdogSalesmans()
     end,
     customCheck = function(ply)
         return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("usergroup"))

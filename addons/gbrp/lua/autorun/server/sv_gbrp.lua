@@ -267,10 +267,41 @@ net.Receive("GBRP::shopwithdraw", function(len, ply)
     shop:SetBalance(0)
 end)
 net.Receive("GBRP::buyfood",function(len,ply)
-    local food = ents.Create(net.ReadString())
-    food:Spawn()
-    food:SetPos(Vector(-5872.747070,1485.609375,20.000000))
-    ply:Pay(net.ReadInt(7))
+    local food = gbrp.foods[net.ReadString()]
+
+    local foodTable = {
+        cmd = "buyfood",
+        max = GAMEMODE.Config.maxfooditems
+    }
+
+    if ply:customEntityLimitReached(foodTable) then
+        DarkRP.notify(ply, 1, 4, DarkRP.getPhrase("limit", GAMEMODE.Config.chatCommandPrefix .. "buyfood"))
+
+        return ""
+    end
+
+    ply:addCustomEntity(foodTable)
+
+    local SpawnedFood = ents.Create("spawned_food")
+    SpawnedFood.DarkRPItem = foodTable
+    SpawnedFood:Setowning_ent(ply)
+    SpawnedFood:SetPos(Vector(-5872.747070,1485.609375,20.000000))
+    SpawnedFood.onlyremover = true
+    SpawnedFood.SID = ply.SID
+    SpawnedFood:SetModel(food.model)
+
+    -- for backwards compatibility
+    SpawnedFood.FoodName = food.name
+    SpawnedFood.FoodEnergy = food.energy
+    SpawnedFood.FoodPrice = food.price
+
+    SpawnedFood.foodItem = food
+    SpawnedFood:Spawn()
+
+    ply:Pay(food.price)
+    DarkRP.notify(ply, 0, 4, DarkRP.getPhrase("you_bought", food.FoodName, gbrp.formatMoney(cost), ""))
+
+    hook.Call("playerBoughtFood", nil, ply, food, SpawnedFood, food.price)
 end)
 net.Receive("GBRP::buywep",function(len,ply)
     ply:Give(net.ReadString())

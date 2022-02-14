@@ -144,6 +144,19 @@ gbrp.doorgroups = {
     ["drugstore"] = {doors = {2166,2582,2167},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "drugstore",typ = "shop"}};
 }
 gbrp.doors = {}
+gbrp.foods = {
+    ["mre"] = {model = "models/crunchy/props/eft_props/mre.mdl", energy = 25, price = 15},
+    ["beefstew"] = {model = "models/crunchy/props/eft_props/beefstew.mdl", energy = 17, price = 7},
+    ["beefstew_family"] = {model = "models/crunchy/props/eft_props/beefstew2.mdl", energy = 20, price = 10},
+    ["canned_fish"] = {model = "models/crunchy/props/eft_props/herring.mdl", energy = 13, price = 3},
+    ["peas"] = {model = "models/crunchy/props/eft_props/peas.mdl", energy = 18, price = 8},
+    ["squash"] = {model = "models/crunchy/props/eft_props/squash.mdl", energy = 19, price = 9},
+    ["hotrod"] = {model = "models/crunchy/props/eft_props/hotrod.mdl", energy = 22, price = 12},
+    ["juice"] = {model = "models/crunchy/props/eft_props/juice.mdl", energy = 16, price = 6},
+    ["oatmeal"] = {model = "models/crunchy/props/eft_props/oatmeal.mdl", energy = 13, price = 3},
+    ["water"] = {model = "models/crunchy/props/eft_props/waterbottle.mdl", energy = 16, price = 6},
+    ["hotdog"] = {model = "models/food/hotdog.mdl", energy = 16, price = 6},
+}
 if SERVER then
     function gbrp.SpawnNPCs()
         local bank1 = ents.Create("gbrp_bank_receptionist")
@@ -241,7 +254,7 @@ if SERVER then
         salesman1:SetAngles(Angle(0,90,0))
         salesman1:Spawn()
     end
-    function gbrp.RemoveHotdogSalesman()
+    function gbrp.RemoveHotdogSalesmans()
         for _,npc in pairs(ents.FindByClass("gbrp_hotdogsalesman")) do
             npc:Remove()
         end
