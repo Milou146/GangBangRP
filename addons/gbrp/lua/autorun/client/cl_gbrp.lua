@@ -607,13 +607,13 @@ net.Receive("GBRP::clubReception",function()
                 end
 
                 surface.SetMaterial(shopbalMat)
-                surface.DrawTexturedRect(311,485,321,68)
+                surface.DrawTexturedRect(270,485,321,68)
 
                 surface.SetMaterial(shopvalMat)
-                surface.DrawTexturedRect(755,485,321,68)
+                surface.DrawTexturedRect(740,485,321,68)
 
                 surface.SetFont("BankSmall")
-                surface.SetTextPos(349,525)
+                surface.SetTextPos(349,520)
                 surface.DrawText(gbrp.formatMoney(shop:GetBalance()))
 
                 GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarframeMat)(157,381,1053,27)
@@ -626,7 +626,7 @@ net.Receive("GBRP::clubReception",function()
 
                 surface.SetFont("BankSmall")
                 surface.SetTextColor(255,0,0,255)
-                surface.SetTextPos(805,525)
+                surface.SetTextPos(830,520)
                 surface.DrawText(gbrp.formatMoney(shop.value))
             end
         else
@@ -1466,4 +1466,113 @@ net.Receive("GBRP::drugstoreReception",function()
             GAMEMODE:AddNotify("Vous n'êtes pas membre.",1,2)
         end
     end
+end)
+net.Receive("GBRP::barReception",function()
+    local shop = net.ReadEntity()
+    if panelOpen then return end
+    local ply = LocalPlayer()
+    local gang = ply:GetGang()
+    if not gang then return end
+    panelOpen = true
+    local panelMat = Material("gui/gbrp/bar/panel.png")
+    local frame = vgui.Create("EditablePanel",GetHUDPanel())
+    frame.mat = Material("gui/gbrp/bar/frame.png")
+    frame.shop = shop
+    frame:SetPos(266,164)
+    frame:SetSize(1396,716)
+    frame:MakePopup()
+    function frame:Paint(w,h)
+        surface.SetDrawColor(255,255,255,255)
+        surface.SetMaterial(self.mat)
+        surface.DrawTexturedRect(0,0,w,h)
+
+        surface.SetMaterial(panelMat)
+        surface.DrawTexturedRect(124,529,1119,112)
+
+        surface.SetTextColor(0,0,0,255)
+        surface.SetFont("Bank")
+        surface.SetTextPos(166,640)
+        surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
+
+        surface.SetTextColor(255,255,255,255)
+        surface.SetTextPos(586,46)
+        surface.SetFont("BankSmall")
+        surface.DrawText("www.nul-bar-ailleurs.com")
+    end
+
+    local remove = vgui.Create("RemoveButton",frame)
+    remove:SetPos(1189,44)
+    remove:SetImage("gui/gbrp/jewelrystore/remove.png")
+    remove:SizeToContents()
+
+    local buy = vgui.Create("BuyShopButton",frame)
+    buy:SetPos(310,142)
+    buy:SetImage("gui/gbrp/jewelrystore/buy.png")
+    buy:SizeToContents()
+
+    local customerarea = vgui.Create("GBRPButton",frame)
+    customerarea:SetPos(750,142)
+    customerarea:SetMaterial("gui/gbrp/jewelrystore/customerarea.png")
+    customerarea:SizeToContents()
+    function customerarea:DoClick()
+        self:Remove()
+        buy:Remove()
+        local balance = Material("gui/gbrp/club/shopbal.png")
+        local value = Material("gui/gbrp/club/shopval.png")
+        local progressbarframeMat = Material("gui/gbrp/jewelrystore/progressbarframe.png")
+        local progressbarMat = Material("gui/gbrp/jewelrystore/progressbar.png")
+        function frame:Paint(w,h)
+            surface.SetDrawColor(255,255,255,255)
+            surface.SetMaterial(self.mat)
+            surface.DrawTexturedRect(0,0,w,h)
+
+            surface.SetTextColor(255,255,255,255)
+            surface.SetTextPos(616,46)
+            surface.SetFont("BankSmall")
+            surface.DrawText("www.esc-ô-bar.com")
+
+            surface.SetMaterial(balance)
+            surface.DrawTexturedRect(311,485,321,68)
+
+            surface.SetMaterial(value)
+            surface.DrawTexturedRect(755,485,321,68)
+
+            surface.SetTextColor(0,0,0,255)
+            surface.SetFont("Bank")
+            surface.SetTextPos(166,640)
+            surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
+
+            surface.SetFont("BankSmall")
+            surface.SetTextPos(422,519)
+            surface.DrawText(gbrp.formatMoney(shop:GetBalance()))
+
+            surface.SetTextColor(255,0,0,255)
+            surface.SetTextPos(879,519)
+            surface.DrawText(gbrp.formatMoney(shop.value))
+
+            GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarframeMat)(157,381,1053,27)
+            GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(157,381,1053 * shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()), 27)
+
+            surface.SetFont("Bank")
+            surface.SetTextColor(255,255,255,255)
+            surface.SetTextPos(680,333)
+            surface.DrawText(tostring(math.Round(100 * shop:GetBalance() / (1 + shop:GetBalance() + shop:GetDirtyMoney()))) .. "%")
+        end
+
+        local dropcash = vgui.Create("DropCashButton",frame)
+        dropcash:SetMaterial("gui/gbrp/jewelrystore/dropcash.png")
+        dropcash:SetPos(156,162)
+        dropcash:SizeToContents()
+
+        local withdraw = vgui.Create("WithdrawLaunderedMoneyButton",frame)
+        withdraw:SetPos(521,162)
+        withdraw:SetMaterial("gui/gbrp/jewelrystore/withdraw.png")
+        withdraw:SizeToContents()
+
+        local sell = vgui.Create("SellShopButton",frame)
+        sell:SetPos(889,162)
+        sell:SetMaterial("gui/gbrp/bar/sell.png")
+        sell:SizeToContents()
+    end
+
 end)

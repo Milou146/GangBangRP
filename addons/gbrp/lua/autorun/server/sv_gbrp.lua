@@ -22,80 +22,9 @@ util.AddNetworkString("GBRP::gasstationReception")
 util.AddNetworkString("GBRP::clubReception")
 util.AddNetworkString("GBRP::drugstoreReception")
 util.AddNetworkString("GBRP::repairgarageReception")
+util.AddNetworkString("GBRP::barReception")
 
 sql.Query("create table if not exists gbrp(steamid64 bigint not null, balance bigint);")
-local function InitDoors()
-    gbrp.doors = {}
-    local counter = 0
-    for doorgroupname,doorgroup in pairs(gbrp.doorgroups) do
-        for _,doormapid in pairs(doorgroup.doors) do
-            counter = counter + 1
-            local door = ents.GetMapCreatedEntity(doormapid)
-            if not IsValid(door) then print("[GBRP] This door is causing problems" .. tostring(doormapid)) break end
-            door:setDoorGroup(doorgroup.attributes.owner)
-            if doorgroup.locked then
-                door:Fire("lock", "", 0)
-            end
-            gbrp.doors[door:EntIndex()] = doorgroup.attributes
-        end
-    end
-end
-local function SendDoorsData(ply)
-    net.Start("GBRP::doorsinit")
-    net.WriteInt(table.Count(gbrp.doors),32)
-    for k,v in pairs(gbrp.doors) do
-        net.WriteInt(k,32)
-        net.WriteTable(v)
-    end
-    net.Send(ply)
-end
-local function SaveDoors()
-    gbrp.savedDoors = {}
-    for doorgroupname,doorgroup in pairs(gbrp.doorgroups) do
-        for _,doormapid in pairs(doorgroup.doors) do
-            local door = ents.GetMapCreatedEntity(doormapid)
-            if not table.IsEmpty(door:getDoorData()) then
-                gbrp.savedDoors[doormapid] = {}
-                gbrp.savedDoors[doormapid].darkrpvars = door:getDoorData()
-                gbrp.savedDoors[doormapid].locked = door:GetInternalVariable("m_bLocked")
-            end
-        end
-    end
-end
-local function LoadDoors()
-    for doormapid,tab in pairs(gbrp.savedDoors) do
-        local door = ents.GetMapCreatedEntity(doormapid)
-        door:setDoorGroup(tab.darkrpvars.groupOwn)
-        if tab.darkrpvars.owner then
-            door:keysOwn(tab.darkrpvars.owner)
-        end
-        if tab.locked then
-            door:Fire("Lock", "", 0)
-        else
-            door:Fire("Unlock", "", 0)
-        end
-    end
-end
-local function SaveShops()
-    gbrp.savedShops = {}
-    for _,ent in pairs(ents.FindByClass("gbrp_shop")) do
-        gbrp.savedShops[ent:GetShopName()] = {}
-        gbrp.savedShops[ent:GetShopName()].balance = ent:GetBalance()
-        gbrp.savedShops[ent:GetShopName()].dirtyMoney = ent:GetDirtyMoney()
-        gbrp.savedShops[ent:GetShopName()].gangName = ent:GetGangName()
-    end
-end
-local function LoadShops()
-    for _,ent in pairs(ents.FindByClass("gbrp_shop")) do
-        for name,val in pairs(gbrp.savedShops) do
-            if name == ent:GetShopName() then
-                ent:SetBalance(val.balance)
-                ent:SetDirtyMoney(val.dirtyMoney)
-                ent:SetGangName(val.gangName)
-            end
-        end
-    end
-end
 
 -------------------
 ---- H O O K S ----
@@ -114,7 +43,7 @@ end)
 hook.Add( "InitPostEntity", "GBRP::InitPostEntity", function()
     gbrp.SpawnNPCs()
     gbrp.SpawnHotdogSalesmans()
-    InitDoors()
+    gbrp.InitDoors()
 end)
 hook.Add("PlayerDisconnected","GBRP::PlayerDisconnected",function(ply)
     if ply:IsGangLeader() then ply:GetGang():Reset() end
@@ -131,21 +60,21 @@ hook.Add("PlayerDeath","GBRP:PlayerDeath",function(ply)
 end)
 hook.Add("PlayerInitialSpawn","GBRP:DoorsInitCS",function(ply)
     timer.Simple(4, function()
-        SendDoorsData(ply)
+        gbrp.SendDoorsData(ply)
     end)
 end)
 hook.Add( "PreCleanupMap", "GBRP::PreCleanupMap", function()
-    SaveDoors()
-    SaveShops()
+    gbrp.SaveDoors()
+    gbrp.SaveShops()
 end)
 hook.Add( "PostCleanupMap", "GBRP::PostCleanupMap", function()
     gbrp.SpawnNPCs()
-    InitDoors() --build the new gbrp.doors table
+    gbrp.InitDoors() --build the new gbrp.doors table
     for _,ply in pairs(player.GetAll()) do
-        SendDoorsData(ply) --send the new table to the clients
+        gbrp.SendDoorsData(ply) --send the new table to the clients
     end
-    LoadDoors()
-    LoadShops()
+    gbrp.LoadDoors()
+    gbrp.LoadShops()
     for _,ply in pairs(player.GetAll()) do if ply:isCook() then return end end
     gbrp.SpawnHotdogSalesmans()
 end)

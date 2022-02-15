@@ -1,58 +1,201 @@
 if engine.ActiveGamemode() ~= "darkrp" then return end
+----------------------------
+---- G A N G -- M E T A ----
+----------------------------
+
+local gangMeta = {}
+function gangMeta:GetMembersCount()
+    local count = 0
+    for _,ply in pairs(player.GetAll()) do
+        if ply:GetGang() == self then count = count + 1 end
+    end
+    return count
+end
+function gangMeta:GetShops()
+    local shops = {}
+    for _,ent in pairs(ents.GetAll()) do
+        if ent:GetClass() == "gbrp_shop" and ent:GetGang() == self then table.insert(shops,ent:GetShopName()) end
+    end
+    return shops
+end
+function gangMeta:GetProperties()
+    local propertylist = {}
+    for k,v in pairs(gbrp.doors) do
+        local door = ents.GetByIndex(k)
+        if door:getDoorData().groupOwn == self.name and gbrp.doors[k].typ ~= "shop" then
+            propertylist[gbrp.doors[k].doorgroup] = gbrp.doors[k].typ
+        end
+    end
+    return propertylist
+end
+function gangMeta:GetBalance()
+    return GetGlobalInt(self.name .. "Balance")
+end
+function gangMeta:GetExpenses()
+    return GetGlobalInt(self.name .. "Expenses")
+end
+function gangMeta:GetEarnings()
+    return GetGlobalInt(self.name .. "Earnings")
+end
+function gangMeta:CanAfford(amount)
+    return self:GetBalance() - amount >= 0
+end
+function gangMeta:GetPrivateDoorsCount()
+    return GetGlobalInt(self.name .. "PrivateDoorsCount")
+end
+if SERVER then
+    function gangMeta:AddEarnings(amount)
+        SetGlobalInt(self.name .. "Earnings",self:GetEarnings() + amount)
+    end
+    function gangMeta:AddExpenses(amount)
+        SetGlobalInt(self.name .. "Expenses",self:GetExpenses() + amount)
+    end
+    function gangMeta:SetBalance(val)
+        SetGlobalInt(self.name .. "Balance",val)
+    end
+    function gangMeta:Cash(amount)
+        self:SetBalance(self:GetBalance() + amount)
+        self:AddEarnings(amount)
+    end
+    function gangMeta:Pay(amount)
+        self:SetBalance(self:GetBalance() - amount)
+        self:AddExpenses(amount)
+    end
+    function gangMeta:Reset()
+        for k,v in pairs(gbrp.doors) do
+            local door = ents.GetByIndex(k)
+            if door:getDoorData().groupOwn == self.name and gbrp.doorgroups[gbrp.doors[k].doorgroup].owner ~= self.name then
+                for _,doorid in pairs(gbrp.doorgroups[gbrp.doors[k].doorgroup].doors) do
+                    door = ents.GetMapCreatedEntity(doorid)
+                    door:setDoorGroup(nil)
+                    if door:getDoorOwner() then
+                        door:keysUnOwn(door:getDoorOwner())
+                        self:AddPrivateDoor(-1)
+                    end
+                    door:Fire("lock", "", 0)
+                end
+            end
+        end
+        local shops = ents.FindByClass("gbrp_shop")
+        for i,shop in pairs(shops) do
+            if shop:GetGang() == self then
+                shop:SetGang(nil)
+            end
+        end
+    end
+    function gangMeta:SetPrivateDoorsCount(count)
+        return SetGlobalInt(self.name .. "PrivateDoorsCount",count)
+    end
+    function gangMeta:AddPrivateDoor(amount)
+        self:SetPrivateDoorsCount(self:GetPrivateDoorsCount() + amount)
+    end
+end
+
+--------------------------
+---- P L Y -- M E T A ----
+--------------------------
+
+local plyMeta = FindMetaTable("Player")
+function plyMeta:IsGangLeader()
+    return self:getJobTable().gangLeader;
+end
+function plyMeta:GetGang()
+    return self:getJobTable().gang;
+end
+function plyMeta:GetBalance()
+    return self:GetNWInt("GBRP::balance")
+end
+function plyMeta:CanAfford(amount)
+    return self:GetBalance() - amount >= 0;
+end
+if CLIENT then
+    function plyMeta:BuyShop(shop)
+        local gang = self:GetGang()
+        if shop:GetGang() and shop:GetGang() ~= gang then
+            GAMEMODE:AddNotify("Ce magasin appartient à un autre gang.",1,2)
+        elseif shop:GetGang() == gang then
+            GAMEMODE:AddNotify("Votre gang possède déjà le magasin.",0,2)
+        elseif not self:IsGangLeader() then
+            GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
+        elseif not gang:CanAfford(shop.price) then
+            GAMEMODE:AddNotify("Solde insuffisant.",1,2)
+        elseif #gang:GetShops() >= 4 then
+            GAMEMODE:AddNotify("Votre gang a atteint le nombre maximal de magasins en sa possession.",1,2)
+        else
+            net.Start("GBRP::buyshop")
+            net.WriteEntity(shop)
+            net.SendToServer()
+            surface.PlaySound("gui/gbrp/buy_sell.mp3")
+            GAMEMODE:AddNotify("Vous avez acheté le magasin.",0,2)
+        end
+    end
+    function plyMeta:SellShop(shop)
+        if self:IsGangLeader() then
+            net.Start("GBRP::sellshop")
+            net.WriteEntity(shop)
+            net.SendToServer()
+            surface.PlaySound("gui/gbrp/buy_sell.mp3")
+            GAMEMODE:AddNotify("Vous avez vendu le magasin.",0,2)
+        else
+            GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
+        end
+    end
+    function plyMeta:WithdrawLaunderedMoney(shop)
+        if self:IsGangLeader() then
+            net.Start("GBRP::shopwithdraw")
+            net.WriteEntity(shop)
+            net.SendToServer()
+            surface.PlaySound("gui/gbrp/withdraw.wav")
+            GAMEMODE:AddNotify("Vous avez retiré l'argent blanchis du magasin.",0,2)
+        else
+            GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
+        end
+    end
+    function plyMeta:DropCash(frame)
+        local textEntry = vgui.Create("DTextEntry",frame)
+        textEntry:SetSize(200,25)
+        textEntry:SetPlaceholderText("ex: 500")
+        textEntry:Center()
+        textEntry:RequestFocus()
+        textEntry.OnEnter = function()
+            local amount = tonumber(textEntry:GetValue())
+            if amount > 0 and self:getDarkRPVar("money") - amount >= 0 then
+                net.Start("GBRP::shopdeposit")
+                net.WriteUInt(amount,32)
+                net.WriteEntity(frame.shop)
+                net.SendToServer()
+                surface.PlaySound("gui/gbrp/dropcash.wav")
+                GAMEMODE:AddNotify("Vous avez déposé " .. DarkRP.formatMoney( amount ) .. ".",0,2)
+            elseif amount <= 0 then
+                GAMEMODE:AddNotify("Valeur non valide.",1,2)
+            else
+                GAMEMODE:AddNotify("Solde insuffisant.",1,2)
+            end
+            textEntry:Remove()
+        end
+    end
+end
+if SERVER then
+    function plyMeta:AddLaunderedMoney(amount)
+        self:SetNWInt("GBRP::launderedmoney", self:GetNWInt("GBRP::launderedmoney") + amount)
+    end
+    function plyMeta:Cash(pay)
+        self:SetNWInt("GBRP::balance",self:GetBalance() + pay);
+        sql.Query("update gbrp set balance = " .. self:GetNWInt("GBRP::balance") .. " where steamid64 = " .. self:SteamID64() .. ";");
+    end
+    function plyMeta:Pay(amount)
+        self:SetNWInt("GBRP::balance",self:GetBalance() - amount);
+        sql.Query("update gbrp set balance = " .. self:GetNWInt("GBRP::balance") .. " where steamid64 = " .. self:SteamID64() .. ";");
+    end
+end
+
 --------------------------
 -- G B R P -- T A B L E --
 --------------------------
+
 gbrp = {}
+gbrp.doors = {}
 gbrp.startingFunds = 100000
-gbrp.jobs = {
-    ["Citoyen"] = {gang = nil,gangLeader = nil};
-    ["N.Y.P.D"] = {gang = nil,gangLeader = nil};
-    ["S.W.A.T"] = {gang = nil,gangLeader = nil};
-    ["S.W.A.T Médic"] = {gang = nil,gangLeader = nil};
-    ["S.W.A.T Sniper"] = {gang = nil,gangLeader = nil};
-    ["Chef des Yakuzas"] = {gang = "yakuzas",gangLeader = true};
-    ["Yakuza"] = {gang = "yakuzas",gangLeader = false};
-    ["Yakuza Architecte"] = {gang = "yakuzas",gangLeader = false};
-    ["Yakuza Médecin"] = {gang = "yakuzas",gangLeader = false};
-    ["Parrain"] = {gang = "mafia",gangLeader = true};
-    ["Mafieux"] = {gang = "mafia",gangLeader = false};
-    ["Mafieux Architecte"] = {gang = "mafia",gangLeader = false};
-    ["Mafieux Médecin"] = {gang = "mafia",gangLeader = false};
-    ["Chef Gangster"] = {gang = "gang",gangLeader = true};
-    ["Gangster"] = {gang = "gang",gangLeader = false};
-    ["Gangster Architecte"] = {gang = "gang",gangLeader = false};
-    ["Gangster Médecin"] = {gang = "gang",gangLeader = false};
-    ["STAFF"] = {gang = nil,gangLeader = nil};
-    ["YAMAKASI"] = {gang = nil,gangLeader = nil};
-    ["Chauffeur de taxi"] = {gang = nil,gangLeader = nil};
-    ["Vendeur hot dog"] = {gang = nil,gangLeader = nil};
-    ["Hacker"] = {gang = nil,gangLeader = nil};
-    ["Agent secret"] = {gang = nil,gangLeader = nil};
-    ["Vendeur d'amres ambulant"] = {gang = nil,gangLeader = nil};
-    ["Tueur à gage"] = {gang = nil,gangLeader = nil};
-}
-function gbrp.formatMoney(n)
-    if not n then return "$0" end
-
-    if n >= 1e14 then return "$" .. tostring(n) end
-    if n <= -1e14 then return "-" .. "$" .. tostring(math.abs(n)) end
-
-    local negative = n < 0
-
-    n = tostring(math.abs(n))
-    local dp = string.find(n, "%.") or #n + 1
-
-    for i = dp - 4, 1, -3 do
-        n = n:sub(1, i) .. "." .. n:sub(i + 1)
-    end
-
-    -- Make sure the amount is padded with zeroes
-    if n[#n - 1] == "." then
-        n = n .. "0"
-    end
-
-    return (negative and "-" or "") .. "$" .. n
-end
 gbrp.doorgroups = {
     ["1 Mapple Rd"] = {doors = {2237,2236,2240,2243,2244,2246},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "1 Mapple Rd",typ = "house"}};
     ["2 Mapple Rd"] = {doors = {2261,2245,2264,2265,2263,2262},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "2 Mapple Rd",typ = "house"}};
@@ -144,7 +287,6 @@ gbrp.doorgroups = {
     ["repairgarage"] = {doors = {2060,2062,2066,2061,2067,2065},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "garage",typ = "shop"}};
     ["drugstore"] = {doors = {2166,2582,2167},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "drugstore",typ = "shop"}};
 }
-gbrp.doors = {}
 gbrp.foods = {
     ["mre"] = {model = "models/crunchy/props/eft_props/mre.mdl", energy = 25, price = 15},
     ["beefstew"] = {model = "models/crunchy/props/eft_props/beefstew.mdl", energy = 17, price = 7},
@@ -158,6 +300,28 @@ gbrp.foods = {
     ["water"] = {model = "models/crunchy/props/eft_props/waterbottle.mdl", energy = 16, price = 6},
     ["hotdog"] = {model = "models/food/hotdog.mdl", energy = 16, price = 6},
 }
+function gbrp.formatMoney(n)
+    if not n then return "$0" end
+
+    if n >= 1e14 then return "$" .. tostring(n) end
+    if n <= -1e14 then return "-" .. "$" .. tostring(math.abs(n)) end
+
+    local negative = n < 0
+
+    n = tostring(math.abs(n))
+    local dp = string.find(n, "%.") or #n + 1
+
+    for i = dp - 4, 1, -3 do
+        n = n:sub(1, i) .. "." .. n:sub(i + 1)
+    end
+
+    -- Make sure the amount is padded with zeroes
+    if n[#n - 1] == "." then
+        n = n .. "0"
+    end
+
+    return (negative and "-" or "") .. "$" .. n
+end
 if SERVER then
     function gbrp.SpawnNPCs()
         local bank1 = ents.Create("gbrp_bank_receptionist")
@@ -226,6 +390,7 @@ if SERVER then
         bar:SetModel("models/alyx.mdl")
         bar:SetPos(Vector(4955.289063,8042.855957,210.012878))
         bar:SetAngles(Angle(0,0,0))
+        bar:SetShopName("bar")
         bar:Spawn()
 
         local gasstation = ents.Create("gbrp_shop")
@@ -289,10 +454,103 @@ if SERVER then
         salesman6:SetPos(Vector(5186.979492,8707.676758,128))
         salesman6:SetAngles(Angle(0,90,0))
         salesman6:Spawn()
+
+        local salesman7 = ents.Create("gbrp_hotdogsalesman")
+        salesman7:SetModel("models/Eli.mdl")
+        salesman7.hotdogpos = Vector(6286.805664,888.787598,-65.55950)
+        salesman7:SetPos(Vector(6341.223145,865.494080,-103))
+        salesman7:SetAngles(Angle(0,180,0))
+        salesman7:Spawn()
+
+        local salesman8 = ents.Create("gbrp_hotdogsalesman")
+        salesman8:SetModel("models/Eli.mdl")
+        salesman8.hotdogpos = Vector(1560.791504,340.471008,-65.559509)
+        salesman8:SetPos(Vector(1601,323,-104))
+        salesman8:SetAngles(Angle(0,180,0))
+        salesman8:Spawn()
+
+        local salesman9 = ents.Create("gbrp_hotdogsalesman")
+        salesman9:SetModel("models/Eli.mdl")
+        salesman9.hotdogpos = Vector(-2793.504395,11675.882813,166.44)
+        salesman9:SetPos(Vector(-2749,11658,130))
+        salesman9:SetAngles(Angle(0,180,0))
+        salesman9:Spawn()
     end
     function gbrp.RemoveHotdogSalesmans()
         for _,npc in pairs(ents.FindByClass("gbrp_hotdogsalesman")) do
             npc:Remove()
+        end
+    end
+    function gbrp.InitDoors()
+        gbrp.doors = {}
+        local counter = 0
+        for doorgroupname,doorgroup in pairs(gbrp.doorgroups) do
+            for _,doormapid in pairs(doorgroup.doors) do
+                counter = counter + 1
+                local door = ents.GetMapCreatedEntity(doormapid)
+                if not IsValid(door) then print("[GBRP] This door is causing problems" .. tostring(doormapid)) break end
+                door:setDoorGroup(doorgroup.attributes.owner)
+                if doorgroup.locked then
+                    door:Fire("lock", "", 0)
+                end
+                gbrp.doors[door:EntIndex()] = doorgroup.attributes
+            end
+        end
+    end
+    function gbrp.SendDoorsData(ply)
+        net.Start("GBRP::doorsinit")
+        net.WriteInt(table.Count(gbrp.doors),32)
+        for k,v in pairs(gbrp.doors) do
+            net.WriteInt(k,32)
+            net.WriteTable(v)
+        end
+        net.Send(ply)
+    end
+    function gbrp.SaveDoors()
+        gbrp.savedDoors = {}
+        for doorgroupname,doorgroup in pairs(gbrp.doorgroups) do
+            for _,doormapid in pairs(doorgroup.doors) do
+                local door = ents.GetMapCreatedEntity(doormapid)
+                if not table.IsEmpty(door:getDoorData()) then
+                    gbrp.savedDoors[doormapid] = {}
+                    gbrp.savedDoors[doormapid].darkrpvars = door:getDoorData()
+                    gbrp.savedDoors[doormapid].locked = door:GetInternalVariable("m_bLocked")
+                end
+            end
+        end
+    end
+    function gbrp.LoadDoors()
+        for doormapid,tab in pairs(gbrp.savedDoors) do
+            local door = ents.GetMapCreatedEntity(doormapid)
+            door:setDoorGroup(tab.darkrpvars.groupOwn)
+            if tab.darkrpvars.owner then
+                door:keysOwn(tab.darkrpvars.owner)
+            end
+            if tab.locked then
+                door:Fire("Lock", "", 0)
+            else
+                door:Fire("Unlock", "", 0)
+            end
+        end
+    end
+    function gbrp.SaveShops()
+        gbrp.savedShops = {}
+        for _,ent in pairs(ents.FindByClass("gbrp_shop")) do
+            gbrp.savedShops[ent:GetShopName()] = {}
+            gbrp.savedShops[ent:GetShopName()].balance = ent:GetBalance()
+            gbrp.savedShops[ent:GetShopName()].dirtyMoney = ent:GetDirtyMoney()
+            gbrp.savedShops[ent:GetShopName()].gangName = ent:GetGangName()
+        end
+    end
+    function gbrp.LoadShops()
+        for _,ent in pairs(ents.FindByClass("gbrp_shop")) do
+            for name,val in pairs(gbrp.savedShops) do
+                if name == ent:GetShopName() then
+                    ent:SetBalance(val.balance)
+                    ent:SetDirtyMoney(val.dirtyMoney)
+                    ent:SetGangName(val.gangName)
+                end
+            end
         end
     end
 end
@@ -332,215 +590,20 @@ SetGlobalInt("mafiaPrivateDoorsCount",0);
 SetGlobalInt("gangBalance",0);
 SetGlobalInt("gangPrivateDoorsCount",0);
 
-
-----------------------------
----- G A N G -- M E T A ----
-----------------------------
-
-local gangMeta = {}
-function gangMeta:GetMembersCount()
-    local count = 0
-    for _,ply in pairs(player.GetAll()) do
-        if gbrp.jobs[team.GetName(ply:Team())].gang == self.name then count = count + 1 end
-    end
-    return count
-end
-function gangMeta:GetShops()
-    local shops = {}
-    for _,ent in pairs(ents.GetAll()) do
-        if ent:GetClass() == "gbrp_shop" and ent:GetGang() == self then table.insert(shops,ent:GetShopName()) end
-    end
-    return shops
-end
-function gangMeta:GetProperties()
-    local propertylist = {}
-    for k,v in pairs(gbrp.doors) do
-        local door = ents.GetByIndex(k)
-        if door:getDoorData().groupOwn == self.name and gbrp.doors[k].typ ~= "shop" then
-            propertylist[gbrp.doors[k].doorgroup] = gbrp.doors[k].typ
-        end
-    end
-    return propertylist
-end
-function gangMeta:GetBalance()
-    return GetGlobalInt(self.name .. "Balance")
-end
-function gangMeta:GetExpenses()
-    return GetGlobalInt(self.name .. "Expenses")
-end
-function gangMeta:GetEarnings()
-    return GetGlobalInt(self.name .. "Earnings")
-end
-function gangMeta:CanAfford(amount)
-    return self:GetBalance() - amount >= 0
-end
-function gangMeta:GetPrivateDoorsCount()
-    return GetGlobalInt(self.name .. "PrivateDoorsCount")
-end
-if SERVER then
-    function gangMeta:AddEarnings(amount)
-        SetGlobalInt(self.name .. "Earnings",self:GetEarnings() + amount)
-    end
-    function gangMeta:AddExpenses(amount)
-        SetGlobalInt(self.name .. "Expenses",self:GetExpenses() + amount)
-    end
-    function gangMeta:SetBalance(val)
-        SetGlobalInt(self.name .. "Balance",val)
-    end
-    function gangMeta:Cash(amount)
-        self:SetBalance(self:GetBalance() + amount)
-        self:AddEarnings(amount)
-    end
-    function gangMeta:Pay(amount)
-        self:SetBalance(self:GetBalance() - amount)
-        self:AddExpenses(amount)
-    end
-    function gangMeta:Reset()
-        for k,v in pairs(gbrp.doors) do
-            local door = ents.GetByIndex(k)
-            if door:getDoorData().groupOwn == self.name and gbrp.doorgroups[gbrp.doors[k].doorgroup].owner ~= self.name then
-                for _,doorid in pairs(gbrp.doorgroups[gbrp.doors[k].doorgroup].doors) do
-                    door = ents.GetMapCreatedEntity(doorid)
-                    door:setDoorGroup(nil)
-                    if door:getDoorOwner() then
-                        door:keysUnOwn(ply)
-                        self:AddPrivateDoor(-1)
-                    end
-                    door:Fire("lock", "", 0)
-                end
-            end
-        end
-        local shops = ents.FindByClass("gbrp_shop")
-        for i,shop in pairs(shops) do
-            if shop:GetGang() == self then
-                shop:SetGang(nil)
-            end
-        end
-    end
-    function gangMeta:SetPrivateDoorsCount(count)
-        return SetGlobalInt(self.name .. "PrivateDoorsCount",count)
-    end
-    function gangMeta:AddPrivateDoor(amount)
-        self:SetPrivateDoorsCount(self:GetPrivateDoorsCount() + amount)
-    end
-end
-
---------------------------
----- P L Y -- M E T A ----
---------------------------
-
-local plyMeta = FindMetaTable("Player")
-function plyMeta:IsGangLeader()
-    return gbrp.jobs[team.GetName(self:Team())].gangLeader;
-end
-function plyMeta:GetGang()
-    return gbrp[gbrp.jobs[team.GetName(self:Team())].gang];
-end
-function plyMeta:GetBalance()
-    return self:GetNWInt("GBRP::balance")
-end
-function plyMeta:CanAfford(amount)
-    return self:GetBalance() - amount >= 0;
-end
-if CLIENT then
-    function plyMeta:BuyShop(shop)
-        local gang = self:GetGang()
-        if shop:GetGang() and shop:GetGang() ~= gang then
-            GAMEMODE:AddNotify("Ce magasin appartient à un autre gang.",1,2)
-        elseif shop:GetGang() == gang then
-            GAMEMODE:AddNotify("Votre gang possède déjà le magasin.",0,2)
-        elseif not self:IsGangLeader() then
-            GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
-        elseif not gang:CanAfford(shop.price) then
-            GAMEMODE:AddNotify("Solde insuffisant.",1,2)
-        elseif #gang:GetShops() >= 4 then
-            GAMEMODE:AddNotify("Votre gang a atteint le nombre maximal de magasins en sa possession.",1,2)
-        else
-            net.Start("GBRP::buyshop")
-            net.WriteEntity(shop)
-            net.SendToServer()
-            surface.PlaySound("gui/gbrp/buy_sell.mp3")
-            GAMEMODE:AddNotify("Vous avez acheté le magasin.",0,2)
-        end
-    end
-    function plyMeta:SellShop(shop)
-        if self:IsGangLeader() then
-            net.Start("GBRP::sellshop")
-            net.WriteEntity(shop)
-            net.SendToServer()
-            surface.PlaySound("gui/gbrp/buy_sell.mp3")
-            GAMEMODE:AddNotify("Vous avez vendu le magasin.",0,2)
-        else
-            GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
-        end
-    end
-    function plyMeta:WithdrawLaunderedMoney(shop)
-        if self:IsGangLeader() then
-            net.Start("GBRP::shopwithdraw")
-            net.WriteEntity(shop)
-            net.SendToServer()
-            surface.PlaySound("gui/gbrp/withdraw.wav")
-            GAMEMODE:AddNotify("Vous avez retiré l'argent blanchis du magasin.",0,2)
-        else
-            GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
-        end
-    end
-    function plyMeta:DropCash(frame)
-        local textEntry = vgui.Create("DTextEntry",frame)
-        textEntry:SetSize(200,25)
-        textEntry:SetPlaceholderText("ex: 500")
-        textEntry:Center()
-        textEntry:RequestFocus()
-        textEntry.OnEnter = function()
-            local amount = tonumber(textEntry:GetValue())
-            if amount > 0 and self:getDarkRPVar("money") - amount >= 0 then
-                net.Start("GBRP::shopdeposit")
-                net.WriteUInt(amount,32)
-                net.WriteEntity(frame.shop)
-                net.SendToServer()
-                surface.PlaySound("gui/gbrp/dropcash.wav")
-                GAMEMODE:AddNotify("Vous avez déposé " .. DarkRP.formatMoney( amount ) .. ".",0,2)
-            elseif amount <= 0 then
-                GAMEMODE:AddNotify("Valeur non valide.",1,2)
-            else
-                GAMEMODE:AddNotify("Solde insuffisant.",1,2)
-            end
-            textEntry:Remove()
-        end
-    end
-end
-if SERVER then
-    function plyMeta:AddLaunderedMoney(amount)
-        self:SetNWInt("GBRP::launderedmoney", self:GetNWInt("GBRP::launderedmoney") + amount)
-    end
-    function plyMeta:Cash(pay)
-        self:SetNWInt("GBRP::balance",self:GetBalance() + pay);
-        sql.Query("update gbrp set balance = " .. self:GetNWInt("GBRP::balance") .. " where steamid64 = " .. self:SteamID64() .. ";");
-    end
-    function plyMeta:Pay(amount)
-        self:SetNWInt("GBRP::balance",self:GetBalance() - amount);
-        sql.Query("update gbrp set balance = " .. self:GetNWInt("GBRP::balance") .. " where steamid64 = " .. self:SteamID64() .. ";");
-    end
-end
-
---------------------------
--- G A N G S -- I N I T --
---------------------------
-
 gbrp.yakuzas = {
     subject = "Les yakuzas",
     name = "yakuzas"
 }
-table.Merge(gbrp.yakuzas,gangMeta)
+table.Inherit(gbrp.yakuzas,gangMeta)
 
 gbrp.mafia = {
     subject = "La Mafia",
     name = "mafia"
 }
-table.Merge(gbrp.mafia,gangMeta)
+table.Inherit(gbrp.mafia,gangMeta)
 
 gbrp.gang = {
     subject = "Les gangsters",
     name = "gang"
 }
-table.Merge(gbrp.gang,gangMeta)
+table.Inherit(gbrp.gang,gangMeta)
