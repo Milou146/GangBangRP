@@ -503,7 +503,7 @@ net.Receive("GBRP::jewelrystoreReception",function()
                 surface.DrawText(gbrp.formatMoney(shop:GetBalance()))
 
                 GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarframeMat)(84,385,1053,27)
-                GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(84,385,1053 * shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()), 27)
+                GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(84,385,1053 * math.Round(shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()),2), 27)
 
                 surface.SetFont("Bank")
                 surface.SetTextColor(0,0,0,255)
@@ -617,7 +617,7 @@ net.Receive("GBRP::clubReception",function()
                 surface.DrawText(gbrp.formatMoney(shop:GetBalance()))
 
                 GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarframeMat)(157,381,1053,27)
-                GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(157,381,1053 * shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()), 27)
+                GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(157,381,1053 * math.Round(shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()),2), 27)
 
                 surface.SetFont("Bank")
                 surface.SetTextColor(255,255,255,255)
@@ -846,7 +846,7 @@ net.Receive("GBRP::gasstationReception",function()
             surface.DrawText(gbrp.formatMoney(shop:GetBalance()))
 
             GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarframeMat)(174,637,1053,27)
-            GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(174,637,1053 * shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()), 27)
+            GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(174,637,1053 * math.Round(shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()),2), 27)
 
             surface.SetFont("Bank")
             surface.SetTextPos(616,563)
@@ -1095,7 +1095,7 @@ net.Receive("GBRP::gunshopReception",function()
             surface.DrawText(gbrp.formatMoney(shop.value))
 
             GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarframeMat)(66,620,1053,27)
-            GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(66,620,1053 * shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()), 27)
+            GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(66,620,1053 * math.Round(shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()),2), 27)
 
             surface.SetFont("BankLarge")
             surface.SetTextPos(563,569)
@@ -1263,7 +1263,7 @@ net.Receive("GBRP::repairgarageReception",function()
                 surface.DrawText(gbrp.formatMoney(shop:GetBalance()))
 
                 GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarframeMat)(66,394,1053,27)
-                GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(66,394,1053 * shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()), 27)
+                GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(66,394,1053 * math.Round(shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()),2), 27)
 
                 surface.SetFont("BankLarge")
                 surface.SetTextPos(561,338)
@@ -1417,7 +1417,7 @@ net.Receive("GBRP::drugstoreReception",function()
                 surface.DrawText(gbrp.formatMoney(shop:GetBalance()))
 
                 GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarframeMat)(80,593,1053,27)
-                GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(80,593,1053 * shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()), 27,Color(0,255,0,255))
+                GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(80,593,1053 * math.Round(shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()),2), 27,Color(0,255,0,255))
 
                 surface.SetFont("BankLarge")
                 surface.SetTextColor(0,0,0)
@@ -1551,7 +1551,7 @@ net.Receive("GBRP::barReception",function()
             surface.DrawText(gbrp.formatMoney(shop.value))
 
             GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarframeMat)(157,381,1053,27)
-            GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(157,381,1053 * shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()), 27)
+            GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(157,381,1053 * math.Round(shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()),2), 27)
 
             surface.SetFont("Bank")
             surface.SetTextColor(255,255,255,255)
