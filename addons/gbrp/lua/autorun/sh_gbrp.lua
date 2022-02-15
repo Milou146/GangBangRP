@@ -159,15 +159,15 @@ if CLIENT then
         textEntry:RequestFocus()
         textEntry.OnEnter = function()
             local amount = tonumber(textEntry:GetValue())
-            if amount > 0 and self:getDarkRPVar("money") - amount >= 0 then
+            if amount > 0 and self:getDarkRPVar("money") - amount > 4 then
                 net.Start("GBRP::shopdeposit")
                 net.WriteUInt(amount,32)
                 net.WriteEntity(frame.shop)
                 net.SendToServer()
                 surface.PlaySound("gui/gbrp/dropcash.wav")
                 GAMEMODE:AddNotify("Vous avez déposé " .. DarkRP.formatMoney( amount ) .. ".",0,2)
-            elseif amount <= 0 then
-                GAMEMODE:AddNotify("Valeur non valide.",1,2)
+            elseif amount <= 4 then
+                GAMEMODE:AddNotify("Veuillez mettre au moins $5",1,2)
             else
                 GAMEMODE:AddNotify("Solde insuffisant.",1,2)
             end
