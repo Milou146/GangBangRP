@@ -1,3 +1,4 @@
+if engine.ActiveGamemode() ~= "DarkRP" then return end
 --------------------------
 -- G B R P -- T A B L E --
 --------------------------

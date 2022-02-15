@@ -45,9 +45,9 @@ TEAM_NYPD = DarkRP.createJob("N.Y.P.D", {
 --------------------------------------------------------------------------------
 TEAM_NYPD1 = DarkRP.createJob("Commissaire", {
     color = Color(0, 0, 230, 255),
-    model = {"models/sentry/gtav/lspd/fcopbpm.mdl", "models/sentry/gtav/lspd/fcopwpm.mdl", "models/sentry/gtav/lspd/vtrafcoppm.mdl","door_ram"},
+    model = {"models/sentry/gtav/lspd/fcopbpm.mdl", "models/sentry/gtav/lspd/fcopwpm.mdl", "models/sentry/gtav/lspd/vtrafcoppm.mdl"},
     description = [[Commissaire de la police, dirigez vos agents de façon efficace et protégez la ville.]],
-    weapons = {"weapon_tg_fists", "pocket", "keys", "weaponchecker","weapon_frost_lidargun"},
+    weapons = {"weapon_tg_fists", "pocket", "keys", "weaponchecker","weapon_frost_lidargun","door_ram"},
     command = "cnypd",
     max = 1,
     salary = 10,
