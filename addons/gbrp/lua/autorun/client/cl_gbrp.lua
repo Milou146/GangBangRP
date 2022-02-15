@@ -1,4 +1,4 @@
-if engine.ActiveGamemode() ~= "DarkRP" then return end
+if engine.ActiveGamemode() ~= "darkrp" then return end
 -------------------------------
 -- M I S C E L L A N E O U S --
 -------------------------------
