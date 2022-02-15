@@ -1263,7 +1263,7 @@ net.Receive("GBRP::repairgarageReception",function()
                 surface.DrawText(gbrp.formatMoney(shop:GetBalance()))
 
                 GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarframeMat)(66,394,1053,27)
-                GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(66,364,1053 * shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()), 27)
+                GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(66,394,1053 * shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()), 27)
 
                 surface.SetFont("BankLarge")
                 surface.SetTextPos(561,338)
