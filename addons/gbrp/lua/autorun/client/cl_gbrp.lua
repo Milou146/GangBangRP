@@ -320,6 +320,9 @@ hook.Add("HUDPaint","GBRP::HUD",function()
         surface.DrawTexturedRect(1842,981,46,84)
     end
 end)
+hook.Add("HUDDrawDoorData","GBRP::HUDDrawDoorData",function()
+    return true
+end)
 
 -----------
 -- N E T --

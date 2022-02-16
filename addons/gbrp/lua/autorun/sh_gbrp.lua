@@ -594,16 +594,16 @@ gbrp.yakuzas = {
     subject = "Les yakuzas",
     name = "yakuzas"
 }
-table.Inherit(gbrp.yakuzas,gangMeta)
+table.Merge(gbrp.yakuzas,gangMeta)
 
 gbrp.mafia = {
     subject = "La Mafia",
     name = "mafia"
 }
-table.Inherit(gbrp.mafia,gangMeta)
+table.Merge(gbrp.mafia,gangMeta)
 
 gbrp.gang = {
     subject = "Les gangsters",
     name = "gang"
 }
-table.Inherit(gbrp.gang,gangMeta)
+table.Merge(gbrp.gang,gangMeta)
