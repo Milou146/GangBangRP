@@ -36,7 +36,7 @@ function BODYMAN:PushBuffer( ply )
 	for _,v in ipairs(ply:GetBodyGroups()) do
 		table.insert( groups, { id = v.id, val = ply:GetBodygroup( v.id ) } )
 	end
-	local key = "id64_"..ply:SteamID64()
+	local key = "id64_" .. ply:SteamID64()
 	bodygroupBuffer[ key ] = bodygroupBuffer[ key ] or {}
 
 	bodygroupBuffer[ key ][ tostring(ply:GetModel()) ] = {
@@ -53,13 +53,13 @@ function BODYMAN:SaveBuffer()
 	--PrintTable(bodygroupBuffer)
 	for id64,mdls in pairs( bodygroupBuffer ) do
 		for _,data in pairs(mdls) do
-			local res = sql.Query("SELECT * FROM bodyman_persist WHERE sid64 = '"..id64.."' AND mdl = '"..data.mdl.."'")
+			local res = sql.Query("SELECT * FROM bodyman_persist WHERE sid64 = '" .. id64 .. "' AND mdl = '" .. data.mdl .. "'")
 			if res ~= false then
 				if res == nil then
-					sql.Query("INSERT INTO bodyman_persist VALUES ('"..id64.."', '"..data.mdl.."', '"..data.bgs.."', '"..data.skn.."' )")
+					sql.Query("INSERT INTO bodyman_persist VALUES ('" .. id64 .. "', '" .. data.mdl .. "', '" .. data.bgs .. "', '" .. data.skn .. "' )")
 				else
-					sql.Query("UPDATE bodyman_persist SET bgs = '"..data.bgs.."' WHERE sid64 = '"..id64.."' AND mdl = '"..data.mdl.."'")
-					sql.Query("UPDATE bodyman_persist SET skn = '"..data.skn.."' WHERE sid64 = '"..id64.."' AND mdl = '"..data.mdl.."'")
+					sql.Query("UPDATE bodyman_persist SET bgs = '" .. data.bgs .. "' WHERE sid64 = '" .. id64 .. "' AND mdl = '" .. data.mdl .. "'")
+					sql.Query("UPDATE bodyman_persist SET skn = '" .. data.skn .. "' WHERE sid64 = '" .. id64 .. "' AND mdl = '" .. data.mdl .. "'")
 				end
 			else
 				print("Something went terribly wrong with the SQLite in Bodygroupr.")
@@ -71,18 +71,16 @@ function BODYMAN:SaveBuffer()
 end
 
 function BODYMAN:RestoreLoadout( ply )
-	local id64 = "id64_"..ply:SteamID64()
+	local id64 = "id64_" .. ply:SteamID64()
 	local mdl = ply:GetModel()
-	local res = sql.Query("SELECT * FROM bodyman_persist WHERE sid64 = '"..id64.."' AND mdl = '"..mdl.."'")
-	if res ~= false then
-		if res ~= nil then
-			local skn = res[1].skn
-			local bgs = util.JSONToTable(res[1].bgs)
-			ply:SetSkin( skn )
-			for _,b in ipairs( bgs ) do
-				--print(b.id,b.val)
-				ply:SetBodygroup(b.id,b.val)
-			end
+	local res = sql.Query("SELECT * FROM bodyman_persist WHERE sid64 = '" .. id64 .. "' AND mdl = '" .. mdl .. "'")
+	if res then
+		local skn = res[1].skn
+		local bgs = util.JSONToTable(res[1].bgs)
+		ply:SetSkin( skn )
+		for _,b in ipairs( bgs ) do
+			--print(b.id,b.val)
+			ply:SetBodygroup(b.id,b.val)
 		end
 	end
 end
@@ -92,7 +90,7 @@ net.Receive("bodyman_model_change", function( len, ply )
 	local newModel = oldModel
 
 	if BODYMAN:PlayerCommandIsThrottled(ply, "bodyman_model_change") then
-		print(ply:Nick().." ("..ply:SteamID64()..") is being throttled from changing models")
+		print(ply:Nick() .. " (" .. ply:SteamID64() .. ") is being throttled from changing models")
 		return false
 	end
 
@@ -100,7 +98,7 @@ net.Receive("bodyman_model_change", function( len, ply )
 		return false
 	end
 
-	if (not BODYMAN:CloseEnoughCloset( ply )) and (BODYMAN.ClosetsOnly) then return false end
+	if (not BODYMAN:CloseEnoughCloset( ply )) and BODYMAN.ClosetsOnly then return false end
 
 	local job = ply:getJobTable()
 
@@ -111,6 +109,7 @@ net.Receive("bodyman_model_change", function( len, ply )
 		if playermodels[idx] then
 			newModel = playermodels[idx]
 			ply:SetModel(newModel)
+			ply:SetupHands()
 			timer.Simple(0.5, function() ply:SendLua( [[BODYMAN:RefreshAppearanceMenu()]] ) end )
 		end
 	end
@@ -129,7 +128,7 @@ net.Receive("bodygroups_change", function(len, ply)
 		return false
 	end
 
-	if (not BODYMAN:CloseEnoughCloset( ply )) and (BODYMAN.ClosetsOnly) then return false end
+	if not BODYMAN:CloseEnoughCloset( ply ) and BODYMAN.ClosetsOnly then return false end
 
 	local data = net.ReadTable()
 
@@ -142,57 +141,36 @@ net.Receive("bodygroups_change", function(len, ply)
 	data[2] = math.Round(data[2])
 
 	local curgroups = ply:GetBodyGroups()
-	if curgroups[data[1]+1] then
-		if curgroups[data[1]+1].submodels[data[2]] then
-		else
-			return false
-		end
+	if curgroups[data[1] + 1] then return false end
+
+	ply.bodygroups[ply:GetModel()][data[1]] = data[2]
+
+	-- check if the bodygroup is allowed --
+	local name = ply:GetBodygroupName( data[1] )
+	local job = ply:getJobTable()
+	local allowedbodygroups = {}
+	local allowed = false
+
+	if job.bodygroups then
+		allowedbodygroups = job.bodygroups
 	else
-		return false
+		allowed = true
 	end
 
-		ply.bodygroups[ply:GetModel()][data[1]] = data[2]
 
-		-- check if the bodygroup is allowed --
-		local name = ply:GetBodygroupName( data[1] )
-		local job = ply:getJobTable()
-		local allowedbodygroups = {}
-		local allowed = false
 
-		if job.bodygroups then
-			allowedbodygroups = job.bodygroups
-		else
-			for i = 2, #ply:GetBodyGroups() do
-				local bg = ply:GetBodyGroups()[i]
-				if bg then
-					for k,v in pairs( bg ) do
-						if k == "name" then
-							allowedbodygroups[v] = {}
-							for k2, v2 in pairs( bg["submodels"] ) do
-								table.insert( allowedbodygroups[v], k2 )
-							end
-						end
-					end	
-				end
+	if allowedbodygroups ~= {} and allowedbodygroups[name] then
+		for k,v in pairs(allowedbodygroups[name]) do
+			if v == data[2] then
+				allowed = true
 			end
 		end
+	end
 
-
-
-		if allowedbodygroups ~= {} then
-			if allowedbodygroups[name] then
-				for k,v in pairs(allowedbodygroups[name]) do
-					if v == data[2] then
-						allowed = true
-					end
-				end
-			end
-		end
-
-		if allowed then
-			ply:SetBodygroup(data[1], data[2])
-			BodygroupManagerLog( ply:Nick().." changed their bodygroup: ("..ply:GetBodygroupName(data[1])..","..tostring(data[2])..")" )
-		end
+	if allowed then
+		ply:SetBodygroup(data[1], data[2])
+		-- BodygroupManagerLog( ply:Nick().." changed their bodygroup: (" .. ply:GetBodygroupName(data[1])..","..tostring(data[2])..")" )
+	end
 
 	ply.LastJob_bodygroupr = job.command or "none"
 	ply.LastPlayermodel = ply:GetModel()
@@ -230,7 +208,7 @@ net.Receive("skins_change", function(len, ply)
 		return false
 	end
 
-	if (not BODYMAN:CloseEnoughCloset( ply )) and (BODYMAN.ClosetsOnly) then return false end
+	if (not BODYMAN:CloseEnoughCloset( ply )) and BODYMAN.ClosetsOnly then return false end
 
 	local wants = net.ReadInt(8) -- the skin that they wants
 
@@ -264,11 +242,11 @@ net.Receive("skins_change", function(len, ply)
 
 		if allowed then
 			ply:SetSkin(wants)
-			BodygroupManagerLog( ply:Nick().." changed their skin: ("..tostring(wants)..")" )
+			BodygroupManagerLog( ply:Nick() .. " changed their skin: (" .. tostring(wants) .. ")" )
 		end
 	else
 		ply:SetSkin( wants )
-		BodygroupManagerLog( ply:Nick().." changed their skin: ("..tostring(wants)..")" )
+		BodygroupManagerLog( ply:Nick() .. " changed their skin: (" .. tostring(wants) .. ")" )
 	end
 
 	ply.LastJob_bodygroupr = job.command or "none"

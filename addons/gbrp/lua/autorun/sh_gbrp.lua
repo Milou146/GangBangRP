@@ -300,6 +300,31 @@ gbrp.foods = {
     ["water"] = {model = "models/crunchy/props/eft_props/waterbottle.mdl", energy = 16, price = 6},
     ["hotdog"] = {model = "models/food/hotdog.mdl", energy = 16, price = 6},
 }
+gbrp.c_arms = {
+    ["models/sentry/sentryoldmob/greaser/sentrygreasemale2pm.mdl"] = {[2] = {
+        bodygroups = {
+            [0] = 0,
+            [1] = 0,
+            [2] = 0,
+            [3] = 1,
+            [4] = 2,
+            [5] = 2,
+            [6] = 2,
+        },
+        skins = {
+            [0] = 0,
+            [1] = 1,
+            [2] = 2,
+            [3] = 2,
+            [4] = 3,
+            [5] = 5,
+            [6] = 4,
+        }}
+    },
+}
+gbrp.c_arms["models/sentry/sentryoldmob/greaser/sentrygreasemale4pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/greaser/sentrygreasemale2pm.mdl"]
+gbrp.c_arms["models/sentry/sentryoldmob/greaser/sentrygreasemale7pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/greaser/sentrygreasemale2pm.mdl"]
+gbrp.c_arms["models/sentry/sentryoldmob/greaser/sentrygreasemale9pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/greaser/sentrygreasemale2pm.mdl"]
 function gbrp.formatMoney(n)
     if not n then return "$0" end
 
