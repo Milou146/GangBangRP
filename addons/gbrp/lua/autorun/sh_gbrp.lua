@@ -187,6 +187,22 @@ if SERVER then
         self:SetNWInt("GBRP::balance",self:GetBalance() - amount);
         sql.Query("update gbrp set balance = " .. self:GetNWInt("GBRP::balance") .. " where steamid64 = " .. self:SteamID64() .. ";");
     end
+    function plyMeta:SetupHands(ply)
+        ply = ply or self
+        local model = self:GetModel()
+        local hands = self:GetHands()
+        hands = ents.Create( "gmod_hands" )
+        hands:DoSetup(self, ply)
+        if gbrp.c_arms[model] then
+            for k,v in pairs(gbrp.c_arms[model]) do
+                hands:SetBodygroup(v.bgid, v.bodygroups[self:GetBodygroup(k)])
+                if v.skins then
+                    hands:SetSkin(v.skins[self:GetBodygroup(k)])
+                end
+            end
+        end
+        hands:Spawn()
+    end
 end
 
 --------------------------
@@ -316,15 +332,54 @@ gbrp.c_arms = {
             [1] = 1,
             [2] = 2,
             [3] = 2,
-            [4] = 3,
-            [5] = 5,
-            [6] = 4,
-        }}
+            [4] = 0,
+            [5] = 1,
+            [6] = 2,
+        },
+        bgid = 0
+    }
+    },
+    ["models/sentry/sentryoldmob/mafia/sentrymobmale2pm.mdl"] = {
+        [2] = {
+            bodygroups = {
+                [0] = 0,
+                [1] = 0,
+                [2] = 0,
+                [3] = 1,
+                [4] = 1,
+                [5] = 1,
+                [6] = 0,
+                [7] = 0,
+            },
+            skins = {
+                [0] = 0,
+                [1] = 1,
+                [2] = 3,
+                [3] = 0,
+                [4] = 1,
+                [5] = 2,
+                [6] = 4,
+                [7] = 2,
+            },
+            bgid = 0
+        },
+        [6] = {
+            bodygroups = {
+                [0] = 0,
+                [1] = 1,
+            },
+            bgid = 1
+        }
     },
 }
 gbrp.c_arms["models/sentry/sentryoldmob/greaser/sentrygreasemale4pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/greaser/sentrygreasemale2pm.mdl"]
 gbrp.c_arms["models/sentry/sentryoldmob/greaser/sentrygreasemale7pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/greaser/sentrygreasemale2pm.mdl"]
 gbrp.c_arms["models/sentry/sentryoldmob/greaser/sentrygreasemale9pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/greaser/sentrygreasemale2pm.mdl"]
+gbrp.c_arms["models/sentry/sentryoldmob/mafia/sentrymobmale4pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/mafia/sentrymobmale2pm.mdl"]
+gbrp.c_arms["models/sentry/sentryoldmob/mafia/sentrymobmale6pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/mafia/sentrymobmale2pm.mdl"]
+gbrp.c_arms["models/sentry/sentryoldmob/mafia/sentrymobmale7pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/mafia/sentrymobmale2pm.mdl"]
+gbrp.c_arms["models/sentry/sentryoldmob/mafia/sentrymobmale8pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/mafia/sentrymobmale2pm.mdl"]
+gbrp.c_arms["models/sentry/sentryoldmob/mafia/sentrymobmale9pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/mafia/sentrymobmale2pm.mdl"]
 function gbrp.formatMoney(n)
     if not n then return "$0" end
 

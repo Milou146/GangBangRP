@@ -509,21 +509,23 @@ function BODYMAN:RefreshAppearanceMenu()
                     function btn:DoClick()
                         local ent = BODYMAN.ClientModelPanel.Entity
                         local bgid = ent:FindBodygroupByName(self.bg_name)
+                        local model = ply:GetModel()
 
-                        if gbrp.c_arms[ply:GetModel()] and gbrp.c_arms[ply:GetModel()][bgid] then
+                        if gbrp.c_arms[model] and gbrp.c_arms[model][bgid] then
                             local hands = ply:GetHands()
-                            hands:SetBodygroup(0, gbrp.c_arms[ply:GetModel()][bgid].bodygroups[self.bg_num])
-                            hands:SetSkin(gbrp.c_arms[ply:GetModel()][bgid].skins[self.bg_num])
+                            hands:SetBodygroup(gbrp.c_arms[model][bgid].bgid, gbrp.c_arms[model][bgid].bodygroups[self.bg_num])
+
+                            if gbrp.c_arms[model][bgid].skins then
+                                hands:SetSkin(gbrp.c_arms[model][bgid].skins[self.bg_num])
+                            end
                         end
 
-                        if bgid ~= -1 then
-                            ent:SetBodygroup(bgid, self.bg_num)
-                            net.Start("bodygroups_change")
+                        ent:SetBodygroup(bgid, self.bg_num)
+                        net.Start("bodygroups_change")
 
-                            net.WriteTable({bgid, self.bg_num})
+                        net.WriteTable({bgid, self.bg_num})
 
-                            net.SendToServer()
-                        end
+                        net.SendToServer()
                     end
                 end
             end

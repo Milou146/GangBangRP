@@ -323,7 +323,6 @@ end)
 hook.Add("HUDDrawDoorData","GBRP::HUDDrawDoorData",function()
     return true
 end)
-
 -----------
 -- N E T --
 -----------
