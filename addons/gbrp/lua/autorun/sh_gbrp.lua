@@ -317,27 +317,35 @@ gbrp.foods = {
     ["hotdog"] = {model = "models/food/hotdog.mdl", energy = 16, price = 6},
 }
 gbrp.c_arms = {
-    ["models/sentry/sentryoldmob/greaser/sentrygreasemale2pm.mdl"] = {[2] = {
-        bodygroups = {
-            [0] = 0,
-            [1] = 0,
-            [2] = 0,
-            [3] = 1,
-            [4] = 2,
-            [5] = 2,
-            [6] = 2,
+    ["models/sentry/sentryoldmob/greaser/sentrygreasemale2pm.mdl"] = {
+        [2] = {
+            bodygroups = {
+                [0] = 0,
+                [1] = 0,
+                [2] = 0,
+                [3] = 1,
+                [4] = 2,
+                [5] = 2,
+                [6] = 2,
+            },
+            skins = {
+                [0] = 0,
+                [1] = 1,
+                [2] = 2,
+                [3] = 2,
+                [4] = 0,
+                [5] = 1,
+                [6] = 2,
+            },
+            bgid = 0
         },
-        skins = {
-            [0] = 0,
-            [1] = 1,
-            [2] = 2,
-            [3] = 2,
-            [4] = 0,
-            [5] = 1,
-            [6] = 2,
-        },
-        bgid = 0
-    }
+        [6] = {
+            bodygroups = {
+                [0] = 0,
+                [1] = 1,
+            },
+            bgid = 1
+        }
     },
     ["models/sentry/sentryoldmob/mafia/sentrymobmale2pm.mdl"] = {
         [2] = {
@@ -371,6 +379,36 @@ gbrp.c_arms = {
             bgid = 1
         }
     },
+    ["models/sentry/sentryoldmob/irish/sentryirishmale2pm.mdl"] = {
+        [2] = {
+            bodygroups = {
+                [0] = 0,
+                [1] = 0,
+                [2] = 0,
+                [3] = 1,
+                [4] = 1,
+                [5] = 1,
+                [6] = 1,
+            },
+            skins = {
+                [0] = 0,
+                [1] = 1,
+                [2] = 3,
+                [3] = 3,
+                [4] = 0,
+                [5] = 1,
+                [6] = 2,
+            },
+            bgid = 0
+        },
+        [6] = {
+            bodygroups = {
+                [0] = 0,
+                [1] = 1,
+            },
+            bgid = 1
+        }
+    },
 }
 gbrp.c_arms["models/sentry/sentryoldmob/greaser/sentrygreasemale4pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/greaser/sentrygreasemale2pm.mdl"]
 gbrp.c_arms["models/sentry/sentryoldmob/greaser/sentrygreasemale7pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/greaser/sentrygreasemale2pm.mdl"]
@@ -380,6 +418,11 @@ gbrp.c_arms["models/sentry/sentryoldmob/mafia/sentrymobmale6pm.mdl"] = gbrp.c_ar
 gbrp.c_arms["models/sentry/sentryoldmob/mafia/sentrymobmale7pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/mafia/sentrymobmale2pm.mdl"]
 gbrp.c_arms["models/sentry/sentryoldmob/mafia/sentrymobmale8pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/mafia/sentrymobmale2pm.mdl"]
 gbrp.c_arms["models/sentry/sentryoldmob/mafia/sentrymobmale9pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/mafia/sentrymobmale2pm.mdl"]
+gbrp.c_arms["models/sentry/sentryoldmob/irish/sentryirishmale4pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/irish/sentryirishmale2pm.mdl"]
+gbrp.c_arms["models/sentry/sentryoldmob/irish/sentryirishmale6pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/irish/sentryirishmale2pm.mdl"]
+gbrp.c_arms["models/sentry/sentryoldmob/irish/sentryirishmale7pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/irish/sentryirishmale2pm.mdl"]
+gbrp.c_arms["models/sentry/sentryoldmob/irish/sentryirishmale8pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/irish/sentryirishmale2pm.mdl"]
+gbrp.c_arms["models/sentry/sentryoldmob/irish/sentryirishmale9pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/irish/sentryirishmale2pm.mdl"]
 function gbrp.formatMoney(n)
     if not n then return "$0" end
 
