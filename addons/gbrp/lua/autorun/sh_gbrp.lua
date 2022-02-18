@@ -339,7 +339,7 @@ gbrp.c_arms = {
             },
             bgid = 0
         },
-        [6] = {
+        [5] = {
             bodygroups = {
                 [0] = 0,
                 [1] = 1,
@@ -409,6 +409,23 @@ gbrp.c_arms = {
             bgid = 1
         }
     },
+    ["models/sentry/sentryoldmob/oldgoons/sentrybusi1male2pm.mdl"] = {
+        [2] = {
+            bodygroups = {
+                [0] = 0,
+                [1] = 0,
+                [2] = 0,
+                [3] = 0,
+            },
+            skins = {
+                [0] = 3,
+                [1] = 0,
+                [2] = 1,
+                [3] = 2,
+            },
+            bgid = 0
+        }
+    },
 }
 gbrp.c_arms["models/sentry/sentryoldmob/greaser/sentrygreasemale4pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/greaser/sentrygreasemale2pm.mdl"]
 gbrp.c_arms["models/sentry/sentryoldmob/greaser/sentrygreasemale7pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/greaser/sentrygreasemale2pm.mdl"]
@@ -423,6 +440,11 @@ gbrp.c_arms["models/sentry/sentryoldmob/irish/sentryirishmale6pm.mdl"] = gbrp.c_
 gbrp.c_arms["models/sentry/sentryoldmob/irish/sentryirishmale7pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/irish/sentryirishmale2pm.mdl"]
 gbrp.c_arms["models/sentry/sentryoldmob/irish/sentryirishmale8pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/irish/sentryirishmale2pm.mdl"]
 gbrp.c_arms["models/sentry/sentryoldmob/irish/sentryirishmale9pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/irish/sentryirishmale2pm.mdl"]
+gbrp.c_arms["models/sentry/sentryoldmob/oldgoons/sentrybusi1male4pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/oldgoons/sentrybusi1male2pm.mdl"]
+gbrp.c_arms["models/sentry/sentryoldmob/oldgoons/sentrybusi1male6pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/oldgoons/sentrybusi1male2pm.mdl"]
+gbrp.c_arms["models/sentry/sentryoldmob/oldgoons/sentrybusi1male7pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/oldgoons/sentrybusi1male2pm.mdl"]
+gbrp.c_arms["models/sentry/sentryoldmob/oldgoons/sentrybusi1male8pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/oldgoons/sentrybusi1male2pm.mdl"]
+gbrp.c_arms["models/sentry/sentryoldmob/oldgoons/sentrybusi1male9pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/oldgoons/sentrybusi1male2pm.mdl"]
 function gbrp.formatMoney(n)
     if not n then return "$0" end
 
