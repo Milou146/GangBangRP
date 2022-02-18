@@ -36,6 +36,7 @@ local function FormatNumber(n)
         return string.Left(n,#n - 9) .. "Mds"
     end
 end
+
 -----------------
 -- P A N E L S --
 -----------------
@@ -214,11 +215,23 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,darkrpframe)
             privatize:SetPos(237,45)
             privatize:SetImage("gui/gbrp/property/privatize.png")
             privatize:SizeToContents()
+            privatize:SetEnabled(ent:getDoorData().owner ~= ply:UserID() and gang:GetPrivateDoorsCount() < 2)
+
+            local collectivize = vgui.Create("GBRPButton",frame)
+            collectivize:SetPos(212,45)
+            collectivize:SetImage("gui/gbrp/property/collectivize.png")
+            collectivize:SizeToContents()
+            collectivize:SetEnabled(ent:getDoorData().owner == ply:UserID())
             privatize.DoClick = function()
                 RunConsoleCommand("privatizedoor",tostring(ent:EntIndex()))
                 privatize:SetEnabled(false)
+                collectivize:SetEnabled(true)
             end
-            privatize:SetEnabled(ent:getDoorData().owner ~= ply:UserID() and gang:GetPrivateDoorsCount() < 2)
+            collectivize.DoClick = function()
+                RunConsoleCommand("collectivizedoor",tostring(ent:EntIndex()))
+                collectivize:SetEnabled(false)
+                privatize:SetEnabled(true)
+            end
         else
             GAMEMODE:AddNotify("Cette propriété a déjà un propriétaire.",1,2)
         end
@@ -323,6 +336,7 @@ end)
 hook.Add("HUDDrawDoorData","GBRP::HUDDrawDoorData",function()
     return true
 end)
+
 -----------
 -- N E T --
 -----------
@@ -1542,7 +1556,11 @@ net.Receive("GBRP::barReception",function()
             surface.SetTextColor(0,0,0,255)
             surface.SetFont("Bank")
             surface.SetTextPos(166,640)
-            surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
+            if ply:IsGangLeader() then
+                surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
+            else
+                surface.DrawText("ARGENT SALE: " .. gbrp.formatMoney(ply.DarkRPVars.money))
+            end
 
             surface.SetFont("BankSmall")
             surface.SetTextPos(422,519)

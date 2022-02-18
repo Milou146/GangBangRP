@@ -280,3 +280,12 @@ concommand.Add("privatizedoor",function(ply,cmd,args)
         ply:GetGang():AddPrivateDoor(1)
     end
 end)
+concommand.Add("collectivizedoor",function(ply,cmd,args)
+    local door = ents.GetByIndex(args[1])
+    local gang = ply:GetGang()
+    if ply:IsAdmin() or ply:IsGangLeader() and door:getDoorData().owner == ply then
+        door:setDoorGroup(gang.name)
+        door:keysUnOwn(ply)
+        gang:AddPrivateDoor(-1)
+    end
+end)
