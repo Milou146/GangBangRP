@@ -316,6 +316,9 @@ gbrp.foods = {
     ["water"] = {model = "models/crunchy/props/eft_props/waterbottle.mdl", energy = 16, price = 6},
     ["hotdog"] = {model = "models/food/hotdog.mdl", energy = 16, price = 6},
 }
+gbrp.customMapEntities = {
+    [2587] = {}
+}
 gbrp.c_arms = {
     ["models/sentry/sentryoldmob/greaser/sentrygreasemale2pm.mdl"] = {
         [2] = {

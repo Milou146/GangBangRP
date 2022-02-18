@@ -497,36 +497,29 @@ function BODYMAN:RefreshAppearanceMenu()
 
             for _, i in ipairs(bgtable) do
                 local ply = LocalPlayer()
+                local btn = cpanlist:Add("arizard_button")
+                btn:SetSize(cpanlist:GetWide() / 4 - 16, 28)
+                btn:SetText(tostring(i))
+                btn.bg_name = bgname
+                btn.bg_num = i
+                btn:SetColors(HexColor("#2980b9"), HexColor("#3498db"))
 
-                if BODYMAN:HasBodyGroup(ply, bgname, i) then
-                    local btn = cpanlist:Add("arizard_button")
-                    btn:SetSize(cpanlist:GetWide() / 4 - 16, 28)
-                    btn:SetText(tostring(i))
-                    btn.bg_name = bgname
-                    btn.bg_num = i
-                    btn:SetColors(HexColor("#2980b9"), HexColor("#3498db"))
+                function btn:DoClick()
+                    local ent = BODYMAN.ClientModelPanel.Entity
+                    local bgid = ent:FindBodygroupByName(self.bg_name)
+                    local model = ply:GetModel()
 
-                    function btn:DoClick()
-                        local ent = BODYMAN.ClientModelPanel.Entity
-                        local bgid = ent:FindBodygroupByName(self.bg_name)
-                        local model = ply:GetModel()
-
-                        if gbrp.c_arms[model] and gbrp.c_arms[model][bgid] then
-                            local hands = ply:GetHands()
-                            hands:SetBodygroup(gbrp.c_arms[model][bgid].bgid, gbrp.c_arms[model][bgid].bodygroups[self.bg_num])
-
-                            if gbrp.c_arms[model][bgid].skins then
-                                hands:SetSkin(gbrp.c_arms[model][bgid].skins[self.bg_num])
-                            end
-                        end
-
-                        ent:SetBodygroup(bgid, self.bg_num)
-                        net.Start("bodygroups_change")
-
-                        net.WriteTable({bgid, self.bg_num})
-
-                        net.SendToServer()
+                    if gbrp.c_arms[model] and gbrp.c_arms[model][bgid] then
+                        ply:GetHands():SetBodygroup(gbrp.c_arms[model][bgid].bgid, gbrp.c_arms[model][bgid].bodygroups[self.bg_num])
                     end
+                    if gbrp.c_arms[model] and gbrp.c_arms[model][bgid] and gbrp.c_arms[model][bgid].skins then
+                        ply:GetHands():SetSkin(gbrp.c_arms[model][bgid].skins[self.bg_num])
+                    end
+
+                    ent:SetBodygroup(bgid, self.bg_num)
+                    net.Start("bodygroups_change")
+                    net.WriteTable({bgid, self.bg_num})
+                    net.SendToServer()
                 end
             end
 

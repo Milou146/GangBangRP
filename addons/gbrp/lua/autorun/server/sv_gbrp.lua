@@ -63,11 +63,11 @@ hook.Add("PlayerInitialSpawn","GBRP:DoorsInitCS",function(ply)
         gbrp.SendDoorsData(ply)
     end)
 end)
-hook.Add( "PreCleanupMap", "GBRP::PreCleanupMap", function()
+hook.Add("PreCleanupMap", "GBRP::PreCleanupMap", function()
     gbrp.SaveDoors()
     gbrp.SaveShops()
 end)
-hook.Add( "PostCleanupMap", "GBRP::PostCleanupMap", function()
+hook.Add("PostCleanupMap", "GBRP::PostCleanupMap", function()
     gbrp.SpawnNPCs()
     gbrp.InitDoors() --build the new gbrp.doors table
     for _,ply in pairs(player.GetAll()) do
@@ -78,10 +78,25 @@ hook.Add( "PostCleanupMap", "GBRP::PostCleanupMap", function()
     for _,ply in pairs(player.GetAll()) do if ply:isCook() then return end end
     gbrp.SpawnHotdogSalesmans()
 end)
-hook.Add( "PlayerChangedTeam", "GBRP::PlayerChangedTeam", function(ply,oldTeam,newTeam)
+hook.Add("PlayerChangedTeam", "GBRP::PlayerChangedTeam", function(ply,oldTeam,newTeam)
     if oldTeam == TEAM_VIP2 then
         gbrp.SpawnHotdogSalesmans()
     end
+end)
+hook.Add("PlayerLeaveVehicle", "GBRP::PlayerLeaveVehicle", function(ply,veh)
+    ply:SetupHands()
+end)
+hook.Add("EntityTakeDamage","GBRP::EntityTakeDamage",function(ent,dmg)
+    local mapid = ent:MapCreationID()
+    if mapid and gbrp.customMapEntities[mapid] then
+        local hp = ent:Health()
+        ent:SetHealth(math.Clamp(hp - dmg:GetDamage(),0,10000))
+        print(hp)
+        if ent:Health() == 0 then
+            ent:SetColor(Color(0,0,0,255))
+        end
+    end
+    return true
 end)
 
 ---------------
