@@ -23,7 +23,16 @@ TEAM_CITIZEN = DarkRP.createJob("Citoyen", {
 --------------------------------------------------------------------------------
 TEAM_NYPD = DarkRP.createJob("N.Y.P.D", {
     color = Color(0, 0, 230, 255),
-    model = {"models/taggart/police01/male_01.mdl", "models/taggart/police01/male_02.mdl", "models/taggart/police01/male_04.mdl", "models/taggart/police01/male_05.mdl", "models/taggart/police01/male_06.mdl", "models/taggart/police01/male_07.mdl", "models/taggart/police01/male_08.mdl", "models/taggart/police01/male_09.mdl"},
+    model = {
+        "models/taggart/police01/male_01.mdl",
+        "models/taggart/police01/male_02.mdl",
+        "models/taggart/police01/male_03.mdl",
+        "models/taggart/police01/male_04.mdl",
+        "models/taggart/police01/male_05.mdl",
+        "models/taggart/police01/male_06.mdl",
+        "models/taggart/police01/male_07.mdl",
+        "models/taggart/police01/male_08.mdl",
+        "models/taggart/police01/male_09.mdl"},
     description = [[Agent de police, gardez vos concitoyens en sécurité et empéchez les bandits de transformer la ville en champ de bataille.]],
     weapons = {"weapon_tg_fists", "pocket", "keys", "weaponchecker","weapon_frost_lidargun"},
     command = "nypd",
@@ -45,7 +54,10 @@ TEAM_NYPD = DarkRP.createJob("N.Y.P.D", {
 --------------------------------------------------------------------------------
 TEAM_NYPD1 = DarkRP.createJob("Commissaire", {
     color = Color(0, 0, 230, 255),
-    model = {"models/sentry/gtav/lspd/fcopbpm.mdl", "models/sentry/gtav/lspd/fcopwpm.mdl", "models/sentry/gtav/lspd/vtrafcoppm.mdl"},
+    model = {
+        "models/sentry/gtav/lspd/fcopbpm.mdl",
+        "models/sentry/gtav/lspd/fcopwpm.mdl",
+        "models/sentry/gtav/lspd/vtrafcoppm.mdl"},
     description = [[Commissaire de la police, dirigez vos agents de façon efficace et protégez la ville.]],
     weapons = {"weapon_tg_fists", "pocket", "keys", "weaponchecker","weapon_frost_lidargun","door_ram"},
     command = "cnypd",

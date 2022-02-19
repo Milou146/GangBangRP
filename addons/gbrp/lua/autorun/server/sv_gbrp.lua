@@ -96,7 +96,6 @@ hook.Add("EntityTakeDamage","GBRP::EntityTakeDamage",function(ent,dmg)
             ent:SetColor(Color(0,0,0,255))
         end
     end
-    return true
 end)
 
 ---------------
