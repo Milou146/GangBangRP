@@ -48,7 +48,7 @@ ulx logEchoColorPlayerAsGroup 1 ; Whether or not to use group colors for players
 ulx logEchoColorPlayer "255 255 0" ; The color to use for players when ulx logEchoColorPlayerAsGroup is set to 0.
 ulx logEchoColorMisc "0 255 0" ; The color for anything else in echoes
 
-ulx rslotsMode 0
+ulx rslotsMode 1 
 ulx rslots 2
 ulx rslotsVisible 1 ; When this is 0, sv_visiblemaxplayers will be set to maxplayers - slots_currently_reserved
 ;Modes:
