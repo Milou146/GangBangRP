@@ -23,6 +23,7 @@ util.AddNetworkString("GBRP::clubReception")
 util.AddNetworkString("GBRP::drugstoreReception")
 util.AddNetworkString("GBRP::repairgarageReception")
 util.AddNetworkString("GBRP::barReception")
+util.AddNetworkString("GBRP::welcomeScreen")
 
 sql.Query("create table if not exists gbrp(steamid64 bigint not null, balance bigint);")
 
@@ -39,6 +40,8 @@ hook.Add("PlayerInitialSpawn", "GBRP::Client Init", function(ply)
     else
         ply:SetNWInt("GBRP::balance", tonumber(data.balance))
     end
+    net.Start("GBRP::welcomeScreen")
+    net.Send(ply)
 end)
 hook.Add( "InitPostEntity", "GBRP::InitPostEntity", function()
     gbrp.SpawnNPCs()

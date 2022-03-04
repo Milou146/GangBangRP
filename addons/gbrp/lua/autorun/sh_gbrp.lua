@@ -470,6 +470,15 @@ function gbrp.formatMoney(n)
 
     return (negative and "-" or "") .. "$" .. n
 end
+function gbrp.sortedGangs()
+    for _,ply in pairs(player.GetAll()) do
+        local gang = ply:GetGang()
+        if gang then gang.ct = gang.ct + 1 end
+    end
+    local gangs = gbrp.gangs
+    table.sort(gangs, function(a, b) return a.ct < b.ct end)
+    return gangs
+end
 if SERVER then
     function gbrp.SpawnNPCs()
         local bank1 = ents.Create("gbrp_bank_receptionist")
@@ -738,20 +747,23 @@ SetGlobalInt("mafiaPrivateDoorsCount",0);
 SetGlobalInt("gangBalance",0);
 SetGlobalInt("gangPrivateDoorsCount",0);
 
-gbrp.yakuzas = {
-    subject = "Les yakuzas",
-    name = "yakuzas"
+gbrp.gangs = {
+    [1] = {
+        subject = "Les yakuzas",
+        name = "yakuzas",
+        ct = 0
+    },
+    [2] = {
+        subject = "La Mafia",
+        name = "mafia",
+        ct = 0
+    },
+    [3] = {
+        subject = "Les gangsters",
+        name = "gang",
+        ct = 0
+    }
 }
-table.Merge(gbrp.yakuzas,gangMeta)
-
-gbrp.mafia = {
-    subject = "La Mafia",
-    name = "mafia"
-}
-table.Merge(gbrp.mafia,gangMeta)
-
-gbrp.gang = {
-    subject = "Les gangsters",
-    name = "gang"
-}
-table.Merge(gbrp.gang,gangMeta)
+for k,v in pairs(gbrp.gangs) do
+    table.Merge(v,gangMeta)
+end
