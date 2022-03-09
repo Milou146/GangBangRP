@@ -1614,6 +1614,13 @@ net.Receive("GBRP::barReception",function()
 
 end)
 net.Receive("GBRP::welcomeScreen",function()
+    local selected
+    local leaderlabel
+    local memberlabel
+    local archilabel
+    local mediclabel
+    local label
+    local ply = LocalPlayer()
     local frame = vgui.Create("EditablePanel",GetHUDPanel())
     frame:SetSize(ScreenW,ScreenH)
     frame.mat = Material("gui/gbrp/welcomescreen/background1.jpg")
@@ -1629,60 +1636,390 @@ net.Receive("GBRP::welcomeScreen",function()
     continuer:SetImage("gui/gbrp/welcomescreen/page1/continuer.png")
     continuer:SetPos(FormatX(655),FormatY(902))
     continuer:SetSize(FormatX(572),FormatY(26))
-    local function LoadPageTwo()
+    local LoadPage3 = {}
+
+    LoadPage3.init = function()
+        function frame:Paint(w,h)
+            Derma_DrawBackgroundBlur(self, CurTime())
+            surface.SetDrawColor(255,255,255,255)
+            surface.SetMaterial(self.mat)
+            surface.DrawTexturedRect(0,0,w,h)
+
+            surface.SetDrawColor(0,0,0,90)
+            surface.DrawRect(0,FormatY(442),ScreenW,FormatY(644))
+        end
+        label:SetText("CHOIX DU METIER:")
+        label:SizeToContents()
+        label:CenterHorizontal(.5)
+        label:CenterVertical(.1)
+        leaderlabel = vgui.Create("DImage",frame)
+        leaderlabel:SetImage("gui/gbrp/welcomescreen/page3/leaderlabel.png")
+        leaderlabel:SetVisible(false)
+        leaderlabel:SetPos(FormatX(40),FormatY(257))
+        leaderlabel:SetSize(FormatX(430),FormatY(176))
+        memberlabel = vgui.Create("DImage",frame)
+        memberlabel:SetImage("gui/gbrp/welcomescreen/page3/memberlabel.png")
+        memberlabel:SetVisible(false)
+        memberlabel:SetPos(FormatX(512),FormatY(257))
+        memberlabel:SetSize(FormatX(430),FormatY(176))
+        archilabel = vgui.Create("DImage",frame)
+        archilabel:SetImage("gui/gbrp/welcomescreen/page3/archilabel.png")
+        archilabel:SetPos(FormatX(1002),FormatY(257))
+        archilabel:SetSize(FormatX(430),FormatY(176))
+        archilabel:SetVisible(false)
+        mediclabel = vgui.Create("DImage",frame)
+        mediclabel:SetImage("gui/gbrp/welcomescreen/page3/mediclabel.png")
+        mediclabel:SetPos(FormatX(1483),FormatY(257))
+        mediclabel:SetSize(FormatX(430),FormatY(176))
+        mediclabel:SetVisible(false)
+    end
+
+    LoadPage3.yakuzas = function()
+        local yakuleader = vgui.Create("DImageButton",frame)
+        yakuleader.jobtable,yakuleader.teamid = DarkRP.getJobByCommand("yakuleader")
+        if team.NumPlayers(yakuleader.teamid) >= yakuleader.jobtable.max then
+            yakuleader:SetImage("gui/gbrp/welcomescreen/page3/yakuleader.png")
+            yakuleader:SetPos(FormatX(134),FormatY(341))
+            yakuleader:SetSize(FormatX(247),FormatY(711))
+        else
+            yakuleader:SetImage("gui/gbrp/welcomescreen/page3/yakuleaderavailable.png")
+            yakuleader:SetPos(FormatX(100),FormatY(309))
+            yakuleader:SetSize(FormatX(314),FormatY(777))
+            yakuleader.available = true
+        end
+        yakuleader.OnCursorEntered = function()
+            leaderlabel:SetVisible(true)
+        end
+        yakuleader.OnCursorExited = function()
+            leaderlabel:SetVisible(false)
+        end
+        local yakumember = vgui.Create("DImageButton",frame)
+        yakumember:SetImage("gui/gbrp/welcomescreen/page3/yakuavailable.png")
+        yakumember:SetPos(FormatX(595),FormatY(419))
+        yakumember:SetSize(FormatX(283),FormatY(676))
+        yakumember.OnCursorEntered = function()
+            memberlabel:SetVisible(true)
+        end
+        yakumember.OnCursorExited = function()
+            memberlabel:SetVisible(false)
+        end
+        local yakuarchi = vgui.Create("DImageButton",frame)
+        yakuarchi.jobtable,yakuarchi.teamid = DarkRP.getJobByCommand("yakuarchi")
+        if team.NumPlayers(yakuarchi.teamid) >= yakuarchi.jobtable.max then
+            yakuarchi:SetImage("gui/gbrp/welcomescreen/page3/yakuarchi.png")
+            yakuarchi:SetPos(FormatX(1058),FormatY(448))
+            yakuarchi:SetSize(FormatX(255),FormatY(598))
+        else
+            yakuarchi:SetImage("gui/gbrp/welcomescreen/page3/yakuarchiavailable.png")
+            yakuarchi:SetPos(FormatX(1024),FormatY(415))
+            yakuarchi:SetSize(FormatX(324),FormatY(665))
+            yakuarchi.available = true
+        end
+        yakuarchi.OnCursorEntered = function()
+            archilabel:SetVisible(true)
+        end
+        yakuarchi.OnCursorExited = function()
+            archilabel:SetVisible(false)
+        end
+        local yakumedic = vgui.Create("DImageButton",frame)
+        yakumedic.jobtable,yakumedic.teamid = DarkRP.getJobByCommand("yakumedic")
+        if team.NumPlayers(yakumedic.teamid) >= yakumedic.jobtable.max then
+            yakumedic:SetImage("gui/gbrp/welcomescreen/page3/yakumedic.png")
+            yakumedic:SetPos(FormatX(1584),FormatY(453))
+            yakumedic:SetSize(FormatX(229),FormatY(623))
+        else
+            yakumedic:SetImage("gui/gbrp/welcomescreen/page3/yakumedicavailable.png")
+            yakumedic:SetPos(FormatX(1548),FormatY(418))
+            yakumedic:SetSize(FormatX(299),FormatY(693))
+            yakumedic.available = true
+        end
+        yakumedic.OnCursorEntered = function()
+            mediclabel:SetVisible(true)
+        end
+        yakumedic.OnCursorExited = function()
+            mediclabel:SetVisible(false)
+        end
+        function yakuleader:DoClick()
+            if self.available then
+                frame:Remove()
+                ply:ConCommand("say /yakuleader")
+            end
+        end
+        function yakumember:DoClick()
+            frame:Remove()
+            ply:ConCommand("say /yaku")
+        end
+        function yakuarchi:DoClick()
+            if self.available then
+                frame:Remove()
+                ply:ConCommand("say /yakuarchi")
+            end
+        end
+        function yakumedic:DoClick()
+            if self.available then
+                frame:Remove()
+                ply:ConCommand("say /yakumedic")
+            end
+        end
+    end
+
+    LoadPage3.mafia = function()
+        local mafialeader = vgui.Create("DImageButton",frame)
+        mafialeader.jobtable,mafialeader.teamid = DarkRP.getJobByCommand("mafiamedic")
+        if team.NumPlayers(mafialeader.teamid) >= mafialeader.jobtable.max then
+            mafialeader:SetImage("gui/gbrp/welcomescreen/page3/mafialeader.png")
+            mafialeader:SetPos(FormatX(181),FormatY(472))
+            mafialeader:SetSize(FormatX(199),FormatY(608))
+        else
+            mafialeader:SetImage("gui/gbrp/welcomescreen/page3/mafialeaderavailable.png")
+            mafialeader:SetPos(FormatX(146),FormatY(437))
+            mafialeader:SetSize(FormatX(269),FormatY(677))
+            mafialeader.available = true
+        end
+        mafialeader.OnCursorEntered = function()
+            leaderlabel:SetVisible(true)
+        end
+        mafialeader.OnCursorExited = function()
+            leaderlabel:SetVisible(false)
+        end
+        local mafiamember = vgui.Create("DImageButton",frame)
+        mafiamember.jobtable,mafiamember.teamid = DarkRP.getJobByCommand("mafia")
+        mafiamember:SetImage("gui/gbrp/welcomescreen/page3/mafiaavailable.png")
+        mafiamember:SetPos(FormatX(535),FormatY(466))
+        mafiamember:SetSize(FormatX(442),FormatY(641))
+        mafiamember.OnCursorEntered = function()
+            memberlabel:SetVisible(true)
+        end
+        mafiamember.OnCursorExited = function()
+            memberlabel:SetVisible(false)
+        end
+        local mafiaarchi = vgui.Create("DImageButton",frame)
+        mafiaarchi.jobtable,mafiaarchi.teamid = DarkRP.getJobByCommand("mafiaarchi")
+        if team.NumPlayers(mafiaarchi.teamid) >= mafiaarchi.jobtable.max then
+            mafiaarchi:SetImage("gui/gbrp/welcomescreen/page3/mafiaarchi.png")
+            mafiaarchi:SetPos(FormatX(1130),FormatY(471))
+            mafiaarchi:SetSize(FormatX(189),FormatY(601))
+        else
+            mafiaarchi:SetImage("gui/gbrp/welcomescreen/page3/mafiaarchiavailable.png")
+            mafiaarchi:SetPos(FormatX(1095),FormatY(435))
+            mafiaarchi:SetSize(FormatX(260),FormatY(673))
+            mafiaarchi.available = true
+        end
+        mafiaarchi.OnCursorEntered = function()
+            archilabel:SetVisible(true)
+        end
+        mafiaarchi.OnCursorExited = function()
+            archilabel:SetVisible(false)
+        end
+        local mafiamedic = vgui.Create("DImageButton",frame)
+        mafiamedic.jobtable,mafiamedic.teamid = DarkRP.getJobByCommand("mafiamedic")
+        if team.NumPlayers(mafiamedic.teamid) >= mafiamedic.jobtable.max then
+            mafiamedic:SetImage("gui/gbrp/welcomescreen/page3/mafiamedic.png")
+            mafiamedic:SetPos(FormatX(1584),FormatY(480))
+            mafiamedic:SetSize(FormatX(229),FormatY(606))
+        else
+            mafiamedic:SetImage("gui/gbrp/welcomescreen/page3/mafiamedicavailable.png")
+            mafiamedic:SetPos(FormatX(1549),FormatY(445))
+            mafiamedic:SetSize(FormatX(300),FormatY(675))
+            mafiamedic.available = true
+        end
+        mafiamedic.OnCursorEntered = function()
+            mediclabel:SetVisible(true)
+        end
+        mafiamedic.OnCursorExited = function()
+            mediclabel:SetVisible(false)
+        end
+        function mafialeader:DoClick()
+            if self.available then
+                frame:Remove()
+                ply:ConCommand("say /mafialeader")
+            end
+        end
+        function mafiamember:DoClick()
+            frame:Remove()
+            ply:ConCommand("say /mafia")
+        end
+        function mafiaarchi:DoClick()
+            if self.available then
+                frame:Remove()
+                ply:ConCommand("say /mafiaarchi")
+            end
+        end
+        function mafiamedic:DoClick()
+            if self.available then
+                frame:Remove()
+                ply:ConCommand("say /mafiamedic")
+            end
+        end
+    end
+
+    LoadPage3.gang = function()
+        local gangleader = vgui.Create("DImageButton",frame)
+        gangleader.jobtable,gangleader.teamid = DarkRP.getJobByCommand("gangmedic")
+        if team.NumPlayers(gangleader.teamid) >= gangleader.jobtable.max then
+            gangleader:SetImage("gui/gbrp/welcomescreen/page3/gangleader.png")
+            gangleader:SetPos(FormatX(160),FormatY(460))
+            gangleader:SetSize(FormatX(287),FormatY(618))
+        else
+            gangleader:SetImage("gui/gbrp/welcomescreen/page3/gangleaderavailable.png")
+            gangleader:SetPos(FormatX(125),FormatY(425))
+            gangleader:SetSize(FormatX(357),FormatY(689))
+            gangleader.available = true
+        end
+        gangleader.OnCursorEntered = function()
+            leaderlabel:SetVisible(true)
+        end
+        gangleader.OnCursorExited = function()
+            leaderlabel:SetVisible(false)
+        end
+        local gangmember = vgui.Create("DImageButton",frame)
+        gangmember.jobtable,gangmember.teamid = DarkRP.getJobByCommand("gang")
+        gangmember:SetImage("gui/gbrp/welcomescreen/page3/gangavailable.png")
+        gangmember:SetPos(FormatX(570),FormatY(421))
+        gangmember:SetSize(FormatX(299),FormatY(683))
+        gangmember.OnCursorEntered = function()
+            memberlabel:SetVisible(true)
+        end
+        gangmember.OnCursorExited = function()
+            memberlabel:SetVisible(false)
+        end
+        local gangarchi = vgui.Create("DImageButton",frame)
+        gangarchi.jobtable,gangarchi.teamid = DarkRP.getJobByCommand("gangarchi")
+        if team.NumPlayers(gangarchi.teamid) >= gangarchi.jobtable.max then
+            gangarchi:SetImage("gui/gbrp/welcomescreen/page3/gangarchi.png")
+            gangarchi:SetPos(FormatX(1111),FormatY(460))
+            gangarchi:SetSize(FormatX(199),FormatY(638))
+        else
+            gangarchi:SetImage("gui/gbrp/welcomescreen/page3/gangarchiavailable.png")
+            gangarchi:SetPos(FormatX(1078),FormatY(425))
+            gangarchi:SetSize(FormatX(267),FormatY(708))
+            gangarchi.available = true
+        end
+        gangarchi.OnCursorEntered = function()
+            archilabel:SetVisible(true)
+        end
+        gangarchi.OnCursorExited = function()
+            archilabel:SetVisible(false)
+        end
+        local gangmedic = vgui.Create("DImageButton",frame)
+        gangmedic.jobtable,gangmedic.teamid = DarkRP.getJobByCommand("gangmedic")
+        if team.NumPlayers(gangmedic.teamid) >= gangmedic.jobtable.max then
+            gangmedic:SetImage("gui/gbrp/welcomescreen/page3/gangmedic.png")
+            gangmedic:SetPos(FormatX(1596),FormatY(470))
+            gangmedic:SetSize(FormatX(205),FormatY(602))
+        else
+            gangmedic:SetImage("gui/gbrp/welcomescreen/page3/gangmedicavailable.png")
+            gangmedic:SetPos(FormatX(1561),FormatY(436))
+            gangmedic:SetSize(FormatX(275),FormatY(672))
+            gangmedic.available = true
+        end
+        gangmedic.OnCursorEntered = function()
+            mediclabel:SetVisible(true)
+        end
+        gangmedic.OnCursorExited = function()
+            mediclabel:SetVisible(false)
+        end
+        function gangleader:DoClick()
+            if self.available then
+                frame:Remove()
+                ply:ConCommand("say /gangleader")
+            end
+        end
+        function gangmember:DoClick()
+            frame:Remove()
+            ply:ConCommand("say /gang")
+        end
+        function gangarchi:DoClick()
+            if self.available then
+                frame:Remove()
+                ply:ConCommand("say /gangarchi")
+            end
+        end
+        function gangmedic:DoClick()
+            if self.available then
+                frame:Remove()
+                ply:ConCommand("say /gangmedic")
+            end
+        end
+    end
+
+    local function LoadPage2()
+        local gangpos = {
+            [1] = {{181,460},{149,425}},
+            [2] = {{648,456},{601,412}}
+        }
+        local bubblexpos = {
+            [1] = 93,
+            [2] = 555
+        }
         frame.mat = Material("gui/gbrp/welcomescreen/background2.jpg")
-        local sortedGangs = gbrp.sortedGangs()
-        local gang1 = sortedGangs[1].name
-        local gang2 = sortedGangs[2].name
-        local bubble1 = vgui.Create("DImage",frame)
-        bubble1:SetPos(FormatX(93),FormatY(276))
-        bubble1:SetSize(FormatX(378),FormatY(155))
-        bubble1:SetImage("gui/gbrp/welcomescreen/page2/bubble.png")
-        bubble1:SetVisible(false)
-        local gang1Label = vgui.Create("DLabel",bubble1)
-        gang1Label:SetFont("Bank")
-        gang1Label:SetText(gang1)
-        gang1Label:SizeToContents()
-        gang1Label:Center()
-        local bubble2 = vgui.Create("DImage",frame)
-        bubble2:SetPos(FormatX(555),FormatY(276))
-        bubble2:SetSize(FormatX(378),FormatY(155))
-        bubble2:SetImage("gui/gbrp/welcomescreen/page2/bubble.png")
-        bubble2:SetVisible(false)
-        local gang2Label = vgui.Create("DLabel",bubble2)
-        gang2Label:SetFont("Bank")
-        gang2Label:SetText(gang2)
-        gang2Label:SizeToContents()
-        gang2Label:Center()
-        local label = vgui.Create("DLabel",frame)
+        local gangs = gbrp.sortedGangs()
+        label = vgui.Create("DLabel",frame)
         label:SetFont("Bank")
         label:SetText("Choix du gang:")
         label:SizeToContents()
         label:SetPos(FormatX(355),FormatY(225))
-        local gang1Button = vgui.Create("DImageButton",frame)
-        gang1Button:SetImage("gui/gbrp/welcomescreen/page2/" .. gang1 .. ".png")
-        gang1Button:SizeToContents()
-        gang1Button:SetPos(FormatX(181),FormatY(460))
-        function gang1Button:OnCursorEntered()
-            self:SetImage("gui/gbrp/welcomescreen/page2/" .. gang1 .. "rollover.png")
-            self:SizeToContents()
-            self:SetPos(FormatX(114),FormatY(393))
-            bubble1:SetVisible(true)
-        end
-        function gang1Button:OnCursorExited()
-            if not self.selected then
-                self:SetImage("gui/gbrp/welcomescreen/page2/" .. gang1 .. ".png")
+        local bubbles = {}
+        local ganglabels = {}
+        local gangButton = {}
+        for k = 1,2 do
+            bubbles[k] = vgui.Create("DImage",frame)
+            bubbles[k]:SetPos(FormatX(bubblexpos[k]),FormatY(276))
+            bubbles[k]:SetSize(FormatX(378),FormatY(155))
+            bubbles[k]:SetImage("gui/gbrp/welcomescreen/page2/bubble.png")
+            bubbles[k]:SetVisible(false)
+            ganglabels[k] = vgui.Create("DLabel",bubbles[k])
+            ganglabels[k]:SetFont("BankLarge")
+            ganglabels[k]:SetText(string.upper(gangs[k].name))
+            ganglabels[k]:SizeToContents()
+            ganglabels[k]:Center()
+            ganglabels[k]:SetY(ganglabels[k]:GetY() - FormatY(40))
+            gangButton[k] = vgui.Create("DImageButton",frame)
+            gangButton[k].gangName = gangs[k].name
+            gangButton[k]:SetImage("gui/gbrp/welcomescreen/page2/" .. gangs[k].name .. ".png")
+            gangButton[k]:SizeToContents()
+            gangButton[k]:SetPos(FormatX(gangpos[k][1][1]),FormatY(gangpos[k][1][2]))
+            gangButton[k].OnCursorEntered = function(self)
+                self:SetImage("gui/gbrp/welcomescreen/page2/" .. gangs[k].name .. "rollover.png")
                 self:SizeToContents()
-                self:SetPos(FormatX(181),FormatY(460))
-                bubble1:SetVisible(false)
+                self:SetPos(FormatX(gangpos[k][2][1]),FormatY(gangpos[k][2][2]))
+                bubbles[k]:SetVisible(true)
+            end
+            gangButton[k].Unselect = function(self)
+                self:SetImage("gui/gbrp/welcomescreen/page2/" .. gangs[k].name .. ".png")
+                self:SizeToContents()
+                self:SetPos(FormatX(gangpos[k][1][1]),FormatY(gangpos[k][1][2]))
+                bubbles[k]:SetVisible(false)
+            end
+            gangButton[k].OnCursorExited = function(self)
+                if self ~= selected then
+                    self:Unselect()
+                end
+            end
+            gangButton[k].DoClick = function(self)
+                if selected then selected:Unselect() end
+                selected = self
             end
         end
-        function gang1Button:DoClick()
-            self.selected = true
+        continuer = vgui.Create("GBRPButton",frame)
+        continuer:SetImage("gui/gbrp/welcomescreen/page2/continuer.png")
+        continuer:SetPos(FormatX(1183),FormatY(985))
+        continuer:SetSize(FormatX(215),FormatY(34))
+        continuer.DoClick = function()
+            if selected then
+                continuer:Remove()
+                for k = 1,2 do
+                    bubbles[k]:Remove()
+                    ganglabels[k]:Remove()
+                    gangButton[k]:Remove()
+                end
+                LoadPage3.init()
+                LoadPage3[selected.gangName]()
+            end
         end
     end
     function continuer:DoClick()
         self:Remove()
-        LoadPageTwo()
+        LoadPage2()
     end
 end)
