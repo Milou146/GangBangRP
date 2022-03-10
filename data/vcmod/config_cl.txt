@@ -1,4 +1,0 @@
-{
-	"lng_picked": true,
-	"lng": "fr"
-}

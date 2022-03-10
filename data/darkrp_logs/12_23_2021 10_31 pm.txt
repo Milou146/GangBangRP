@@ -1,6 +1,0 @@
-Thu Dec 23 22:31:18 2021	Milou (STEAM_0:0:89713489) has joined the game
-Thu Dec 23 22:31:18 2021	Milou (STEAM_0:0:89713489) spawned
-Thu Dec 23 22:33:45 2021	Milou (STEAM_0:0:89713489): !wcd
-Thu Dec 23 22:34:49 2021	Milou (STEAM_0:0:89713489): !wcd
-Thu Dec 23 22:38:39 2021	Milou was killed by Himself with a suicide trick
-Thu Dec 23 22:38:40 2021	Milou (STEAM_0:0:89713489) spawned

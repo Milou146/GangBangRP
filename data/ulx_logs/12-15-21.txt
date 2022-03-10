@@ -1,4 +1,0 @@
-[00:31:54] New map: rp_southside_day
-[00:43:42] Reacker Smith [Joqueez]<STEAM_0:1:123019348> spawned model models/props_c17/furniturestove001a.mdl
-[01:01:05] Reacker Smith [Joqueez]: !gang
-[01:09:56] Server is shutting down/changing levels.

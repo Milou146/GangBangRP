@@ -1,3 +1,0 @@
-[18:14:34] New map: de_paris_subway
-[18:15:27] Reacker Smith [Joqueez]: /drop
-[18:15:55] Server is shutting down/changing levels.

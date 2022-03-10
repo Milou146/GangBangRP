@@ -1,6 +1,0 @@
-[23:17:09] New map: gm_construct
-
-
-
-[23:20:34] New map: gm_construct
-[23:27:14] Server is shutting down/changing levels.

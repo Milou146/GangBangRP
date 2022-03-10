@@ -1,4 +1,0 @@
-Wed Dec 22 22:47:15 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) has joined the game
-Wed Dec 22 22:47:15 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) spawned
-Wed Dec 22 22:48:14 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) spawned SENT npc_shop
-Wed Dec 22 23:02:12 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) spawned SENT npc_shop

@@ -1,3 +1,0 @@
-Thu Dec 23 18:19:04 2021	Milou (STEAM_0:0:89713489) has joined the game
-Thu Dec 23 18:19:04 2021	Milou (STEAM_0:0:89713489) spawned
-Thu Dec 23 18:19:20 2021	Milou (STEAM_0:0:89713489) spawned SENT atm_wall

@@ -1,4 +1,0 @@
-Tue Jun 29 14:59:29 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) has joined the game
-Tue Jun 29 14:59:29 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) spawned
-Tue Jun 29 15:00:46 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348): /drop
-Tue Jun 29 15:11:10 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348): /drop

@@ -1,9 +1,0 @@
-Tue Dec 21 23:02:19 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) has joined the game
-Tue Dec 21 23:02:20 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) spawned
-Tue Dec 21 23:02:45 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) spawned SENT npc_shop
-Tue Dec 21 23:04:33 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) spawned SENT npc_shop
-Tue Dec 21 23:05:48 2021	Reacker Smith [Joqueez] was killed by Himself with a suicide trick
-Tue Dec 21 23:06:00 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) spawned
-Tue Dec 21 23:06:06 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) spawned SENT npc_shop
-Tue Dec 21 23:06:33 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348): /addmoney Reacker 111111
-Tue Dec 21 23:06:33 2021	Reacker Smith [Joqueez] (STEAM_0:1:123019348) added €111,111 to Reacker Smith [Joqueez]'s wallet
