@@ -444,8 +444,9 @@ net.Receive("GBRP::jewelrystoreReception",function()
     local shopbalMat = Material("gui/gbrp/jewelrystore/shopbal.png")
     local shopvalMat = Material("gui/gbrp/jewelrystore/shopval.png")
     local frame = vgui.Create("EditablePanel",GetHUDPanel())
-    frame:SetSize(1217,964)
-    frame:SetPos(371,116)
+    frame:SetSize(FormatX(1217),FormatY(964))
+    frame:CenterHorizontal(.5)
+    frame:SetY(FormatY(116))
     frame:MakePopup()
     frame.shop = shop
     frame.mat = Material("gui/gbrp/jewelrystore/frame.png")
@@ -456,26 +457,26 @@ net.Receive("GBRP::jewelrystoreReception",function()
         surface.SetMaterial(self.mat)
         surface.DrawTexturedRect(0,0,w,h)
         surface.SetMaterial(self.panelMat)
-        surface.DrawTexturedRect(76,99,403,531)
+        surface.DrawTexturedRect(FormatX(76),FormatY(99),FormatX(403),FormatY(531))
         surface.SetFont("Bank")
         surface.SetTextColor(0,0,0,255)
-        surface.SetTextPos(93,644)
+        surface.SetTextPos(FormatX(93),FormatY(644))
         surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
         surface.SetFont("BankSmall")
-        surface.SetTextPos(193,322)
+        surface.SetTextPos(FormatX(193),FormatY(322))
         surface.DrawText("PRIX: " .. gbrp.formatMoney(shop.price))
-        surface.SetTextPos(193,352)
+        surface.SetTextPos(FormatX(193),FormatY(352))
         surface.DrawText("REVENTE: " .. gbrp.formatMoney(shop.value))
     end
 
     local buy = vgui.Create("BuyShopButton",frame)
     buy:SetImage("gui/gbrp/jewelrystore/buy.png")
     buy:SizeToContents()
-    buy:SetPos(643,201)
+    buy:SetPos(FormatX(643),FormatY(201))
 
     local customerArea = vgui.Create("GBRPButton",frame)
     customerArea:SetImage("gui/gbrp/jewelrystore/customerarea.png")
-    customerArea:SetPos(643,416)
+    customerArea:SetPos(FormatX(643),FormatY(416))
     customerArea:SizeToContents()
     function customerArea:DoClick()
         surface.PlaySound("gui/gbrp/remove_customerarea.wav")
@@ -486,12 +487,12 @@ net.Receive("GBRP::jewelrystoreReception",function()
             local dropcash = vgui.Create("DropCashButton",frame)
             dropcash:SetImage("gui/gbrp/jewelrystore/dropcash.png")
             dropcash:SizeToContents()
-            dropcash:SetPos(83,166)
+            dropcash:SetPos(FormatX(83),FormatY(166))
 
             local withdraw = vgui.Create("WithdrawLaunderedMoneyButton",frame)
             withdraw:SetImage("gui/gbrp/jewelrystore/withdraw.png")
             withdraw:SizeToContents()
-            withdraw:SetPos(448,166)
+            withdraw:SetPos(FormatX(448),FormatY(166))
 
             local sell = vgui.Create("SellShopButton",frame)
             sell:SetImage("gui/gbrp/jewelrystore/sell.png")
@@ -509,7 +510,7 @@ net.Receive("GBRP::jewelrystoreReception",function()
 
                 surface.SetFont("Bank")
                 surface.SetTextColor(0,0,0,255)
-                surface.SetTextPos(93,644)
+                surface.SetTextPos(FormatX(93),FormatY(644))
                 if ply:IsGangLeader() then
                     surface.DrawText("SOLDE DU GANG: " .. gbrp.formatMoney(gang:GetBalance()))
                 else
@@ -517,26 +518,26 @@ net.Receive("GBRP::jewelrystoreReception",function()
                 end
 
                 surface.SetMaterial(shopbalMat)
-                surface.DrawTexturedRect(238,489,321,68)
+                surface.DrawTexturedRect(FormatX(238),FormatY(489),FormatX(321),FormatY(68))
 
                 surface.SetMaterial(shopvalMat)
-                surface.DrawTexturedRect(682,489,321,68)
+                surface.DrawTexturedRect(FormatX(682),FormatY(489),FormatX(321),FormatY(68))
 
                 surface.SetFont("BankSmall")
-                surface.SetTextPos(349,525)
+                surface.SetTextPos(FormatX(349),FormatY(525))
                 surface.DrawText(gbrp.formatMoney(shop:GetBalance()))
 
-                GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarframeMat)(84,385,1053,27)
-                GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(84,385,1053 * math.Round(shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()),2), 27)
+                GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarframeMat)(FormatX(84),FormatY(385),FormatX(1053),FormatY(27))
+                GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(FormatX(84),FormatY(385),FormatX(1053 * math.Round(shop:GetBalance() / (shop:GetBalance() + shop:GetDirtyMoney()),2)), FormatY(27))
 
                 surface.SetFont("Bank")
                 surface.SetTextColor(0,0,0,255)
-                surface.SetTextPos(577,331)
+                surface.SetTextPos(FormatX(577),FormatY(331))
                 surface.DrawText(tostring(math.Round(100 * shop:GetBalance() / (.01 + shop:GetBalance() + shop:GetDirtyMoney()))) .. "%")
 
                 surface.SetFont("BankSmall")
                 surface.SetTextColor(255,0,0,255)
-                surface.SetTextPos(805,525)
+                surface.SetTextPos(FormatX(805),FormatY(525))
                 surface.DrawText(gbrp.formatMoney(shop.value))
             end
         else
@@ -546,7 +547,7 @@ net.Receive("GBRP::jewelrystoreReception",function()
 
     local remove = vgui.Create("RemoveButton",frame)
     remove:SetImage("gui/gbrp/jewelrystore/remove.png")
-    remove:SetPos(1112,48)
+    remove:SetPos(FormatX(1112),FormatY(48))
     remove:SizeToContents()
 end)
 net.Receive("GBRP::clubReception",function()
@@ -1962,33 +1963,36 @@ net.Receive("GBRP::welcomeScreen",function()
         local bubbles = {}
         local ganglabels = {}
         local gangButton = {}
-        for k = 1,2 do
+        local i = 0
+        for k,v in pairs(gangs) do
+            i = i + 1
             bubbles[k] = vgui.Create("DImage",frame)
-            bubbles[k]:SetPos(FormatX(bubblexpos[k]),FormatY(276))
+            bubbles[k]:SetPos(FormatX(bubblexpos[i]),FormatY(276))
             bubbles[k]:SetSize(FormatX(378),FormatY(155))
             bubbles[k]:SetImage("gui/gbrp/welcomescreen/page2/bubble.png")
             bubbles[k]:SetVisible(false)
             ganglabels[k] = vgui.Create("DLabel",bubbles[k])
             ganglabels[k]:SetFont("BankLarge")
-            ganglabels[k]:SetText(string.upper(gangs[k].name))
+            ganglabels[k]:SetText(string.upper(v.membername))
             ganglabels[k]:SizeToContents()
             ganglabels[k]:Center()
             ganglabels[k]:SetY(ganglabels[k]:GetY() - FormatY(40))
             gangButton[k] = vgui.Create("DImageButton",frame)
-            gangButton[k].gangName = gangs[k].name
-            gangButton[k]:SetImage("gui/gbrp/welcomescreen/page2/" .. gangs[k].name .. ".png")
+            gangButton[k].gangName = v.name
+            gangButton[k]:SetImage("gui/gbrp/welcomescreen/page2/" .. v.name .. ".png")
             gangButton[k]:SizeToContents()
-            gangButton[k]:SetPos(FormatX(gangpos[k][1][1]),FormatY(gangpos[k][1][2]))
+            gangButton[k]:SetPos(FormatX(gangpos[i][1][1]),FormatY(gangpos[i][1][2]))
+            gangButton[k].index = i
             gangButton[k].OnCursorEntered = function(self)
-                self:SetImage("gui/gbrp/welcomescreen/page2/" .. gangs[k].name .. "rollover.png")
+                self:SetImage("gui/gbrp/welcomescreen/page2/" .. v.name .. "rollover.png")
                 self:SizeToContents()
-                self:SetPos(FormatX(gangpos[k][2][1]),FormatY(gangpos[k][2][2]))
+                self:SetPos(FormatX(gangpos[self.index][2][1]),FormatY(gangpos[self.index][2][2]))
                 bubbles[k]:SetVisible(true)
             end
             gangButton[k].Unselect = function(self)
-                self:SetImage("gui/gbrp/welcomescreen/page2/" .. gangs[k].name .. ".png")
+                self:SetImage("gui/gbrp/welcomescreen/page2/" .. v.name .. ".png")
                 self:SizeToContents()
-                self:SetPos(FormatX(gangpos[k][1][1]),FormatY(gangpos[k][1][2]))
+                self:SetPos(FormatX(gangpos[self.index][1][1]),FormatY(gangpos[self.index][1][2]))
                 bubbles[k]:SetVisible(false)
             end
             gangButton[k].OnCursorExited = function(self)
@@ -2008,7 +2012,7 @@ net.Receive("GBRP::welcomeScreen",function()
         continuer.DoClick = function()
             if selected then
                 continuer:Remove()
-                for k = 1,2 do
+                for k,v in pairs(gangs) do
                     bubbles[k]:Remove()
                     ganglabels[k]:Remove()
                     gangButton[k]:Remove()

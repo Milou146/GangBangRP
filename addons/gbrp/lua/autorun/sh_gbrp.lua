@@ -476,7 +476,13 @@ function gbrp.sortedGangs()
         if gang then gang.ct = gang.ct + 1 end
     end
     local gangs = gbrp.gangs
-    table.sort(gangs, function(a, b) return a.ct < b.ct end)
+    local max = "yakuzas"
+    for k,v in pairs(gangs) do
+        if v.ct > gangs[max].ct then
+            max = k
+        end
+    end
+    gangs[max] = nil
     return gangs
 end
 if SERVER then
@@ -748,20 +754,23 @@ SetGlobalInt("gangBalance",0);
 SetGlobalInt("gangPrivateDoorsCount",0);
 
 gbrp.gangs = {
-    [1] = {
+    yakuzas = {
         subject = "Les yakuzas",
         name = "yakuzas",
-        ct = 0
+        ct = 0,
+        membername = "Yakuza"
     },
-    [2] = {
+    mafia = {
         subject = "La Mafia",
         name = "mafia",
-        ct = 0
+        ct = 0,
+        membername = "Mafieux"
     },
-    [3] = {
+    gang = {
         subject = "Les gangsters",
         name = "gang",
-        ct = 0
+        ct = 0,
+        membername = "Gangster"
     }
 }
 for k,v in pairs(gbrp.gangs) do
