@@ -90,7 +90,7 @@ function SH_COCAINE_DarkRPAdds()
         price = 350,
         max = 8,
 		category = "Cocaine Factory",
-        cmd = "buygas",
+        cmd = "buycocainegas",
     })
 
     DarkRP.createEntity("Drying Rack", {
