@@ -6,7 +6,7 @@ ENT.cash = {}
 ENT.money = {}
 ENT.gainRate = .2
 ENT.moneyRate = 1000
-ENT.timeRate = 60
+ENT.timeRate = 1
 local ft = CurTime()
 local laundered
 
@@ -42,11 +42,7 @@ end
 function ENT:Use(ply, caller, useType, value)
     if self.money[ply] and self.money[ply] > 0 then
         ply:ChatPrint("Vous récupérez " .. gbrp.formatMoney(self.money[ply]) .. " à encaisser à la banque.")
-        if ply.launderedMoney then
-            ply.launderedMoney = ply.launderedMoney + self.money[ply]
-        else
-            ply.launderedMoney = self.money[ply]
-        end
+        ply:SetNWInt("GBRP::personnalLaunderedMoney",ply:GetNWInt("GBRP::personnalLaunderedMoney") + self.money[ply])
         self.money[ply] = 0
     else
         net.Start("GBRP::laundererReception")

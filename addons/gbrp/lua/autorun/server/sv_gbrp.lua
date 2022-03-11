@@ -26,6 +26,7 @@ util.AddNetworkString("GBRP::barReception")
 util.AddNetworkString("GBRP::welcomeScreen")
 util.AddNetworkString("GBRP::laundererReception")
 util.AddNetworkString("GBRP::launderingRequest")
+util.AddNetworkString("GBRP::personnalBankDeposit")
 
 sql.Query("create table if not exists gbrp(steamid64 bigint not null, balance bigint);")
 
@@ -270,6 +271,10 @@ net.Receive("GBRP::launderingRequest",function(len,ply)
         launderer.cash[ply] = amount
     end
 end)
+net.Receive("GBRP::personnalBankDeposit",function(len,ply)
+    ply:Cash(ply:GetNWInt("GBRP::personnalLaunderedMoney"))
+    ply:SetNWInt("GBRP::personnalLaunderedMoney",0)
+end)
 
 -------------------------
 ---- C O M M A N D S ----
@@ -317,4 +322,14 @@ concommand.Add("collectivizedoor",function(ply,cmd,args)
         door:keysUnOwn(ply)
         gang:AddPrivateDoor(-1)
     end
+end)
+concommand.Add("spawn", function(ply,cmd,args)
+    if not ply:IsAdmin() then return end
+    local hitpos = ply:GetEyeTrace().HitPos
+    local ent = ents.Create(args[1])
+    if IsValid(ent) then
+        ent:SetPos(hitpos)
+        ent:Spawn()
+    end
+
 end)
