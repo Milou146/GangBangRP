@@ -24,6 +24,8 @@ util.AddNetworkString("GBRP::drugstoreReception")
 util.AddNetworkString("GBRP::repairgarageReception")
 util.AddNetworkString("GBRP::barReception")
 util.AddNetworkString("GBRP::welcomeScreen")
+util.AddNetworkString("GBRP::laundererReception")
+util.AddNetworkString("GBRP::launderingRequest")
 
 sql.Query("create table if not exists gbrp(steamid64 bigint not null, balance bigint);")
 
@@ -257,6 +259,16 @@ net.Receive("GBRP::buywep",function(len,ply)
 end)
 net.Receive("GBRP::heal",function(len,ply)
     ply:SetHealth(100)
+end)
+net.Receive("GBRP::launderingRequest",function(len,ply)
+    local launderer = net.ReadEntity()
+    local amount = net.ReadInt(32)
+    ply:addMoney(-amount)
+    if launderer.cash[ply] then
+        launderer.cash[ply] = launderer.cash[ply] + amount
+    else
+        launderer.cash[ply] = amount
+    end
 end)
 
 -------------------------

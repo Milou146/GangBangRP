@@ -2027,3 +2027,26 @@ net.Receive("GBRP::welcomeScreen",function()
         LoadPage2()
     end
 end)
+net.Receive("GBRP::laundererReception",function()
+    local ply = LocalPlayer()
+    local launderer = net.ReadEntity()
+    local frame = vgui.Create("EditablePanel",GetHUDPanel())
+    frame:SetSize(ScreenW,ScreenH)
+    frame:MakePopup()
+    local textEntry = vgui.Create("DTextEntry",frame)
+    textEntry:CenterHorizontal(.5)
+    textEntry:CenterVertical(.45)
+    textEntry:RequestFocus()
+    function textEntry:OnEnter()
+        local amount = tonumber(self:GetValue())
+        if amount > 0 and ply:canAfford(amount) then
+            net.Start("GBRP::launderingRequest")
+            net.WriteEntity(launderer)
+            net.WriteInt(amount,32)
+            net.SendToServer()
+        else
+            GAMEMODE:AddNotify("Montant invalide.",1,2)
+        end
+        frame:Remove()
+    end
+end)
