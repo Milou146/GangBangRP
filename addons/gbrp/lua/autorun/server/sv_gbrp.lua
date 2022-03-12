@@ -103,6 +103,10 @@ hook.Add("EntityTakeDamage","GBRP::EntityTakeDamage",function(ent,dmg)
         end
     end
 end)
+hook.Add("playerGetSalary","GBRP::salary",function(ply,amount)
+    ply:Cash(amount)
+    return false,"Jour de paye, vous touchez " .. gbrp.formatMoney(amount),0
+end)
 
 ---------------
 ---- N E T ----
