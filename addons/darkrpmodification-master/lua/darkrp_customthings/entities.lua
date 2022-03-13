@@ -266,3 +266,58 @@ DarkRP.createEntity("Boîte", {
 	category = "COCAINE",
     allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
 })
+---------------CIGARETTE--------------------------------------
+DarkRP.createEntity("AUTO-CIG 2000", {
+    ent = "cf_cigarette_machine",
+    model = "models/cigarette_factory/cf_machine.mdl",
+    price = 1,
+    max = 2,
+    cmd = "buyauto",
+	category = "CIGARETTE",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Tabac", {
+    ent = "cf_tobacco_pack",
+    model = "models/cigarette_factory/cf_tobacco_pack.mdl",
+    price = 1,
+    max = 5,
+    cmd = "buytab",
+	category = "CIGARETTE",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Papier", {
+    ent = "cf_roll_paper",
+    model = "models/cigarette_factory/cf_rollpaper.mdl",
+    price = 1,
+    max = 3,
+    cmd = "buypap",
+	category = "CIGARETTE",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Carton", {
+    ent = "cf_delievery_box",
+    model = "models/props_junk/cardboard_box003a.mdl",
+    price = 1,
+    max = 2,
+    cmd = "buycar",
+	category = "CIGARETTE",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Amélioration du stockage", {
+    ent = "cf_storage_upgrade",
+    model = "models/thrusters/jetpack.mdl",
+    price = 1,
+    max = 2,
+    cmd = "buysto",
+	category = "CIGARETTE",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Amélioration de la vitesse", {
+    ent = "cf_engine_upgrade",
+    model = "models/maxofs2d/thruster_propeller.mdl",
+    price = 1,
+    max = 2,
+    cmd = "buyvit",
+	category = "CIGARETTE",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
