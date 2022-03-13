@@ -21,6 +21,8 @@
 !/addons/the_cocaine_factory
 !/addons/vieetarmure
 !/addons/wcd
+!/data/
+/data/*
 !/data/arccw_presets
 !/data/ulib
 !/data/ulx

@@ -449,20 +449,20 @@ gbrp.c_arms["models/sentry/sentryoldmob/oldgoons/sentrybusi1male7pm.mdl"] = gbrp
 gbrp.c_arms["models/sentry/sentryoldmob/oldgoons/sentrybusi1male8pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/oldgoons/sentrybusi1male2pm.mdl"]
 gbrp.c_arms["models/sentry/sentryoldmob/oldgoons/sentrybusi1male9pm.mdl"] = gbrp.c_arms["models/sentry/sentryoldmob/oldgoons/sentrybusi1male2pm.mdl"]
 gbrp.dealerpos = {
-    [1] = {pos = Vector(-3820.632324,4315.528320,-38.120117), ang = Angle(90,-90,0)},
-    [2] = {pos = Vector(213.825684,7069.883789,121.879883), ang = Angle(72.878082,-98.743011,0)},
-    [3] = {pos = Vector(1712.468628,8209.974609,177.879883), ang = Angle(66.542526,-4.939997,0)},
-    [4] = {pos = Vector(4188.500977,6394.341309,81.879883), ang = Angle(83.554588,-89.734322,0)},
-    [5] = {pos = Vector(3489.109375,8379.791016,201.879883), ang = Angle(62.270256,1.426012,0)},
-    [6] = {pos = Vector(4707.984863,2009.082153,-38.120117), ang = Angle(86.396576,-177.882141,0)},
-    [7] = {pos = Vector(4391.191406,52.472580,-34.019478), ang = Angle(88.999992,-168.272705,0)},
-    [8] = {pos = Vector(-9388.332031,1625.529785,65.879883), ang = Angle(88.711983,87.816544,0)},
-    [9] = {pos = Vector(-4814.350586,-3661.320068,-271.446075), ang = Angle(71.686699,38.823296,0)}
+    [1] = {pos = Vector(-3820.632324,4315.528320,-38.120117), ang = Angle(0,-90,0)},
+    [2] = {pos = Vector(213.825684,7069.883789,121.879883), ang = Angle(0,-98.743011,0)},
+    [3] = {pos = Vector(1712.468628,8209.974609,177.879883), ang = Angle(0,-4.939997,0)},
+    [4] = {pos = Vector(4188.500977,6394.341309,81.879883), ang = Angle(0,-89.734322,0)},
+    [5] = {pos = Vector(3489.109375,8379.791016,201.879883), ang = Angle(0,1.426012,0)},
+    [6] = {pos = Vector(4707.984863,2009.082153,-38.120117), ang = Angle(0,-177.882141,0)},
+    [7] = {pos = Vector(4391.191406,52.472580,-34.019478), ang = Angle(0,-168.272705,0)},
+    [8] = {pos = Vector(-9388.332031,1625.529785,65.879883), ang = Angle(0,87.816544,0)},
+    [9] = {pos = Vector(-4814.350586,-3661.320068,-271.446075), ang = Angle(0,38.823296,0)}
 }
 gbrp.vanpos = {
-    [1] = {pos = Vector(1553.106812,10469.421875,193.879883), ang = Angle(88.999992,-179.138397,0)},
-    [2] = {pos = Vector(-12414.625977,10086.099609,313.879883), ang = Angle(88.842926,-90.847946,0)},
-    [3] = {pos = Vector(5899.490723,-3527.173828,-110.120117), ang = Angle(88.999992,99.768364,0)}
+    [1] = {pos = Vector(1553.106812,10469.421875,193.879883), ang = Angle(0,-179.138397,0)},
+    [2] = {pos = Vector(-12414.625977,10086.099609,313.879883), ang = Angle(0,-90.847946,0)},
+    [3] = {pos = Vector(5899.490723,-3527.173828,-110.120117), ang = Angle(0,99.768364,0)}
 }
 function gbrp.formatMoney(n)
     if not n then return "$0" end
@@ -507,14 +507,14 @@ if SERVER then
         bank1.gender = "female"
         bank1:SetModel("models/mossman.mdl")
         bank1:SetPos(Vector(-954.399658,2831.927979,-38.031754))
-        bank1:SetAngles(Angle(0,-89.345398,0))
+        bank1:SetAngles(Angle(0,-90,0))
         bank1:Spawn()
 
         local bank2 = ents.Create("gbrp_bank_receptionist")
         bank2.gender = "male"
         bank2:SetModel("models/sentry/sentryoldmob/mafia/sentrymobmale2pm.mdl")
         bank2:SetPos(Vector(-1063.368408,2830.685547,-38.031754))
-        bank2:SetAngles(Angle(0,-89.730392,0))
+        bank2:SetAngles(Angle(0,-90,0))
         bank2:Spawn()
 
         local bank3 = ents.Create("gbrp_bank_receptionist")
@@ -534,27 +534,27 @@ if SERVER then
         local hardwarestore = ents.Create("gbrp_shop")
         hardwarestore:SetModel("models/odessa.mdl")
         hardwarestore:SetPos(Vector(1298.557983,-1579.187866,-29.987122))
-        hardwarestore:SetAngles(Angle(0,90.987114,0))
+        hardwarestore:SetAngles(Angle(0,90,0))
         hardwarestore:Spawn()
 
         local gunshop = ents.Create("gbrp_shop")
         gunshop:SetModel("models/monk.mdl")
         gunshop:SetPos(Vector(-1099.968750,10497.299805,202.012878))
-        gunshop:SetAngles(Angle(0,-179.686249,0))
+        gunshop:SetAngles(Angle(0,-180,0))
         gunshop:SetShopName("gunshop")
         gunshop:Spawn()
 
         local drugstore = ents.Create("gbrp_shop")
         drugstore:SetModel("models/Kleiner.mdl")
         drugstore:SetPos(Vector(-6566.270508,3409.478027,42.012878))
-        drugstore:SetAngles(Angle(0,-90.832703,0))
+        drugstore:SetAngles(Angle(0,-90,0))
         drugstore:SetShopName("drugstore")
         drugstore:Spawn()
 
         local club = ents.Create("gbrp_shop")
         club:SetModel("models/breen.mdl")
         club:SetPos(Vector(-7678.176758,5545.522461,66.012878))
-        club:SetAngles(Angle(0,89.205963,0))
+        club:SetAngles(Angle(0,90,0))
         club:SetShopName("club")
         club:Spawn()
 
@@ -575,7 +575,7 @@ if SERVER then
         local gasstation = ents.Create("gbrp_shop")
         gasstation:SetModel("models/eli.mdl")
         gasstation:SetPos(Vector(-5872.972168,1543.199097,50.012878))
-        gasstation:SetAngles(Angle(0,-92.799614,0))
+        gasstation:SetAngles(Angle(0,-90,0))
         gasstation:SetShopName("gasstation")
         gasstation:Spawn()
 
@@ -593,12 +593,12 @@ if SERVER then
 
         local meth = ents.Create("eml_buyer")
         meth:SetPos(Vector(2020.909058,6699.243164,-230.120117))
-        meth:SetAngles(Angle(78.161469,175.822433,0))
+        meth:SetAngles(Angle(0,175.822433,0))
         meth:Spawn()
 
         local cocaine = ents.Create("cocaine_drugs_buyer")
         cocaine:SetPos(Vector(990.905701,1648.007080,-430.120117))
-        cocaine:SetAngles(Angle(83.030998,88.564888,0))
+        cocaine:SetAngles(Angle(0,88.564888,0))
         cocaine:Spawn()
 
         local randint = math.random(1,#gbrp.dealerpos)
