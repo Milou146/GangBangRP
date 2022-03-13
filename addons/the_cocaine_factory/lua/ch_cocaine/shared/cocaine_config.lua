@@ -3,7 +3,7 @@ TCF.Config = TCF.Config or {}
 
 -- SET LANGUAGE
 -- Available languages: English: en - Danish: da - German: de - Polish: pl - Russian: ru - Spanish: es - French: fr - Chinese: cn - Turkish: tr
-TCF.Config.Language = "en" -- Set the language of the script.
+TCF.Config.Language = "fr" -- Set the language of the script.
 
 -- GENERAL Config
 TCF.Config.RemoveEntsOnTeamChange = true -- Should all cocaine related entities owned by the player be removed when changing to a non Criminal team (from list below)?
@@ -11,17 +11,23 @@ TCF.Config.RemoveEntsOnDC = true -- Same as above, but on disconnect all owned e
 
 -- GENERAL TEAM CONFIGURATION
 TCF.Config.CriminalTeams = { -- These teams are allowed to interact with the cocaine buyer NPC.
-	"Citizen",
+	"Chef des Yakuzas",
+	"Yakuza",
+	"Yakuza Architecte",
+	"Yakuza Médecin",
+	"Parrain",
+	"Mafieux",
+	"Mafieux Architecte",
+	"Mafieux Médecin",
+	"Chef Gangster",
 	"Gangster",
-	"Criminal",
-	"Mafia",
-	"Mafia Leader",
-	"Mob Boss",
-	"Organized Crime" -- THE LAST TEAM SHOULD NOT HAVE A COMMA
+	"Gangster Architecte",
+	"Gangster Médecin"
+	
 }
 
 TCF.Config.PoliceTeams = { -- Police teams. These teams are NOT allowed to use the cocaine buyer NPC and can also confiscate packed boxes with cocaine.
-	"Police Officer",
+	"Citoyen",
 	"Civil Protection",
 	"Police Chief",
 	"Chief Civil Protection",

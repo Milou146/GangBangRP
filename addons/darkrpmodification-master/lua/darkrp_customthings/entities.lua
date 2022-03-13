@@ -139,7 +139,6 @@ DarkRP.createEntity("Water", {
 	category = "METHAMPHETAMINE",
     allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
 })
-
 DarkRP.createEntity("Salt", {
     ent = "eml_salt",
     model = "models/props_junk/garbage_milkcarton002a.mdl",
@@ -156,5 +155,114 @@ DarkRP.createEntity("Liquid Iodine", {
     max = 10,
     cmd = "buyliq",
 	category = "METHAMPHETAMINE",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+---------------COCAINE--------------------------------------
+DarkRP.createEntity("Gazinière", {
+    ent = "cocaine_stove",
+    model = "models/craphead_scripts/the_cocaine_factory/stove/gas_stove.mdl",
+    price = 1,
+    max = 1,
+    cmd = "buygazi",
+	category = "COCAINE",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Gaz", {
+    ent = "cocaine_gas",
+    model = "models/craphead_scripts/the_cocaine_factory/utility/gas_tank.mdl",
+    price = 1,
+    max = 2,
+    cmd = "buygaz",
+	category = "COCAINE",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Plaque de cuisson", {
+    ent = "cocaine_cooking_plate",
+    model = "models/craphead_scripts/the_cocaine_factory/utility/stove_upgrade.mdl",
+    price = 1,
+    max = 4,
+    cmd = "buypla",
+	category = "COCAINE",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Casserole", {
+    ent = "cocaine_cooking_pot",
+    model = "models/craphead_scripts/the_cocaine_factory/utility/pot.mdl",
+    price = 1,
+    max = 4,
+    cmd = "buycas",
+	category = "COCAINE",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Bicarbonate", {
+    ent = "cocaine_baking_soda",
+    model = "models/craphead_scripts/the_cocaine_factory/utility/soda.mdl",
+    price = 1,
+    max = 5,
+    cmd = "buybic",
+	category = "COCAINE",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Eau", {
+    ent = "cocaine_water",
+    model = "models/craphead_scripts/the_cocaine_factory/utility/water.mdl",
+    price = 1,
+    max = 5,
+    cmd = "buyeau",
+	category = "COCAINE",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Extracteur", {
+    ent = "cocaine_extractor",
+    model = "models/craphead_scripts/the_cocaine_factory/extractor/extractor.mdl",
+    price = 1,
+    max = 1,
+    cmd = "buyext",
+	category = "COCAINE",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Feuilles", {
+    ent = "cocaine_leaves",
+    model = "models/craphead_scripts/the_cocaine_factory/utility/leaves.mdl",
+    price = 1,
+    max = 5,
+    cmd = "buyfeu",
+	category = "COCAINE",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Seau", {
+    ent = "cocaine_bucket",
+    model = "models/craphead_scripts/the_cocaine_factory/utility/bucket.mdl",
+    price = 1,
+    max = 1,
+    cmd = "buysea",
+	category = "COCAINE",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Déshydrateur", {
+    ent = "cocaine_drying_rack",
+    model = "models/craphead_scripts/the_cocaine_factory/drying_rack/drying_rack.mdl",
+    price = 1,
+    max = 1,
+    cmd = "buydes",
+	category = "COCAINE",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Batterie", {
+    ent = "cocaine_battery",
+    model = "models/craphead_scripts/the_cocaine_factory/utility/battery.mdl",
+    price = 1,
+    max = 2,
+    cmd = "buybat",
+	category = "COCAINE",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Boîte", {
+    ent = "cocaine_box",
+    model = "models/craphead_scripts/the_cocaine_factory/utility/cocaine_box.mdl",
+    price = 1,
+    max = 1,
+    cmd = "buyboi",
+	category = "COCAINE",
     allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
 })
