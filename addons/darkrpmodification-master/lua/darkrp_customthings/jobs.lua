@@ -674,11 +674,11 @@ TEAM_VIP5 = DarkRP.createJob("Vendeur d'armes ambulant", {
 })
 
 --------------------------------------------------------------------------------
-TEAM_VIP6 = DarkRP.createJob("Tueur à gage", {
+TEAM_MOB = DarkRP.createJob("Tueur à gage", {
     color = Color(212, 164, 17, 255),
     model = {"models/player/gman_high.mdl"},
     description = [[Réalisez les contrats donnés par vos clients en respectant leurs conditions.]],
-    weapons = {"pocket", "keys","hmc_fiberwire"},
+    weapons = {"pocket", "keys","hmc_fiberwire","disguise_swep"},
     command = "tag",
     max = 1,
     salary = 0,
@@ -701,15 +701,15 @@ TEAM_VIP6 = DarkRP.createJob("Tueur à gage", {
 --------------------------------------------------------------------------------
 TEAM_VIP7 = DarkRP.createJob("Voleur", {
     color = Color(212, 164, 17, 255),
-    model = {"models/player/gman_high.mdl"},
-    description = [[Volez les biens des autres et revendez-les sur le marché. Collaborez avec un gang poru vosu faire du blé.]],
+    model = {"models/sentry/sentryoldmob/greaser/sentrygreasemale2pm.mdl", "models/sentry/sentryoldmob/greaser/sentrygreasemale4pm.mdl", "models/sentry/sentryoldmob/greaser/sentrygreasemale7pm.mdl", "models/sentry/sentryoldmob/greaser/sentrygreasemale9pm.mdl"},
+    description = [[Volez les biens des autres et revendez-les sur le marché. Collaborez avec un gang pour vous faire du blé.]],
     weapons = {"pocket", "keys","deathdisturbance_pickpocket","lockpick"},
     command = "vol",
     max = 1,
     salary = 0,
     admin = 0,
     vote = false,
-    hasLicense = true,
+    hasLicense = false,
     candemote = false,
     category = "VIP+",
     PlayerSpawn = function(ply)
