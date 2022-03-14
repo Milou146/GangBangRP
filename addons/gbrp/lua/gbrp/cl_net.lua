@@ -1,4 +1,4 @@
-local panelOpen = false
+local frame
 
 net.Receive("GBRP::doorsinit",function()
     gbrp.doors = {}
@@ -7,20 +7,17 @@ net.Receive("GBRP::doorsinit",function()
     end
 end)
 net.Receive("GBRP::bankreception", function()
-    if panelOpen then return end
-    panelOpen = true
+    if IsValid(frame) then return end
+    local ply = LocalPlayer()
     local gender = net.ReadString()
     surface.PlaySound(gbrp.voices[gender][math.random(1,#gbrp.voices[gender])])
-    local ply = LocalPlayer()
-    local SW = ScrW()
-    local SH = ScrH()
-    local frame = vgui.Create("EditablePanel",GetHUDPanel())
+    frame = vgui.Create("EditablePanel",GetHUDPanel())
     frame:SetSize(1016,550)
-    frame:SetPos(SW / 2 -frame:GetWide() / 2, SH)
+    frame:SetPos(gbrp.ScreenW / 2 -frame:GetWide() / 2, gbrp.ScreenH)
     frame:MakePopup()
     frame.mat = Material("gui/gbrp/bank/frame.png")
     function frame:Think()
-        if self:GetY() ~= SH - 550 then
+        if self:GetY() ~= gbrp.ScreenH - 550 then
             self:SetY(self:GetY() - 25)
         end
     end
@@ -51,7 +48,6 @@ net.Receive("GBRP::bankreception", function()
             net.Start("GBRP::bankdeposit")
             net.SendToServer()
             frame:Remove()
-            panelOpen = false
             GAMEMODE:AddNotify("Vous avez déposé " .. gbrp.formatMoney(amount) .. ".",0,2)
             surface.PlaySound("gui/gbrp/bank/deposit.wav")
         elseif personnalAmount > 0 then
@@ -92,14 +88,13 @@ net.Receive("GBRP::bankreception", function()
 end)
 net.Receive("GBRP::jewelrystoreReception",function()
     local shop = net.ReadEntity()
-    if panelOpen then return end
+    if IsValid(frame) then return end
     local ply = LocalPlayer()
     local gang = ply:GetGang()
     if not gang then return end
-    panelOpen = true
     local shopbalMat = Material("gui/gbrp/jewelrystore/shopbal.png")
     local shopvalMat = Material("gui/gbrp/jewelrystore/shopval.png")
-    local frame = vgui.Create("EditablePanel",GetHUDPanel())
+    frame = vgui.Create("EditablePanel",GetHUDPanel())
     frame:SetSize(gbrp.FormatX(1217),gbrp.FormatY(964))
     frame:CenterHorizontal(.5)
     frame:SetY(gbrp.FormatY(116))
@@ -208,15 +203,14 @@ net.Receive("GBRP::jewelrystoreReception",function()
 end)
 net.Receive("GBRP::clubReception",function()
     local shop = net.ReadEntity()
-    if panelOpen then return end
+    if IsValid(frame) then return end
     local ply = LocalPlayer()
     local gang = ply:GetGang()
     if not gang then return end
-    panelOpen = true
     local subpanelMat = Material("gui/gbrp/club/subpanel.png")
     local shopbalMat = Material("gui/gbrp/club/shopbal.png")
     local shopvalMat = Material("gui/gbrp/club/shopval.png")
-    local frame = vgui.Create("EditablePanel",GetHUDPanel())
+    frame = vgui.Create("EditablePanel",GetHUDPanel())
     frame:SetSize(1396,716)
     frame:SetPos(371,116)
     frame:MakePopup()
@@ -322,14 +316,13 @@ net.Receive("GBRP::clubReception",function()
 end)
 net.Receive("GBRP::gasstationReception",function()
     local shop = net.ReadEntity()
-    if panelOpen then return end
+    if IsValid(frame) then return end
     local ply = LocalPlayer()
     local gang = ply:GetGang()
     if not gang then return end
-    panelOpen = true
     local leftpanelMat = Material("gui/gbrp/gasstation/page1/leftpanel.png")
     local rightpanelMat = Material("gui/gbrp/gasstation/page1/rightpanel.png")
-    local frame = vgui.Create("EditablePanel",GetHUDPanel())
+    frame = vgui.Create("EditablePanel",GetHUDPanel())
     frame:SetSize(1376,1005)
     frame:SetPos(287,75)
     frame:MakePopup()
@@ -457,7 +450,6 @@ net.Receive("GBRP::gasstationReception",function()
             if shoppingBasket == "" then GAMEMODE:AddNotify("Veuillez sélectionner un article.",1,2) return end
             if ply:CanAfford(bill) then
                 frame:Remove()
-                panelOpen = false
                 net.Start("GBRP::buyfood")
                 net.WriteString(shoppingBasket)
                 net.SendToServer()
@@ -562,13 +554,12 @@ net.Receive("GBRP::gasstationReception",function()
 end)
 net.Receive("GBRP::gunshopReception",function()
     local shop = net.ReadEntity()
-    if panelOpen then return end
+    if IsValid(frame) then return end
     local ply = LocalPlayer()
     local gang = ply:GetGang()
     if not gang then return end
-    panelOpen = true
     local panel = Material("gui/gbrp/gunshop/page1/panel.png")
-    local frame = vgui.Create("EditablePanel",GetHUDPanel())
+    frame = vgui.Create("EditablePanel",GetHUDPanel())
     frame:SetPos(376,137)
     frame:SetSize(1220,943)
     frame:MakePopup()
@@ -726,7 +717,6 @@ net.Receive("GBRP::gunshopReception",function()
             if not selected then GAMEMODE:AddNotify("Veuillez sélectionner un article.",1,2) return end
             if ply:CanAfford(selected.price) then
                 frame:Remove()
-                panelOpen = false
                 net.Start("GBRP::buywep")
                 net.WriteString(selected.classname)
                 net.WriteInt(selected.price,7)
@@ -835,18 +825,17 @@ net.Receive("GBRP::gunshopReception",function()
 end)
 net.Receive("GBRP::repairgarageReception",function()
     local shop = net.ReadEntity()
-    if panelOpen then return end
+    if IsValid(frame) then return end
     local ply = LocalPlayer()
     local gang = ply:GetGang()
     if not gang then return end
-    panelOpen = true
     local urlbar = Material("gui/gbrp/repairgarage/urlbar.jpg")
     local background = Material("gui/gbrp/repairgarage/background.jpg")
     local sidebar = Material("gui/gbrp/sidebar.png")
     local bottombar = Material("gui/gbrp/bottombar.jpg")
     local price = Material("gui/gbrp/repairgarage/page1/price.png")
     local value = Material("gui/gbrp/repairgarage/page1/value.png")
-    local frame = vgui.Create("EditablePanel",GetHUDPanel())
+    frame = vgui.Create("EditablePanel",GetHUDPanel())
     frame:SetPos(376,143)
     frame:SetSize(1220,937)
     frame:MakePopup()
@@ -986,17 +975,16 @@ net.Receive("GBRP::repairgarageReception",function()
 end)
 net.Receive("GBRP::drugstoreReception",function()
     local shop = net.ReadEntity()
-    if panelOpen then return end
+    if IsValid(frame) then return end
     local ply = LocalPlayer()
     local gang = ply:GetGang()
     if not gang then return end
-    panelOpen = true
     local urlbar = Material("gui/gbrp/macbook/urlbar.jpg")
     local background = Material("gui/gbrp/drugstore/page1/background.jpg")
     local bottombar = Material("gui/gbrp/macbook/bottombar.jpg")
     local logo = Material("gui/gbrp/drugstore/logo.png")
     local panel = Material("gui/gbrp/drugstore/page1/panel.png")
-    local frame = vgui.Create("EditablePanel",GetHUDPanel())
+    frame = vgui.Create("EditablePanel",GetHUDPanel())
     frame:SetSize(1217,964)
     frame:CenterHorizontal()
     frame:SetY(ScrH() - 964)
@@ -1157,13 +1145,12 @@ net.Receive("GBRP::drugstoreReception",function()
 end)
 net.Receive("GBRP::barReception",function()
     local shop = net.ReadEntity()
-    if panelOpen then return end
+    if IsValid(frame) then return end
     local ply = LocalPlayer()
     local gang = ply:GetGang()
     if not gang then return end
-    panelOpen = true
     local panelMat = Material("gui/gbrp/bar/panel.png")
-    local frame = vgui.Create("EditablePanel",GetHUDPanel())
+    frame = vgui.Create("EditablePanel",GetHUDPanel())
     frame.mat = Material("gui/gbrp/bar/frame.png")
     frame.shop = shop
     frame:SetPos(266,164)
@@ -1278,7 +1265,7 @@ net.Receive("GBRP::welcomeScreen",function()
     local mediclabel
     local label
     local ply = LocalPlayer()
-    local frame = vgui.Create("EditablePanel",GetHUDPanel())
+    frame = vgui.Create("EditablePanel",GetHUDPanel())
     frame:SetSize(gbrp.ScreenW,gbrp.ScreenH)
     frame.mat = Material("gui/gbrp/welcomescreen/background1.jpg")
     frame:MakePopup()
@@ -1684,9 +1671,9 @@ net.Receive("GBRP::welcomeScreen",function()
     end
 end)
 net.Receive("GBRP::laundererReception",function()
-    local ply = LocalPlayer()
     local launderer = net.ReadEntity()
-    local frame = vgui.Create("EditablePanel",GetHUDPanel())
+    local ply = LocalPlayer()
+    frame = vgui.Create("EditablePanel",GetHUDPanel())
     frame:SetSize(gbrp.ScreenW,gbrp.ScreenH)
     frame:MakePopup()
     local label = vgui.Create("DLabel",frame)
@@ -1711,5 +1698,68 @@ net.Receive("GBRP::laundererReception",function()
             GAMEMODE:AddNotify("Montant invalide.",1,2)
         end
         frame:Remove()
+    end
+end)
+net.Receive("GBRP::robberyPanel",function()
+    if IsValid(frame) then return end
+    local shop = net.ReadEntity()
+    local ply = LocalPlayer()
+    local time = Material("gui/gbrp/robbery/time.png")
+    local att = Material("gui/gbrp/robbery/att.png")
+    local attChar = ply:GetGang().materials[ply:GetGBRPClass()]
+    local defChar = shop:GetGang().materials.leader
+    local def = Material("gui/gbrp/robbery/def.png")
+    frame = vgui.Create("EditablePanel",GetHUDPanel())
+    frame:SetSize(gbrp.FormatX(989),gbrp.FormatY(979))
+    frame:SetPos(gbrp.FormatX(417),0)
+    frame:MakePopup()
+    frame.bg = Material("gui/gbrp/robbery/background.png")
+    frame.bottom = Material("gui/gbrp/robbery/bottom.png")
+    function frame:Paint(w,h)
+        surface.SetDrawColor(2555,255,255,255)
+        surface.SetMaterial(self.bg)
+        surface.DrawTexturedRect(0,0,w,h)
+
+        surface.SetMaterial(time)
+        surface.DrawTexturedRect(gbrp.FormatX(334),gbrp.FormatY(753),gbrp.FormatX(375),gbrp.FormatY(30))
+
+        surface.SetMaterial(att)
+        surface.DrawTexturedRect(gbrp.FormatX(295),gbrp.FormatY(376),gbrp.FormatX(att:Width()),gbrp.FormatY(att:Height()))
+
+        surface.SetMaterial(attChar)
+        surface.DrawTexturedRect(gbrp.FormatX(124),gbrp.FormatY(318),gbrp.FormatX(200),gbrp.FormatY(600))
+
+        surface.SetMaterial(def)
+        surface.DrawTexturedRect(gbrp.FormatX(648),gbrp.FormatY(376),gbrp.FormatX(def:Width()),gbrp.FormatY(def:Height()))
+
+        surface.SetMaterial(defChar)
+        surface.DrawTexturedRect(gbrp.FormatX(712),gbrp.FormatY(318),gbrp.FormatX(200),gbrp.FormatY(600))
+
+        surface.SetMaterial(self.bottom)
+        surface.DrawTexturedRect(gbrp.FormatY(102),gbrp.FormatY(897),gbrp.FormatX(823),gbrp.FormatY(82))
+
+        surface.SetTextColor(255,255,255,255)
+        surface.SetFont("PricedownHuge")
+        surface.SetTextPos(gbrp.FormatX(400),gbrp.FormatY(910))
+        surface.DrawText(gbrp.formatMoney(shop:GetBalance() + shop:GetDirtyMoney()))
+    end
+    local remove = vgui.Create("RemoveButton",frame)
+    remove:SetImage("gui/gbrp/jewelrystore/remove.png")
+    remove:SetPos(gbrp.FormatX(882),gbrp.FormatY(110))
+    remove:SetSize(gbrp.FormatX(30),gbrp.FormatY(33))
+    local braquer = vgui.Create("DImageButton",frame)
+    braquer:SetImage("gui/gbrp/robbery/braquer.png")
+    braquer:SetPos(gbrp.FormatX(341),gbrp.FormatY(568))
+    braquer:SetSize(gbrp.FormatX(371),gbrp.FormatY(176))
+    function braquer:GetMaterial()
+        return Material(self:GetImage())
+    end
+    function braquer:OnCursorEntered()
+        self:SetImage("gui/gbrp/robbery/braquerrollover.png")
+        self:SetSize(gbrp.FormatX(self:GetMaterial():Width()),gbrp.FormatY(self:GetMaterial():Height()))
+    end
+    function braquer:OnCursorExited()
+        self:SetImage("gui/gbrp/robbery/braquer.png")
+        self:SetSize(gbrp.FormatX(self:GetMaterial():Width()),gbrp.FormatY(self:GetMaterial():Height()))
     end
 end)

@@ -1,4 +1,9 @@
 if engine.ActiveGamemode() ~= "darkrp" then return end
+local meth1
+local cocaine1
+local npc_shop
+local launderer
+local cf_export_van
 ----------------------------
 ---- G A N G -- M E T A ----
 ----------------------------
@@ -97,7 +102,10 @@ end
 
 local plyMeta = FindMetaTable("Player")
 function plyMeta:IsGangLeader()
-    return self:getJobTable().gangLeader;
+    return self:getJobTable().class == "leader"
+end
+function plyMeta:GetGBRPClass()
+    return self:getJobTable().class
 end
 function plyMeta:GetGang()
     return self:getJobTable().gang;
@@ -460,9 +468,9 @@ gbrp.dealerpos = {
     [9] = {pos = Vector(-4814.350586,-3661.320068,-271.446075), ang = Angle(0,38.823296,0)}
 }
 gbrp.vanpos = {
-    [1] = {pos = Vector(1553.106812,10469.421875,193.879883), ang = Angle(0,-179.138397,0)},
-    [2] = {pos = Vector(-12414.625977,10086.099609,313.879883), ang = Angle(0,-90.847946,0)},
-    [3] = {pos = Vector(5899.490723,-3527.173828,-110.120117), ang = Angle(0,99.768364,0)}
+    [1] = {pos = Vector(1553,10469,194), ang = Angle(0,-90,0)},
+    [2] = {pos = Vector(-12415,10086,314), ang = Angle(0,0,0)},
+    [3] = {pos = Vector(5899,-3527,-110), ang = Angle(0,180,0)}
 }
 function gbrp.formatMoney(n)
     if not n then return "$0" end
@@ -567,52 +575,54 @@ if SERVER then
 
         local bar = ents.Create("gbrp_shop")
         bar:SetModel("models/alyx.mdl")
-        bar:SetPos(Vector(4955.289063,8042.855957,210.012878))
+        bar:SetPos(Vector(4955,8042,210))
         bar:SetAngles(Angle(0,0,0))
         bar:SetShopName("bar")
         bar:Spawn()
 
         local gasstation = ents.Create("gbrp_shop")
         gasstation:SetModel("models/eli.mdl")
-        gasstation:SetPos(Vector(-5872.972168,1543.199097,50.012878))
+        gasstation:SetPos(Vector(-5872,1543,50))
         gasstation:SetAngles(Angle(0,-90,0))
         gasstation:SetShopName("gasstation")
         gasstation:Spawn()
 
         local archivist = ents.Create("gbrp_shop")
         archivist:SetModel("models/humans/Group01/female_03.mdl")
-        archivist:SetPos(Vector(3966.805908,6776.076660,16.896027))
+        archivist:SetPos(Vector(3966,6776,16))
         archivist:SetAngles(Angle(0,-90,0))
         archivist:Spawn()
 
         local unknown = ents.Create("gbrp_shop")
         unknown:SetModel("models/player/hostage/hostage_01.mdl")
-        unknown:SetPos(Vector(1505.933350,7163.607422,81.896027))
+        unknown:SetPos(Vector(1505,7163,81))
         unknown:SetAngles(Angle(0,-90,0))
         unknown:Spawn()
 
         local meth = ents.Create("eml_buyer")
-        meth:SetPos(Vector(2020.909058,6699.243164,-230.120117))
-        meth:SetAngles(Angle(0,175.822433,0))
+        meth:SetPos(Vector(2020,6699,-290))
+        meth:SetAngles(Angle(0,180,0))
         meth:Spawn()
+        meth:DropToFloor()
 
         local cocaine = ents.Create("cocaine_drugs_buyer")
-        cocaine:SetPos(Vector(990.905701,1648.007080,-430.120117))
-        cocaine:SetAngles(Angle(0,88.564888,0))
+        cocaine:SetPos(Vector(990,1648,-430))
+        cocaine:SetAngles(Angle(0,90,0))
         cocaine:Spawn()
 
         local randint = math.random(1,#gbrp.dealerpos)
         gbrp.dealerpos[randint].posTaken = true
-        local meth1 = ents.Create("eml_buyer")
+        meth1 = ents.Create("eml_buyer")
         meth1:SetPos(gbrp.dealerpos[randint].pos)
         meth1:SetAngles(gbrp.dealerpos[randint].ang)
         meth1:Spawn()
+        meth1:DropToFloor()
 
         while gbrp.dealerpos[randint].posTaken == true do
             randint = math.random(1,#gbrp.dealerpos)
         end
         gbrp.dealerpos[randint].posTaken = true
-        local cocaine1 = ents.Create("cocaine_drugs_buyer")
+        cocaine1 = ents.Create("cocaine_drugs_buyer")
         cocaine1:SetPos(gbrp.dealerpos[randint].pos)
         cocaine1:SetAngles(gbrp.dealerpos[randint].ang)
         cocaine1:Spawn()
@@ -621,7 +631,7 @@ if SERVER then
             randint = math.random(1,#gbrp.dealerpos)
         end
         gbrp.dealerpos[randint].posTaken = true
-        local npc_shop = ents.Create("npc_shop")
+        npc_shop = ents.Create("npc_shop")
         npc_shop:SetPos(gbrp.dealerpos[randint].pos)
         npc_shop:SetAngles(gbrp.dealerpos[randint].ang)
         npc_shop:Spawn()
@@ -630,14 +640,14 @@ if SERVER then
             randint = math.random(1,#gbrp.dealerpos)
         end
         gbrp.dealerpos[randint].posTaken = true
-        local launderer = ents.Create("gbrp_launderer")
+        launderer = ents.Create("gbrp_launderer")
         launderer:SetModel("models/odessa.mdl")
         launderer:SetPos(gbrp.dealerpos[randint].pos)
         launderer:SetAngles(gbrp.dealerpos[randint].ang)
         launderer:Spawn()
 
         local random = gbrp.vanpos[math.random(1,#gbrp.vanpos)]
-        local cf_export_van = ents.Create("cf_export_van")
+        cf_export_van = ents.Create("cf_export_van")
         cf_export_van:SetPos(random.pos)
         cf_export_van:SetAngles(random.ang)
         cf_export_van:Spawn()
@@ -783,6 +793,50 @@ if SERVER then
             end
         end
     end
+    function gbrp.MoveNPCs()
+        for k,v in pairs(gbrp.dealerpos) do
+            v.posTaken = false
+        end
+        local randint = math.random(1,#gbrp.dealerpos)
+        gbrp.dealerpos[randint].posTaken = true
+        meth1:Remove()
+        meth1 = ents.Create("eml_buyer")
+        meth1:SetPos(gbrp.dealerpos[randint].pos)
+        meth1:SetAngles(gbrp.dealerpos[randint].ang)
+        meth1:Spawn()
+        meth1:DropToFloor()
+
+        while gbrp.dealerpos[randint].posTaken == true do
+            randint = math.random(1,#gbrp.dealerpos)
+        end
+        gbrp.dealerpos[randint].posTaken = true
+        cocaine1:Remove()
+        cocaine1 = ents.Create("cocaine_drugs_buyer")
+        cocaine1:SetPos(gbrp.dealerpos[randint].pos)
+        cocaine1:SetAngles(gbrp.dealerpos[randint].ang)
+        cocaine1:Spawn()
+
+        while gbrp.dealerpos[randint].posTaken == true do
+            randint = math.random(1,#gbrp.dealerpos)
+        end
+        gbrp.dealerpos[randint].posTaken = true
+        npc_shop:SetPos(gbrp.dealerpos[randint].pos)
+        npc_shop:SetAngles(gbrp.dealerpos[randint].ang)
+        npc_shop:DropToFloor()
+
+        while gbrp.dealerpos[randint].posTaken == true do
+            randint = math.random(1,#gbrp.dealerpos)
+        end
+        gbrp.dealerpos[randint].posTaken = true
+        launderer:SetPos(gbrp.dealerpos[randint].pos)
+        launderer:SetAngles(gbrp.dealerpos[randint].ang)
+        launderer:DropToFloor()
+
+        local random = gbrp.vanpos[math.random(1,#gbrp.vanpos)]
+        cf_export_van:SetPos(random.pos)
+        cf_export_van:SetAngles(random.ang)
+        cf_export_van:DropToFloor()
+    end
 end
 if CLIENT then
     gbrp.gangpanel = {}
@@ -846,19 +900,37 @@ gbrp.gangs = {
         subject = "Les yakuzas",
         name = "yakuzas",
         ct = 0,
-        membername = "Yakuza"
+        membername = "Yakuza",
+        materials = {
+            member = Material("gui/gbrp/welcomescreen/page3/yaku.png"),
+            leader = Material("gui/gbrp/welcomescreen/page3/yakuleader.png"),
+            archi = Material("gui/gbrp/welcomescreen/page3/yakuarchi.png"),
+            medic = Material("gui/gbrp/welcomescreen/page3/yakumedic.png")
+        }
     },
     mafia = {
         subject = "La Mafia",
         name = "mafia",
         ct = 0,
-        membername = "Mafieux"
+        membername = "Mafieux",
+        materials = {
+            member = Material("gui/gbrp/welcomescreen/page3/mafia.png"),
+            leader = Material("gui/gbrp/welcomescreen/page3/mafialeader.png"),
+            archi = Material("gui/gbrp/welcomescreen/page3/mafiaarchi.png"),
+            medic = Material("gui/gbrp/welcomescreen/page3/mafiamedic.png")
+        }
     },
     gang = {
         subject = "Les gangsters",
         name = "gang",
         ct = 0,
-        membername = "Gangster"
+        membername = "Gangster",
+        materials = {
+            member = Material("gui/gbrp/welcomescreen/page3/gang.png"),
+            leader = Material("gui/gbrp/welcomescreen/page3/gangleader.png"),
+            archi = Material("gui/gbrp/welcomescreen/page3/gangarchi.png"),
+            medic = Material("gui/gbrp/welcomescreen/page3/gangmedic.png")
+        }
     }
 }
 for k,v in pairs(gbrp.gangs) do

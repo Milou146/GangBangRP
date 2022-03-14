@@ -14,9 +14,16 @@ function ENT:Initialize()
 end
 
 function ENT:Use(ply, caller, useType, value)
-    net.Start("GBRP::" .. self:GetShopName() .. "Reception")
-    net.WriteEntity(self)
-    net.Send(ply)
+    local shopGang = self:GetGang()
+    if shopGang and ply:GetGang() and ply:GetGang() != shopGang then
+        net.Start("GBRP::robberyPanel")
+        net.WriteEntity(self)
+        net.Send(ply)
+    else
+        net.Start("GBRP::" .. self:GetShopName() .. "Reception")
+        net.WriteEntity(self)
+        net.Send(ply)
+    end
 end
 
 ENT.money = {}

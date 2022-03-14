@@ -1,3 +1,5 @@
+local ft = CurTime()
+
 hook.Add("PlayerInitialSpawn", "GBRP::Client Init", function(ply)
     local data = sql.QueryRow("select * from gbrp where steamid64 = " .. ply:SteamID64() .. ";")
 
@@ -10,7 +12,7 @@ hook.Add("PlayerInitialSpawn", "GBRP::Client Init", function(ply)
     net.Start("GBRP::welcomeScreen")
     net.Send(ply)
 end)
-hook.Add( "InitPostEntity", "GBRP::InitPostEntity", function()
+hook.Add("InitPostEntity", "GBRP::InitPostEntity", function()
     gbrp.SpawnNPCs()
     gbrp.SpawnHotdogSalesmans()
     gbrp.InitDoors()
@@ -70,4 +72,10 @@ end)
 hook.Add("playerGetSalary","GBRP::salary",function(ply,amount)
     ply:Cash(amount)
     return false,"Jour de paye, vous touchez " .. gbrp.formatMoney(amount),0
+end)
+hook.Add("Think", "GBRP::Think",function()
+    if CurTime() > ft + 1800 then
+        ft = CurTime()
+        gbrp.MoveNPCs()
+    end
 end)

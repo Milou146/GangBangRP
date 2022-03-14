@@ -184,7 +184,7 @@ TEAM_YAKUZA = DarkRP.createJob("Chef des Yakuzas", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
     gang = gbrp.gangs.yakuzas,
-    gangLeader = true
+    class = "leader"
 })
 
 --------------------------------------------------------------------------------
@@ -213,7 +213,8 @@ TEAM_YAKUZA1 = DarkRP.createJob("Yakuza", {
         ply:SetArmor(0)
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
-    gang = gbrp.gangs.yakuzas
+    gang = gbrp.gangs.yakuzas,
+    class = "member"
 })
 
 --------------------------------------------------------------------------------
@@ -242,7 +243,8 @@ TEAM_YAKUZA2 = DarkRP.createJob("Yakuza Architecte", {
         ply:SetArmor(0)
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
-    gang = gbrp.gangs.yakuzas
+    gang = gbrp.gangs.yakuzas,
+    class = "archi"
 })
 
 --------------------------------------------------------------------------------
@@ -275,7 +277,8 @@ TEAM_YAKUZA3 = DarkRP.createJob("Yakuza Médecin", {
         return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("usergroup"))
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
-    gang = gbrp.gangs.yakuzas
+    gang = gbrp.gangs.yakuzas,
+    class = "medic"
 })
 
 --------------------------------------------------------------------------------
@@ -312,7 +315,7 @@ TEAM_MAFIA = DarkRP.createJob("Parrain", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
     gang = gbrp.gangs.mafia,
-    gangLeader = true
+    class = "leader"
 })
 
 --------------------------------------------------------------------------------
@@ -335,7 +338,8 @@ TEAM_MAFIA1 = DarkRP.createJob("Mafieux", {
         ply:SetArmor(0)
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
-    gang = gbrp.gangs.mafia
+    gang = gbrp.gangs.mafia,
+    class = "member"
 })
 
 --------------------------------------------------------------------------------
@@ -358,7 +362,8 @@ TEAM_MAFIA2 = DarkRP.createJob("Mafieux Architecte", {
         ply:SetArmor(0)
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
-    gang = gbrp.gangs.mafia
+    gang = gbrp.gangs.mafia,
+    class = "archi"
 })
 
 --------------------------------------------------------------------------------
@@ -385,7 +390,8 @@ TEAM_MAFIA3 = DarkRP.createJob("Mafieux Médecin", {
         return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("usergroup"))
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
-    gang = gbrp.gangs.mafia
+    gang = gbrp.gangs.mafia,
+    class = "medic"
 })
 
 --------------------------------------------------------------------------------
@@ -422,7 +428,7 @@ TEAM_GANGSTER = DarkRP.createJob("Chef Gangster", {
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
     gang = gbrp.gangs.gang,
-    gangLeader = true
+    class = "leader"
 })
 
 --------------------------------------------------------------------------------
@@ -445,7 +451,8 @@ TEAM_GANGSTER1 = DarkRP.createJob("Gangster", {
         ply:SetArmor(0)
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
-    gang = gbrp.gangs.gang
+    gang = gbrp.gangs.gang,
+    class = "member"
 })
 
 --------------------------------------------------------------------------------
@@ -468,7 +475,8 @@ TEAM_GANGSTER2 = DarkRP.createJob("Gangster Architecte", {
         ply:SetArmor(0)
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
-    gang = gbrp.gangs.gang
+    gang = gbrp.gangs.gang,
+    class = "archi"
 })
 
 --------------------------------------------------------------------------------
@@ -495,7 +503,8 @@ TEAM_GANGSTER3 = DarkRP.createJob("Gangster Médecin", {
         return CLIENT or table.HasValue({"VIP", "superadmin", "VIP +", "moderateur_VIP", "moderateur_VIP+", "moderateur_test_VIP", "moderateur_test_VIP+", "admin"}, ply:GetNWString("usergroup"))
     end,
     customCheckFailMsg = "Ce métier est réservé aux membres VIP seulement.This job is VIP only.",
-    gang = gbrp.gangs.gang
+    gang = gbrp.gangs.gang,
+    class = "medic"
 })
 
 TEAM_STAFF = DarkRP.createJob("STAFF", {

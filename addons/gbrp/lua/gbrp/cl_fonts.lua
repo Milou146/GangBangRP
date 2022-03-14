@@ -14,3 +14,11 @@ surface.CreateFont("DermaHuge",{
     font = "Verdana",
     size = 48
 })
+surface.CreateFont("PricedownLarge",{
+    font = "Pricedown Bl",
+    size = 32
+})
+surface.CreateFont("PricedownHuge",{
+    font = "Pricedown Bl",
+    size = 48
+})

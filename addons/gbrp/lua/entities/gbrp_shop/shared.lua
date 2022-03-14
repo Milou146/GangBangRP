@@ -19,6 +19,6 @@ function ENT:GetGang()
 	if self:GetGangName() == "" then
 		return nil
 	else
-		return gbrp[self:GetGangName()]
+		return gbrp.gangs[self:GetGangName()]
 	end
 end
