@@ -382,6 +382,7 @@ GM.Config.CategoryOverride = {
         ["Mob boss"]                            = "Gangsters",
         ["Civil Protection Chief"]              = "Civil Protection",
         ["Mayor"]                               = "Civil Protection",
+		["N.Y.P.D"]                               = "POLICE",
     },
     entities = {
         ["Drug lab"]                            = "Other",

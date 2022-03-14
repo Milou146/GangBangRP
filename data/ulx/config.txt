@@ -6,7 +6,7 @@
 ;specific config only.
 ;Any line starting with a ';' is a comment!
 
-ulx showMotd 2 ; MOTD mode
+ulx showMotd 0 ; MOTD mode
 ; MOTD modes:
 ; 0 - OFF No MOTD shown
 ; 1 - FILE Show the players the contents of the file from the 'motdfile' cvar

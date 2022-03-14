@@ -1,0 +1,10 @@
+VertexLitGeneric
+{
+	$basetexture "models/bratplat/cuadrado/mask_triangle"
+	$bumpmap "models/bratplat/cuadrado/mask_n"
+
+	$phong 1
+	$phongexponenttexture "models/bratplat/cuadrado/mask_n"
+	$phongfresnelranges "[0.5 0.75 1]"
+	$phongwarptexture "models/bratplat/cuadrado/mask_n"
+}

@@ -1,0 +1,9 @@
+"AddonInfo"
+{
+	"name"		"The Cocaine Factory"
+	"version"	"1.0"
+	"up_date"	"2019"
+	"author_name"	"Crap-Head"
+	"author_url"	"https://www.gmodstore.com/users/crap-head"
+	"info"		"This script adds a realistic and advanced cocaine factory to your server with fully custom models. It has a large range of features and a good way for illegal money activities."
+}

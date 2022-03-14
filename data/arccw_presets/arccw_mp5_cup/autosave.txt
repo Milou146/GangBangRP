@@ -1,3 +1,3 @@
-
-
-ub_bo2_pdwgrip,0.5,-1
+go_optic_barska,0.5,-1
+go_supp_nt4
+go_foregrip_ergo,0.5,-1

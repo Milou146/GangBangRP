@@ -321,3 +321,76 @@ DarkRP.createEntity("Amélioration de la vitesse", {
 	category = "CIGARETTE",
     allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
 })
+---------------PRINTERS--------------------------------------
+DarkRP.createEntity("Printer", {
+    ent = "custom_printer_white",
+    model = "models/custom/rprinter.mdl",
+    price = 1,
+    max = 1,
+    cmd = "buy_cheap_printer",
+	category = "PRINTERS",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Printer modifié", {
+    ent = "custom_printer_pinky",
+    model = "models/custom/rprinter.mdl",
+    price = 1,
+    max = 1,
+    cmd = "buy_pinky_printer",
+	category = "PRINTERS",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Printer amélioré", {
+    ent = "custom_printer_green",
+    model = "models/custom/rprinter.mdl",
+    price = 1,
+    max = 1,
+    cmd = "buy_green_printer",
+	category = "PRINTERS",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Printer GOLD", {
+    ent = "custom_printer_gold",
+    model = "models/custom/rprinter.mdl",
+    price = 1,
+    max = 1,
+    cmd = "buy_gold_printer",
+	category = "PRINTERS",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Encre", {
+    ent = "upgrade_color",
+    model = "models/props_lab/jar01b.mdl",
+    price = 1,
+    max = 1,
+    cmd = "buyprintercolors",
+	category = "PRINTERS",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Papier", {
+    ent = "upgrade_paper",
+    model = "models/props/cs_office/paper_towels.mdl",
+    price = 1,
+    max = 1,
+    cmd = "buyprinterpaper",
+	category = "PRINTERS",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Ventilateur", {
+    ent = "upgrade_cooler",
+    model = "models/custom/coolerx2.mdl",
+    price = 1,
+    max = 1,
+    cmd = "buyprintercooler",
+	category = "PRINTERS",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})
+DarkRP.createEntity("Mini Ventilateur", {
+    ent = "upgrade_cooler_mini",
+    model = "models/custom/coolermini.mdl",
+    price = 1,
+    max = 1,
+    cmd = "buyprintercooler2",
+	category = "PRINTERS",
+    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+})

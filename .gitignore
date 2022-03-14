@@ -6,6 +6,7 @@
 !/addons/bodygroupr-master
 !/addons/cigarette_factory
 !/addons/climb_swep_2
+!/addons/customhq_realprinters
 !/addons/dans-weapon-shelves-sell-weapons-the-right-way
 !/addons/darkrpmodification-master
 !/addons/disguise
@@ -29,3 +30,4 @@
 !/data/wcd
 !/data/wepholster
 !.gitignore
+data/arccw_presets/*

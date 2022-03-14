@@ -1,6 +1,6 @@
-optic_bo1_longscope,0.5,-1
-
-
+go_optic_pvs4,0.5,-1
+go_supp_osprey
+go_fore_bipod,0.5,-1
 
 
 

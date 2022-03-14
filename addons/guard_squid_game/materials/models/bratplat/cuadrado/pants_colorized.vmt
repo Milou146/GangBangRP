@@ -1,0 +1,24 @@
+VertexLitGeneric
+{
+	$basetexture "models/bratplat/cuadrado/pants_colorized"
+	$bumpmap "models/bratplat/cuadrado/pants_n"
+	
+
+	$phong 1
+	$phongtint "[1 0 0.05]"
+	$phongalbedotint 1
+	$phongboost 1.2
+	$phongalbedoboost 0.5
+
+"$blendtintbybasealpha" "1"
+"$blendtintcoloroverbase" "0"
+
+Proxies
+{
+PlayerColor
+{
+resultVar $color2
+default 0.75 0.75 0.75
+}
+}
+}

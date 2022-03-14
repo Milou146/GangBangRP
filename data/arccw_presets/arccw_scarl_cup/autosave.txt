@@ -1,4 +1,4 @@
-go_optic_awp,1,-1
+go_optic_eotech,0.5,-1
 
 
 
