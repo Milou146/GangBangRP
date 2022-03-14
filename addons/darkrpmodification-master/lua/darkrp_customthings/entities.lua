@@ -285,7 +285,7 @@ DarkRP.createEntity("Tabac", {
 	category = "CIGARETTE",
     allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
 })
-DarkRP.createEntity("Papier", {
+DarkRP.createEntity("Feuilles blanches", {
     ent = "cf_roll_paper",
     model = "models/cigarette_factory/cf_rollpaper.mdl",
     price = 1,
@@ -303,13 +303,14 @@ DarkRP.createEntity("Carton", {
 	category = "CIGARETTE",
     allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
 })
-DarkRP.createEntity("Amélioration du stockage", {
+DarkRP.createEntity("Amélioration du stockage [VIP]", {
     ent = "cf_storage_upgrade",
     model = "models/thrusters/jetpack.mdl",
     price = 1,
     max = 2,
     cmd = "buysto",
 	category = "CIGARETTE",
+	customCheck = function(ply) return CLIENT or table.HasValue({'superadmin', 'admin', 'moderateur_vip', 'moderateur_vip+', 'VIP+', 'VIP','moderateur_test_vip','moderateur_test_vip+'}, ply:GetNWString('usergroup')) end,
     allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
 })
 DarkRP.createEntity("Amélioration de la vitesse", {
@@ -319,7 +320,7 @@ DarkRP.createEntity("Amélioration de la vitesse", {
     max = 2,
     cmd = "buyvit",
 	category = "CIGARETTE",
-    allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
+	allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
 })
 ---------------PRINTERS--------------------------------------
 DarkRP.createEntity("Printer", {
@@ -349,20 +350,21 @@ DarkRP.createEntity("Printer amélioré", {
 	category = "PRINTERS",
     allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
 })
-DarkRP.createEntity("Printer GOLD", {
+DarkRP.createEntity("Printer GOLD [VIP]", {
     ent = "custom_printer_gold",
     model = "models/custom/rprinter.mdl",
     price = 1,
     max = 1,
     cmd = "buy_gold_printer",
 	category = "PRINTERS",
+	customCheck = function(ply) return CLIENT or table.HasValue({'superadmin', 'admin', 'moderateur_vip', 'moderateur_vip+', 'VIP+', 'VIP','moderateur_test_vip','moderateur_test_vip+'}, ply:GetNWString('usergroup')) end,
     allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
 })
 DarkRP.createEntity("Encre", {
     ent = "upgrade_color",
     model = "models/props_lab/jar01b.mdl",
     price = 1,
-    max = 1,
+    max = 3,
     cmd = "buyprintercolors",
 	category = "PRINTERS",
     allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
@@ -371,18 +373,19 @@ DarkRP.createEntity("Papier", {
     ent = "upgrade_paper",
     model = "models/props/cs_office/paper_towels.mdl",
     price = 1,
-    max = 1,
+    max = 3,
     cmd = "buyprinterpaper",
 	category = "PRINTERS",
     allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
 })
-DarkRP.createEntity("Ventilateur", {
+DarkRP.createEntity("Ventilateur [VIP]", {
     ent = "upgrade_cooler",
     model = "models/custom/coolerx2.mdl",
     price = 1,
     max = 1,
     cmd = "buyprintercooler",
 	category = "PRINTERS",
+	customCheck = function(ply) return CLIENT or table.HasValue({'superadmin', 'admin', 'moderateur_vip', 'moderateur_vip+', 'VIP+', 'VIP','moderateur_test_vip','moderateur_test_vip+'}, ply:GetNWString('usergroup')) end,
     allowed = {TEAM_YAKUZA,TEAM_YAKUZA1,TEAM_YAKUZA2,TEAM_YAKUZA3,TEAM_MAFIA,TEAM_MAFIA1,TEAM_MAFIA2,TEAM_MAFIA3,TEAM_GANGSTER,TEAM_GANGSTER1,TEAM_GANGSTER2,TEAM_GANGSTER3}
 })
 DarkRP.createEntity("Mini Ventilateur", {
