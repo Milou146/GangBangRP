@@ -15,10 +15,12 @@ end
 
 function ENT:Use(ply, caller, useType, value)
     local shopGang = self:GetGang()
-    if shopGang and ply:GetGang() and ply:GetGang() != shopGang then
+    if shopGang and ply:GetGang() and ply:GetGang() != shopGang and CurTime() - self.robbery.lt > self.robbery.delay then
         net.Start("GBRP::robberyPanel")
         net.WriteEntity(self)
         net.Send(ply)
+    elseif shopGang and ply:GetGang() and ply:GetGang() != shopGang and not self:GetBeingRobbed() and CurTime() - self.robbery.lt < self.robbery.delay then
+        ply:ChatPrint("Patientez " .. tostring(math.Round(self.robbery.delay - CurTime() + self.robbery.lt)) .. " secondes pour braquer de nouveau le commerce.")
     else
         net.Start("GBRP::" .. self:GetShopName() .. "Reception")
         net.WriteEntity(self)
@@ -51,11 +53,46 @@ function ENT:launder(i,amount)
     end
 end
 
+function ENT:StartRobbery(gang)
+    self:SetBeingRobbed(true)
+    self.robbery.startingAmount = self:GetBalance() + self:GetDirtyMoney()
+    self.robbery.startingBalance = self:GetBalance()
+    self.robbery.startingDirtyMoney = self:GetDirtyMoney()
+    self.robbery.gang = gang
+    self:SetRobberyTime(0)
+end
+
+function ENT:StopRobbery()
+    self:SetBeingRobbed(false)
+    self.robbery.elapsedTime = 0
+    self.robbery.lt = CurTime()
+end
+
 
 function ENT:Think()
-    if #self.money >= 1 and CurTime() > self.lastTime + self.launderingTime then
+    if #self.money >= 1 and CurTime() > self.lastTime + self.launderingTime and not self:GetBeingRobbed() then
         self.lastTime = CurTime()
         self:launder(1,self.launderingAmount)
+    elseif CurTime() > self.lastTime + 1 and self:GetBeingRobbed() and self:GetRobberyTime() < self.robbery.time then
+        self.lastTime = CurTime()
+        local receivers = {}
+        for _,pl in pairs(player.GetAll()) do
+            if pl:GetPos():Distance(self:GetPos()) < self.robbery.radius and pl:GetGang() == self.robbery.gang then
+                table.insert(receivers,pl)
+            end
+        end
+        local reward = self.robbery.startingAmount / (#receivers * self.robbery.time)
+        for _,receiver in pairs(receivers) do
+            receiver:addMoney(reward)
+        end
+        if table.IsEmpty(receivers) then
+            self:StopRobbery()
+        end
+        self:SetBalance(self:GetBalance() - self.robbery.startingBalance / self.robbery.time)
+        self:SetDirtyMoney(self:GetDirtyMoney() - self.robbery.startingDirtyMoney / self.robbery.time)
+        self:SetRobberyTime(self:GetRobberyTime() + 1)
+    elseif self:GetRobberyTime() == self.robbery.time then
+        self:StopRobbery()
     end
 end
 

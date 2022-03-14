@@ -6,7 +6,7 @@ ENT.Contact = ""
 ENT.Category	= "EML"
 
 ENT.AutomaticFrameAdvance = true
-   
+
 ENT.Spawnable = true
 ENT.AdminSpawnable = true
 

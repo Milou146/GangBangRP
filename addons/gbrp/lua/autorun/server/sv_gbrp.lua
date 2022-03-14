@@ -25,9 +25,10 @@ util.AddNetworkString("GBRP::laundererReception")
 util.AddNetworkString("GBRP::launderingRequest")
 util.AddNetworkString("GBRP::personnalBankDeposit")
 util.AddNetworkString("GBRP::robberyPanel")
+util.AddNetworkString("GBRP::startRobbery") -- client to server
 
 sql.Query("create table if not exists gbrp(steamid64 bigint not null, balance bigint);")
 
 include("gbrp/sv_commands.lua")
 include("gbrp/sv_hooks.lua")
-include("gbrp/sv_net.lua") 
+include("gbrp/sv_net.lua")

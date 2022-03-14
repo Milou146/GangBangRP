@@ -1715,51 +1715,101 @@ net.Receive("GBRP::robberyPanel",function()
     frame:MakePopup()
     frame.bg = Material("gui/gbrp/robbery/background.png")
     frame.bottom = Material("gui/gbrp/robbery/bottom.png")
-    function frame:Paint(w,h)
-        surface.SetDrawColor(2555,255,255,255)
-        surface.SetMaterial(self.bg)
-        surface.DrawTexturedRect(0,0,w,h)
+    if shop:GetBeingRobbed() then
+        local remainingTime = Material("gui/gbrp/robbery/remainingTime.png")
+        local progressbarframeMat = Material("gui/gbrp/jewelrystore/progressbarframe.png")
+        local progressbarMat = Material("gui/gbrp/jewelrystore/progressbar.png")
+        function frame:Paint(w,h)
+            surface.SetDrawColor(2555,255,255,255)
+            surface.SetMaterial(self.bg)
+            surface.DrawTexturedRect(0,0,w,h)
 
-        surface.SetMaterial(time)
-        surface.DrawTexturedRect(gbrp.FormatX(334),gbrp.FormatY(753),gbrp.FormatX(375),gbrp.FormatY(30))
+            surface.SetMaterial(attChar)
+            surface.DrawTexturedRect(gbrp.FormatX(124),gbrp.FormatY(318),gbrp.FormatX(200),gbrp.FormatY(600))
 
-        surface.SetMaterial(att)
-        surface.DrawTexturedRect(gbrp.FormatX(295),gbrp.FormatY(376),gbrp.FormatX(att:Width()),gbrp.FormatY(att:Height()))
+            surface.SetMaterial(self.bottom)
+            surface.DrawTexturedRect(gbrp.FormatY(102),gbrp.FormatY(897),gbrp.FormatX(823),gbrp.FormatY(82))
 
-        surface.SetMaterial(attChar)
-        surface.DrawTexturedRect(gbrp.FormatX(124),gbrp.FormatY(318),gbrp.FormatX(200),gbrp.FormatY(600))
+            surface.SetTextColor(255,255,255,255)
+            surface.SetFont("PricedownHuge")
+            surface.SetTextPos(gbrp.FormatX(400),gbrp.FormatY(910))
+            surface.DrawText(gbrp.formatMoney(shop:GetBalance() + shop:GetDirtyMoney()))
 
-        surface.SetMaterial(def)
-        surface.DrawTexturedRect(gbrp.FormatX(648),gbrp.FormatY(376),gbrp.FormatX(def:Width()),gbrp.FormatY(def:Height()))
+            GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarframeMat)(gbrp.FormatX(139),gbrp.FormatY(579),gbrp.FormatX(742),gbrp.FormatY(28))
+            GWEN.CreateTextureBorder(0,0,27,27,8,8,8,8,progressbarMat)(gbrp.FormatX(139),gbrp.FormatY(579),gbrp.FormatX(742) * shop:GetRobberyTime() / shop.robbery.time, gbrp.FormatY(28))
 
-        surface.SetMaterial(defChar)
-        surface.DrawTexturedRect(gbrp.FormatX(712),gbrp.FormatY(318),gbrp.FormatX(200),gbrp.FormatY(600))
+            surface.SetFont("PricedownLarge")
+            surface.SetTextColor(255,255,255,255)
+            surface.SetTextPos(gbrp.FormatX(479),gbrp.FormatY(539))
+            surface.DrawText(tostring(math.Round(100 * shop:GetRobberyTime() / shop.robbery.time) .. "%"))
 
-        surface.SetMaterial(self.bottom)
-        surface.DrawTexturedRect(gbrp.FormatY(102),gbrp.FormatY(897),gbrp.FormatX(823),gbrp.FormatY(82))
+            surface.SetMaterial(remainingTime)
+            surface.DrawTexturedRect(gbrp.FormatX(300),gbrp.FormatY(624),gbrp.FormatX(250),gbrp.FormatY(32))
 
-        surface.SetTextColor(255,255,255,255)
-        surface.SetFont("PricedownHuge")
-        surface.SetTextPos(gbrp.FormatX(400),gbrp.FormatY(910))
-        surface.DrawText(gbrp.formatMoney(shop:GetBalance() + shop:GetDirtyMoney()))
-    end
-    local remove = vgui.Create("RemoveButton",frame)
-    remove:SetImage("gui/gbrp/jewelrystore/remove.png")
-    remove:SetPos(gbrp.FormatX(882),gbrp.FormatY(110))
-    remove:SetSize(gbrp.FormatX(30),gbrp.FormatY(33))
-    local braquer = vgui.Create("DImageButton",frame)
-    braquer:SetImage("gui/gbrp/robbery/braquer.png")
-    braquer:SetPos(gbrp.FormatX(341),gbrp.FormatY(568))
-    braquer:SetSize(gbrp.FormatX(371),gbrp.FormatY(176))
-    function braquer:GetMaterial()
-        return Material(self:GetImage())
-    end
-    function braquer:OnCursorEntered()
-        self:SetImage("gui/gbrp/robbery/braquerrollover.png")
-        self:SetSize(gbrp.FormatX(self:GetMaterial():Width()),gbrp.FormatY(self:GetMaterial():Height()))
-    end
-    function braquer:OnCursorExited()
-        self:SetImage("gui/gbrp/robbery/braquer.png")
-        self:SetSize(gbrp.FormatX(self:GetMaterial():Width()),gbrp.FormatY(self:GetMaterial():Height()))
+            surface.SetTextPos(gbrp.FormatX(570),gbrp.FormatY(620))
+            surface.DrawText(tostring(shop.robbery.time - shop:GetRobberyTime()) .. " secondes")
+        end
+        local remove = vgui.Create("RemoveButton",frame)
+        remove:SetImage("gui/gbrp/jewelrystore/remove.png")
+        remove:SetPos(gbrp.FormatX(882),gbrp.FormatY(110))
+        remove:SetSize(gbrp.FormatX(30),gbrp.FormatY(33))
+    else
+        function frame:Paint(w,h)
+            surface.SetDrawColor(2555,255,255,255)
+            surface.SetMaterial(self.bg)
+            surface.DrawTexturedRect(0,0,w,h)
+
+            surface.SetMaterial(time)
+            surface.DrawTexturedRect(gbrp.FormatX(334),gbrp.FormatY(753),gbrp.FormatX(375),gbrp.FormatY(30))
+
+            surface.SetMaterial(att)
+            surface.DrawTexturedRect(gbrp.FormatX(295),gbrp.FormatY(376),gbrp.FormatX(att:Width()),gbrp.FormatY(att:Height()))
+
+            surface.SetMaterial(attChar)
+            surface.DrawTexturedRect(gbrp.FormatX(124),gbrp.FormatY(318),gbrp.FormatX(200),gbrp.FormatY(600))
+
+            surface.SetMaterial(def)
+            surface.DrawTexturedRect(gbrp.FormatX(648),gbrp.FormatY(376),gbrp.FormatX(def:Width()),gbrp.FormatY(def:Height()))
+
+            surface.SetMaterial(defChar)
+            surface.DrawTexturedRect(gbrp.FormatX(712),gbrp.FormatY(318),gbrp.FormatX(200),gbrp.FormatY(600))
+
+            surface.SetMaterial(self.bottom)
+            surface.DrawTexturedRect(gbrp.FormatY(102),gbrp.FormatY(897),gbrp.FormatX(823),gbrp.FormatY(82))
+
+            surface.SetTextColor(255,255,255,255)
+            surface.SetFont("PricedownHuge")
+            surface.SetTextPos(gbrp.FormatX(400),gbrp.FormatY(910))
+            surface.DrawText(gbrp.formatMoney(shop:GetBalance() + shop:GetDirtyMoney()))
+        end
+        local remove = vgui.Create("RemoveButton",frame)
+        remove:SetImage("gui/gbrp/jewelrystore/remove.png")
+        remove:SetPos(gbrp.FormatX(882),gbrp.FormatY(110))
+        remove:SetSize(gbrp.FormatX(30),gbrp.FormatY(33))
+        local braquer = vgui.Create("DImageButton",frame)
+        braquer:SetImage("gui/gbrp/robbery/braquer.png")
+        braquer:SetPos(gbrp.FormatX(341),gbrp.FormatY(568))
+        braquer:SetSize(gbrp.FormatX(371),gbrp.FormatY(176))
+        function braquer:GetMaterial()
+            return Material(self:GetImage())
+        end
+        function braquer:OnCursorEntered()
+            self:SetImage("gui/gbrp/robbery/braquerrollover.png")
+            self:SetSize(gbrp.FormatX(self:GetMaterial():Width()),gbrp.FormatY(self:GetMaterial():Height()))
+        end
+        function braquer:OnCursorExited()
+            self:SetImage("gui/gbrp/robbery/braquer.png")
+            self:SetSize(gbrp.FormatX(self:GetMaterial():Width()),gbrp.FormatY(self:GetMaterial():Height()))
+        end
+        braquer.DoClick = function()
+            frame:Remove()
+            if shop:GetBalance() + shop:GetDirtyMoney() > 0 then
+                net.Start("GBRP::startRobbery")
+                net.WriteEntity(shop)
+                net.SendToServer()
+            else
+                ply:ChatPrint("Il n'y a pas assez d'argent dans les caisses")
+            end
+        end
     end
 end)

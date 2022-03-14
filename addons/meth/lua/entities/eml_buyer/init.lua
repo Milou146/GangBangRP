@@ -43,7 +43,7 @@ function spawnMethPos(ply, cmd, args)
 
         local methVector = string.Explode(" ", tostring(ply:GetEyeTrace().HitPos))
         local methAngles = string.Explode(" ", tostring(ply:GetAngles() + Angle(0, -180, 0)))
-        file.Write("eml/methbuyer/" .. string.lower(game.GetMap()) .. "/meth_" .. fileMethName .. ".txt", "" .. (methVector[1]) .. ";" .. (methVector[2]) .. ";" .. (methVector[3]) .. ";" .. (methAngles[1]) .. ";" .. (methAngles[2]) .. ";" .. (methAngles[3]) .. "", "DATA")
+        file.Write("eml/methbuyer/" .. string.lower(game.GetMap()) .. "/meth_" .. fileMethName .. ".txt", "" .. methVector[1] .. ";" .. methVector[2] .. ";" .. methVector[3] .. ";" .. methAngles[1] .. ";" .. methAngles[2] .. ";" .. methAngles[3] .. "", "DATA")
         ply:SendLua("local tab = {Color(1,241,249,255), [[|EML| ]], Color(255,255,255), [[New pos for the Meth Addicted NPC has been set. Restart your server!]] } chat.AddText(unpack(tab))")
     else
         ply:SendLua("local tab = {Color(1,241,249,255), [[|EML| ]], Color(255,255,255), [[Only admins and superadmins can perform this action.]] } chat.AddText(unpack(tab))")
