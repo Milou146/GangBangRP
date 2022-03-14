@@ -1,4 +1,3 @@
-
 local ft = 0
 local gangPanelOpen = false
 local hide = {
