@@ -812,6 +812,27 @@ if CLIENT then
             "npc/male_speech_1.wav"
         };
     }
+    gbrp.woundedMat = Material("gui/gbrp/wounded.png")
+    gbrp.ScreenW = ScrW()
+    gbrp.ScreenH = ScrH()
+    gbrp.FormatX = function(x)
+        return x * gbrp.ScreenW / 1920
+    end
+    gbrp.FormatY = function(y)
+        return y * gbrp.ScreenH / 1080
+    end
+    gbrp.FormatNumber = function(n)
+        n = tostring(n)
+        if #n < 3 then
+            return n
+        elseif #n <= 6 then
+            return string.Left(n,#n - 3) .. "k"
+        elseif #n <= 9 then
+            return string.Left(n,#n - 6) .. "M"
+        else
+            return string.Left(n,#n - 9) .. "Mds"
+        end
+    end
 end
 SetGlobalInt("yakuzasBalance",0);
 SetGlobalInt("yakuzasPrivateDoorsCount",0);

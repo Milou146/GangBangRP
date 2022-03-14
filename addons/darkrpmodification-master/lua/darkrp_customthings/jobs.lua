@@ -421,7 +421,8 @@ TEAM_GANGSTER = DarkRP.createJob("Chef Gangster", {
         ply:SetArmor(10)
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end,
-    gang = gbrp.gangs.gang
+    gang = gbrp.gangs.gang,
+    gangLeader = true
 })
 
 --------------------------------------------------------------------------------
