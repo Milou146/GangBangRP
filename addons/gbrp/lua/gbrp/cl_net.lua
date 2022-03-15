@@ -1264,7 +1264,6 @@ net.Receive("GBRP::welcomeScreen",function()
     local archilabel
     local mediclabel
     local label
-    local ply = LocalPlayer()
     frame = vgui.Create("EditablePanel",GetHUDPanel())
     frame:SetSize(gbrp.ScreenW,gbrp.ScreenH)
     frame.mat = Material("gui/gbrp/welcomescreen/background1.jpg")
@@ -1386,23 +1385,23 @@ net.Receive("GBRP::welcomeScreen",function()
         function yakuleader:DoClick()
             if self.available then
                 frame:Remove()
-                ply:ConCommand("say /yakuleader")
+                LocalPlayer():ConCommand("say /yakuleader")
             end
         end
         function yakumember:DoClick()
             frame:Remove()
-            ply:ConCommand("say /yaku")
+            LocalPlayer():ConCommand("say /yaku")
         end
         function yakuarchi:DoClick()
             if self.available then
                 frame:Remove()
-                ply:ConCommand("say /yakuarchi")
+                LocalPlayer():ConCommand("say /yakuarchi")
             end
         end
         function yakumedic:DoClick()
             if self.available then
                 frame:Remove()
-                ply:ConCommand("say /yakumedic")
+                LocalPlayer():ConCommand("say /yakumedic")
             end
         end
     end
@@ -1476,23 +1475,23 @@ net.Receive("GBRP::welcomeScreen",function()
         function mafialeader:DoClick()
             if self.available then
                 frame:Remove()
-                ply:ConCommand("say /mafialeader")
+                LocalPlayer():ConCommand("say /mafialeader")
             end
         end
         function mafiamember:DoClick()
             frame:Remove()
-            ply:ConCommand("say /mafia")
+            LocalPlayer():ConCommand("say /mafia")
         end
         function mafiaarchi:DoClick()
             if self.available then
                 frame:Remove()
-                ply:ConCommand("say /mafiaarchi")
+                LocalPlayer():ConCommand("say /mafiaarchi")
             end
         end
         function mafiamedic:DoClick()
             if self.available then
                 frame:Remove()
-                ply:ConCommand("say /mafiamedic")
+                LocalPlayer():ConCommand("say /mafiamedic")
             end
         end
     end
@@ -1566,23 +1565,23 @@ net.Receive("GBRP::welcomeScreen",function()
         function gangleader:DoClick()
             if self.available then
                 frame:Remove()
-                ply:ConCommand("say /gangleader")
+                LocalPlayer():ConCommand("say /gangleader")
             end
         end
         function gangmember:DoClick()
             frame:Remove()
-            ply:ConCommand("say /gang")
+            LocalPlayer():ConCommand("say /gang")
         end
         function gangarchi:DoClick()
             if self.available then
                 frame:Remove()
-                ply:ConCommand("say /gangarchi")
+                LocalPlayer():ConCommand("say /gangarchi")
             end
         end
         function gangmedic:DoClick()
             if self.available then
                 frame:Remove()
-                ply:ConCommand("say /gangmedic")
+                LocalPlayer():ConCommand("say /gangmedic")
             end
         end
     end
