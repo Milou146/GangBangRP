@@ -166,5 +166,19 @@ net.Receive("GBRP::personnalBankDeposit",function(len,ply)
     ply:SetNWInt("GBRP::personnalLaunderedMoney",0)
 end)
 net.Receive("GBRP::startRobbery",function(len,ply)
-    net.ReadEntity():StartRobbery(ply:GetGang())
+    local shop = net.ReadEntity()
+    local shopGang = shop:GetGang()
+    shop:StartRobbery(ply:GetGang())
+    for _,pl in pairs(player.GetAll()) do
+        if pl:GetGang() == shopGang then
+            DarkRP.notify(pl,1,2,"Intrusion " .. string.lower(shop.niceName) .. " !")
+        end
+    end
+end)
+net.Receive("GBRP::shopSalvation",function(len,ply)
+    if net.ReadBool() then
+        ply:GetGang():Pay(net.ReadInt(32))
+    else
+        net.ReadEntity():SetGang(nil)
+    end
 end)

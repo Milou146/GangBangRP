@@ -68,6 +68,18 @@ function ENT:StopRobbery()
     self.robbery.lt = CurTime()
 end
 
+function ENT:EndRobbery()
+    self:StopRobbery()
+    local leader = self:GetGang():GetLeader()
+    if leader then
+        net.Start("GBRP::bankruptMessage")
+        net.WriteEntity(self)
+        net.WriteInt(self.robbery.startingAmount,32)
+        net.WriteString(self.niceName)
+        net.Send(leader)
+    end
+end
+
 
 function ENT:Think()
     if #self.money >= 1 and CurTime() > self.lastTime + self.launderingTime and not self:GetBeingRobbed() then
@@ -92,7 +104,7 @@ function ENT:Think()
         self:SetDirtyMoney(self:GetDirtyMoney() - self.robbery.startingDirtyMoney / self.robbery.time)
         self:SetRobberyTime(self:GetRobberyTime() + 1)
     elseif self:GetRobberyTime() == self.robbery.time then
-        self:StopRobbery()
+        self:EndRobbery()
     end
 end
 

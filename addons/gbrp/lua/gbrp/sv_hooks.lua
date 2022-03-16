@@ -79,3 +79,8 @@ hook.Add("Think", "GBRP::Think",function()
         gbrp.MoveNPCs()
     end
 end)
+hook.Add("DarkRPFinishedLoading","GBRP::DarkRPFinishedLoading",function()
+    gbrp.gangs.yakuzas.leaderTeam = DarkRP.getJobByCommand("yakuleader")[2]
+    gbrp.gangs.mafia.leaderTeam = DarkRP.getJobByCommand("mafialeader")[2]
+    gbrp.gangs.gang.leaderTeam = DarkRP.getJobByCommand("gangleader")[2]
+end)

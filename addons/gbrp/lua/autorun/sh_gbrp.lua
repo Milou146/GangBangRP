@@ -48,6 +48,9 @@ end
 function gangMeta:GetPrivateDoorsCount()
     return GetGlobalInt(self.name .. "PrivateDoorsCount")
 end
+function gangMeta:GetLeader()
+    return team.GetPlayers(self.leaderTeam)
+end
 if SERVER then
     function gangMeta:AddEarnings(amount)
         SetGlobalInt(self.name .. "Earnings",self:GetEarnings() + amount)
@@ -538,12 +541,14 @@ if SERVER then
         jewelry:SetAngles(Angle(0,0,0))
         jewelry:SetShopName("jewelrystore")
         jewelry:Spawn()
+        jewelry.niceName = "Bijouterie"
 
         local hardwarestore = ents.Create("gbrp_shop")
         hardwarestore:SetModel("models/odessa.mdl")
         hardwarestore:SetPos(Vector(1298.557983,-1579.187866,-29.987122))
         hardwarestore:SetAngles(Angle(0,90,0))
         hardwarestore:Spawn()
+        hardwarestore.niceName = "Quincaillerie"
 
         local gunshop = ents.Create("gbrp_shop")
         gunshop:SetModel("models/monk.mdl")
@@ -551,6 +556,7 @@ if SERVER then
         gunshop:SetAngles(Angle(0,-180,0))
         gunshop:SetShopName("gunshop")
         gunshop:Spawn()
+        gunshop.niceName = "Armurerie"
 
         local drugstore = ents.Create("gbrp_shop")
         drugstore:SetModel("models/Kleiner.mdl")
@@ -558,6 +564,7 @@ if SERVER then
         drugstore:SetAngles(Angle(0,-90,0))
         drugstore:SetShopName("drugstore")
         drugstore:Spawn()
+        drugstore.niceName = "Pharmacie"
 
         local club = ents.Create("gbrp_shop")
         club:SetModel("models/breen.mdl")
@@ -565,6 +572,7 @@ if SERVER then
         club:SetAngles(Angle(0,90,0))
         club:SetShopName("club")
         club:Spawn()
+        club.niceName = "Boite de nuit"
 
         local repairgarage = ents.Create("gbrp_shop")
         repairgarage:SetModel("models/odessa.mdl")
@@ -572,6 +580,7 @@ if SERVER then
         repairgarage:SetAngles(Angle(0,-5.253576,0))
         repairgarage:SetShopName("repairgarage")
         repairgarage:Spawn()
+        repairgarage.niceName = "Garage"
 
         local bar = ents.Create("gbrp_shop")
         bar:SetModel("models/alyx.mdl")
@@ -579,6 +588,7 @@ if SERVER then
         bar:SetAngles(Angle(0,0,0))
         bar:SetShopName("bar")
         bar:Spawn()
+        bar.niceName = "Bar"
 
         local gasstation = ents.Create("gbrp_shop")
         gasstation:SetModel("models/eli.mdl")
@@ -586,18 +596,20 @@ if SERVER then
         gasstation:SetAngles(Angle(0,-90,0))
         gasstation:SetShopName("gasstation")
         gasstation:Spawn()
+        gasstation.niceName = "Station service"
 
-        local archivist = ents.Create("gbrp_shop")
+--[[         local archivist = ents.Create("gbrp_shop")
         archivist:SetModel("models/humans/Group01/female_03.mdl")
         archivist:SetPos(Vector(3966,6776,16))
         archivist:SetAngles(Angle(0,-90,0))
         archivist:Spawn()
+        archivist.niceName = "Archiviste"
 
         local unknown = ents.Create("gbrp_shop")
         unknown:SetModel("models/player/hostage/hostage_01.mdl")
         unknown:SetPos(Vector(1505,7163,81))
         unknown:SetAngles(Angle(0,-90,0))
-        unknown:Spawn()
+        unknown:Spawn() ]]
 
         local meth = ents.Create("eml_buyer")
         meth:SetPos(Vector(2020,6699,-290))

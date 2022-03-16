@@ -26,6 +26,8 @@ util.AddNetworkString("GBRP::launderingRequest")
 util.AddNetworkString("GBRP::personnalBankDeposit")
 util.AddNetworkString("GBRP::robberyPanel")
 util.AddNetworkString("GBRP::startRobbery") -- client to server
+util.AddNetworkString("GBRP::bankruptMessage") -- server to client
+util.AddNetworkString("GBRP::shopSolvation") -- client to server
 
 sql.Query("create table if not exists gbrp(steamid64 bigint not null, balance bigint);")
 

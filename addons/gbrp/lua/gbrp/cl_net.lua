@@ -1812,3 +1812,62 @@ net.Receive("GBRP::robberyPanel",function()
         end
     end
 end)
+net.Receive("GBRP::bankruptMessage",function()
+    local shop = net.ReadEntity()
+    local amount = net.ReadInt(32)
+    local niceName = net.ReadString()
+    local ply = LocalPlayer()
+    local ct = CurTime()
+    frame = vgui.Create("DFrame",GetHUDPanel())
+    frame:SetTitle(niceName .. " a été braqué")
+    frame:SetSize(gbrp.FormatX(500),gbrp.FormatY(500))
+    frame:Center()
+    function frame:OnClose()
+        self:Remove()
+        net.Start("GBRP::shopSolvation")
+        net.WriteBool(false)
+        net.WriteEntity(shop)
+        net.SendToServer()
+    end
+    function frame:Think()
+        if CurTime > ct + 20 then
+            frame:OnClose()
+        end
+    end
+    local label = vgui.Create("DLabel",frame)
+    label:SetText("DermaLarge")
+    label:SetText(niceName .. " a été braqué.\nPayer la facture?\nNe pas payer entraine une liquidation.")
+    label:CenterHorizontal(.5)
+    label:CenterVertical(.4)
+    local yes = vgui.Create("DButton",frame)
+    yes:CenterHorizontal(.45)
+    yes:CenterVertical(.6)
+    yes:SetText("Payer")
+    yes.DoClick = function()
+        frame:Remove()
+        net.Start("GBRP::ShopSolvation")
+        if ply:GetGang():GetBalance() >= amount then
+            net.WriteBool(true)
+            net.WriteInt(amount,32)
+        else
+            ply:ChatPrint("Le gang n'a pas les fonds nécessaires, le commerce a été liquidé")
+            net.WriteBool(false)
+            net.WriteEntity(shop)
+        end
+        net.SendToServer()
+    end
+    local no = vgui.Create("DButton",frame)
+    no:CenterHorizontal(.55)
+    no:CenterVertical(.6)
+    no:SetText("Liquider")
+    no.DoClick = function()
+        frame:OnClose()
+    end
+    local timeLabel = vgui.Create("DLabel",frame)
+    timeLabel:SetFont("DermaLarge")
+    timeLabel:CenterHorizontal(.5)
+    function timeLabel:Think()
+        self:SetText("Temps restant : " .. tostring(math.Round(ct + 20 - CurTime()) .. " secondes"))
+        self:CenterHorizontal(.5)
+    end
+end)
