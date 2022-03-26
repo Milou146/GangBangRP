@@ -71,7 +71,11 @@ hook.Add("EntityTakeDamage","GBRP::EntityTakeDamage",function(ent,dmg)
 end)
 hook.Add("playerGetSalary","GBRP::salary",function(ply,amount)
     ply:Cash(amount)
-    return false,"Jour de paye, vous touchez " .. gbrp.formatMoney(amount),0
+    if amount == 0 then
+        return true
+    else
+        return false,"Jour de paye, vous touchez " .. gbrp.formatMoney(amount),0
+    end
 end)
 hook.Add("Think", "GBRP::Think",function()
     if CurTime() > ft + 1800 then

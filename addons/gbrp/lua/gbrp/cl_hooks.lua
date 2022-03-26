@@ -1,5 +1,6 @@
 local ft = 0
 local gangPanelOpen = false
+local frame
 local hide = {
     ["CHudHealth"] = true,
     --["CHudAmmo"] = true,
@@ -14,16 +15,15 @@ hook.Add("HUDShouldDraw","GBRP::HideHUD",function(name)
 end)
 hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,darkrpframe)
     darkrpframe:Close()
-    if panelOpen then return end
+    if IsValid(frame) then return end
     local ply = LocalPlayer()
     if gbrp.doors[ent:EntIndex()] then
         local gang = ply:GetGang()
         if not gbrp.doors[ent:EntIndex()].buyable then
             GAMEMODE:AddNotify("Cette propriété n'est pas à vendre.",1,2)
         elseif gang and not ent:getDoorData().groupOwn and not ent:getDoorData().owner then
-            panelOpen = true
 
-            local frame = vgui.Create("EditablePanel",GetHUDPanel())
+            frame = vgui.Create("EditablePanel",GetHUDPanel())
             frame:SetSize(800,400)
             frame:Center()
             frame:MakePopup()
@@ -61,7 +61,6 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,darkrpframe)
                     net.SendToServer()
                 end
                 frame:Remove()
-                panelOpen = false
             end
 
             local remove = vgui.Create("RemoveButton",frame)
@@ -69,7 +68,6 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,darkrpframe)
             remove:SetPos(766,9)
             remove:SizeToContents()
         elseif gang and ent:getDoorData().groupOwn == gang.name or ent:getDoorData().owner == ply:UserID() then
-            panelOpen = true
 
             local counter = {
                 frame = Material("gui/gbrp/property/counter.png"),
@@ -78,7 +76,7 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,darkrpframe)
                 [2] = Material("gui/gbrp/property/2.png")
             }
 
-            local frame = vgui.Create("EditablePanel",GetHUDPanel())
+            frame = vgui.Create("EditablePanel",GetHUDPanel())
             frame:SetSize(800,400)
             frame:Center()
             frame:MakePopup()
@@ -120,7 +118,6 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,darkrpframe)
                     net.SendToServer()
                 end
                 frame:Remove()
-                panelOpen = false
             end
 
             local remove = vgui.Create("RemoveButton",frame)
