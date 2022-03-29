@@ -4,13 +4,15 @@ PANEL = {}
 function PANEL:GetMaterial()
     return Material(self:GetImage())
 end
-function PANEL:OnCursorEntered()
-    self:SetImage(string.StripExtension(self:GetImage()) .. "rollover.png")
-    self:SetSize(gbrp.FormatX(self:GetMaterial():Width()),gbrp.FormatY(self:GetMaterial():Height()))
-end
-function PANEL:OnCursorExited()
-    self:SetImage(string.sub(self:GetImage(),1,#self:GetImage() - 12) .. ".png")
-    self:SetSize(gbrp.FormatX(self:GetMaterial():Width()),gbrp.FormatY(self:GetMaterial():Height()))
+function PANEL:Paint(w,h)
+    surface.SetDrawColor(255,255,255,255)
+    if self:IsHovered() then
+        surface.SetMaterial(self.hoveredMat)
+        surface.DrawTexturedRect(0,0,w,h)
+        return
+    end
+    surface.SetMaterial(self.mat)
+    surface.DrawTexturedRect(0,0,w,h)
 end
 vgui.Register("GBRPButton",PANEL,"DImageButton")
 
@@ -24,7 +26,6 @@ PANEL = {}
 function PANEL:DoClick()
     LocalPlayer():SellShop(self:GetParent().shop)
     self:GetParent():Remove()
-    panelOpen = false
 end
 vgui.Register("SellShopButton",PANEL,"GBRPButton")
 
@@ -41,6 +42,8 @@ end
 vgui.Register("DropCashButton",PANEL,"GBRPButton")
 
 PANEL = {}
+PANEL.mat = Material("gui/gbrp/jewelrystore/remove.png")
+PANEL.hoveredMat = Material("gui/gbrp/jewelrystore/removerollover.png")
 function PANEL:DoClick()
     surface.PlaySound("gui/gbrp/remove_customerarea.wav")
     self:GetParent():Remove()

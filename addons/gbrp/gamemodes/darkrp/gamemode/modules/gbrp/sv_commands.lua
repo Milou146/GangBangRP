@@ -1,3 +1,4 @@
+sql.Query("create table if not exists gbrp(steamid64 bigint not null, balance bigint);")
 concommand.Add("getposeye", function(ply,cmd,args,argStr)
     print(ply:GetEyeTrace().HitPos)
     ply:ChatPrint(tostring(ply:GetEyeTrace().HitPos))

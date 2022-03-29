@@ -15,14 +15,13 @@ hook.Add("HUDShouldDraw","GBRP::HideHUD",function(name)
 end)
 hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,darkrpframe)
     darkrpframe:Close()
-    if IsValid(frame) then return end
+    if IsValid(frame) then print("the frame is valid") return end
     local ply = LocalPlayer()
     if gbrp.doors[ent:EntIndex()] then
         local gang = ply:GetGang()
         if not gbrp.doors[ent:EntIndex()].buyable then
             GAMEMODE:AddNotify("Cette propriété n'est pas à vendre.",1,2)
         elseif gang and not ent:getDoorData().groupOwn and not ent:getDoorData().owner then
-
             frame = vgui.Create("EditablePanel",GetHUDPanel())
             frame:SetSize(800,400)
             frame:Center()
@@ -45,9 +44,10 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,darkrpframe)
             end
 
             local buy = vgui.Create("GBRPButton",frame)
+            buy.mat = Material("gui/gbrp/property/buy.png")
+            buy.hoveredMat = Material("gui/gbrp/property/buyrollover.png")
+            buy:SetSize(193,41)
             buy:SetPos(242,86)
-            buy:SetImage("gui/gbrp/property/buy.png")
-            buy:SizeToContents()
             function buy:DoClick()
                 if not ply:IsGangLeader() then
                     GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
@@ -64,9 +64,8 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,darkrpframe)
             end
 
             local remove = vgui.Create("RemoveButton",frame)
-            remove:SetImage("gui/gbrp/jewelrystore/remove.png")
+            remove:SetSize(30,33)
             remove:SetPos(766,9)
-            remove:SizeToContents()
         elseif gang and ent:getDoorData().groupOwn == gang.name or ent:getDoorData().owner == ply:UserID() then
 
             local counter = {
@@ -104,9 +103,10 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,darkrpframe)
             end
 
             local sell = vgui.Create("GBRPButton",frame)
+            sell.mat = Material("gui/gbrp/property/sell.png")
+            sell.hoveredMat = Material("gui/gbrp/property/sellrollover.png")
+            sell:SetSize(144,35)
             sell:SetPos(259,86)
-            sell:SetImage("gui/gbrp/property/sell.png")
-            sell:SizeToContents()
             function sell:DoClick()
                 if not ply:IsGangLeader() then
                     GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
@@ -121,20 +121,22 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,darkrpframe)
             end
 
             local remove = vgui.Create("RemoveButton",frame)
-            remove:SetImage("gui/gbrp/jewelrystore/remove.png")
+            remove.mat = Material("gui/gbrp/jewelrystore/remove.png")
+            remove:SetSize(30,33)
             remove:SetPos(766,9)
-            remove:SizeToContents()
 
             local privatize = vgui.Create("GBRPButton",frame)
+            privatize.mat = Material("gui/gbrp/property/privatize.png")
+            privatize.hoveredMat = Material("gui/gbrp/property/privatizerollover.png")
+            privatize:SetSize(190,43)
             privatize:SetPos(237,45)
-            privatize:SetImage("gui/gbrp/property/privatize.png")
-            privatize:SizeToContents()
             privatize:SetEnabled(ent:getDoorData().owner ~= ply:UserID() and gang:GetPrivateDoorsCount() < 2)
 
             local collectivize = vgui.Create("GBRPButton",frame)
+            collectivize.mat = Material("gui/gbrp/property/collectivize.png")
+            collectivize.hoveredMat = Material("gui/gbrp/property/collectivizerollover.png")
+            collectivize:SetSize(27,35)
             collectivize:SetPos(212,45)
-            collectivize:SetImage("gui/gbrp/property/collectivize.png")
-            collectivize:SizeToContents()
             collectivize:SetEnabled(ent:getDoorData().owner == ply:UserID())
             privatize.DoClick = function()
                 RunConsoleCommand("privatizedoor",tostring(ent:EntIndex()))
