@@ -27,6 +27,7 @@ util.AddNetworkString("GBRP::startRobbery") -- client to server
 util.AddNetworkString("GBRP::bankruptMessage") -- server to client
 util.AddNetworkString("GBRP::shopSolvation") -- client to server
 util.AddNetworkString("GBRP::cityhallReception") -- server to client
+util.AddNetworkString("GBRP::changeTax") -- client to server
 
 net.Receive("GBRP::buyproperty",function(len,ply)
     local gang = ply:GetGang()
@@ -35,11 +36,11 @@ net.Receive("GBRP::buyproperty",function(len,ply)
         local ent = ents.GetMapCreatedEntity(door)
         ent:setDoorGroup(gang.name)
     end
-    gang:Pay(gbrp.doorgroups[doorgroup].attributes.price)
-    for k,pl in pairs(player.GetAll()) do
-        if pl:GetGang() == gang then
-            pl:ChatPrint([[Votre gang a acheté ']] .. doorgroup .. [[']])
-        end
+    local price = gbrp.doorgroups[doorgroup].attributes.price
+    price = price + price * gbrp.GetHousingTax() / 100
+    if gang:CanAfford(price) then
+        gang:Pay(price)
+        ply:ChatPrint([[Votre gang a acheté ']] .. doorgroup .. [[']])
     end
 end)
 net.Receive("GBRP::sellproperty",function(len,ply)
@@ -81,11 +82,12 @@ net.Receive("GBRP::bankdeposit", function(len, gangLeader)
         end
     end
     for member,pay in pairs(members) do
+        pay = pay - pay * gbrp.GetIncomeTax() / 100
         member:SetNWInt("GBRP::balance", member:GetNWInt("GBRP::balance") + pay)
         sql.Query("update gbrp set balance = " .. member:GetNWInt("GBRP::balance") .. " where steamid64 = " .. member:SteamID64() .. ";")
         member:ChatPrint(gang.subject .. " vous rémunère $" .. pay .. ".")
     end
-    gang:Cash(gangPay)
+    gang:Cash(gangPay - gangPay * gbrp.GetIncomeTax() / 100)
     gangLeader:ChatPrint(gang.subject .. " gagne " .. gbrp.formatMoney(gangPay) .. ".")
 
     gangLeader:SetNWInt("GBRP::launderedmoney", 0)
@@ -101,7 +103,7 @@ net.Receive("GBRP::buyshop", function(len, ply)
     local shop = net.ReadEntity()
     local gang = ply:GetGang()
     shop:SetGang(gang)
-    gang:Pay(shop.price)
+    gang:Pay(shop:GetPrice())
     for k,door in pairs(gbrp.doorgroups[shop:GetShopName()].doors) do
         local ent = ents.GetMapCreatedEntity(door)
         ent:setDoorGroup(gang.name)
@@ -211,4 +213,14 @@ net.Receive("GBRP::shopSalvation",function(len,ply)
     else
         net.ReadEntity():SetGang(nil)
     end
+end)
+net.Receive("GBRP::changeTax",function(len,ply)
+    local tax = net.ReadString()
+    local toTax = net.ReadBool()
+    if toTax then
+        SetGlobalInt(tax,GetGlobalInt(tax) + 1)
+    else
+        SetGlobalInt(tax,GetGlobalInt(tax) - 1)
+    end
+    ply:GetGang():Pay(net.ReadInt(32))
 end)

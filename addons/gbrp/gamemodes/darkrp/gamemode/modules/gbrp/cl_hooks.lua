@@ -35,7 +35,7 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,darkrpframe)
                 surface.SetTextPos(275,134)
                 surface.SetTextColor(255,255,255)
                 surface.SetFont("Trebuchet24")
-                surface.DrawText(gbrp.formatMoney(gbrp.doors[ent:EntIndex()].price))
+                surface.DrawText(gbrp.formatMoney(gbrp.doors[ent:EntIndex()].price + gbrp.doors[ent:EntIndex()].price * gbrp.GetHousingTax() / 100))
 
                 surface.SetTextPos(51,362)
                 surface.SetTextColor(255,255,255)
@@ -51,7 +51,7 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,darkrpframe)
             function buy:DoClick()
                 if not ply:IsGangLeader() then
                     GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
-                elseif not gang:CanAfford(gbrp.doors[ent:EntIndex()].price) then
+                elseif not gang:CanAfford(gbrp.doors[ent:EntIndex()].price + gbrp.doors[ent:EntIndex()].price * gbrp.GetHousingTax() / 100) then
                     GAMEMODE:AddNotify("Solde insuffisant.",1,2)
                 elseif #gang:GetProperties() >= 10 then
                     GAMEMODE:AddNotify("Votre gang a atteint le nombre maximal de propriétés en sa possession.",1,2)

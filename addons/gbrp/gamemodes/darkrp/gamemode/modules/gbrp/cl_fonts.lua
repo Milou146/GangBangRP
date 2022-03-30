@@ -10,6 +10,10 @@ surface.CreateFont("BankSmall",{
     font = "Banks Miles Single Line",
     size = 24
 })
+surface.CreateFont("BankMiles20",{
+    font = "Banks Miles Single Line",
+    size = 20
+})
 surface.CreateFont("DermaHuge",{
     font = "Verdana",
     size = 48

@@ -23,6 +23,10 @@ function ENT:SetupDataTables()
    	self:NetworkVar("Bool", 0, "BeingRobbed")
 end
 
+function ENT:GetPrice()
+    return self.price + self.price * gbrp.GetPropertyTax() / 100
+end
+
 function ENT:GetGang()
     if self:GetGangName() == "" then
         return nil

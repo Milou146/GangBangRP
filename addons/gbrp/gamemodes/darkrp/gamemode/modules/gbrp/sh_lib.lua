@@ -9,8 +9,74 @@ SetGlobalInt("mafiaBalance",0);
 SetGlobalInt("mafiaPrivateDoorsCount",0);
 SetGlobalInt("gangBalance",0);
 SetGlobalInt("gangPrivateDoorsCount",0);
+SetGlobalInt("propertyTax",0);
+SetGlobalInt("housingTax",0);
+SetGlobalInt("incomeTax",0);
+SetGlobalInt("VAT",0);
 
 gbrp = {}
+gbrp.tax = {}
+gbrp.defiscalize = {}
+gbrp.tax.propertyTax = {
+    [1] = 10000,
+    [2] = 20000,
+    [3] = 30000,
+    [4] = 40000,
+    [5] = 50000,
+    [6] = 50000,
+}
+gbrp.tax.housingTax = {
+    [1] = 10000,
+    [2] = 20000,
+    [3] = 30000,
+    [4] = 40000,
+    [5] = 50000,
+    [6] = 50000,
+}
+gbrp.tax.incomeTax = {
+    [1] = 10000,
+    [2] = 20000,
+    [3] = 30000,
+    [4] = 40000,
+    [5] = 50000,
+    [6] = 50000,
+}
+gbrp.tax.VAT = {
+    [1] = 10000,
+    [2] = 20000,
+    [3] = 30000,
+    [4] = 40000,
+    [5] = 50000,
+    [6] = 50000,
+}
+gbrp.defiscalize.propertyTax = {
+    [0] = 50000,
+    [1] = 40000,
+    [2] = 30000,
+    [3] = 20000,
+    [4] = 10000,
+}
+gbrp.defiscalize.housingTax = {
+    [0] = 50000,
+    [1] = 40000,
+    [2] = 30000,
+    [3] = 20000,
+    [4] = 10000,
+}
+gbrp.defiscalize.incomeTax = {
+    [0] = 50000,
+    [1] = 40000,
+    [2] = 30000,
+    [3] = 20000,
+    [4] = 10000,
+}
+gbrp.defiscalize.VAT = {
+    [0] = 50000,
+    [1] = 40000,
+    [2] = 30000,
+    [3] = 20000,
+    [4] = 10000,
+}
 gbrp.doors = {}
 gbrp.startingFunds = 100000
 gbrp.doorgroups = {
@@ -769,6 +835,18 @@ function gbrp.sortedGangs()
     gangs[max] = nil
     return gangs
 end
+function gbrp.GetPropertyTax()
+    return GetGlobalInt("propertyTax")
+end
+function gbrp.GetHousingTax()
+    return GetGlobalInt("housingTax")
+end
+function gbrp.GetIncomeTax()
+    return GetGlobalInt("incomeTax")
+end
+function gbrp.GetVAT()
+    return GetGlobalInt("VAT")
+end
 gbrp.gang = {}
 function gbrp.gang:GetMembersCount()
     local count = 0
@@ -1236,6 +1314,9 @@ if CLIENT then
         else
             return string.Left(n,#n - 9) .. "Mds"
         end
+    end
+    gbrp.FormatXY = function(x,y)
+        return gbrp.FormatX(x),gbrp.FormatY(y)
     end
 end
 gbrp.gangs = {

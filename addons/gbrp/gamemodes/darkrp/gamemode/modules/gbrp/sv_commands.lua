@@ -10,7 +10,7 @@ end)
 concommand.Add("setgangbalance" ,function(ply,cmd,args)
     local gang = args[1]
     if ply:IsAdmin() and gang == "yakuzas" or gang == "mafia" or gang == "gang" then
-            SetGlobalInt(gang .. "Balance", tonumber(args[2]))
+        SetGlobalInt(gang .. "Balance", tonumber(args[2]))
     end
 end)
 concommand.Add("setplayerbalance", function(ply,cmd,args)
