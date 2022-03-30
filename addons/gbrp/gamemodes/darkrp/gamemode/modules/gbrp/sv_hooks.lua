@@ -1,4 +1,5 @@
 local ft = CurTime()
+local ft1 = CurTime()
 
 hook.Add("PlayerInitialSpawn", "GBRP::Client Init", function(ply)
     local data = sql.QueryRow("select * from gbrp where steamid64 = " .. ply:SteamID64() .. ";")
@@ -81,10 +82,26 @@ hook.Add("Think", "GBRP::Think",function()
     if CurTime() > ft + 1800 then
         ft = CurTime()
         gbrp.MoveNPCs()
+    elseif CurTime() > ft1 + gbrp.taxSpeed then
+        for _,gang in pairs(gbrp.gangs) do
+            local propertyTax = 0
+            for _,shop in pairs(gang:GetShops()) do
+                propertyTax = propertyTax + shop.value
+            end
+            propertyTax = propertyTax * gbrp.GetPropertyTax() / 100
+            gang:Pay(propertyTax)
+            gang:GetLeader():ChatPrint("Taxe foncière due : " .. propertyTax)
+            local housingTax = 0
+            for _,house in pairs(gang:GetHouses()) do
+                housingTax = housingtax + house.price
+            end
+            housingTax = housingTax * gbrp.GetHousingTax() / 100
+            gang:Pay(housingtax)
+            gang:GetLeader():ChatPrint("Taxe sur l'habitation due : " .. housingtax)
+            incomeTax = gang:GetNWInt(gang.name + "Incomes") * gbrp.GetIncomeTax() / 100
+            gang:SetNWInt(gang.name + "Incomes",0)
+            gang:Pay(incomeTax)
+            gang:GetLeader():ChatPrint("Impôt sur les sociétés : " .. incomeTax)
+        end
     end
-end)
-hook.Add("DarkRPDBInitialized","GBRP::DarkRPDBInitialized",function()
-    gbrp.gangs.yakuzas.leaderTeam = DarkRP.getJobByCommand("yakuleader")[2]
-    gbrp.gangs.mafia.leaderTeam = DarkRP.getJobByCommand("mafialeader")[2]
-    gbrp.gangs.gang.leaderTeam = DarkRP.getJobByCommand("gangleader")[2]
 end)

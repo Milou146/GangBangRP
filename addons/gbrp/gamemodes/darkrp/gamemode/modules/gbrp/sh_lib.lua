@@ -15,6 +15,7 @@ SetGlobalInt("incomeTax",0);
 SetGlobalInt("VAT",0);
 
 gbrp = {}
+gbrp.taxSpeed = 1800
 gbrp.tax = {}
 gbrp.defiscalize = {}
 gbrp.tax.propertyTax = {
@@ -855,22 +856,39 @@ function gbrp.gang:GetMembersCount()
     end
     return count
 end
-function gbrp.gang:GetShops()
+function gbrp.gang:GetShopNames()
     local shops = {}
     for _,ent in pairs(ents.GetAll()) do
         if ent:GetClass() == "gbrp_shop" and ent:GetGang() == self then table.insert(shops,ent:GetShopName()) end
     end
     return shops
 end
-function gbrp.gang:GetProperties()
-    local propertylist = {}
+function gbrp.gang:GetShops()
+    local shops = {}
+    for _,ent in pairs(ents.GetAll()) do
+        if ent:GetClass() == "gbrp_shop" and ent:GetGang() == self then table.insert(shops,ent) end
+    end
+    return shops
+end
+function gbrp.gang:GetHousesTypes()
+    local houses = {}
     for k,v in pairs(gbrp.doors) do
         local door = ents.GetByIndex(k)
         if door:getDoorData().groupOwn == self.name and gbrp.doors[k].typ ~= "shop" then
-            propertylist[gbrp.doors[k].doorgroup] = gbrp.doors[k].typ
+            houses[gbrp.doors[k].doorgroup] = gbrp.doors[k].typ
         end
     end
-    return propertylist
+    return houses
+end
+function gbrp.gang:GetHouses()
+    local houses = {}
+    for k,v in pairs(gbrp.doors) do
+        local door = ents.GetByIndex(k)
+        if door:getDoorData().groupOwn == self.name and gbrp.doors[k].typ ~= "shop" then
+            houses[gbrp.doors[k].doorgroup] = gbrp.doors[k]
+        end
+    end
+    return houses
 end
 function gbrp.gang:GetBalance()
     return GetGlobalInt(self.name .. "Balance")
@@ -878,8 +896,8 @@ end
 function gbrp.gang:GetExpenses()
     return GetGlobalInt(self.name .. "Expenses")
 end
-function gbrp.gang:GetEarnings()
-    return GetGlobalInt(self.name .. "Earnings")
+function gbrp.gang:GetIncomes()
+    return GetGlobalInt(self.name .. "Incomes")
 end
 function gbrp.gang:CanAfford(amount)
     return self:GetBalance() - amount >= 0
@@ -1220,8 +1238,8 @@ if SERVER then
         cf_export_van:SetAngles(random.ang)
         cf_export_van:DropToFloor()
     end
-    function gbrp.gang:AddEarnings(amount)
-        SetGlobalInt(self.name .. "Earnings",self:GetEarnings() + amount)
+    function gbrp.gang:AddIncomes(amount)
+        SetGlobalInt(self.name .. "Incomes",self:GetIncomes() + amount)
     end
     function gbrp.gang:AddExpenses(amount)
         SetGlobalInt(self.name .. "Expenses",self:GetExpenses() + amount)
@@ -1231,10 +1249,10 @@ if SERVER then
     end
     function gbrp.gang:Cash(amount)
         self:SetBalance(self:GetBalance() + amount)
-        self:AddEarnings(amount)
+        self:AddIncomes(amount)
     end
     function gbrp.gang:Pay(amount)
-        self:SetBalance(self:GetBalance() - amount)
+        self:SetBalance(math.Clamp(self:GetBalance() - amount,0,999999999999))
         self:AddExpenses(amount)
     end
     function gbrp.gang:Reset()
@@ -1325,6 +1343,7 @@ gbrp.gangs = {
         name = "yakuzas",
         ct = 0,
         membername = "Yakuza",
+        leaderCommand = "yakuleader",
         materials = {
             member = Material("gui/gbrp/welcomescreen/page3/yaku.png"),
             leader = Material("gui/gbrp/welcomescreen/page3/yakuleader.png"),
@@ -1337,6 +1356,7 @@ gbrp.gangs = {
         name = "mafia",
         ct = 0,
         membername = "Mafieux",
+        leaderCommand = "mafialeader",
         materials = {
             member = Material("gui/gbrp/welcomescreen/page3/mafia.png"),
             leader = Material("gui/gbrp/welcomescreen/page3/mafialeader.png"),
@@ -1349,6 +1369,7 @@ gbrp.gangs = {
         name = "gang",
         ct = 0,
         membername = "Gangster",
+        leaderCommand = "gangleader",
         materials = {
             member = Material("gui/gbrp/welcomescreen/page3/gang.png"),
             leader = Material("gui/gbrp/welcomescreen/page3/gangleader.png"),

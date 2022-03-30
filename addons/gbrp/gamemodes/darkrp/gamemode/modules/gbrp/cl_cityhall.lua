@@ -104,7 +104,7 @@ net.Receive("GBRP::cityhallReception",function()
             surface.SetTextPos(x10,y11 + 60)
             surface.DrawText("Sont exclus les commerces.")
             surface.SetTextPos(x10,y12)
-            surface.DrawText("IMPOT SUR LE REVENU : Le pourcentage")
+            surface.DrawText("IMPOT SUR LES SOCIETES : Le pourcentage")
             surface.SetTextPos(x10,y12 + 20)
             surface.DrawText("s'applique sur les fonds que détient le gang.")
             surface.SetTextPos(x10,y13)
@@ -116,7 +116,7 @@ net.Receive("GBRP::cityhallReception",function()
         local taxList = {
             ["propertyTax"] = {propertyTax,170,"TAXE FONCIERE"},
             ["housingTax"] = {housingTax,265,"TAXE D'HABITATION"},
-            ["incomeTax"] = {incomeTax,355,"IMPOT SUR LE REVENU"},
+            ["incomeTax"] = {incomeTax,355,"IMPOT SUR LES SOCIETES"},
             ["VAT"] = {VAT,448,"TVA"},
         }
         for tax,v in pairs(taxList) do

@@ -35,7 +35,7 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,darkrpframe)
                 surface.SetTextPos(275,134)
                 surface.SetTextColor(255,255,255)
                 surface.SetFont("Trebuchet24")
-                surface.DrawText(gbrp.formatMoney(gbrp.doors[ent:EntIndex()].price + gbrp.doors[ent:EntIndex()].price * gbrp.GetHousingTax() / 100))
+                surface.DrawText(gbrp.formatMoney(gbrp.doors[ent:EntIndex()].price))
 
                 surface.SetTextPos(51,362)
                 surface.SetTextColor(255,255,255)
@@ -51,9 +51,9 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,darkrpframe)
             function buy:DoClick()
                 if not ply:IsGangLeader() then
                     GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
-                elseif not gang:CanAfford(gbrp.doors[ent:EntIndex()].price + gbrp.doors[ent:EntIndex()].price * gbrp.GetHousingTax() / 100) then
+                elseif not gang:CanAfford(gbrp.doors[ent:EntIndex()].price) then
                     GAMEMODE:AddNotify("Solde insuffisant.",1,2)
-                elseif #gang:GetProperties() >= 10 then
+                elseif #gang:GetHouses() >= 10 then
                     GAMEMODE:AddNotify("Votre gang a atteint le nombre maximal de propriétés en sa possession.",1,2)
                 else
                     net.Start("GBRP::buyproperty")
@@ -172,8 +172,8 @@ hook.Add("Think","GBRP::GangMenu",function()
         if not ply:IsGangLeader() then ply:ChatPrint("Ce menu est réservé au chef de gang ;)") return end
         gangPanelOpen = true
         local gang = ply:GetGang()
-        local gangproperties = gang:GetProperties()
-        local gangshops = gang:GetShops()
+        local gangHousesTypes = gang:GetHousesTypes()
+        local gangshops = gang:GetShopNames()
         local panelMat = Material("gui/gbrp/gangpanel/panel.png")
         local graduationMat = Material("gui/gbrp/gangpanel/graduation.png")
         local panel = vgui.Create("EditablePanel",GetHUDPanel())
@@ -196,14 +196,14 @@ hook.Add("Think","GBRP::GangMenu",function()
             surface.SetTextPos(336,15)
             surface.DrawText(": " .. gbrp.formatMoney(gang:GetBalance()))
             surface.SetTextPos(127,531)
-            surface.DrawText(": " .. tostring(table.Count(gangproperties)))
+            surface.DrawText(": " .. tostring(table.Count(gangHousesTypes)))
             surface.SetTextPos(127,365)
             surface.DrawText(": " .. tostring(#gangshops))
             surface.SetTextPos(127,195)
             surface.DrawText(": " .. tostring(gang:GetMembersCount()))
             local i = 0
             local j = 0
-            for k,v in pairs(gangproperties) do
+            for k,v in pairs(gangHousesTypes) do
                 surface.SetMaterial(gbrp.gangpanel.properties[v].mat)
                 surface.DrawTexturedRect(319 + gbrp.gangpanel.properties[v].x + i * 72,504 + gbrp.gangpanel.properties[v].y + j * 70,gbrp.gangpanel.properties[v].mat:Width(),gbrp.gangpanel.properties[v].mat:Height())
                 i = i + 1
@@ -217,15 +217,15 @@ hook.Add("Think","GBRP::GangMenu",function()
                 i = i + 1
                 if i == 5 then i = 0; j = 1 end
             end
-            GWEN.CreateTextureBorder(0,0,24,275,8,8,8,8,earningsbarMat)(803,364 + 300 * gang:GetExpenses() / (gang:GetEarnings() + gang:GetExpenses()),24,300 - 300 * gang:GetExpenses() / (gang:GetEarnings() + gang:GetExpenses()))
+            GWEN.CreateTextureBorder(0,0,24,275,8,8,8,8,earningsbarMat)(803,364 + 300 * gang:GetExpenses() / (gang:GetIncomes() + gang:GetExpenses()),24,300 - 300 * gang:GetExpenses() / (gang:GetIncomes() + gang:GetExpenses()))
             surface.SetFont("DermaLarge")
             surface.SetTextColor(0,255,0)
-            surface.SetTextPos(803,364 + 300 * gang:GetExpenses() / (gang:GetEarnings() + gang:GetExpenses()) - 40)
-            surface.DrawText(gbrp.FormatNumber(gang:GetEarnings()))
-            GWEN.CreateTextureBorder(0,0,24,208,8,8,8,8,expensesbarMat)(912,364 + 300 * gang:GetEarnings() / (gang:GetEarnings() + gang:GetExpenses()),24,300 - 300 * gang:GetEarnings() / (gang:GetEarnings() + gang:GetExpenses()))
+            surface.SetTextPos(803,364 + 300 * gang:GetExpenses() / (gang:GetIncomes() + gang:GetExpenses()) - 40)
+            surface.DrawText(gbrp.FormatNumber(gang:GetIncomes()))
+            GWEN.CreateTextureBorder(0,0,24,208,8,8,8,8,expensesbarMat)(912,364 + 300 * gang:GetIncomes() / (gang:GetIncomes() + gang:GetExpenses()),24,300 - 300 * gang:GetIncomes() / (gang:GetIncomes() + gang:GetExpenses()))
             surface.SetFont("DermaLarge")
             surface.SetTextColor(255,0,0)
-            surface.SetTextPos(912,364 + 300 * gang:GetEarnings() / (gang:GetEarnings() + gang:GetExpenses()) - 40)
+            surface.SetTextPos(912,364 + 300 * gang:GetIncomes() / (gang:GetIncomes() + gang:GetExpenses()) - 40)
             surface.DrawText(gbrp.FormatNumber(gang:GetExpenses()))
             GWEN.CreateTextureBorder(0,0,155,15,8,8,8,8,membersbarMat)(303,205,16,15)
             GWEN.CreateTextureBorder(0,0,155,15,8,8,8,8,membersbarMat)(318,205,721 * gang:GetMembersCount() / 10,15)

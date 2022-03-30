@@ -36,12 +36,8 @@ net.Receive("GBRP::buyproperty",function(len,ply)
         local ent = ents.GetMapCreatedEntity(door)
         ent:setDoorGroup(gang.name)
     end
-    local price = gbrp.doorgroups[doorgroup].attributes.price
-    price = price + price * gbrp.GetHousingTax() / 100
-    if gang:CanAfford(price) then
-        gang:Pay(price)
-        ply:ChatPrint([[Votre gang a acheté ']] .. doorgroup .. [[']])
-    end
+    gang:Pay(gbrp.doorgroups[doorgroup].attributes.price)
+    ply:ChatPrint([[Votre gang a acheté ']] .. doorgroup .. [[']])
 end)
 net.Receive("GBRP::sellproperty",function(len,ply)
     local gang = ply:GetGang()
@@ -82,12 +78,11 @@ net.Receive("GBRP::bankdeposit", function(len, gangLeader)
         end
     end
     for member,pay in pairs(members) do
-        pay = pay - pay * gbrp.GetIncomeTax() / 100
         member:SetNWInt("GBRP::balance", member:GetNWInt("GBRP::balance") + pay)
         sql.Query("update gbrp set balance = " .. member:GetNWInt("GBRP::balance") .. " where steamid64 = " .. member:SteamID64() .. ";")
         member:ChatPrint(gang.subject .. " vous rémunère $" .. pay .. ".")
     end
-    gang:Cash(gangPay - gangPay * gbrp.GetIncomeTax() / 100)
+    gang:Cash(gangPay)
     gangLeader:ChatPrint(gang.subject .. " gagne " .. gbrp.formatMoney(gangPay) .. ".")
 
     gangLeader:SetNWInt("GBRP::launderedmoney", 0)
@@ -103,7 +98,7 @@ net.Receive("GBRP::buyshop", function(len, ply)
     local shop = net.ReadEntity()
     local gang = ply:GetGang()
     shop:SetGang(gang)
-    gang:Pay(shop:GetPrice())
+    gang:Pay(shop.price)
     for k,door in pairs(gbrp.doorgroups[shop:GetShopName()].doors) do
         local ent = ents.GetMapCreatedEntity(door)
         ent:setDoorGroup(gang.name)
