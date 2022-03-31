@@ -100,8 +100,14 @@ hook.Add("Think", "GBRP::Think",function()
             gang:GetLeader():ChatPrint("Taxe sur l'habitation due : " .. housingtax)
             incomeTax = gang:GetNWInt(gang.name + "Incomes") * gbrp.GetIncomeTax() / 100
             gang:SetNWInt(gang.name + "Incomes",0)
+            gang:SetNWInt(gang.name + "Expenses",0)
             gang:Pay(incomeTax)
             gang:GetLeader():ChatPrint("Impôt sur les sociétés : " .. incomeTax)
         end
+    end
+end)
+hook.Add("PlayerShouldTakeDamage","GBRP::antiLeaderKill",function(ply,attacker)
+    if ply:IsGangLeader() and attacker:GetGang() == ply:GetGang() then
+        return false
     end
 end)
