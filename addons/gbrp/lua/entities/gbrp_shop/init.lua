@@ -113,7 +113,7 @@ function ENT:Think()
         self:SetRobberyTime(self:GetRobberyTime() + 1)
     elseif self:GetRobberyTime() == self.robbery.time then
         self:EndRobbery()
-    elseif self:GetGang() and CurTime() > ft1 + self.startingOperatingCostTime and CurTime() > ft2 + self.operatingCostSpeed then
+    elseif self:GetGang() and (CurTime() > ft1 + self.startingOperatingCostTime or self.operatingCostMoney >= self.operatingCostStartingAmount) and CurTime() > ft2 + self.operatingCostSpeed then
         ft2 = CurTime()
         self.operatingCostMoney = self.operatingCostMoney - self.minimumOperatingCost
         if self.operatingCostMoney < 0 then
