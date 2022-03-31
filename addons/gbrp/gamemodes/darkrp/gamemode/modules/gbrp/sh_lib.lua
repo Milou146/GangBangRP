@@ -906,7 +906,8 @@ function gbrp.gang:GetPrivateDoorsCount()
     return GetGlobalInt(self.name .. "PrivateDoorsCount")
 end
 function gbrp.gang:GetLeader()
-    return team.GetPlayers(self.leaderTeam)
+    local _,teamid = DarkRP.getJobByCommand(self.leaderCommand)
+    return team.GetPlayers(teamid)[1]
 end
 if SERVER then
     function gbrp.SpawnNPCs()

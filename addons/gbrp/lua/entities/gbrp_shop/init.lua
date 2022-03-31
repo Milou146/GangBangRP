@@ -1,6 +1,8 @@
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
 include("shared.lua")
+local ft1 = CurTime()
+local ft2 = 0
 
 function ENT:Initialize()
     self:SetHullType(HULL_HUMAN)
@@ -31,21 +33,27 @@ end
 ENT.money = {}
 ENT.launderedMoney = {}
 ENT.lastTime = 0
+ENT.operatingCostMoney = 0 -- money used to pay operating costs
 
 function ENT:launder(i,amount)
-    if self.money[i].wallet >= self.launderingAmount then
-        self.money[i].wallet = self.money[1].wallet - self.launderingAmount
-        table.insert(self.launderedMoney,{gangster = self.money[i].gangster,amount = self.launderingAmount})
-        self:SetBalance(self:GetBalance() + self.launderingAmount * self.launderingRatio - self.launderingAmount * self.launderingRatio * gbrp.GetVAT() / 100)
-        self:SetDirtyMoney(self:GetDirtyMoney() - self.launderingAmount)
+    local amountAfterVAT
+    if self.money[i].wallet >= amount then
+        self.money[i].wallet = self.money[1].wallet - amount
+        amountAfterVAT = amount - amount * gbrp.GetVAT() / 100
+        table.insert(self.launderedMoney,{gangster = self.money[i].gangster,amount = amountAfterVAT})
+        self:SetBalance(self:GetBalance() + amountAfterVAT * self.launderingRatio)
+        self:SetDirtyMoney(self:GetDirtyMoney() - amount)
+        self.operatingCostMoney = self.operatingCostMoney + amountAfterVAT * (1 - self.launderingRatio)
         if self.money[i].wallet == 0 then
             table.remove(self.money,i)
         end
     else
         amount = amount - self.money[i].wallet
-        table.insert(self.launderedMoney,{gangster = self.money[i].gangster,amount = self.money[i].wallet})
-        self:SetBalance(self:GetBalance() + self.money[i].wallet * self.launderingRatio - self.money[i].wallet * self.launderingRatio * gbrp.GetVAT() / 100)
+        amountAfterVAT = self.money[i].wallet - self.money[i].wallet * gbrp.GetVAT() / 100
+        table.insert(self.launderedMoney,{gangster = self.money[i].gangster,amount = amountAfterVAT})
+        self:SetBalance(self:GetBalance() + amountAfterVAT * self.launderingRatio)
         self:SetDirtyMoney(self:GetDirtyMoney() - self.money[i].wallet)
+        self.operatingCostMoney = self.operatingCostMoney + amountAfterVAT * (1 - self.launderingRatio)
         table.remove(self.money,i)
         if self.money[i] then --s'il y a encore de l'argent à blanchir
             self:launder(i,amount)
@@ -105,6 +113,17 @@ function ENT:Think()
         self:SetRobberyTime(self:GetRobberyTime() + 1)
     elseif self:GetRobberyTime() == self.robbery.time then
         self:EndRobbery()
+    elseif self:GetGang() and CurTime() > ft1 + self.startingOperatingCostTime and CurTime() > ft2 + self.operatingCostSpeed then
+        ft2 = CurTime()
+        self.operatingCostMoney = self.operatingCostMoney - self.minimumOperatingCost
+        if self.operatingCostMoney < 0 then
+            self:GetGang():Pay(-self.operatingCostMoney)
+            DarkRP.notify(self:GetGang():GetLeader(), 1, 4, "Votre gang paye les frais de fonctionnement de " .. self.niceName .. " : " .. gbrp.formatMoney(-self.operatingCostMoney))
+            self.operatingCostMoney = 0
+        else
+            DarkRP.notify(self:GetGang():GetLeader(), 0, 2, "Votre " .. self.niceName .. " a payé ses frais de fonctionnement.")
+            self.operatingCostMoney = 0
+        end
     end
 end
 
