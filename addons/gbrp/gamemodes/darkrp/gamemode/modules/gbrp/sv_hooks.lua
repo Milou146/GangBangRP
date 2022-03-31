@@ -25,6 +25,9 @@ hook.Add("PlayerSpawn","GBRP:PlayerSpawn",function(ply)
     if ply:IsGangLeader() then
         ply:GetGang():SetBalance(gbrp.startingFunds)
     end
+    ply:SetNWInt("methItemsCount",0)
+    ply:SetNWInt("cocaineItemsCount",0)
+    ply:SetNWInt("cigaretteItemsCount",0)
 end)
 hook.Add("PlayerDeath","GBRP:PlayerDeath",function(ply)
     if ply:IsGangLeader() then
@@ -107,7 +110,7 @@ hook.Add("Think", "GBRP::Think",function()
     end
 end)
 hook.Add("PlayerShouldTakeDamage","GBRP::antiLeaderKill",function(ply,attacker)
-    if ply:IsGangLeader() and attacker:GetGang() == ply:GetGang() then
+    if ply:IsGangLeader() and attacker:IsPlayer() and attacker:GetGang() == ply:GetGang() then
         return false
     end
 end)

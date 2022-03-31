@@ -14,6 +14,9 @@ end
 function plyMeta:CanAfford(amount)
     return self:GetBalance() - amount >= 0;
 end
+function plyMeta:GetGBRPItemsCount(typ)
+    return self:GetNWInt(typ .. "ItemsCount")
+end
 if CLIENT then
     function plyMeta:BuyShop(shop)
         local gang = self:GetGang()
@@ -108,5 +111,11 @@ if SERVER then
             end
         end
         hands:Spawn()
+    end
+    function plyMeta:AddGBRPItem(typ)
+        self:SetNWInt(typ .. "ItemsCount",self:GetNWInt(typ .. "ItemsCount") + 1)
+    end
+    function plyMeta:RemoveGBRPItem(typ)
+        self:SetNWInt(typ .. "ItemsCount",self:GetNWInt(typ .. "ItemsCount") - 1)
     end
 end
