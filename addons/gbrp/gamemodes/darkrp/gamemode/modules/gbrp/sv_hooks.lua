@@ -86,26 +86,30 @@ hook.Add("Think", "GBRP::Think",function()
         ft = CurTime()
         gbrp.MoveNPCs()
     elseif CurTime() > ft1 + gbrp.taxSpeed then
+        ft1 = CurTime()
         for _,gang in pairs(gbrp.gangs) do
-            local propertyTax = 0
-            for _,shop in pairs(gang:GetShops()) do
-                propertyTax = propertyTax + shop.value
+            local gangLeader = gang:GetLeader()
+            if gangLeader then
+                local propertyTax = 0
+                for _,shop in pairs(gang:GetShops()) do
+                    propertyTax = propertyTax + shop.value
+                end
+                propertyTax = propertyTax * gbrp.GetPropertyTax() / 100
+                gang:Pay(propertyTax)
+                gangLeader:ChatPrint("Taxe foncière due : " .. gbrp.formatMoney(propertyTax))
+                local housingTax = 0
+                for _,house in pairs(gang:GetHouses()) do
+                    housingTax = housingTax + house.price
+                end
+                housingTax = housingTax * gbrp.GetHousingTax() / 100
+                gang:Pay(housingTax)
+                gangLeader:ChatPrint("Taxe sur l'habitation due : " .. gbrp.formatMoney(housingTax))
+                local incomeTax = GetGlobalInt(gang.name .. "Incomes") * gbrp.GetIncomeTax() / 100
+                SetGlobalInt(gang.name .. "Incomes",0)
+                SetGlobalInt(gang.name .. "Expenses",0)
+                gang:Pay(incomeTax)
+                gangLeader:ChatPrint("Impôt sur les sociétés : " .. gbrp.formatMoney(incomeTax))
             end
-            propertyTax = propertyTax * gbrp.GetPropertyTax() / 100
-            gang:Pay(propertyTax)
-            gang:GetLeader():ChatPrint("Taxe foncière due : " .. propertyTax)
-            local housingTax = 0
-            for _,house in pairs(gang:GetHouses()) do
-                housingTax = housingtax + house.price
-            end
-            housingTax = housingTax * gbrp.GetHousingTax() / 100
-            gang:Pay(housingtax)
-            gang:GetLeader():ChatPrint("Taxe sur l'habitation due : " .. housingtax)
-            incomeTax = gang:GetNWInt(gang.name + "Incomes") * gbrp.GetIncomeTax() / 100
-            gang:SetNWInt(gang.name + "Incomes",0)
-            gang:SetNWInt(gang.name + "Expenses",0)
-            gang:Pay(incomeTax)
-            gang:GetLeader():ChatPrint("Impôt sur les sociétés : " .. incomeTax)
         end
     end
 end)
