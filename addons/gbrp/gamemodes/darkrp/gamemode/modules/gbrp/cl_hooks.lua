@@ -233,10 +233,25 @@ hook.Add("Think","GBRP::GangMenu",function()
             surface.DrawTexturedRect(388,205,570,75)
         end
         panel:MakePopup()
-        local close = vgui.Create("DImageButton",panel)
-        close:SetPos(1027,0)
-        close:SetSize(53,82)
-        function close:DoClick()
+        local remove = vgui.Create("DImageButton",panel)
+        remove:SetPos(1034,20)
+        remove:SetSize(46,46)
+        remove.mat = Material("gui/gbrp/gangpanel/remove.png")
+        remove.hoveredMat = Material("gui/gbrp/gangpanel/remove_rollover.png")
+        function remove:GetMaterial()
+            return Material(self:GetImage())
+        end
+        function remove:Paint(w,h)
+            surface.SetDrawColor(255,255,255,255)
+            if self:IsHovered() then
+                surface.SetMaterial(self.hoveredMat)
+                surface.DrawTexturedRect(0,0,w,h)
+                return
+            end
+            surface.SetMaterial(self.mat)
+            surface.DrawTexturedRect(0,0,w,h)
+        end
+        function remove:DoClick()
             panel:Remove()
             gangPanelOpen = false
         end
