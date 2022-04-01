@@ -15,7 +15,7 @@ SetGlobalInt("incomeTax",0);
 SetGlobalInt("VAT",0);
 
 gbrp = {}
-gbrp.taxSpeed = 10
+gbrp.taxSpeed = 1800
 gbrp.tax = {}
 gbrp.defiscalize = {}
 gbrp.tax.propertyTax = {
