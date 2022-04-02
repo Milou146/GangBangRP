@@ -1253,8 +1253,13 @@ if SERVER then
         self:AddIncomes(amount)
     end
     function gbrp.gang:Pay(amount)
-        self:SetBalance(math.Clamp(self:GetBalance() - amount,0,999999999999))
-        self:AddExpenses(amount)
+        if self:GetBalance() - amount >= 0 then
+            self:SetBalance(self:GetBalance() - amount)
+            self:AddExpenses(amount)
+        else
+            self:AddExpenses(self:GetBalance())
+            self:SetBalance(0)
+        end
     end
     function gbrp.gang:Reset()
         for k,v in pairs(gbrp.doors) do
