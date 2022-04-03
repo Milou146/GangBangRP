@@ -1,6 +1,6 @@
 local meth1
 local cocaine1
-local npc_shop
+local gundealer
 local launderer
 local cf_export_van
 SetGlobalInt("yakuzasBalance",0);
@@ -913,27 +913,27 @@ if SERVER then
     function gbrp.SpawnNPCs()
         local bank1 = ents.Create("gbrp_bank_receptionist")
         bank1.gender = "female"
-        bank1:SetModel("models/mossman.mdl")
+        bank1:SetModel("models/humans/group10/female_01.mdl")
         bank1:SetPos(Vector(-954.399658,2831.927979,-38.031754))
         bank1:SetAngles(Angle(0,-90,0))
         bank1:Spawn()
 
         local bank2 = ents.Create("gbrp_bank_receptionist")
-        bank2.gender = "male"
-        bank2:SetModel("models/sentry/sentryoldmob/mafia/sentrymobmale2pm.mdl")
+        bank2.gender = "female"
+        bank2:SetModel("models/humans/group10/female_04.mdl")
         bank2:SetPos(Vector(-1063.368408,2830.685547,-38.031754))
         bank2:SetAngles(Angle(0,-90,0))
         bank2:Spawn()
 
         local bank3 = ents.Create("gbrp_bank_receptionist")
-        bank3.gender = "female"
-        bank3:SetModel("models/mossman.mdl")
+        bank3.gender = "male"
+        bank3:SetModel("models/humans/group10/male_02.mdl")
         bank3:SetPos(Vector(-1159.221558,2812.594482,-38.031754))
         bank3:SetAngles(Angle(0,-90,0))
         bank3:Spawn()
 
         local jewelry = ents.Create("gbrp_shop")
-        jewelry:SetModel("models/sentry/sentryoldmob/mafia/sentrymobmale7pm.mdl")
+        jewelry:SetModel("models/humans/group10/male_04.mdl")
         jewelry:SetPos(Vector(-576.345520,253.843369,-30.031754))
         jewelry:SetAngles(Angle(0,0,0))
         jewelry:SetShopName("jewelrystore")
@@ -941,14 +941,14 @@ if SERVER then
         jewelry.niceName = "Bijouterie"
 
         local hardwarestore = ents.Create("gbrp_shop")
-        hardwarestore:SetModel("models/odessa.mdl")
+        hardwarestore:SetModel("models/1000shells/player/worker/npc/worker_npc.mdl")
         hardwarestore:SetPos(Vector(1298.557983,-1579.187866,-29.987122))
         hardwarestore:SetAngles(Angle(0,90,0))
         hardwarestore:Spawn()
         hardwarestore.niceName = "Quincaillerie"
 
         local gunshop = ents.Create("gbrp_shop")
-        gunshop:SetModel("models/monk.mdl")
+        gunshop:SetModel("models/player/spike/josef.mdl")
         gunshop:SetPos(Vector(-1099.968750,10497.299805,202.012878))
         gunshop:SetAngles(Angle(0,-180,0))
         gunshop:SetShopName("gunshop")
@@ -964,7 +964,7 @@ if SERVER then
         drugstore.niceName = "Pharmacie"
 
         local club = ents.Create("gbrp_shop")
-        club:SetModel("models/breen.mdl")
+        club:SetModel("models/alyx.mdl")
         club:SetPos(Vector(-7678.176758,5545.522461,66.012878))
         club:SetAngles(Angle(0,90,0))
         club:SetShopName("club")
@@ -980,7 +980,7 @@ if SERVER then
         repairgarage.niceName = "Garage"
 
         local bar = ents.Create("gbrp_shop")
-        bar:SetModel("models/alyx.mdl")
+        bar:SetModel("models/player/spike/nigel.mdl")
         bar:SetPos(Vector(4955,8042,210))
         bar:SetAngles(Angle(0,0,0))
         bar:SetShopName("bar")
@@ -996,12 +996,14 @@ if SERVER then
         gasstation.niceName = "Station service"
 
         local meth = ents.Create("eml_buyer")
+        meth:SetModel("models/hazcit_npc.mdl")
         meth:SetPos(Vector(2020,6699,-290))
         meth:SetAngles(Angle(0,180,0))
         meth:Spawn()
         meth:DropToFloor()
 
         local cocaine = ents.Create("cocaine_drugs_buyer")
+        cocaine:SetModel("models/humans/gasmaskcit.mdl")
         cocaine:SetPos(Vector(990,1648,-430))
         cocaine:SetAngles(Angle(0,90,0))
         cocaine:Spawn()
@@ -1015,6 +1017,7 @@ if SERVER then
         local randint = math.random(1,#gbrp.dealerpos)
         gbrp.dealerpos[randint].posTaken = true
         meth1 = ents.Create("eml_buyer")
+        meth1:SetModel("models/hazcit_npc.mdl")
         meth1:SetPos(gbrp.dealerpos[randint].pos)
         meth1:SetAngles(gbrp.dealerpos[randint].ang)
         meth1:Spawn()
@@ -1025,6 +1028,7 @@ if SERVER then
         end
         gbrp.dealerpos[randint].posTaken = true
         cocaine1 = ents.Create("cocaine_drugs_buyer")
+        cocaine1:SetModel("models/humans/gasmaskcit.mdl")
         cocaine1:SetPos(gbrp.dealerpos[randint].pos)
         cocaine1:SetAngles(gbrp.dealerpos[randint].ang)
         cocaine1:Spawn()
@@ -1033,17 +1037,18 @@ if SERVER then
             randint = math.random(1,#gbrp.dealerpos)
         end
         gbrp.dealerpos[randint].posTaken = true
-        npc_shop = ents.Create("npc_shop")
-        npc_shop:SetPos(gbrp.dealerpos[randint].pos)
-        npc_shop:SetAngles(gbrp.dealerpos[randint].ang)
-        npc_shop:Spawn()
+        gundealer = ents.Create("npc_shop")
+        gundealer:SetModel("models/player/spike/ogbosshd.mdl ")
+        gundealer:SetPos(gbrp.dealerpos[randint].pos)
+        gundealer:SetAngles(gbrp.dealerpos[randint].ang)
+        gundealer:Spawn()
 
         while gbrp.dealerpos[randint].posTaken == true do
             randint = math.random(1,#gbrp.dealerpos)
         end
         gbrp.dealerpos[randint].posTaken = true
         launderer = ents.Create("gbrp_launderer")
-        launderer:SetModel("models/odessa.mdl")
+        launderer:SetModel("models/player/spike/robber.mdl")
         launderer:SetPos(gbrp.dealerpos[randint].pos)
         launderer:SetAngles(gbrp.dealerpos[randint].ang)
         launderer:Spawn()
@@ -1056,63 +1061,63 @@ if SERVER then
     end
     function gbrp.SpawnHotdogSalesmans()
         local salesman1 = ents.Create("gbrp_hotdogsalesman")
-        salesman1:SetModel("models/Eli.mdl")
+        salesman1:SetModel("models/kuhnya/barinov_combine.mdl")
         salesman1.hotdogpos = Vector(1985.312012,5540.983398,46.440498)
         salesman1:SetPos(Vector(1953.749268,5490.832520,8.031250))
         salesman1:SetAngles(Angle(0,90,0))
         salesman1:Spawn()
 
         local salesman2 = ents.Create("gbrp_hotdogsalesman")
-        salesman2:SetModel("models/Eli.mdl")
+        salesman2:SetModel("models/kuhnya/barinov_combine.mdl")
         salesman2.hotdogpos = Vector(3762.856201,5870.750000,46.440498)
         salesman2:SetPos(Vector(3740.848389,5814.738281,8.031242))
         salesman2:SetAngles(Angle(0,90,0))
         salesman2:Spawn()
 
         local salesman3 = ents.Create("gbrp_hotdogsalesman")
-        salesman3:SetModel("models/Eli.mdl")
+        salesman3:SetModel("models/kuhnya/barinov_combine.mdl")
         salesman3.hotdogpos = Vector(5800.159668,4402.841309,-17.559513)
         salesman3:SetPos(Vector(5840.312500,4459.221191,-55.968750))
         salesman3:SetAngles(Angle(0,-90,0))
         salesman3:Spawn()
 
         local salesman4 = ents.Create("gbrp_hotdogsalesman")
-        salesman4:SetModel("models/Eli.mdl")
+        salesman4:SetModel("models/kuhnya/barinov_combine.mdl")
         salesman4.hotdogpos = Vector(-6306.340332,2667.020508,-1.559502)
         salesman4:SetPos(Vector(-6298.107910,2717.878174,-40))
         salesman4:SetAngles(Angle(0,-90,0))
         salesman4:Spawn()
 
         local salesman5 = ents.Create("gbrp_hotdogsalesman")
-        salesman5:SetModel("models/Eli.mdl")
+        salesman5:SetModel("models/kuhnya/barinov_combine.mdl")
         salesman5.hotdogpos = Vector(-6306.340332,2667.020508,-7)
         salesman5:SetPos(Vector(-6298.107910,2717.878174,-40))
         salesman5:SetAngles(Angle(0,-90,0))
         salesman5:Spawn()
 
         local salesman6 = ents.Create("gbrp_hotdogsalesman")
-        salesman6:SetModel("models/Eli.mdl")
+        salesman6:SetModel("models/kuhnya/barinov_combine.mdl")
         salesman6.hotdogpos = Vector(5211.087402,8753.347656,166.440491)
         salesman6:SetPos(Vector(5186.979492,8707.676758,128))
         salesman6:SetAngles(Angle(0,90,0))
         salesman6:Spawn()
 
         local salesman7 = ents.Create("gbrp_hotdogsalesman")
-        salesman7:SetModel("models/Eli.mdl")
+        salesman7:SetModel("models/kuhnya/barinov_combine.mdl")
         salesman7.hotdogpos = Vector(6286.805664,888.787598,-65.55950)
         salesman7:SetPos(Vector(6341.223145,865.494080,-103))
         salesman7:SetAngles(Angle(0,180,0))
         salesman7:Spawn()
 
         local salesman8 = ents.Create("gbrp_hotdogsalesman")
-        salesman8:SetModel("models/Eli.mdl")
+        salesman8:SetModel("models/kuhnya/barinov_combine.mdl")
         salesman8.hotdogpos = Vector(1560.791504,340.471008,-65.559509)
         salesman8:SetPos(Vector(1601,323,-104))
         salesman8:SetAngles(Angle(0,180,0))
         salesman8:Spawn()
 
         local salesman9 = ents.Create("gbrp_hotdogsalesman")
-        salesman9:SetModel("models/Eli.mdl")
+        salesman9:SetModel("models/kuhnya/barinov_combine.mdl")
         salesman9.hotdogpos = Vector(-2793.504395,11675.882813,166.44)
         salesman9:SetPos(Vector(-2749,11658,130))
         salesman9:SetAngles(Angle(0,180,0))
@@ -1203,6 +1208,7 @@ if SERVER then
         gbrp.dealerpos[randint].posTaken = true
         meth1:Remove()
         meth1 = ents.Create("eml_buyer")
+        meth1:SetModel("models/hazcit_npc.mdl")
         meth1:SetPos(gbrp.dealerpos[randint].pos)
         meth1:SetAngles(gbrp.dealerpos[randint].ang)
         meth1:Spawn()
@@ -1214,6 +1220,7 @@ if SERVER then
         gbrp.dealerpos[randint].posTaken = true
         cocaine1:Remove()
         cocaine1 = ents.Create("cocaine_drugs_buyer")
+        cocaine1:SetModel("models/humans/gasmaskcit.mdl")
         cocaine1:SetPos(gbrp.dealerpos[randint].pos)
         cocaine1:SetAngles(gbrp.dealerpos[randint].ang)
         cocaine1:Spawn()
@@ -1222,9 +1229,9 @@ if SERVER then
             randint = math.random(1,#gbrp.dealerpos)
         end
         gbrp.dealerpos[randint].posTaken = true
-        npc_shop:SetPos(gbrp.dealerpos[randint].pos)
-        npc_shop:SetAngles(gbrp.dealerpos[randint].ang)
-        npc_shop:DropToFloor()
+        gundealer:SetPos(gbrp.dealerpos[randint].pos)
+        gundealer:SetAngles(gbrp.dealerpos[randint].ang)
+        gundealer:DropToFloor()
 
         while gbrp.dealerpos[randint].posTaken == true do
             randint = math.random(1,#gbrp.dealerpos)
