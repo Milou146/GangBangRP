@@ -165,16 +165,10 @@ TEAM_YAKUZA = DarkRP.createJob("Chef des Yakuzas", {
     candemote = false,
     category = "YAKUZA",
     PlayerDeath = function(ply)
-        ply.LastTimeAsYakuzaLeader = CurTime()
+        ply:teamBan(TEAM_YAKUZA,900)
+        ply:changeTeam(TEAM_CITIZEN, true)
+        DarkRP.notifyAll(1, 4, "Le chef Yakuza est décédé.")
     end,
-    customCheck = function(ply)
-        if ply.LastTimeAsYakuzaLeader then
-            return CurTime() - ply.LastTimeAsYakuzaLeader > 900
-        else
-            return true
-        end
-    end,
-    customCheckFailMsg = "Il vous faut attendre 15 minutes après avoir quitté ce job.",
     PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
@@ -294,16 +288,10 @@ TEAM_MAFIA = DarkRP.createJob("Parrain", {
     candemote = false,
     category = "MAFIA",
     PlayerDeath = function(ply)
-        ply.LastTimeAsMafiaLeader = CurTime()
+        ply:teamBan(TEAM_MAFIA,900)
+        ply:changeTeam(TEAM_CITIZEN, true)
+        DarkRP.notifyAll(1, 4, "Le parrain est décédé.")
     end,
-    customCheck = function(ply)
-        if ply.LastTimeAsMafiaLeader then
-            return CurTime() - ply.LastTimeAsMafiaLeader > 900
-        else
-            return true
-        end
-    end,
-    customCheckFailMsg = "Il vous faut attendre 15 minutes après avoir quitté ce job.",
     PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
@@ -405,16 +393,10 @@ TEAM_GANGSTER = DarkRP.createJob("Chef Gangster", {
     candemote = false,
     category = "GANGSTER",
     PlayerDeath = function(ply)
-        ply.LastTimeAsGangsterLeader = CurTime()
+        ply:teamBan(TEAM_GANGSTER,900)
+        ply:changeTeam(TEAM_CITIZEN, true)
+        DarkRP.notifyAll(1, 4, "Le chef gangster est décédé.")
     end,
-    customCheck = function(ply)
-        if ply.LastTimeAsGangsterLeader then
-            return CurTime() - ply.LastTimeAsGangsterLeader > 900
-        else
-            return true
-        end
-    end,
-    customCheckFailMsg = "Il vous faut attendre 15 minutes après avoir quitté ce job.",
     PlayerSpawn = function(ply)
         ply:SetMaxHealth(100)
         ply:SetHealth(100)
