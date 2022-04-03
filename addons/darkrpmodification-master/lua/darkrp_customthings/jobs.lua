@@ -166,8 +166,6 @@ TEAM_YAKUZA = DarkRP.createJob("Chef des Yakuzas", {
     category = "YAKUZA",
     PlayerDeath = function(ply)
         ply.LastTimeAsYakuzaLeader = CurTime()
-        ply:changeTeam(TEAM_CITIZEN, true)
-        DarkRP.notifyAll(1, 4, "Le chef Yakuza est décédé.")
     end,
     customCheck = function(ply)
         if ply.LastTimeAsYakuzaLeader then
@@ -297,8 +295,6 @@ TEAM_MAFIA = DarkRP.createJob("Parrain", {
     category = "MAFIA",
     PlayerDeath = function(ply)
         ply.LastTimeAsMafiaLeader = CurTime()
-        ply:changeTeam(TEAM_CITIZEN, true)
-        DarkRP.notifyAll(1, 4, "Le parrain est décédé.")
     end,
     customCheck = function(ply)
         if ply.LastTimeAsMafiaLeader then
@@ -410,8 +406,6 @@ TEAM_GANGSTER = DarkRP.createJob("Chef Gangster", {
     category = "GANGSTER",
     PlayerDeath = function(ply)
         ply.LastTimeAsGangsterLeader = CurTime()
-        ply:changeTeam(TEAM_CITIZEN, true)
-        DarkRP.notifyAll(1, 4, "Le chef gangster est décédé.")
     end,
     customCheck = function(ply)
         if ply.LastTimeAsGangsterLeader then

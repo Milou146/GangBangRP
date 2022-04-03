@@ -118,3 +118,9 @@ hook.Add("PlayerShouldTakeDamage","GBRP::antiLeaderKill",function(ply,attacker)
         return false
     end
 end)
+hook.Add("PostPlayerDeath","GBRP::PostPlayerDeath",function(ply)
+    if ply:IsGangLeader() then
+        DarkRP.notifyAll(1, 4, "Le chef " .. ply:GetGang().name .. " est décédé.")
+        ply:changeTeam(TEAM_CITIZEN, true)
+    end
+end)
