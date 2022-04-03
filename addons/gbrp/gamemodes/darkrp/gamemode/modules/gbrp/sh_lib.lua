@@ -826,7 +826,7 @@ function gbrp.sortedGangs()
         local gang = ply:GetGang()
         if gang then gang.ct = gang.ct + 1 end
     end
-    local gangs = gbrp.gangs
+    local gangs = table.Copy(gbrp.gangs)
     local max = "yakuzas"
     for k,v in pairs(gangs) do
         if v.ct > gangs[max].ct then
