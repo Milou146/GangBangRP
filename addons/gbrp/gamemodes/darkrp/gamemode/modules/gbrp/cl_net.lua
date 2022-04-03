@@ -1865,6 +1865,7 @@ net.Receive("GBRP::bankruptMessage",function()
     frame:SetTitle(niceName .. " a été braqué")
     frame:SetSize(gbrp.FormatX(500),gbrp.FormatY(500))
     frame:Center()
+    frame:MakePopup()
     function frame:OnClose()
         self:Remove()
         net.Start("GBRP::shopSolvation")
@@ -1873,7 +1874,7 @@ net.Receive("GBRP::bankruptMessage",function()
         net.SendToServer()
     end
     function frame:Think()
-        if CurTime > ct + 20 then
+        if CurTime() > ct + 20 then
             frame:OnClose()
         end
     end
