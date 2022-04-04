@@ -36,7 +36,7 @@ hook.Add("OnContextMenuOpen", "GBRPContext", function()
             -- Partie Temps
             Timestamp = os.time()
             TimeString = os.date("%H:%M", Timestamp)
-            draw.SimpleText(TimeString, "PricedownLarge", scrw * 0.5, scrh * 0.5, Color(51, 51, 51, 225), 1, 1) -- 280  , ScrH() - 302.5
+            draw.SimpleText(TimeString, "PricedownLarge", scrw * 0.5, scrh * 0.5, Color(255, 255, 255, 225), 1, 1) -- 280  , ScrH() - 302.5
             -- Partie Argent
             money = LocalPlayer():getDarkRPVar("money")
             argent = gbrp.formatMoney(money)
