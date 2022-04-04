@@ -131,7 +131,7 @@ GM.Config.propertytax = false
 -- proppaying - Whether or not players should pay for spawning props.
 GM.Config.proppaying = true
 -- propspawning - Enable/disable props spawning. Applies to admins too.
-GM.Config.propspawning = false
+GM.Config.propspawning = true
 -- removeclassitems - Enable/disable shipments/microwaves/etc. removal when someone changes team.
 GM.Config.removeclassitems = false
 -- removeondisconnect - Enable/disable shipments/microwaves/etc. removal when someone disconnects.
@@ -247,7 +247,7 @@ GM.Config.pricecap = 500
 -- pricemin - The minimum price of items (using /price).
 GM.Config.pricemin = 50
 -- propcost - How much prop spawning should cost (prop paying must be enabled for this to have an effect).
-GM.Config.propcost = 10000000000
+GM.Config.propcost = 0
 -- quakechance - Chance of an earthquake happening.
 GM.Config.quakechance = 4000
 -- respawntime - Minimum amount of seconds a player has to wait before respawning.
