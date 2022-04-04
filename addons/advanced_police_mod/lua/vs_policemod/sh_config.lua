@@ -18,7 +18,7 @@ CFG.PoliceJobs = {
 	[ "S.W.A.T Médic" ] = true,
 	[ "S.W.A.T Sniper" ] = true,
 }
-}
+
 
 -- Dispatch groups names
 CFG.DispatchGroupsNames = {
