@@ -32,3 +32,4 @@
 !/data/wepholster
 !.gitignore
 data/arccw_presets/*
+data/ulib/users.txt

@@ -5,7 +5,9 @@ local hide = {
     ["CHudHealth"] = true,
     --["CHudAmmo"] = true,
     ["CHudCrosshair"] = true,
-    ["CHudBattery"] = true
+    ["CHudBattery"] = true,
+    ["DarkRP_LocalPlayerHUD"] = true,
+    ["DarkRP_Hungermod"] = true
 }
 
 hook.Add("HUDShouldDraw","GBRP::HideHUD",function(name)

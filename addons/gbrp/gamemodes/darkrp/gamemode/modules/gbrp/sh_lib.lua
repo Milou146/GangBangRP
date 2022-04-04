@@ -148,7 +148,7 @@ gbrp.doorgroups = {
     ["E Union Sq"] = {doors = {3002,3004,3003},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "E Union Sq",typ = "appartment"}};
     ["F Union Sq"] = {doors = {1358,1359,1360},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "F Union Sq",typ = "appartment"}};
     ["G Union Sq"] = {doors = {1353,1354,1355},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "G Union Sq",typ = "appartment"}};
-    ["H Union Sq"] = {doors = {1356,2957,1357},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "H Union Sq",typ = "appartment"}};
+    ["H Union Sq"] = {doors = {1356,2957,1357},locked = true,attributes = {owner = "mafia",buyable = true,price = 10000,value = 8000,doorgroup = "H Union Sq",typ = "appartment"}};
     ["I Union Sq"] = {doors = {2997,3001,3000},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "I Union Sq",typ = "appartment"}};
     ["J Union Sq"] = {doors = {1361,1362,1363},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "J Union Sq",typ = "appartment"}};
     ["K Union Sq"] = {doors = {1364,1366,1365},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "K Union Sq",typ = "appartment"}};
