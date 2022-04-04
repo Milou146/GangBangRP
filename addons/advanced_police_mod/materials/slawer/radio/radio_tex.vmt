@@ -1,0 +1,5 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "slawer/radio/radio_tex"
+	"$normalmap" "slawer/radio/radio_tex_n"
+}

@@ -1,0 +1,5 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "navigation/gps/gps_tex"
+	"$normalmap" "navigation/gps/gps_tex_n"
+}

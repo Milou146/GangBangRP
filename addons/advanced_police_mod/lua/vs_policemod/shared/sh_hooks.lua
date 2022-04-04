@@ -1,0 +1,5 @@
+hook.Add("PostGamemodeLoaded", "VS_PoliceMod.DVARS:PostGamemodeLoaded", function()
+	DarkRP.registerDarkRPVar("warrant", net.WriteBool, net.ReadBool)
+	DarkRP.registerDarkRPVar("warrantReason", net.WriteString, net.ReadString)
+    DarkRP.registerDarkRPVar("bailAvailable", net.WriteBit, fc{tobool, net.ReadBit})
+end)
