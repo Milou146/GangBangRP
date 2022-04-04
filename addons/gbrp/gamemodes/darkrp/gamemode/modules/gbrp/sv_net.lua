@@ -198,7 +198,7 @@ net.Receive("GBRP::startRobbery",function(len,ply)
     shop:StartRobbery(ply:GetGang())
     for _,pl in pairs(player.GetAll()) do
         if pl:GetGang() == shopGang then
-            DarkRP.notify(pl,1,2,"Intrusion " .. string.lower(shop.niceName) .. " !")
+            DarkRP.notify(pl,1,4,"Intrusion " .. string.lower(shop.niceName) .. " !")
         end
     end
 end)

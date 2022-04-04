@@ -914,21 +914,21 @@ if SERVER then
         local bank1 = ents.Create("gbrp_bank_receptionist")
         bank1.gender = "female"
         bank1:SetModel("models/humans/group10/female_01.mdl")
-        bank1:SetPos(Vector(-954.399658,2831.927979,-38.031754))
+        bank1:SetPos(Vector(-954,2812,-38))
         bank1:SetAngles(Angle(0,-90,0))
         bank1:Spawn()
 
         local bank2 = ents.Create("gbrp_bank_receptionist")
         bank2.gender = "female"
         bank2:SetModel("models/humans/group10/female_04.mdl")
-        bank2:SetPos(Vector(-1063.368408,2830.685547,-38.031754))
+        bank2:SetPos(Vector(-1063,2812,-38))
         bank2:SetAngles(Angle(0,-90,0))
         bank2:Spawn()
 
         local bank3 = ents.Create("gbrp_bank_receptionist")
         bank3.gender = "male"
         bank3:SetModel("models/humans/group10/male_02.mdl")
-        bank3:SetPos(Vector(-1159.221558,2812.594482,-38.031754))
+        bank3:SetPos(Vector(-1159,2812,-38))
         bank3:SetAngles(Angle(0,-90,0))
         bank3:Spawn()
 
@@ -1083,45 +1083,38 @@ if SERVER then
 
         local salesman4 = ents.Create("gbrp_hotdogsalesman")
         salesman4:SetModel("models/kuhnya/barinov_combine.mdl")
-        salesman4.hotdogpos = Vector(-6306.340332,2667.020508,-1.559502)
+        salesman4.hotdogpos = Vector(-6306.340332,2667.020508,-7)
         salesman4:SetPos(Vector(-6298.107910,2717.878174,-40))
         salesman4:SetAngles(Angle(0,-90,0))
         salesman4:Spawn()
 
         local salesman5 = ents.Create("gbrp_hotdogsalesman")
         salesman5:SetModel("models/kuhnya/barinov_combine.mdl")
-        salesman5.hotdogpos = Vector(-6306.340332,2667.020508,-7)
-        salesman5:SetPos(Vector(-6298.107910,2717.878174,-40))
-        salesman5:SetAngles(Angle(0,-90,0))
+        salesman5.hotdogpos = Vector(5211.087402,8753.347656,166.440491)
+        salesman5:SetPos(Vector(5186.979492,8707.676758,128))
+        salesman5:SetAngles(Angle(0,90,0))
         salesman5:Spawn()
 
         local salesman6 = ents.Create("gbrp_hotdogsalesman")
         salesman6:SetModel("models/kuhnya/barinov_combine.mdl")
-        salesman6.hotdogpos = Vector(5211.087402,8753.347656,166.440491)
-        salesman6:SetPos(Vector(5186.979492,8707.676758,128))
-        salesman6:SetAngles(Angle(0,90,0))
+        salesman6.hotdogpos = Vector(6286.805664,888.787598,-65.55950)
+        salesman6:SetPos(Vector(6341.223145,865.494080,-103))
+        salesman6:SetAngles(Angle(0,180,0))
         salesman6:Spawn()
 
         local salesman7 = ents.Create("gbrp_hotdogsalesman")
         salesman7:SetModel("models/kuhnya/barinov_combine.mdl")
-        salesman7.hotdogpos = Vector(6286.805664,888.787598,-65.55950)
-        salesman7:SetPos(Vector(6341.223145,865.494080,-103))
+        salesman7.hotdogpos = Vector(1560.791504,340.471008,-65.559509)
+        salesman7:SetPos(Vector(1601,323,-104))
         salesman7:SetAngles(Angle(0,180,0))
         salesman7:Spawn()
 
         local salesman8 = ents.Create("gbrp_hotdogsalesman")
         salesman8:SetModel("models/kuhnya/barinov_combine.mdl")
-        salesman8.hotdogpos = Vector(1560.791504,340.471008,-65.559509)
-        salesman8:SetPos(Vector(1601,323,-104))
+        salesman8.hotdogpos = Vector(-2793.504395,11675.882813,166.44)
+        salesman8:SetPos(Vector(-2749,11658,130))
         salesman8:SetAngles(Angle(0,180,0))
         salesman8:Spawn()
-
-        local salesman9 = ents.Create("gbrp_hotdogsalesman")
-        salesman9:SetModel("models/kuhnya/barinov_combine.mdl")
-        salesman9.hotdogpos = Vector(-2793.504395,11675.882813,166.44)
-        salesman9:SetPos(Vector(-2749,11658,130))
-        salesman9:SetAngles(Angle(0,180,0))
-        salesman9:Spawn()
     end
     function gbrp.RemoveHotdogSalesmans()
         for _,npc in pairs(ents.FindByClass("gbrp_hotdogsalesman")) do
