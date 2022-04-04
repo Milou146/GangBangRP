@@ -1,5 +1,4 @@
 if !NpcShop_Config then NpcShop_Config = {} end
-print("Waschbär's Gundealer Loaded!")
 // Ignore the fist line
 
 

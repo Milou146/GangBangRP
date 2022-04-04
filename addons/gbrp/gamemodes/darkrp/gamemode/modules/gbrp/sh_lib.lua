@@ -1003,55 +1003,55 @@ if SERVER then
         meth:DropToFloor()
 
         local cocaine = ents.Create("cocaine_drugs_buyer")
-        cocaine:SetModel("models/humans/gasmaskcit.mdl")
         cocaine:SetPos(Vector(990,1648,-430))
         cocaine:SetAngles(Angle(0,90,0))
         cocaine:Spawn()
+        cocaine:SetModel("models/humans/gasmaskcit.mdl")
 
         local mayor = ents.Create("gbrp_mayor")
-        mayor:SetModel("models/breen.mdl")
         mayor:SetPos(Vector(2502.454102,5055.062500,65.969872))
         mayor:SetAngles(Angle(2.425522,0.616063,0))
         mayor:Spawn()
+        mayor:SetModel("models/breen.mdl")
 
         local randint = math.random(1,#gbrp.dealerpos)
         gbrp.dealerpos[randint].posTaken = true
         meth1 = ents.Create("eml_buyer")
-        meth1:SetModel("models/hazcit_npc.mdl")
         meth1:SetPos(gbrp.dealerpos[randint].pos)
         meth1:SetAngles(gbrp.dealerpos[randint].ang)
         meth1:Spawn()
         meth1:DropToFloor()
+        meth1:SetModel("models/hazcit_npc.mdl")
 
         while gbrp.dealerpos[randint].posTaken == true do
             randint = math.random(1,#gbrp.dealerpos)
         end
         gbrp.dealerpos[randint].posTaken = true
         cocaine1 = ents.Create("cocaine_drugs_buyer")
-        cocaine1:SetModel("models/humans/gasmaskcit.mdl")
         cocaine1:SetPos(gbrp.dealerpos[randint].pos)
         cocaine1:SetAngles(gbrp.dealerpos[randint].ang)
         cocaine1:Spawn()
+        cocaine1:SetModel("models/humans/gasmaskcit.mdl")
 
         while gbrp.dealerpos[randint].posTaken == true do
             randint = math.random(1,#gbrp.dealerpos)
         end
         gbrp.dealerpos[randint].posTaken = true
-        gundealer = ents.Create("npc_shop")
-        gundealer:SetModel("models/player/spike/ogbosshd.mdl ")
+        gundealer = ents.Create("npc_gundealer")
         gundealer:SetPos(gbrp.dealerpos[randint].pos)
         gundealer:SetAngles(gbrp.dealerpos[randint].ang)
         gundealer:Spawn()
+        gundealer:SetModel("models/player/spike/ogbosshd.mdl")
 
         while gbrp.dealerpos[randint].posTaken == true do
             randint = math.random(1,#gbrp.dealerpos)
         end
         gbrp.dealerpos[randint].posTaken = true
         launderer = ents.Create("gbrp_launderer")
-        launderer:SetModel("models/player/spike/robber.mdl")
         launderer:SetPos(gbrp.dealerpos[randint].pos)
         launderer:SetAngles(gbrp.dealerpos[randint].ang)
         launderer:Spawn()
+        launderer:SetModel("models/player/spike/robber.mdl")
 
         local random = gbrp.vanpos[math.random(1,#gbrp.vanpos)]
         cf_export_van = ents.Create("cf_export_van")
@@ -1206,24 +1206,16 @@ if SERVER then
         end
         local randint = math.random(1,#gbrp.dealerpos)
         gbrp.dealerpos[randint].posTaken = true
-        meth1:Remove()
-        meth1 = ents.Create("eml_buyer")
-        meth1:SetModel("models/hazcit_npc.mdl")
         meth1:SetPos(gbrp.dealerpos[randint].pos)
         meth1:SetAngles(gbrp.dealerpos[randint].ang)
-        meth1:Spawn()
         meth1:DropToFloor()
 
         while gbrp.dealerpos[randint].posTaken == true do
             randint = math.random(1,#gbrp.dealerpos)
         end
         gbrp.dealerpos[randint].posTaken = true
-        cocaine1:Remove()
-        cocaine1 = ents.Create("cocaine_drugs_buyer")
-        cocaine1:SetModel("models/humans/gasmaskcit.mdl")
         cocaine1:SetPos(gbrp.dealerpos[randint].pos)
         cocaine1:SetAngles(gbrp.dealerpos[randint].ang)
-        cocaine1:Spawn()
 
         while gbrp.dealerpos[randint].posTaken == true do
             randint = math.random(1,#gbrp.dealerpos)
