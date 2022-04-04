@@ -996,23 +996,19 @@ if SERVER then
         gasstation.niceName = "Station service"
 
         local meth = ents.Create("eml_buyer")
-        meth:SetModel("models/hazcit_npc.mdl")
         meth:SetPos(Vector(2020,6699,-290))
         meth:SetAngles(Angle(0,180,0))
         meth:Spawn()
-        meth:DropToFloor()
 
         local cocaine = ents.Create("cocaine_drugs_buyer")
         cocaine:SetPos(Vector(990,1648,-430))
         cocaine:SetAngles(Angle(0,90,0))
         cocaine:Spawn()
-        cocaine:SetModel("models/humans/gasmaskcit.mdl")
 
         local mayor = ents.Create("gbrp_mayor")
         mayor:SetPos(Vector(2502.454102,5055.062500,65.969872))
         mayor:SetAngles(Angle(2.425522,0.616063,0))
         mayor:Spawn()
-        mayor:SetModel("models/breen.mdl")
 
         local randint = math.random(1,#gbrp.dealerpos)
         gbrp.dealerpos[randint].posTaken = true
@@ -1020,18 +1016,13 @@ if SERVER then
         meth1:SetPos(gbrp.dealerpos[randint].pos)
         meth1:SetAngles(gbrp.dealerpos[randint].ang)
         meth1:Spawn()
-        meth1:DropToFloor()
-        meth1:SetModel("models/hazcit_npc.mdl")
 
         while gbrp.dealerpos[randint].posTaken == true do
             randint = math.random(1,#gbrp.dealerpos)
         end
         gbrp.dealerpos[randint].posTaken = true
-        cocaine1 = ents.Create("cocaine_drugs_buyer")
         cocaine1:SetPos(gbrp.dealerpos[randint].pos)
         cocaine1:SetAngles(gbrp.dealerpos[randint].ang)
-        cocaine1:Spawn()
-        cocaine1:SetModel("models/humans/gasmaskcit.mdl")
 
         while gbrp.dealerpos[randint].posTaken == true do
             randint = math.random(1,#gbrp.dealerpos)
@@ -1041,7 +1032,6 @@ if SERVER then
         gundealer:SetPos(gbrp.dealerpos[randint].pos)
         gundealer:SetAngles(gbrp.dealerpos[randint].ang)
         gundealer:Spawn()
-        gundealer:SetModel("models/player/spike/ogbosshd.mdl")
 
         while gbrp.dealerpos[randint].posTaken == true do
             randint = math.random(1,#gbrp.dealerpos)
@@ -1051,7 +1041,6 @@ if SERVER then
         launderer:SetPos(gbrp.dealerpos[randint].pos)
         launderer:SetAngles(gbrp.dealerpos[randint].ang)
         launderer:Spawn()
-        launderer:SetModel("models/player/spike/robber.mdl")
 
         local random = gbrp.vanpos[math.random(1,#gbrp.vanpos)]
         cf_export_van = ents.Create("cf_export_van")
@@ -1061,56 +1050,48 @@ if SERVER then
     end
     function gbrp.SpawnHotdogSalesmans()
         local salesman1 = ents.Create("gbrp_hotdogsalesman")
-        salesman1:SetModel("models/kuhnya/barinov_combine.mdl")
         salesman1.hotdogpos = Vector(1985.312012,5540.983398,46.440498)
         salesman1:SetPos(Vector(1953.749268,5490.832520,8.031250))
         salesman1:SetAngles(Angle(0,90,0))
         salesman1:Spawn()
 
         local salesman2 = ents.Create("gbrp_hotdogsalesman")
-        salesman2:SetModel("models/kuhnya/barinov_combine.mdl")
         salesman2.hotdogpos = Vector(3762.856201,5870.750000,46.440498)
         salesman2:SetPos(Vector(3740.848389,5814.738281,8.031242))
         salesman2:SetAngles(Angle(0,90,0))
         salesman2:Spawn()
 
         local salesman3 = ents.Create("gbrp_hotdogsalesman")
-        salesman3:SetModel("models/kuhnya/barinov_combine.mdl")
         salesman3.hotdogpos = Vector(5800.159668,4402.841309,-17.559513)
         salesman3:SetPos(Vector(5840.312500,4459.221191,-55.968750))
         salesman3:SetAngles(Angle(0,-90,0))
         salesman3:Spawn()
 
         local salesman4 = ents.Create("gbrp_hotdogsalesman")
-        salesman4:SetModel("models/kuhnya/barinov_combine.mdl")
         salesman4.hotdogpos = Vector(-6306.340332,2667.020508,-7)
         salesman4:SetPos(Vector(-6298.107910,2717.878174,-40))
         salesman4:SetAngles(Angle(0,-90,0))
         salesman4:Spawn()
 
         local salesman5 = ents.Create("gbrp_hotdogsalesman")
-        salesman5:SetModel("models/kuhnya/barinov_combine.mdl")
         salesman5.hotdogpos = Vector(5211.087402,8753.347656,166.440491)
         salesman5:SetPos(Vector(5186.979492,8707.676758,128))
         salesman5:SetAngles(Angle(0,90,0))
         salesman5:Spawn()
 
         local salesman6 = ents.Create("gbrp_hotdogsalesman")
-        salesman6:SetModel("models/kuhnya/barinov_combine.mdl")
         salesman6.hotdogpos = Vector(6286.805664,888.787598,-65.55950)
         salesman6:SetPos(Vector(6341.223145,865.494080,-103))
         salesman6:SetAngles(Angle(0,180,0))
         salesman6:Spawn()
 
         local salesman7 = ents.Create("gbrp_hotdogsalesman")
-        salesman7:SetModel("models/kuhnya/barinov_combine.mdl")
         salesman7.hotdogpos = Vector(1560.791504,340.471008,-65.559509)
         salesman7:SetPos(Vector(1601,323,-104))
         salesman7:SetAngles(Angle(0,180,0))
         salesman7:Spawn()
 
         local salesman8 = ents.Create("gbrp_hotdogsalesman")
-        salesman8:SetModel("models/kuhnya/barinov_combine.mdl")
         salesman8.hotdogpos = Vector(-2793.504395,11675.882813,166.44)
         salesman8:SetPos(Vector(-2749,11658,130))
         salesman8:SetAngles(Angle(0,180,0))
