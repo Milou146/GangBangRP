@@ -11,6 +11,7 @@ local ft = CurTime()
 local laundered
 
 function ENT:Initialize()
+    self:SetModel("models/player/spike/robber.mdl")
     self:SetHullType(HULL_HUMAN)
     self:SetHullSizeNormal()
     self:SetNPCState(NPC_STATE_SCRIPT)

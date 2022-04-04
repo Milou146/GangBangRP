@@ -5,6 +5,7 @@ include("shared.lua")
 
 
 function ENT:Initialize( )
+	self:SetModel("models/player/spike/ogbosshd.mdl")
 	self:SetHullType( HULL_HUMAN )
 	self:SetHullSizeNormal( )
 	self:SetNPCState( NPC_STATE_SCRIPT )

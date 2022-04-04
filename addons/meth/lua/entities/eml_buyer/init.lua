@@ -76,7 +76,7 @@ end
 concommand.Add("methbuyer_remove", removeMethPos)
 
 function ENT:Initialize()
-    self:SetModel("models/Humans/Group03/Female_06.mdl")
+    self:SetModel("models/hazcit_npc.mdl")
     self:SetHullType(HULL_HUMAN)
     self:SetHullSizeNormal()
     self:SetNPCState(NPC_STATE_SCRIPT)
@@ -91,6 +91,7 @@ function ENT:Initialize()
         buyerText:SetParent(self)
         buyerText:Spawn()
     end
+    self:DropToFloor()
 end
 
 function ENT:AcceptInput(name, activator, caller)

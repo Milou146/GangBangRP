@@ -28,6 +28,7 @@ hook.Add("PlayerSpawn","GBRP:PlayerSpawn",function(ply)
     ply:SetNWInt("methItemsCount",0)
     ply:SetNWInt("cocaineItemsCount",0)
     ply:SetNWInt("cigaretteItemsCount",0)
+    ply.AFKDemote = CurTime() + GAMEMODE.Config.afkdemotetime
 end)
 hook.Add("PlayerDeath","GBRP:PlayerDeath",function(ply)
     if ply:IsGangLeader() then
@@ -38,6 +39,7 @@ hook.Add("PlayerInitialSpawn","GBRP:DoorsInitCS",function(ply)
     timer.Simple(4, function()
         gbrp.SendDoorsData(ply)
     end)
+    ply.AFKDemote = math.huge
 end)
 hook.Add("PreCleanupMap", "GBRP::PreCleanupMap", function()
     gbrp.SaveDoors()
@@ -116,5 +118,10 @@ end)
 hook.Add("PlayerShouldTakeDamage","GBRP::antiLeaderKill",function(ply,attacker)
     if ply:IsGangLeader() and attacker:IsPlayer() and attacker:GetGang() == ply:GetGang() then
         return false
+    end
+end)
+hook.Add("PlayerNoClip","GBRP::PlayerNoClip",function(ply,desiredState)
+    if ply:IsAdmin() then
+        return true
     end
 end)

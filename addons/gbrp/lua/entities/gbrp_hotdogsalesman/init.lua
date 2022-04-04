@@ -5,6 +5,7 @@ include("shared.lua")
 ENT.hotdogpos = Vector(1985.312012,5540.983398,46.440498)
 
 function ENT:Initialize()
+    self:SetModel("models/kuhnya/barinov_combine.mdl")
     self:SetHullType(HULL_HUMAN)
     self:SetHullSizeNormal()
     self:SetNPCState(NPC_STATE_SCRIPT)
