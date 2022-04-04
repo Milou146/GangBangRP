@@ -10,7 +10,7 @@ ENT.launderingRatio = 0.5
 ENT.robbery = {
     lt = 0,
     time = 300, --time needed to completely rob the shop
-    radius = 330,
+    radius = 400,
     delay = 10
 }
 ENT.minimumOperatingCost = 1000 -- the minimum amount the gang pay everytime

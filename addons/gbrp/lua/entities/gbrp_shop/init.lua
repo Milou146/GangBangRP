@@ -105,7 +105,7 @@ function ENT:Think()
         for _,receiver in pairs(receivers) do
             receiver:addMoney(reward)
         end
-        if table.IsEmpty(receivers) then
+        if table.IsEmpty(receivers) then --stop thje robbery if nobody is inside the radius
             self:StopRobbery()
         end
         self:SetBalance(self:GetBalance() - self.robbery.startingBalance / self.robbery.time)

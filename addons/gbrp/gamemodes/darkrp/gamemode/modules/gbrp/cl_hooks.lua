@@ -269,3 +269,9 @@ end)
 hook.Add("HUDDrawDoorData","GBRP::HUDDrawDoorData",function()
     return true
 end)
+hook.Add("SpawnMenuOpen","GBRP::SpawnMenuOpen",function()
+    local teamid = LocalPlayer():Team()
+    if teamid ~= TEAM_YAKUZA2 and teamid ~= TEAM_MAFIA2 and teamid ~= TEAM_GANGSTER2 and not LocalPlayer():IsAdmin() then
+        return false
+    end
+end)
