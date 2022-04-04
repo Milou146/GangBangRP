@@ -1021,8 +1021,10 @@ if SERVER then
             randint = math.random(1,#gbrp.dealerpos)
         end
         gbrp.dealerpos[randint].posTaken = true
+        cocaine1 = ents.Create("cocaine_drugs_buyer")
         cocaine1:SetPos(gbrp.dealerpos[randint].pos)
         cocaine1:SetAngles(gbrp.dealerpos[randint].ang)
+        cocaine1:Spawn()
 
         while gbrp.dealerpos[randint].posTaken == true do
             randint = math.random(1,#gbrp.dealerpos)
