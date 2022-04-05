@@ -406,7 +406,7 @@ DarkRP.createEntity("Liquid Iodine", {
 DarkRP.createEntity("Gazinière", {
     ent = "cocaine_stove",
     model = "models/craphead_scripts/the_cocaine_factory/stove/gas_stove.mdl",
-    price = 1,
+    price = 300,
     max = 1,
     cmd = "buygazi",
     category = "COCAINE",
@@ -440,7 +440,7 @@ DarkRP.createEntity("Gazinière", {
 DarkRP.createEntity("Gaz", {
     ent = "cocaine_gas",
     model = "models/craphead_scripts/the_cocaine_factory/utility/gas_tank.mdl",
-    price = 1,
+    price = 50,
     max = 2,
     cmd = "buygaz",
     category = "COCAINE",
@@ -474,7 +474,7 @@ DarkRP.createEntity("Gaz", {
 DarkRP.createEntity("Plaque de cuisson", {
     ent = "cocaine_cooking_plate",
     model = "models/craphead_scripts/the_cocaine_factory/utility/stove_upgrade.mdl",
-    price = 1,
+    price = 25,
     max = 4,
     cmd = "buypla",
     category = "COCAINE",
@@ -508,7 +508,7 @@ DarkRP.createEntity("Plaque de cuisson", {
 DarkRP.createEntity("Casserole", {
     ent = "cocaine_cooking_pot",
     model = "models/craphead_scripts/the_cocaine_factory/utility/pot.mdl",
-    price = 1,
+    price = 20,
     max = 4,
     cmd = "buycas",
     category = "COCAINE",
@@ -542,7 +542,7 @@ DarkRP.createEntity("Casserole", {
 DarkRP.createEntity("Bicarbonate", {
     ent = "cocaine_baking_soda",
     model = "models/craphead_scripts/the_cocaine_factory/utility/soda.mdl",
-    price = 1,
+    price = 3,
     max = 5,
     cmd = "buybic",
     category = "COCAINE",
@@ -576,7 +576,7 @@ DarkRP.createEntity("Bicarbonate", {
 DarkRP.createEntity("Eau", {
     ent = "cocaine_water",
     model = "models/craphead_scripts/the_cocaine_factory/utility/water.mdl",
-    price = 1,
+    price = 15,
     max = 5,
     cmd = "buyeau",
     category = "COCAINE",
@@ -610,7 +610,7 @@ DarkRP.createEntity("Eau", {
 DarkRP.createEntity("Extracteur", {
     ent = "cocaine_extractor",
     model = "models/craphead_scripts/the_cocaine_factory/extractor/extractor.mdl",
-    price = 1,
+    price = 425,
     max = 1,
     cmd = "buyext",
     category = "COCAINE",
@@ -644,7 +644,7 @@ DarkRP.createEntity("Extracteur", {
 DarkRP.createEntity("Feuilles", {
     ent = "cocaine_leaves",
     model = "models/craphead_scripts/the_cocaine_factory/utility/leaves.mdl",
-    price = 1,
+    price = 40,
     max = 5,
     cmd = "buyfeu",
     category = "COCAINE",
@@ -678,7 +678,7 @@ DarkRP.createEntity("Feuilles", {
 DarkRP.createEntity("Seau", {
     ent = "cocaine_bucket",
     model = "models/craphead_scripts/the_cocaine_factory/utility/bucket.mdl",
-    price = 1,
+    price = 5,
     max = 1,
     cmd = "buysea",
     category = "COCAINE",
@@ -712,7 +712,7 @@ DarkRP.createEntity("Seau", {
 DarkRP.createEntity("Déshydrateur", {
     ent = "cocaine_drying_rack",
     model = "models/craphead_scripts/the_cocaine_factory/drying_rack/drying_rack.mdl",
-    price = 1,
+    price = 500,
     max = 1,
     cmd = "buydes",
     category = "COCAINE",
@@ -746,7 +746,7 @@ DarkRP.createEntity("Déshydrateur", {
 DarkRP.createEntity("Batterie", {
     ent = "cocaine_battery",
     model = "models/craphead_scripts/the_cocaine_factory/utility/battery.mdl",
-    price = 1,
+    price = 100,
     max = 2,
     cmd = "buybat",
     category = "COCAINE",
@@ -780,7 +780,7 @@ DarkRP.createEntity("Batterie", {
 DarkRP.createEntity("Boîte", {
     ent = "cocaine_box",
     model = "models/craphead_scripts/the_cocaine_factory/utility/cocaine_box.mdl",
-    price = 1,
+    price = 10,
     max = 1,
     cmd = "buyboi",
     category = "COCAINE",

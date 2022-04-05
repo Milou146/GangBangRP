@@ -43,8 +43,8 @@ TCF.Config.NPCDisplayDescription = "Sell me your cocaine packs." -- The descript
 TCF.Config.SellDistance = 15000 -- How far away can the NPC detect your drug holder.
 TCF.Config.RandomPayoutInterval = 300 -- How many seconds before the randomized payout is changed again. It randomizes the settings below.
 
-TCF.Config.PayPerPackMin = 1000 -- How much should each cocaine pack be worth? Minimum value (without any donator bonuses)
-TCF.Config.PayPerPackMax = 1500 -- How much should each cocaine pack be worth? Maximum value (without any donator bonuses)
+TCF.Config.PayPerPackMin = 65000 -- How much should each cocaine pack be worth? Minimum value (without any donator bonuses)
+TCF.Config.PayPerPackMax = 70000 -- How much should each cocaine pack be worth? Maximum value (without any donator bonuses)
 
 TCF.Config.DisplayUIDistance = 300000 -- How far away from the drug dealer will the over-heads display show up? [Default = 300000]
 
@@ -128,11 +128,12 @@ TCF.Config.CookingPlateHealth = 50 -- The amount of health the cooking plate ent
 TCF.Config.EnableDonatorBonus = true -- If this feature should be enabled or not (WORKS ONLY WITH ULX GROUPS).
 
 TCF.Config.DonatorBonuses = {
-	{ ULXGroup = "vip", Bonus = 1.25 },
-	{ ULXGroup = "gold_member", Bonus = 1.50 },
-	{ ULXGroup = "admin", Bonus = 1.60 },
-	{ ULXGroup = "superadmin", Bonus = 1.60 },
-	{ ULXGroup = "owner", Bonus = 2 },
+	{ ULXGroup = "VIP", Bonus = 1.25 },
+	{ ULXGroup = "VIP+", Bonus = 1.50 },
+	{ ULXGroup = "moderateur_test_vip", Bonus = 1.25 },
+	{ ULXGroup = "moderateur_test_vip+", Bonus = 1.50 },
+	{ ULXGroup = "moderateur_vip", Bonus = 2 },
+	{ ULXGroup = "moderateur_vip+", Bonus = 1.50 },
 }
 
 -- DarkRP Fire System ( https://www.gmodstore.com/market/view/302 )
