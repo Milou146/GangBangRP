@@ -69,7 +69,7 @@ EML_Salt_Color = Color(133, 202, 219, 255);
 EML_Pathos_Color = Color(90, 255, 0, 220);
 
 -- Цена мета за один кристал (1500/lbs)
-EML_Meth_ValueModifier = 300;
+EML_Meth_ValueModifier = 2007;
 -- Meth addicted person (I don't like NPCs at all).
 EML_Meth_UseSalesman = true;
 -- Подать игрока в розыск если он продал мет.
@@ -116,7 +116,7 @@ EML_Jar_DestroyEmpty = true;
 
 
 -- Default gas amount in gas canister.
-EML_Gas_Amount = 2500;
+EML_Gas_Amount = 625;
 -- 0 - Can't be exploded/destroyed; 1 - Can be destroyed without explosion; 2 - Explodes instantly.
 EML_Gas_ExplosionType = 1;
 -- Removes when out of gas.

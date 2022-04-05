@@ -75,7 +75,7 @@ DarkRP.createEntity("Drone", {
 DarkRP.createEntity("Gas", {
     ent = "eml_gas",
     model = "models/props_c17/canister01a.mdl",
-    price = 1,
+    price = 60,
     max = 2,
     cmd = "buygas",
     category = "METHAMPHETAMINE",
@@ -108,7 +108,7 @@ DarkRP.createEntity("Gas", {
 DarkRP.createEntity("Four", {
     ent = "eml_stove",
     model = "models/props_c17/furnitureStove001a.mdl",
-    price = 1,
+    price = 400,
     max = 1,
     cmd = "buyfour",
     category = "METHAMPHETAMINE",
@@ -141,7 +141,7 @@ DarkRP.createEntity("Four", {
 DarkRP.createEntity("Pot phosphore", {
     ent = "eml_pot",
     model = "models/props_c17/metalPot001a.mdl",
-    price = 1,
+    price = 25,
     max = 2,
     cmd = "buyred",
     category = "METHAMPHETAMINE",
@@ -174,7 +174,7 @@ DarkRP.createEntity("Pot phosphore", {
 DarkRP.createEntity("Pot meth", {
     ent = "eml_spot",
     model = "models/props_c17/metalPot001a.mdl",
-    price = 1,
+    price = 25,
     max = 2,
     cmd = "buymeth",
     category = "METHAMPHETAMINE",
@@ -207,7 +207,7 @@ DarkRP.createEntity("Pot meth", {
 DarkRP.createEntity("Ionid Jar", {
     ent = "eml_jar",
     model = "models/props_junk/plasticbucket001a.mdl",
-    price = 1,
+    price = 30,
     max = 1,
     cmd = "buyion",
     category = "METHAMPHETAMINE",
@@ -240,7 +240,7 @@ DarkRP.createEntity("Ionid Jar", {
 DarkRP.createEntity("Muriatic Acid", {
     ent = "eml_macid",
     model = "models/props_junk/garbage_plasticbottle001a.mdl",
-    price = 1,
+    price = 20,
     max = 10,
     cmd = "buymuria",
     category = "METHAMPHETAMINE",
@@ -273,7 +273,7 @@ DarkRP.createEntity("Muriatic Acid", {
 DarkRP.createEntity("Sulfur", {
     ent = "eml_sulfur",
     model = "models/props_junk/garbage_glassbottle001a.mdl",
-    price = 1,
+    price = 10,
     max = 10,
     cmd = "buysulf",
     category = "METHAMPHETAMINE",
@@ -339,7 +339,7 @@ DarkRP.createEntity("Water", {
 DarkRP.createEntity("Salt", {
     ent = "eml_salt",
     model = "models/props_junk/garbage_milkcarton002a.mdl",
-    price = 1,
+    price = 5,
     max = 8,
     cmd = "buysal",
     category = "METHAMPHETAMINE",
@@ -372,7 +372,7 @@ DarkRP.createEntity("Salt", {
 DarkRP.createEntity("Liquid Iodine", {
     ent = "eml_iodine",
     model = "models/props_lab/jar01b.mdl",
-    price = 1,
+    price = 15,
     max = 10,
     cmd = "buyliq",
     category = "METHAMPHETAMINE",
