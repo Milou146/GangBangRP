@@ -1,7 +1,7 @@
 local CFG = {}
 
 -- Language used by the addon
-CFG.Language = "en"
+CFG.Language = "fr"
 
 -- are all the jobs defined as Civil Protection in your darkrp config police jobs in the addon
 CFG.IsCPPoliceJobs = true
