@@ -815,7 +815,7 @@ DarkRP.createEntity("Boîte", {
 DarkRP.createEntity("AUTO-CIG 2000", {
     ent = "cf_cigarette_machine",
     model = "models/cigarette_factory/cf_machine.mdl",
-    price = 1,
+    price = 1000,
     max = 2,
     cmd = "buyauto",
     category = "CIGARETTE",
@@ -849,7 +849,7 @@ DarkRP.createEntity("AUTO-CIG 2000", {
 DarkRP.createEntity("Tabac", {
     ent = "cf_tobacco_pack",
     model = "models/cigarette_factory/cf_tobacco_pack.mdl",
-    price = 1,
+    price = 100,
     max = 5,
     cmd = "buytab",
     category = "CIGARETTE",
@@ -883,7 +883,7 @@ DarkRP.createEntity("Tabac", {
 DarkRP.createEntity("Feuilles blanches", {
     ent = "cf_roll_paper",
     model = "models/cigarette_factory/cf_rollpaper.mdl",
-    price = 1,
+    price = 15,
     max = 3,
     cmd = "buypap",
     category = "CIGARETTE",
@@ -917,8 +917,8 @@ DarkRP.createEntity("Feuilles blanches", {
 DarkRP.createEntity("Carton", {
     ent = "cf_delievery_box",
     model = "models/props_junk/cardboard_box003a.mdl",
-    price = 1,
-    max = 2,
+    price = 5,
+    max = 3,
     cmd = "buycar",
     category = "CIGARETTE",
     allowed = {TEAM_YAKUZA, TEAM_YAKUZA1, TEAM_YAKUZA2, TEAM_YAKUZA3, TEAM_MAFIA, TEAM_MAFIA1, TEAM_MAFIA2, TEAM_MAFIA3, TEAM_GANGSTER, TEAM_GANGSTER1, TEAM_GANGSTER2, TEAM_GANGSTER3},
@@ -951,7 +951,7 @@ DarkRP.createEntity("Carton", {
 DarkRP.createEntity("Amélioration du stockage [VIP]", {
     ent = "cf_storage_upgrade",
     model = "models/thrusters/jetpack.mdl",
-    price = 1,
+    price = 500,
     max = 2,
     cmd = "buysto",
     category = "CIGARETTE",
@@ -986,7 +986,7 @@ DarkRP.createEntity("Amélioration du stockage [VIP]", {
 DarkRP.createEntity("Amélioration de la vitesse", {
     ent = "cf_engine_upgrade",
     model = "models/maxofs2d/thruster_propeller.mdl",
-    price = 1,
+    price = 1000,
     max = 2,
     cmd = "buyvit",
     category = "CIGARETTE",

@@ -18,10 +18,10 @@ cf.maxPaperStorage = 300
 cf.timeToProduce = 5
 
 -- Amount of paper it takes to produce one pack.
-cf.paperProductionCost = 2
+cf.paperProductionCost = 20
 
 -- Amount of tobacco it takes to produce one pack.
-cf.tobaccoProductionCost = 20
+cf.tobaccoProductionCost = 200
 
 -- Time (in seconds) it takes for a cigarette pack to despawn (reduces lag).
 cf.cigAutoDespawnTime = 14
@@ -46,7 +46,7 @@ cf.maxPriceDifference = 6
 cf.maxCigsBox = 64
 
 -- Max amount of packs player can carry.
-cf.maxCigsOnPlayer = 256
+cf.maxCigsOnPlayer = 192
 
 -- Machine maximum health
 cf.maxMachineHealth = 300
