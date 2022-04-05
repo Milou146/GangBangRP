@@ -69,7 +69,7 @@ EML_Salt_Color = Color(133, 202, 219, 255);
 EML_Pathos_Color = Color(90, 255, 0, 220);
 
 -- Цена мета за один кристал (1500/lbs)
-EML_Meth_ValueModifier = 2022;
+EML_Meth_ValueModifier = 3752;
 -- Meth addicted person (I don't like NPCs at all).
 EML_Meth_UseSalesman = true;
 -- Подать игрока в розыск если он продал мет.

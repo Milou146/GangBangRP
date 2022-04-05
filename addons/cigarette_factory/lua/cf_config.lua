@@ -34,7 +34,7 @@ cf.storageUpgradeBoostTobacco = 2000
 cf.storageUpgradeBoostPaper = 200
 
 -- Base amount of $ you'll get for one pack sold.
-cf.sellPrice = 297
+cf.sellPrice = 547
 
 -- How often should the price change (in seconds). 
 cf.priceChangeTime = 60

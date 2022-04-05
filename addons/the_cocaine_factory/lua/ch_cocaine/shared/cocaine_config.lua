@@ -43,8 +43,8 @@ TCF.Config.NPCDisplayDescription = "Sell me your cocaine packs." -- The descript
 TCF.Config.SellDistance = 15000 -- How far away can the NPC detect your drug holder.
 TCF.Config.RandomPayoutInterval = 300 -- How many seconds before the randomized payout is changed again. It randomizes the settings below.
 
-TCF.Config.PayPerPackMin = 65000 -- How much should each cocaine pack be worth? Minimum value (without any donator bonuses)
-TCF.Config.PayPerPackMax = 70000 -- How much should each cocaine pack be worth? Maximum value (without any donator bonuses)
+TCF.Config.PayPerPackMin = 134 735 -- How much should each cocaine pack be worth? Minimum value (without any donator bonuses)
+TCF.Config.PayPerPackMax = 123 520 -- How much should each cocaine pack be worth? Maximum value (without any donator bonuses)
 
 TCF.Config.DisplayUIDistance = 300000 -- How far away from the drug dealer will the over-heads display show up? [Default = 300000]
 
