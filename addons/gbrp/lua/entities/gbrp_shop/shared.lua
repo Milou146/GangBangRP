@@ -3,8 +3,8 @@ ENT.Type = "ai"
 ENT.Spawnable = true
 
 ENT.price = 100000
-ENT.value = 90000
-ENT.launderingAmount = 1000
+ENT.value = 100000
+ENT.launderingAmount = 700
 ENT.launderingTime = 1
 ENT.launderingRatio = 0.5
 ENT.robbery = {

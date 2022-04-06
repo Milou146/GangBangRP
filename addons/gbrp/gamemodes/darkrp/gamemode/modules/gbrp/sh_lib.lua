@@ -19,64 +19,64 @@ gbrp.taxSpeed = 1800
 gbrp.tax = {}
 gbrp.defiscalize = {}
 gbrp.tax.propertyTax = {
-    [1] = 60000,
-    [2] = 85000,
-    [3] = 170000,
-    [4] = 340000,
-    [5] = 680000,
+    [1] = 85000,
+    [2] = 170000,
+    [3] = 340000,
+    [4] = 680000,
+    [5] = 1360000,
     [6] = 1360000,
 }
 gbrp.tax.housingTax = {
-    [1] = 32000,
+    [1] = 50000,
+    [2] = 100000,
+    [3] = 200000,
+    [4] = 400000,
+    [5] = 800000,
+    [6] = 800000,
+}
+gbrp.tax.incomeTax = {
+    [1] = 70000,
+    [2] = 140000,
+    [3] = 280000,
+    [4] = 560000,
+    [5] = 1120000,
+    [6] = 1120000,
+}
+gbrp.tax.VAT = {
+    [1] = 25000,
     [2] = 50000,
     [3] = 100000,
     [4] = 200000,
     [5] = 400000,
-    [6] = 800000,
-}
-gbrp.tax.incomeTax = {
-    [1] = 47000,
-    [2] = 70000,
-    [3] = 140000,
-    [4] = 280000,
-    [5] = 560000,
-    [6] = 1120000,
-}
-gbrp.tax.VAT = {
-    [1] = 15000,
-    [2] = 25000,
-    [3] = 50000,
-    [4] = 100000,
-    [5] = 200000,
     [6] = 400000,
 }
 gbrp.defiscalize.propertyTax = {
-    [0] = 680000,
-    [1] = 340000,
-    [2] = 170000,
-    [3] = 85000,
-    [4] = 60000,
+    [0] = 85000,
+    [1] = 170000,
+    [2] = 340000,
+    [3] = 680000,
+    [4] = 1360000,
 }
 gbrp.defiscalize.housingTax = {
-    [0] = 400000,
-    [1] = 200000,
-    [2] = 100000,
-    [3] = 50000,
-    [4] = 32000,
+    [0] = 50000,
+    [1] = 100000,
+    [2] = 200000,
+    [3] = 400000,
+    [4] = 800000,
 }
 gbrp.defiscalize.incomeTax = {
-    [0] = 560000,
-    [1] = 280000,
-    [2] = 140000,
-    [3] = 70000,
-    [4] = 47000,
+    [0] = 70000,
+    [1] = 140000,
+    [2] = 280000,
+    [3] = 560000,
+    [4] = 1120000,
 }
 gbrp.defiscalize.VAT = {
-    [0] = 200000,
-    [1] = 100000,
-    [2] = 50000,
-    [3] = 25000,
-    [4] = 15000,
+    [0] = 25000,
+    [1] = 50000,
+    [2] = 100000,
+    [3] = 200000,
+    [4] = 400000,
 }
 gbrp.doors = {}
 gbrp.startingFunds = 100000
@@ -937,6 +937,8 @@ if SERVER then
         jewelry:SetPos(Vector(-576.345520,253.843369,-30.031754))
         jewelry:SetAngles(Angle(0,0,0))
         jewelry:SetShopName("jewelrystore")
+		jewelry.price = 850000
+		jewelry.value = 650992
         jewelry:Spawn()
         jewelry.niceName = "Bijouterie"
 
@@ -944,6 +946,9 @@ if SERVER then
         hardwarestore:SetModel("models/1000shells/player/worker/npc/worker_npc.mdl")
         hardwarestore:SetPos(Vector(1298.557983,-1579.187866,-29.987122))
         hardwarestore:SetAngles(Angle(0,90,0))
+		hardwarestore:SetShopName("hardwarestore")
+		hardwarestore.price = 320000
+		hardwarestore.value = 160111
         hardwarestore:Spawn()
         hardwarestore.niceName = "Quincaillerie"
 
@@ -952,6 +957,8 @@ if SERVER then
         gunshop:SetPos(Vector(-1099.968750,10497.299805,202.012878))
         gunshop:SetAngles(Angle(0,-180,0))
         gunshop:SetShopName("gunshop")
+		gunshop.price = 712000
+		gunshop.value = 519194
         gunshop:Spawn()
         gunshop.niceName = "Armurerie"
 
@@ -960,7 +967,9 @@ if SERVER then
         drugstore:SetPos(Vector(-6566.270508,3409.478027,42.012878))
         drugstore:SetAngles(Angle(0,-90,0))
         drugstore:SetShopName("drugstore")
-        drugstore:Spawn()
+		drugstore.price = 300000
+		drugstore.value = 151527
+		drugstore:Spawn()
         drugstore.niceName = "Pharmacie"
 
         local club = ents.Create("gbrp_shop")
@@ -968,6 +977,8 @@ if SERVER then
         club:SetPos(Vector(-7678.176758,5545.522461,66.012878))
         club:SetAngles(Angle(0,90,0))
         club:SetShopName("club")
+		club.price = 625000
+		club.value = 458498
         club:Spawn()
         club.niceName = "Boite de nuit"
 
@@ -976,6 +987,8 @@ if SERVER then
         repairgarage:SetPos(Vector(-2378.206543,6402.301758,90.012878))
         repairgarage:SetAngles(Angle(0,-5.253576,0))
         repairgarage:SetShopName("repairgarage")
+		repairgarage.price = 200000
+		repairgarage.value = 98812
         repairgarage:Spawn()
         repairgarage.niceName = "Garage"
 
@@ -992,6 +1005,8 @@ if SERVER then
         gasstation:SetPos(Vector(-5872,1543,50))
         gasstation:SetAngles(Angle(0,-90,0))
         gasstation:SetShopName("gasstation")
+		gasstation.price = 245000
+		gasstation.value = 135887
         gasstation:Spawn()
         gasstation.niceName = "Station service"
 
