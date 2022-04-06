@@ -28,7 +28,7 @@ if CLIENT then
             GAMEMODE:AddNotify("Vous devez être chef du gang.",1,2)
         elseif not gang:CanAfford(shop.price) then
             GAMEMODE:AddNotify("Solde insuffisant.",1,2)
-        elseif #gang:GetShops() >= 4 then
+        elseif #gang:GetShops() >= 3 then
             GAMEMODE:AddNotify("Votre gang a atteint le nombre maximal de magasins en sa possession.",1,2)
         else
             net.Start("GBRP::buyshop")
