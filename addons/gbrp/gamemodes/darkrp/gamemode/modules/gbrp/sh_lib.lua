@@ -19,155 +19,155 @@ gbrp.taxSpeed = 1800
 gbrp.tax = {}
 gbrp.defiscalize = {}
 gbrp.tax.propertyTax = {
-    [1] = 10000,
-    [2] = 20000,
-    [3] = 30000,
-    [4] = 40000,
-    [5] = 50000,
-    [6] = 50000,
+    [1] = 60000,
+    [2] = 85000,
+    [3] = 170000,
+    [4] = 340000,
+    [5] = 680000,
+    [6] = 1360000,
 }
 gbrp.tax.housingTax = {
-    [1] = 10000,
-    [2] = 20000,
-    [3] = 30000,
-    [4] = 40000,
-    [5] = 50000,
-    [6] = 50000,
+    [1] = 32000,
+    [2] = 50000,
+    [3] = 100000,
+    [4] = 200000,
+    [5] = 400000,
+    [6] = 800000,
 }
 gbrp.tax.incomeTax = {
-    [1] = 10000,
-    [2] = 20000,
-    [3] = 30000,
-    [4] = 40000,
-    [5] = 50000,
-    [6] = 50000,
+    [1] = 47000,
+    [2] = 70000,
+    [3] = 140000,
+    [4] = 280000,
+    [5] = 560000,
+    [6] = 1120000,
 }
 gbrp.tax.VAT = {
-    [1] = 10000,
-    [2] = 20000,
-    [3] = 30000,
-    [4] = 40000,
-    [5] = 50000,
-    [6] = 50000,
+    [1] = 15000,
+    [2] = 25000,
+    [3] = 50000,
+    [4] = 100000,
+    [5] = 200000,
+    [6] = 400000,
 }
 gbrp.defiscalize.propertyTax = {
-    [0] = 50000,
-    [1] = 40000,
-    [2] = 30000,
-    [3] = 20000,
-    [4] = 10000,
+    [0] = 680000,
+    [1] = 340000,
+    [2] = 170000,
+    [3] = 85000,
+    [4] = 60000,
 }
 gbrp.defiscalize.housingTax = {
-    [0] = 50000,
-    [1] = 40000,
-    [2] = 30000,
-    [3] = 20000,
-    [4] = 10000,
+    [0] = 400000,
+    [1] = 200000,
+    [2] = 100000,
+    [3] = 50000,
+    [4] = 32000,
 }
 gbrp.defiscalize.incomeTax = {
-    [0] = 50000,
-    [1] = 40000,
-    [2] = 30000,
-    [3] = 20000,
-    [4] = 10000,
+    [0] = 560000,
+    [1] = 280000,
+    [2] = 140000,
+    [3] = 70000,
+    [4] = 47000,
 }
 gbrp.defiscalize.VAT = {
-    [0] = 50000,
-    [1] = 40000,
-    [2] = 30000,
-    [3] = 20000,
-    [4] = 10000,
+    [0] = 200000,
+    [1] = 100000,
+    [2] = 50000,
+    [3] = 25000,
+    [4] = 15000,
 }
 gbrp.doors = {}
 gbrp.startingFunds = 100000
 gbrp.doorgroups = {
-    ["1 Mapple Rd"] = {doors = {2237,2236,2240,2243,2244,2246},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "1 Mapple Rd",typ = "house"}};
-    ["2 Mapple Rd"] = {doors = {2261,2245,2264,2265,2263,2262},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "2 Mapple Rd",typ = "house"}};
-    ["3 Mapple Rd"] = {doors = {2268,2271,2272,2270,2269,2267},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "3 Mapple Rd",typ = "house"}};
-    ["4 Mapple Rd"] = {doors = {2238,2277,2278,4875,2276,2274},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "4 Mapple Rd",typ = "house"}};
-    ["5 Mapple Rd"] = {doors = {2313,2318,2319,2317,2316,2314},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "5 Mapple Rd",typ = "house"}};
-    ["6 Mapple Rd"] = {doors = {2414,2409,4876,4873,2410,2239},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "6 Mapple Rd",typ = "house"}};
-    ["7 Mapple Rd"] = {doors = {2286,2288,2291,2290,2289,2287},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "7 Mapple Rd",typ = "house"}};
-    ["8 Mapple Rd"] = {doors = {2534,2304,2307,2306,2305,2287},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "8 Mapple Rd",typ = "house"}};
-    ["9 Mapple Rd"] = {doors = {2509,2417,4874,4877,2416,2415},locked = true,attributes = {owner = "gang",buyable = true,price = 10000,value = 8000,doorgroup = "9 Mapple Rd",typ = "house"}};
-    ["gunshop"] = {doors = {2608,2610,2609},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "armory",typ = "shop"}};
-    ["bar"] = {doors = {2712,2742,2779,2771,2744},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "bar",typ = "shop"}};
+    ["1 Mapple Rd"] = {doors = {2237,2236,2240,2243,2244,2246},locked = true,attributes = {owner = nil,buyable = true,price = 80000,value = 64000,doorgroup = "1 Mapple Rd",typ = "house"}};
+    ["2 Mapple Rd"] = {doors = {2261,2245,2264,2265,2263,2262},locked = true,attributes = {owner = nil,buyable = true,price = 95000,value = 76000,doorgroup = "2 Mapple Rd",typ = "house"}};
+    ["3 Mapple Rd"] = {doors = {2268,2271,2272,2270,2269,2267},locked = true,attributes = {owner = nil,buyable = true,price = 105000,value = 84000,doorgroup = "3 Mapple Rd",typ = "house"}};
+    ["4 Mapple Rd"] = {doors = {2238,2277,2278,4875,2276,2274},locked = true,attributes = {owner = nil,buyable = true,price = 100000,value = 80000,doorgroup = "4 Mapple Rd",typ = "house"}};
+    ["5 Mapple Rd"] = {doors = {2313,2318,2319,2317,2316,2314},locked = true,attributes = {owner = nil,buyable = true,price = 125000,value = 100000,doorgroup = "5 Mapple Rd",typ = "house"}};
+    ["6 Mapple Rd"] = {doors = {2414,2409,4876,4873,2410,2239},locked = true,attributes = {owner = nil,buyable = true,price = 115000,value = 92000,doorgroup = "6 Mapple Rd",typ = "house"}};
+    ["7 Mapple Rd"] = {doors = {2286,2288,2291,2290,2289,2287},locked = true,attributes = {owner = nil,buyable = true,price = 120000,value = 96000,doorgroup = "7 Mapple Rd",typ = "house"}};
+    ["8 Mapple Rd"] = {doors = {2534,2304,2307,2306,2305,2287},locked = true,attributes = {owner = nil,buyable = true,price = 110000,value = 88000,doorgroup = "8 Mapple Rd",typ = "house"}};
+    ["9 Mapple Rd"] = {doors = {2509,2417,4874,4877,2416,2415},locked = true,attributes = {owner = "gang",buyable = true,price = 100000,value = 80000,doorgroup = "9 Mapple Rd",typ = "house"}};
+    ["gunshop"] = {doors = {2608,2610,2609},locked = false,attributes = {owner = nil,buyable = false,price = 712000,value = 612000,doorgroup = "armory",typ = "shop"}};
+    ["bar"] = {doors = {2712,2742,2779,2771,2744},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 100000,doorgroup = "bar",typ = "shop"}};
     ["NYPD open"] = {doors = {2791,2790},locked = false,attributes = {owner = "NYPD",buyable = false,price = 10000,value = 8000,doorgroup = "NYPD open",typ = "NYPD"}};
     ["NYPD closed"] = {doors = {2792,2793,2811,4200,2806,2808,2807,2875,2796,2797,2846,2847,2845,2849,2844,2848,2824,2822,2819,2812,2798,2917,2918,2916,2915,2801,2853,2802,2803,2809,2810},locked = true,attributes = {owner = "NYPD",buyable = false,price = 10000,value = 8000,doorgroup = "NYPD closed",typ = "NYPD"}};
-    ["Caserne des pompiers"] = {doors = {2214,2227,2226,2213},locked = true,attributes = {owner = "NYPD",buyable = false,price = 10000,value = 8000,doorgroup = "Caserne des pompiers",typ = "NYPD"}};
-    ["1 Haviture Way"] = {doors = {2002,2001},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "1 Haviture Way",typ = "hangar"}};
-    ["1 Grand Way"] = {doors = {3569,3574},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "1 Grand Way",typ = "appartment"}};
-    ["2 Grand Way"] = {doors = {3600,3577},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "2 Grand Way",typ = "appartment"}};
-    ["3 Grand Way"] = {doors = {3601,3583},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "3 Grand Way",typ = "appartment"}};
-    ["4 Grand Way"] = {doors = {3602,3581},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "4 Grand Way",typ = "appartment"}};
-    ["5 Grand Way"] = {doors = {3603,3560},locked = true,attributes = {owner = "yakuzas",buyable = true,price = 10000,value = 8000,doorgroup = "5 Grand Way",typ = "appartment"}};
-    ["6 Grand Way"] = {doors = {3604,3565},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "6 Grand Way",typ = "appartment"}};
-    ["1 River Rd"] = {doors = {2033},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "1 River Rd",typ = "garage"}};
-    ["2 River Rd"] = {doors = {2034},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "2 River Rd",typ = "garage"}};
-    ["3 River Rd"] = {doors = {2030},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "3 River Rd",typ = "garage"}};
-    ["4 River Rd"] = {doors = {2000},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "4 River Rd",typ = "garage"}};
-    ["5 River Rd"] = {doors = {2032},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "5 River Rd",typ = "garage"}};
-    ["6 River Rd"] = {doors = {2031},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "6 River Rd",typ = "garage"}};
-    ["7 River Rd"] = {doors = {2035},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "7 River Rd",typ = "garage"}};
-    ["8 River Rd"] = {doors = {2036},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "8 River Rd",typ = "garage"}};
+    ["Caserne des pompiers"] = {doors = {2214,2227,2226,2213},locked = true,attributes = {owner = "NYPD",buyable = false,price = 1,value = 1,doorgroup = "Caserne des pompiers",typ = "NYPD"}};
+    ["1 Haviture Way"] = {doors = {2002,2001},locked = true,attributes = {owner = nil,buyable = true,price = 50000,value = 40000,doorgroup = "1 Haviture Way",typ = "hangar"}};
+    ["1 Grand Way"] = {doors = {3569,3574},locked = true,attributes = {owner = nil,buyable = true,price = 60000,value = 40000,doorgroup = "1 Grand Way",typ = "appartment"}};
+    ["2 Grand Way"] = {doors = {3600,3577},locked = true,attributes = {owner = nil,buyable = true,price = 65000,value = 52000,doorgroup = "2 Grand Way",typ = "appartment"}};
+    ["3 Grand Way"] = {doors = {3601,3583},locked = true,attributes = {owner = nil,buyable = true,price = 67500,value = 54000,doorgroup = "3 Grand Way",typ = "appartment"}};
+    ["4 Grand Way"] = {doors = {3602,3581},locked = true,attributes = {owner = nil,buyable = true,price = 72500,value = 58000,doorgroup = "4 Grand Way",typ = "appartment"}};
+    ["5 Grand Way"] = {doors = {3603,3560},locked = true,attributes = {owner = "yakuzas",buyable = true,price = 77500,value = 62000,doorgroup = "5 Grand Way",typ = "appartment"}};
+    ["6 Grand Way"] = {doors = {3604,3565},locked = true,attributes = {owner = nil,buyable = true,price = 80000,value = 64000,doorgroup = "6 Grand Way",typ = "appartment"}};
+    ["1 River Rd"] = {doors = {2033},locked = true,attributes = {owner = nil,buyable = true,price = 15000,value = 12000,doorgroup = "1 River Rd",typ = "garage"}};
+    ["2 River Rd"] = {doors = {2034},locked = true,attributes = {owner = nil,buyable = true,price = 15000,value = 12000,doorgroup = "2 River Rd",typ = "garage"}};
+    ["3 River Rd"] = {doors = {2030},locked = true,attributes = {owner = nil,buyable = true,price = 15000,value = 12000,doorgroup = "3 River Rd",typ = "garage"}};
+    ["4 River Rd"] = {doors = {2000},locked = true,attributes = {owner = nil,buyable = true,price = 15000,value = 12000,doorgroup = "4 River Rd",typ = "garage"}};
+    ["5 River Rd"] = {doors = {2032},locked = true,attributes = {owner = nil,buyable = true,price = 15000,value = 12000,doorgroup = "5 River Rd",typ = "garage"}};
+    ["6 River Rd"] = {doors = {2031},locked = true,attributes = {owner = nil,buyable = true,price = 15000,value = 12000,doorgroup = "6 River Rd",typ = "garage"}};
+    ["7 River Rd"] = {doors = {2035},locked = true,attributes = {owner = nil,buyable = true,price = 15000,value = 12000,doorgroup = "7 River Rd",typ = "garage"}};
+    ["8 River Rd"] = {doors = {2036},locked = true,attributes = {owner = nil,buyable = true,price = 15000,value = 12000,doorgroup = "8 River Rd",typ = "garage"}};
     ["NYPD Hangar"] = {doors = {2018,2008,2007,2555,2302,2301,2019 },locked = true,attributes = {owner = "NYPD",buyable = false,price = 10000,value = 8000,doorgroup = "NYPD Hangar",typ = "NYPD"}};
-    ["10 River Rd"] = {doors = {2005,2004,2220,2221},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "10 River Rd",typ = "hangar"}};
-    ["11 River Rd"] = {doors = {2021},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "11 River Rd",typ = "house"}};
-    ["1 Any Way"] = {doors = {3852,3867},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "1 Any Way",typ = "appartment"}};
-    ["2 Any Way"] = {doors = {3849,3861},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "2 Any Way",typ = "appartment"}};
-    ["3 Any Way"] = {doors = {3848,3859},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "3 Any Way",typ = "appartment"}};
-    ["4 Any Way"] = {doors = {3840,3844},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "4 Any Way",typ = "appartment"}};
-    ["5 Any Way"] = {doors = {3845,2341},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "5 Any Way",typ = "appartment"}};
-    ["6 Any Way"] = {doors = {3851,3865},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "6 Any Way",typ = "appartment"}};
-    ["7 Any Way"] = {doors = {3847,3857},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "7 Any Way",typ = "appartment"}};
-    ["8 Any Way"] = {doors = {3850,3863},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "8 Any Way",typ = "appartment"}};
-    ["9 Any Way"] = {doors = {3839,3842},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "9 Any Way",typ = "appartment"}};
-    ["10 Any Way"] = {doors = {3846,3855},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "10 Any Way",typ = "appartment"}};
-    ["12 Any Way"] = {doors = {2011,2010},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "11 Any Way",typ = "hangar"}};
-    ["13 Any Way"] = {doors = {2052,2013,2051},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "12 Any Way",typ = "hangar"}};
+    ["10 River Rd"] = {doors = {2005,2004,2220,2221},locked = true,attributes = {owner = nil,buyable = true,price = 75000,value = 60000,doorgroup = "10 River Rd",typ = "hangar"}};
+    ["11 River Rd"] = {doors = {2021},locked = true,attributes = {owner = nil,buyable = true,price = 85000,value = 68000,doorgroup = "11 River Rd",typ = "house"}};
+    ["1 Any Way"] = {doors = {3852,3867},locked = true,attributes = {owner = nil,buyable = true,price = 15000,value = 12000,doorgroup = "1 Any Way",typ = "appartment"}};
+    ["2 Any Way"] = {doors = {3849,3861},locked = true,attributes = {owner = nil,buyable = true,price = 15000,value = 12000,doorgroup = "2 Any Way",typ = "appartment"}};
+    ["3 Any Way"] = {doors = {3848,3859},locked = true,attributes = {owner = nil,buyable = true,price = 15000,value = 12000,doorgroup = "3 Any Way",typ = "appartment"}};
+    ["4 Any Way"] = {doors = {3840,3844},locked = true,attributes = {owner = nil,buyable = true,price = 15000,value = 12000,doorgroup = "4 Any Way",typ = "appartment"}};
+    ["5 Any Way"] = {doors = {3845,2341},locked = true,attributes = {owner = nil,buyable = true,price = 15000,value = 12000,doorgroup = "5 Any Way",typ = "appartment"}};
+    ["6 Any Way"] = {doors = {3851,3865},locked = true,attributes = {owner = nil,buyable = true,price = 20000,value = 16000,doorgroup = "6 Any Way",typ = "appartment"}};
+    ["7 Any Way"] = {doors = {3847,3857},locked = true,attributes = {owner = nil,buyable = true,price = 20000,value = 16000,doorgroup = "7 Any Way",typ = "appartment"}};
+    ["8 Any Way"] = {doors = {3850,3863},locked = true,attributes = {owner = nil,buyable = true,price = 20000,value = 16000,doorgroup = "8 Any Way",typ = "appartment"}};
+    ["9 Any Way"] = {doors = {3839,3842},locked = true,attributes = {owner = nil,buyable = true,price = 20000,value = 16000,doorgroup = "9 Any Way",typ = "appartment"}};
+    ["10 Any Way"] = {doors = {3846,3855},locked = true,attributes = {owner = nil,buyable = true,price = 20000,value = 16000,doorgroup = "10 Any Way",typ = "appartment"}};
+    ["12 Any Way"] = {doors = {2011,2010},locked = true,attributes = {owner = nil,buyable = true,price = 45000,value = 36000,doorgroup = "11 Any Way",typ = "hangar"}};
+    ["13 Any Way"] = {doors = {2052,2013,2051},locked = true,attributes = {owner = nil,buyable = true,price = 35000,value = 28000,doorgroup = "12 Any Way",typ = "hangar"}};
     ["hardwarestore"] = {doors = {2049,2571,2570},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "hardwarestore",typ = "shop"}};
     ["gasstation"] = {doors = {2111,2112,2113},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "gasstation",typ = "shop"}};
-    ["14 Any Way"] = {doors = {1290,1291,1288,1289,2231,2299},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "14 Any Way",typ = "hangar"}};
+    ["14 Any Way"] = {doors = {1290,1291,1288,1289,2231,2299},locked = true,attributes = {owner = nil,buyable = true,price = 50000,value = 40000,doorgroup = "14 Any Way",typ = "hangar"}};
     ["club"] = {doors = {2100,2101,3539,3466,3465,3546,3545,3551,3468,3481},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "nightclub",typ = "shop"}};
-    ["1 Pleasant Rd"] = {doors = {2699,2698,2700},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "1 Pleasant Rd",typ = "hangar"}};
-    ["1 South St"] = {doors = {2025,2026,2027,2170},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "1 South St",typ = "hangar"}};
+    ["1 Pleasant Rd"] = {doors = {2699,2698,2700},locked = true,attributes = {owner = nil,buyable = true,price = 62500,value = 50000,doorgroup = "1 Pleasant Rd",typ = "hangar"}};
+    ["1 South St"] = {doors = {2025,2026,2027,2170},locked = true,attributes = {owner = nil,buyable = true,price = 725000,value = 58000,doorgroup = "1 South St",typ = "hangar"}};
     ["bank"] = {doors = {3114,3115},locked = true,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "bank",typ = "shop"}};
-    ["1 Bank St"] = {doors = {2707,2706,2708},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "1 Bank St",typ = "hangar"}};
+    ["1 Bank St"] = {doors = {2707,2706,2708},locked = true,attributes = {owner = nil,buyable = true,price = 67500,value = 54000,doorgroup = "1 Bank St",typ = "hangar"}};
     ["6-1 Crooked Ln"] = {doors = {3258},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "6-1 Crooked Ln",typ = "hugetower"}};
     ["6-2 Crooked Ln"] = {doors = {3257},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "6-2 Crooked Ln",typ = "hugetower"}};
-    ["8-1 Crooked Ln"] = {doors = {3264},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "8-1 Crooked Ln",typ = "hugetower"}};
-    ["8-2 Crooked Ln"] = {doors = {3265},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "8-2 Crooked Ln",typ = "hugetower"}};
-    ["10-1 Crooked Ln"] = {doors = {3268},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "10-1 Crooked Ln",typ = "hugetower"}};
-    ["10-2 Crooked Ln"] = {doors = {3269},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "10-2 Crooked Ln",typ = "hugetower"}};
-    ["12 Crooked Ln"] = {doors = {3298,3305},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "12 Crooked Ln",typ = "hugetower"}};
+    ["8-1 Crooked Ln"] = {doors = {3264},locked = true,attributes = {owner = nil,buyable = true,price = 12500,value = 10000,doorgroup = "8-1 Crooked Ln",typ = "hugetower"}};
+    ["8-2 Crooked Ln"] = {doors = {3265},locked = true,attributes = {owner = nil,buyable = true,price = 12500,value = 10000,doorgroup = "8-2 Crooked Ln",typ = "hugetower"}};
+    ["10-1 Crooked Ln"] = {doors = {3268},locked = true,attributes = {owner = nil,buyable = true,price = 15000,value = 12000,doorgroup = "10-1 Crooked Ln",typ = "hugetower"}};
+    ["10-2 Crooked Ln"] = {doors = {3269},locked = true,attributes = {owner = nil,buyable = true,price = 15000,value = 12000,doorgroup = "10-2 Crooked Ln",typ = "hugetower"}};
+    ["12 Crooked Ln"] = {doors = {3298,3305},locked = true,attributes = {owner = nil,buyable = true,price = 17500,value = 14000,doorgroup = "12 Crooked Ln",typ = "hugetower"}};
     ["jewelrystore"] = {doors = {2050,2195,2059},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "jewelry",typ = "shop"}};
-    ["A Union Sq"] = {doors = {3135,3137,3136},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "A Union Sq",typ = "appartment"}};
-    ["B Union Sq"] = {doors = {3138,3139,3140},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "B Union Sq",typ = "appartment"}};
-    ["C Union Sq"] = {doors = {3132,3133,3134},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "C Union Sq",typ = "appartment"}};
-    ["D Union Sq"] = {doors = {3130,3131,2956},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "D Union Sq",typ = "appartment"}};
-    ["E Union Sq"] = {doors = {3002,3004,3003},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "E Union Sq",typ = "appartment"}};
-    ["F Union Sq"] = {doors = {1358,1359,1360},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "F Union Sq",typ = "appartment"}};
-    ["G Union Sq"] = {doors = {1353,1354,1355},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "G Union Sq",typ = "appartment"}};
-    ["H Union Sq"] = {doors = {1356,2957,1357},locked = true,attributes = {owner = "mafia",buyable = true,price = 10000,value = 8000,doorgroup = "H Union Sq",typ = "appartment"}};
-    ["I Union Sq"] = {doors = {2997,3001,3000},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "I Union Sq",typ = "appartment"}};
-    ["J Union Sq"] = {doors = {1361,1362,1363},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "J Union Sq",typ = "appartment"}};
-    ["K Union Sq"] = {doors = {1364,1366,1365},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "K Union Sq",typ = "appartment"}};
-    ["L Union Sq"] = {doors = {1367,2958,1368},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "L Union Sq",typ = "appartment"}};
-    ["1 New Life St"] = {doors = {1958,2372,2363},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "1 New Life St",typ = "garage"}};
-    ["2 New Life St"] = {doors = {2044,2373,2364},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "2 New Life St",typ = "garage"}};
-    ["3 New Life St"] = {doors = {2046,2376,2055},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "3 New Life St",typ = "garage"}};
+    ["A Union Sq"] = {doors = {3135,3137,3136},locked = true,attributes = {owner = nil,buyable = true,price = 15000,value = 12000,doorgroup = "A Union Sq",typ = "appartment"}};
+    ["B Union Sq"] = {doors = {3138,3139,3140},locked = true,attributes = {owner = nil,buyable = true,price = 15000,value = 12000,doorgroup = "B Union Sq",typ = "appartment"}};
+    ["C Union Sq"] = {doors = {3132,3133,3134},locked = true,attributes = {owner = nil,buyable = true,price = 15000,value = 12000,doorgroup = "C Union Sq",typ = "appartment"}};
+    ["D Union Sq"] = {doors = {3130,3131,2956},locked = true,attributes = {owner = nil,buyable = true,price = 15000,value = 12000,doorgroup = "D Union Sq",typ = "appartment"}};
+    ["E Union Sq"] = {doors = {3002,3004,3003},locked = true,attributes = {owner = nil,buyable = true,price = 20000,value = 16000,doorgroup = "E Union Sq",typ = "appartment"}};
+    ["F Union Sq"] = {doors = {1358,1359,1360},locked = true,attributes = {owner = nil,buyable = true,price = 20000,value = 16000,doorgroup = "F Union Sq",typ = "appartment"}};
+    ["G Union Sq"] = {doors = {1353,1354,1355},locked = true,attributes = {owner = nil,buyable = true,price = 20000,value = 16000,doorgroup = "G Union Sq",typ = "appartment"}};
+    ["H Union Sq"] = {doors = {1356,2957,1357},locked = true,attributes = {owner = "mafia",buyable = true,price = 20000,value = 16000,doorgroup = "H Union Sq",typ = "appartment"}};
+    ["I Union Sq"] = {doors = {2997,3001,3000},locked = true,attributes = {owner = nil,buyable = true,price = 25000,value = 20000,doorgroup = "I Union Sq",typ = "appartment"}};
+    ["J Union Sq"] = {doors = {1361,1362,1363},locked = true,attributes = {owner = nil,buyable = true,price = 25000,value = 20000,doorgroup = "J Union Sq",typ = "appartment"}};
+    ["K Union Sq"] = {doors = {1364,1366,1365},locked = true,attributes = {owner = nil,buyable = true,price = 25000,value = 20000,doorgroup = "K Union Sq",typ = "appartment"}};
+    ["L Union Sq"] = {doors = {1367,2958,1368},locked = true,attributes = {owner = nil,buyable = true,price = 25000,value = 20000,doorgroup = "L Union Sq",typ = "appartment"}};
+    ["1 New Life St"] = {doors = {1958,2372,2363},locked = true,attributes = {owner = nil,buyable = true,price = 30000,value = 24000,doorgroup = "1 New Life St",typ = "garage"}};
+    ["2 New Life St"] = {doors = {2044,2373,2364},locked = true,attributes = {owner = nil,buyable = true,price = 30000,value = 24000,doorgroup = "2 New Life St",typ = "garage"}};
+    ["3 New Life St"] = {doors = {2046,2376,2055},locked = true,attributes = {owner = nil,buyable = true,price = 30000,value = 24000,doorgroup = "3 New Life St",typ = "garage"}};
     ["Mairie open"] = {doors = {3008,3007},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "Mairie open",typ = "garage"}};
     ["Mairie closed"] = {doors = {3018,3019},locked = true,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "Mairie closed",typ = "garage"}};
     ["archivist"] = {doors = {2047,2380,2054},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "archivist",typ = "shop"}};
-    ["1 13th St"] = {doors = {1964,1965,1300},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "1 13th St",typ = "appartment"}};
-    ["2 13th St"] = {doors = {2259,2260,1296},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "2 13th St",typ = "appartment"}};
-    ["3 13th St"] = {doors = {2257,2258,1295},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "3 13th St",typ = "appartment"}};
-    ["4 13th St"] = {doors = {1969,1299,1968},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "4 13th St",typ = "appartment"}};
-    ["5 13th St"] = {doors = {2256,2255,1293},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "5 13th St",typ = "appartment"}};
-    ["6 13th St"] = {doors = {1970,1298,1972},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "6 13th St",typ = "appartment"}};
-    ["7 13th St"] = {doors = {1977,1978,1294},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "7 13th St",typ = "appartment"}};
-    ["8 13th St"] = {doors = {1971,1297,1973},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "8 13th St",typ = "appartment"}};
-    ["9 13th St"] = {doors = {2048,2381,2053},locked = true,attributes = {owner = nil,buyable = true,price = 10000,value = 8000,doorgroup = "1 13th St",typ = "garage"}};
+    ["1 13th St"] = {doors = {1964,1965,1300},locked = true,attributes = {owner = nil,buyable = true,price = 12500,value = 10000,doorgroup = "1 13th St",typ = "appartment"}};
+    ["2 13th St"] = {doors = {2259,2260,1296},locked = true,attributes = {owner = nil,buyable = true,price = 12500,value = 10000,doorgroup = "2 13th St",typ = "appartment"}};
+    ["3 13th St"] = {doors = {2257,2258,1295},locked = true,attributes = {owner = nil,buyable = true,price = 17500,value = 14000,doorgroup = "3 13th St",typ = "appartment"}};
+    ["4 13th St"] = {doors = {1969,1299,1968},locked = true,attributes = {owner = nil,buyable = true,price = 17500,value = 14000,doorgroup = "4 13th St",typ = "appartment"}};
+    ["5 13th St"] = {doors = {2256,2255,1293},locked = true,attributes = {owner = nil,buyable = true,price = 22500,value = 18000,doorgroup = "5 13th St",typ = "appartment"}};
+    ["6 13th St"] = {doors = {1970,1298,1972},locked = true,attributes = {owner = nil,buyable = true,price = 22500,value = 18000,doorgroup = "6 13th St",typ = "appartment"}};
+    ["7 13th St"] = {doors = {1977,1978,1294},locked = true,attributes = {owner = nil,buyable = true,price = 27500,value = 22000,doorgroup = "7 13th St",typ = "appartment"}};
+    ["8 13th St"] = {doors = {1971,1297,1973},locked = true,attributes = {owner = nil,buyable = true,price = 27500,value = 22000,doorgroup = "8 13th St",typ = "appartment"}};
+    ["9 13th St"] = {doors = {2048,2381,2053},locked = true,attributes = {owner = nil,buyable = true,price = 30000,value = 24000,doorgroup = "1 13th St",typ = "garage"}};
     ["repairgarage"] = {doors = {2060,2062,2066,2061,2067,2065},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "garage",typ = "shop"}};
     ["drugstore"] = {doors = {2166,2582,2167},locked = false,attributes = {owner = nil,buyable = false,price = 10000,value = 8000,doorgroup = "drugstore",typ = "shop"}};
 }
