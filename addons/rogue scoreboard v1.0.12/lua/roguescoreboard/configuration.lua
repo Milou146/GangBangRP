@@ -32,7 +32,7 @@ Configuration.AdministrationMod     = "ulx"
 
 -- Allow ALL ranks to view players money and props. If false fill table below.
 Configuration.InformationViewAll    = true
-Configuration.InformationView       = { "Moderator", "admin", "superadmin", "Owner" }
+Configuration.InformationView       = { "moderateur", "moderateur_vip", "moderateur_vip+", "moderateur_test", "moderateur_test_vip", "moderateur_test_vip+", "admin", "superadmin" }
 
 -- Show the online count at the bottom of the scoreboard?
 Configuration.ShowOnlineCount       = true
@@ -165,27 +165,27 @@ Configuration.RankDisplay["Owner"]          = { DisplayName = "Owner", TagName =
 // C O M M A N D  C O N F I G U R A T I O N
 
 -- Who has access to remove players props, this uses FPP system
-Configuration.PropAccess            = { "admin", "superadmin", "Owner" }
+Configuration.PropAccess            = { "admin", "superadmin" }
 
 -- Who can see the administrative buttons
-Configuration.MenuAccess            = { "Moderator", "admin", "superadmin", "Owner" }
+Configuration.MenuAccess            = { "moderateur", "moderateur_vip", "moderateur_vip+", "moderateur_test", "moderateur_test_vip", "moderateur_test_vip+", "admin", "superadmin" }
 
 -- Allow precise control for commands, if true then set the tables below to what ranks have access otherwise Configuration.MenuAccess determines allowed ranks.
 Configuration.SeperateAccess        = false
 
 -- If seperate access is true, configure below.
 -- Who has access to goto
-Configuration.AllowedGoto           = { "Moderator", "admin", "superadmin", "Owner" }
+Configuration.AllowedGoto           = { "moderateur", "moderateur_vip", "moderateur_vip+", "moderateur_test", "moderateur_test_vip", "moderateur_test_vip+", "admin", "superadmin" }
 -- Who has access to bring
-Configuration.AllowedBring          = { "Moderator", "admin", "superadmin", "Owner" }
+Configuration.AllowedBring          = { "moderateur", "moderateur_vip", "moderateur_vip+", "moderateur_test", "moderateur_test_vip", "moderateur_test_vip+", "admin", "superadmin" }
 -- Who has access to spectate
-Configuration.AllowedSpectate       = { "Moderator", "admin", "superadmin", "Owner" }
+Configuration.AllowedSpectate       = { "moderateur", "moderateur_vip", "moderateur_vip+", "moderateur_test", "moderateur_test_vip", "moderateur_test_vip+", "admin", "superadmin" }
 -- Who has access to freeze
-Configuration.AllowedFreeze         = { "Moderator", "admin", "superadmin", "Owner" }
+Configuration.AllowedFreeze         = { "moderateur", "moderateur_vip", "moderateur_vip+", "moderateur_test", "moderateur_test_vip", "moderateur_test_vip+", "admin", "superadmin" }
 -- Who has access to kick
-Configuration.AllowedKick           = { "Moderator", "admin", "superadmin", "Owner" }
+Configuration.AllowedKick           = { "moderateur", "moderateur_vip", "moderateur_vip+", "moderateur_test", "moderateur_test_vip", "moderateur_test_vip+", "admin", "superadmin" }
 -- Who has access to ban
-Configuration.AllowedBan            = { "Moderator", "admin", "superadmin", "Owner" }
+Configuration.AllowedBan            = { "moderateur", "moderateur_vip", "moderateur_vip+", "moderateur_test", "moderateur_test_vip", "moderateur_test_vip+", "admin", "superadmin" }
 
 -- Ban time
 Configuration.CommandBanTime        = 120
@@ -195,9 +195,9 @@ Configuration.CommandBanTime        = 120
 // U N D E R  C O V E R  M O D E
 
 -- Who has access to go incognito?
-Configuration.IncognitoAccess       = { "admin", "superadmin", "Owner" }
+Configuration.IncognitoAccess       = { "admin", "superadmin" }
 -- Who can see who is incognito mode?
-Configuration.IncognitoVision       = { "admin", "superadmin", "Owner" }
+Configuration.IncognitoVision       = { "admin", "superadmin" }
 -- Use the custom icon for profile picture, if false will use players original profile picture
 Configuration.UseCustomIcon         = true
 
@@ -258,7 +258,7 @@ Configuration.Administration["ulx"].send = function(cmdPly)
 end
 
 Configuration.Administration["ulx"].spectate = function(cmdPly)
-    RunConsoleCommand("ulx", "spectate", cmdPly:Nick())
+    RunConsoleCommand("fspectate", cmdPly:Nick())
 end
 
 Configuration.Administration["ulx"].ban = function(cmdPly, time, reason)
@@ -330,7 +330,7 @@ Configuration.Administration["fadmin"].send = function(cmdPly)
 end
 
 Configuration.Administration["fadmin"].spectate = function(cmdPly)
-    RunConsoleCommand("fadmin", "spectate", cmdPly:Nick())
+    RunConsoleCommand("fspectate", cmdPly:Nick())
 end
 
 Configuration.Administration["fadmin"].ban = function(cmdPly, time, reason)
