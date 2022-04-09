@@ -937,8 +937,8 @@ if SERVER then
         jewelry:SetPos(Vector(-576.345520,253.843369,-30.031754))
         jewelry:SetAngles(Angle(0,0,0))
         jewelry:SetShopName("jewelrystore")
-		jewelry.price = 850000
-		jewelry.value = 650992
+        jewelry:SetPrice(850000)
+        jewelry:SetValue(650992)
         jewelry:Spawn()
         jewelry.niceName = "Bijouterie"
 
@@ -946,9 +946,9 @@ if SERVER then
         hardwarestore:SetModel("models/1000shells/player/worker/npc/worker_npc.mdl")
         hardwarestore:SetPos(Vector(1298.557983,-1579.187866,-29.987122))
         hardwarestore:SetAngles(Angle(0,90,0))
-		hardwarestore:SetShopName("hardwarestore")
-		hardwarestore.price = 320000
-		hardwarestore.value = 160111
+        hardwarestore:SetShopName("hardwarestore")
+        hardwarestore:SetPrice(320000)
+        hardwarestore:SetValue(160111)
         hardwarestore:Spawn()
         hardwarestore.niceName = "Quincaillerie"
 
@@ -957,8 +957,8 @@ if SERVER then
         gunshop:SetPos(Vector(-1099.968750,10497.299805,202.012878))
         gunshop:SetAngles(Angle(0,-180,0))
         gunshop:SetShopName("gunshop")
-		gunshop.price = 712000
-		gunshop.value = 519194
+        gunshop:SetPrice(712000)
+        gunshop:SetValue(519194)
         gunshop:Spawn()
         gunshop.niceName = "Armurerie"
 
@@ -967,9 +967,9 @@ if SERVER then
         drugstore:SetPos(Vector(-6566.270508,3409.478027,42.012878))
         drugstore:SetAngles(Angle(0,-90,0))
         drugstore:SetShopName("drugstore")
-		drugstore.price = 300000
-		drugstore.value = 151527
-		drugstore:Spawn()
+        drugstore:SetPrice(300000)
+        drugstore:SetValue(151527)
+        drugstore:Spawn()
         drugstore.niceName = "Pharmacie"
 
         local club = ents.Create("gbrp_shop")
@@ -977,8 +977,8 @@ if SERVER then
         club:SetPos(Vector(-7678.176758,5545.522461,66.012878))
         club:SetAngles(Angle(0,90,0))
         club:SetShopName("club")
-		club.price = 625000
-		club.value = 458498
+        club:SetPrice(625000)
+        club:SetValue(458498)
         club:Spawn()
         club.niceName = "Boite de nuit"
 
@@ -987,8 +987,8 @@ if SERVER then
         repairgarage:SetPos(Vector(-2378.206543,6402.301758,90.012878))
         repairgarage:SetAngles(Angle(0,-5.253576,0))
         repairgarage:SetShopName("repairgarage")
-		repairgarage.price = 200000
-		repairgarage.value = 98812
+        repairgarage:SetPrice(200000)
+        repairgarage:SetValue(98812)
         repairgarage:Spawn()
         repairgarage.niceName = "Garage"
 
@@ -1005,8 +1005,8 @@ if SERVER then
         gasstation:SetPos(Vector(-5872,1543,50))
         gasstation:SetAngles(Angle(0,-90,0))
         gasstation:SetShopName("gasstation")
-		gasstation.price = 245000
-		gasstation.value = 135887
+        gasstation:SetPrice(245000)
+        gasstation:SetValue(135887)
         gasstation:Spawn()
         gasstation.niceName = "Station service"
 
@@ -1331,6 +1331,9 @@ if CLIENT then
     end
     gbrp.FormatXY = function(x,y)
         return gbrp.FormatX(x),gbrp.FormatY(y)
+    end
+    gbrp.FormatXYWH = function(x,y,w,h)
+        return gbrp.FormatX(x),gbrp.FormatY(y),gbrp.FormatX(w),gbrp.FormatY(h)
     end
 end
 gbrp.gangs = {

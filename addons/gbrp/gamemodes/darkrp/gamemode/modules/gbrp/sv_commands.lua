@@ -18,7 +18,7 @@ concommand.Add("setplayerbalance", function(ply,cmd,args)
         local target = DarkRP.findPlayer(args[1])
 
         if IsValid(target) then
-            target:SetNWInt("GBRP::balance", args[2])
+            target:SetNWInt("GBRP::balance", tonumber(args[2]))
             sql.Query("update gbrp set balance = " .. target:GetNWInt("GBRP::balance") .. " where steamid64 = " .. target:SteamID64() .. ";")
         end
     else

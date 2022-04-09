@@ -28,6 +28,7 @@ util.AddNetworkString("GBRP::bankruptMessage") -- server to client
 util.AddNetworkString("GBRP::shopSolvation") -- client to server
 util.AddNetworkString("GBRP::cityhallReception") -- server to client
 util.AddNetworkString("GBRP::changeTax") -- client to server
+util.AddNetworkString("GBRP::hardwarestoreReception") -- server to cient
 
 net.Receive("GBRP::buyproperty",function(len,ply)
     local gang = ply:GetGang()
@@ -98,7 +99,7 @@ net.Receive("GBRP::buyshop", function(len, ply)
     local shop = net.ReadEntity()
     local gang = ply:GetGang()
     shop:SetGang(gang)
-    gang:Pay(shop.price)
+    gang:Pay(shop:GetPrice())
     for k,door in pairs(gbrp.doorgroups[shop:GetShopName()].doors) do
         local ent = ents.GetMapCreatedEntity(door)
         ent:setDoorGroup(gang.name)
@@ -108,7 +109,7 @@ net.Receive("GBRP::sellshop", function(len, ply)
     local shop = net.ReadEntity()
     local gang = shop:GetGang()
     shop:SetGang(nil)
-    gang:Cash(shop.value)
+    gang:Cash(shop:GetValue())
     for k,door in pairs(gbrp.doorgroups[shop:GetShopName()].doors) do
         local ent = ents.GetMapCreatedEntity(door)
         ent:setDoorGroup(nil)
