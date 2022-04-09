@@ -827,6 +827,19 @@ gbrp.promotion = {
         ["superadmin"] = "superadmin",
     }
 }
+gbrp.demotion = {
+    ["user"] = "user",
+    ["VIP"] = "user",
+    ["VIP+"] = "user",
+    ["moderateur"] = "moderateur",
+    ["moderateur_vip"] = "moderateur",
+    ["moderateur_vip+"] = "moderateur",
+    ["moderateur_test"] = "moderateur_test",
+    ["moderateur_test_vip"] = "moderateur_test",
+    ["moderateur_test_vip+"] = "moderateur_test",
+    ["admin"] = "admin",
+    ["superadmin"] = "superadmin"
+}
 function gbrp.formatMoney(n)
     if not n then return "$0" end
 
