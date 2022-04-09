@@ -130,9 +130,9 @@ if( SERVER ) then
 		if( !( IsValid( _p ) && IsValid( _e ) && data && _e.__WCDId && !self.List[ _e.__WCDId ]:GetDisallowCustomization() ) ) then return; end
 
 		local price, data = self:CalculateCustomization( _p, _e, data );
-		if( !( price && data ) || ! _p:canAfford( price ) ) then return; end
+		if( !( price && data ) || ! _p:CanAfford( price ) ) then return; end
 
-		_p:addMoney( -price );
+		_p:Pay( price );
 		_p.__WCDSpecifics[ _e.__WCDId ] = data;
 		_p:WCD_Notify( self:Translate( customizationBought, DarkRP.formatMoney( price ) ) );
 

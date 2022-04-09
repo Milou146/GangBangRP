@@ -91,7 +91,7 @@ end
 function ENT:Think()
 	if( !self.hitched ) then
 		if( self.vehicle && IsValid( self.vehicle ) && self.vehicle:GetPos():DistToSqr( self:GetPos() ) < 35000 ) then
-			if( !self.pumper:canAfford( WCD.Settings.fuelCost ) ) then
+			if( !self.pumper:CanAfford( WCD.Settings.fuelCost ) ) then
 				self.pumper:WCD_Notify( WCD.Lang.various.cantAffordFuel );
 				self:Stop();
 				return;

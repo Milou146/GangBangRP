@@ -137,7 +137,7 @@ function WCD:OpenDesigner( _e )
 			if( a.resetToDefault.clicked || ( !WCD.Settings.fullResetCost || WCD.Settings.fullResetCost < 1 ) ) then
 				a.resetToDefault.clicked = nil;
 
-				if( !LocalPlayer():canAfford( WCD.Settings.fullResetCost ) ) then
+				if( !LocalPlayer():CanAfford( WCD.Settings.fullResetCost ) ) then
 					WCD:Notification( WCD:Translate( lang.cantAfford, DarkRP.formatMoney( WCD.Settings.fullResetCost ) ) );
 					return;
 				end
@@ -685,7 +685,7 @@ function WCD:OpenDesigner( _e )
 		end
 
 		local price, newData = WCD:CalculateCustomization( LocalPlayer(), veh, changes );
-		if( !LocalPlayer():canAfford( price ) ) then
+		if( !LocalPlayer():CanAfford( price ) ) then
 			WCD:Notification( WCD:Translate( lang.cantAfford, DarkRP.formatMoney( price ) ) );
 			return;
 		end

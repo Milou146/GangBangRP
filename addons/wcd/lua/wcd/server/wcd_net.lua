@@ -128,8 +128,8 @@ net.Receive("WCD::BuyDesign", function(_, _p)
     print(veh)
     if (not (IsValid(veh) and veh:GetNWFloat("WCD::Id", -1) ~= -1 and veh.__WCDOwner == _p)) then return end
     local price, newData = WCD:CalculateCustomization(_p, veh, data)
-    if (not _p:canAfford(price)) then return end
-    _p:addMoney(-price)
+    if (not _p:CanAfford(price)) then return end
+    _p:Pay(price)
     local tbl = {}
 
     for i, v in pairs(newData) do
@@ -150,7 +150,7 @@ net.Receive("WCD::FullReset", function(_, _p)
     local veh = _p:GetVehicle()
     if (not (IsValid(veh) and veh:GetNWFloat("WCD::Id", -1) ~= -1 and veh.__WCDOwner == _p)) then return end
     local price = WCD.Settings.fullResetCost
-    if (not _p:canAfford(price)) then return end
+    if (not _p:CanAfford(price)) then return end
     local l = WCD.List[veh:GetNWFloat("WCD::Id", -1)]
     if (not l) then return end
     _p:addMoney(-price)

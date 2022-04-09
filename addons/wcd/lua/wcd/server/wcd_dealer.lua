@@ -91,7 +91,7 @@ function WCD:SpawnVehicle( _p, id, testDriving, customize )
 	end
 
 	local spawnCost = vehicle:GetSpawnCost() or self.Settings.spawnCost;
-	if( spawnCost > 0 && !_p:canAfford( spawnCost ) ) then
+	if( spawnCost > 0 && !_p:CanAfford( spawnCost ) ) then
 		_p:WCD_Notify( self:Translate( self.Lang.various.cantAffordSpawn, DarkRP.formatMoney( spawnCost ) ) );
 		return;
 	end

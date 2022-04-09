@@ -4,7 +4,7 @@ DarkRP.formatMoney = function( x )
 end
 
 local meta = FindMetaTable( "Player" );
-function meta:canAfford( x )
+function meta:CanAfford( x )
 	return self:GetMoney() >= x;
 end
 

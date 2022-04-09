@@ -354,7 +354,7 @@ function WCD:OpenDealer( dealer )
 				end
 
 				self.text = self:GetDefault();
-				if( !LocalPlayer():canAfford( WCD.List[ id ]:GetPrice() ) ) then
+				if( !LocalPlayer():CanAfford( WCD.List[ id ]:GetPrice() ) ) then
 					WCD:Notification( WCD.Lang.dealerActionButtons.noAfford );
 					return;
 				end

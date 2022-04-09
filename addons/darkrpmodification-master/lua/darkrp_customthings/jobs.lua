@@ -13,9 +13,7 @@ TEAM_CITIZEN = DarkRP.createJob("Citoyen", {
     candemote = false,
     category = "CITOYEN",
     PlayerSpawn = function(ply)
-        ply:SetMaxHealth(100)
-        ply:SetHealth(100)
-        ply:SetArmor(0)
+        ply:SetSolid(SOLID_NONE)
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
 })
