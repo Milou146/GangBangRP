@@ -799,6 +799,34 @@ gbrp.vanpos = {
     [2] = {pos = Vector(-12415,10086,314), ang = Angle(0,0,0)},
     [3] = {pos = Vector(5899,-3527,-110), ang = Angle(0,180,0)}
 }
+gbrp.promotion = {
+    ["vip"] = {
+        ["user"] = "VIP",
+        ["VIP"] = "VIP",
+        ["VIP+"] = "VIP+",
+        ["moderateur"] = "moderateur_vip",
+        ["moderateur_vip"] = "moderateur_vip",
+        ["moderateur_vip+"] = "moderateur_vip",
+        ["moderateur_test"] = "moderateur_test_vip",
+        ["moderateur_test_vip"] = "moderateur_test_vip",
+        ["moderateur_test_vip+"] = "moderateur_test_vip",
+        ["admin"] = "admin",
+        ["superadmin"] = "superadmin",
+    },
+    ["vip+"] = {
+        ["user"] = "VIP+",
+        ["VIP"] = "VIP+",
+        ["VIP+"] = "VIP+",
+        ["moderateur"] = "moderateur_vip+",
+        ["moderateur_vip"] = "moderateur_vip+",
+        ["moderateur_vip+"] = "moderateur_vip+",
+        ["moderateur_test"] = "moderateur_test_vip+",
+        ["moderateur_test_vip"] = "moderateur_test_vip+",
+        ["moderateur_test_vip+"] = "moderateur_test_vip+",
+        ["admin"] = "admin",
+        ["superadmin"] = "superadmin",
+    }
+}
 function gbrp.formatMoney(n)
     if not n then return "$0" end
 
