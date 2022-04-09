@@ -6,10 +6,14 @@ hook.Add("PlayerInitialSpawn", "GBRP::Client Init", function(ply)
 
     if not data then
         sql.Query("insert into gbrp values(" .. ply:SteamID64() .. ", 0);")
-        ply:SetNWInt("GBRP::balance", 0)
+        ply:Cash(10000)
     else
         ply:SetNWInt("GBRP::balance", tonumber(data.balance))
     end
+    timer.Simple(4, function()
+        gbrp.SendDoorsData(ply)
+    end)
+    ply.AFKDemote = math.huge
     net.Start("GBRP::welcomeScreen")
     net.Send(ply)
 end)
@@ -34,12 +38,6 @@ hook.Add("PlayerDeath","GBRP:PlayerDeath",function(ply)
     if ply:IsGangLeader() then
         ply:GetGang():Reset()
     end
-end)
-hook.Add("PlayerInitialSpawn","GBRP:DoorsInitCS",function(ply)
-    timer.Simple(4, function()
-        gbrp.SendDoorsData(ply)
-    end)
-    ply.AFKDemote = math.huge
 end)
 hook.Add("PreCleanupMap", "GBRP::PreCleanupMap", function()
     gbrp.SaveDoors()

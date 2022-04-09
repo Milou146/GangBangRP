@@ -13,7 +13,7 @@ TEAM_CITIZEN = DarkRP.createJob("Citoyen", {
     candemote = false,
     category = "CITOYEN",
     PlayerSpawn = function(ply)
-        ply:SetSolid(SOLID_NONE)
+        ply:SetCollisionGroup(COLLISION_GROUP_WEAPON)
         GAMEMODE:SetPlayerSpeed(ply, GAMEMODE.Config.walkspeed * 1.0, GAMEMODE.Config.runspeed * 1.0)
     end
 })

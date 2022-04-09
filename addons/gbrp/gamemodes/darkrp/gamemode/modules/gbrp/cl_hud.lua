@@ -1,5 +1,6 @@
-local SmoothArmor = 0
-local SmoothHealth = 0
+local ft1,ft2 = 0,0
+local SmoothArmor = function() return Lerp(5 * (CurTime() - ft1), 0, LocalPlayer():Armor()) end
+local energy = function() return Lerp(CurTime() - ft2, 0, LocalPlayer():getDarkRPVar("Energy") or 0) end
 local ImgBurger = Material("gui/gbrp/hud/armorpng.png")
 local ImgArmor = Material("gui/gbrp/hud/burgurpng.png")
 local ImgLicence = Material("gui/gbrp/hud/licencepng.png")
@@ -19,20 +20,19 @@ hook.Add("OnContextMenuOpen", "GBRPContext", function()
     ContextMenuBase:SetTitle("")
     ContextMenuBase:SetDraggable(false)
     ContextMenuBase:ShowCloseButton(false)
+    ft1 = CurTime()
+    ft2 = CurTime()
 
     -- Image de la licence
     if LocalPlayer():getDarkRPVar("HasGunlicense") then
         ContextMenuBase.Paint = function(self, w, h)
             MaxAR = LocalPlayer():GetMaxArmor()
-            SmoothHealth = Lerp(5 * FrameTime(), SmoothHealth, LocalPlayer():Health())
-            SmoothArmor = Lerp(5 * FrameTime(), SmoothArmor, LocalPlayer():Armor())
-            energy = Lerp(FrameTime(), energy or LocalPlayer():getDarkRPVar("Energy") or 0, LocalPlayer():getDarkRPVar("Energy") or 0)
             -- Partie Armure 
             draw.drawArc(scrw * .47, scrh * 0.5, 85, 210, 30, 10, 8, Color(68, 68, 68, 255))
             draw.drawArc(scrw * .53, scrh * 0.5, 85, 210, 410, 10, 8, Color(68, 68, 68, 255))
-            draw.drawArc(scrw * .47, scrh * 0.5, 85, 30 + SmoothArmor / MaxAR * 180, 30, 10, 8, Color(51, 169, 229, 255))
+            draw.drawArc(scrw * .47, scrh * 0.5, 85, 30 + SmoothArmor() / MaxAR * 180, 30, 10, 8, Color(51, 169, 229, 255))
             -- Partie Faim
-            draw.drawArc(scrw * .53, scrh * 0.5, 85, 210 + energy / 100 * 200, 210, 10, 8, Color(255, 192, 0, 255))
+            draw.drawArc(scrw * .53, scrh * 0.5, 85, 210 + energy() / 100 * 200, 210, 10, 8, Color(255, 192, 0, 255))
             -- Partie Temps
             Timestamp = os.time()
             TimeString = os.date("%H:%M", Timestamp)
@@ -56,15 +56,12 @@ hook.Add("OnContextMenuOpen", "GBRPContext", function()
     else
         ContextMenuBase.Paint = function(self, w, h)
             MaxAR = LocalPlayer():GetMaxArmor()
-            SmoothHealth = Lerp(5 * FrameTime(), SmoothHealth, LocalPlayer():Health())
-            SmoothArmor = Lerp(5 * FrameTime(), SmoothArmor, LocalPlayer():Armor())
-            energy = Lerp(FrameTime(), energy or LocalPlayer():getDarkRPVar("Energy") or 0, LocalPlayer():getDarkRPVar("Energy") or 0)
             -- Partie Armure 
             draw.drawArc(scrw * .47, scrh * 0.5, 85, 210, 30, 10, 8, Color(68, 68, 68, 255))
-            draw.drawArc(scrw * .47, scrh * 0.5, 85, 30 + SmoothArmor / MaxAR * 180, 30, 10, 8, Color(51, 169, 229, 255))
+            draw.drawArc(scrw * .47, scrh * 0.5, 85, 30 + SmoothArmor() / MaxAR * 180, 30, 10, 8, Color(51, 169, 229, 255))
             -- Partie Faim
             draw.drawArc(scrw * .53, scrh * 0.5, 85, 210, 410, 10, 8, Color(68, 68, 68, 255))
-            draw.drawArc(scrw * .53, scrh * 0.5, 85, 210 + energy / 100 * 200, 210, 10, 8, Color(255, 192, 0, 255))
+            draw.drawArc(scrw * .53, scrh * 0.5, 85, 210 + energy() / 100 * 200, 210, 10, 8, Color(255, 192, 0, 255))
             -- Partie Temps
             Timestamp = os.time()
             TimeString = os.date("%H:%M", Timestamp)
