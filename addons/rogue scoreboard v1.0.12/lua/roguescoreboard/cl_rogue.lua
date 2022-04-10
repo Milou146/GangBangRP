@@ -1,8 +1,8 @@
 local Configuration = RogueScoreboard.Configuration
 
 hook.Add("InitPostEntity", "InitFadminRemove", function()
-    hook.Remove("ScoreboardShow", "FAdmin_scoreboard")
-    hook.Remove("ScoreboardHide", "FAdmin_scoreboard")
+	hook.Remove("ScoreboardShow", "FAdmin_scoreboard")
+	hook.Remove("ScoreboardHide", "FAdmin_scoreboard")
 end)
 
 surface.CreateFont("RogueTitle", {font = "Quicksand Regular", size = 48, extended = true, antialias = true,})

@@ -300,7 +300,7 @@ ItemShop[40] = {
 -- COD EXTRA PACK --
 -- PISTOL : arccw_bo3_bloodhound
 -- ASSAUT RIFLE / DMR: arccw_bo3_mp40, arccw_bo3_ppsh41, arccw_bo3_stg44
- 
+
 -- WAW PACK --
 -- PISTOL : arccw_waw_m1911, arccw_waw_tt33, arccw_waw_nambu, arccw_waw_p38
 -- SMG : 
