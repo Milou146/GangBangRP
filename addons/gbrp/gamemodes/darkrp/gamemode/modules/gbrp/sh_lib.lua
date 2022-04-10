@@ -1295,7 +1295,7 @@ if SERVER then
     function gbrp.gang:Reset()
         for k,v in pairs(gbrp.doors) do
             local door = ents.GetByIndex(k)
-            if door:getDoorData().groupOwn == self.name and gbrp.doorgroups[gbrp.doors[k].doorgroup].owner ~= self.name then
+            if door:getDoorData().groupOwn == self.name and gbrp.doorgroups[gbrp.doors[k].doorgroup].attributes.owner ~= self.name then
                 for _,doorid in pairs(gbrp.doorgroups[gbrp.doors[k].doorgroup].doors) do
                     door = ents.GetMapCreatedEntity(doorid)
                     door:setDoorGroup(nil)
