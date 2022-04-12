@@ -6,6 +6,7 @@ local ImgArmor = Material("gui/gbrp/hud/burgurpng.png")
 local ImgLicence = Material("gui/gbrp/hud/licencepng.png")
 local MaxAR, Timestamp, TimeString, money, argent
 local scrw, scrh = ScrW(), ScrH()
+local ContextMenuBase
 hook.Add("HUDDrawTargetID", "NUC_VANILLA_PLAYER_TARGETID", function() return false end)
 
 surface.CreateFont("PricedownLarge", {
@@ -14,7 +15,7 @@ surface.CreateFont("PricedownLarge", {
 })
 
 hook.Add("OnContextMenuOpen", "GBRPContext", function()
-    local ContextMenuBase = vgui.Create("DFrame")
+    ContextMenuBase = vgui.Create("DFrame")
     ContextMenuBase:SetSize(ScrW(), ScrH())
     ContextMenuBase:SetPos(0, 0)
     ContextMenuBase:SetTitle("")
