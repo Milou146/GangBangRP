@@ -29,6 +29,7 @@ util.AddNetworkString("GBRP::shopSolvation") -- client to server
 util.AddNetworkString("GBRP::cityhallReception") -- server to client
 util.AddNetworkString("GBRP::changeTax") -- client to server
 util.AddNetworkString("GBRP::hardwarestoreReception") -- server to cient
+util.AddNetworkString("GBRP::buyhardware")
 
 net.Receive("GBRP::buyproperty",function(len,ply)
     local gang = ply:GetGang()
@@ -219,4 +220,12 @@ net.Receive("GBRP::changeTax",function(len,ply)
         SetGlobalInt(tax,GetGlobalInt(tax) - 1)
     end
     ply:GetGang():Pay(net.ReadInt(32))
+end)
+net.Receive("GBRP::buyhardware",function(len,ply)
+    local class = net.ReadString()
+    local ent = ents.Create(class)
+    ent:SetModel(gbrp.hardwarestore.items[class].model)
+    ent:SetPos(gbrp.hardwarestore.spawnPos)
+    ent:Spawn()
+    ply:Pay(gbrp.hardwarestore.items[class].price)
 end)

@@ -951,6 +951,18 @@ function gbrp.gang:GetLeader()
     return team.GetPlayers(teamid)[1]
 end
 if SERVER then
+    gbrp.hardwarestore = {
+        spawnPos = Vector(1303,-1529,-50),
+        items = {
+            ["lockpick"] = {model = "models/weapons/w_crowbar.mdl", price = 15},
+            ["weapon_spraymhs"] = {model = "models/weapons/w_crowbar.mdl", price = 7},
+            ["weapon_slam"] = {model = "models/weapons/w_slam.mdl", price = 10},
+            ["weapon_rope_knife"] = {model = "models/weapons/hl2meleepack/w_hook.mdl", price = 3},
+            ["weapon_handcuffs"] = {model = "models/katharsmodels/handcuffs/handcuffs-1.mdl", price = 8},
+            ["weapon_breachingcharge"] = {model = "models/minic23/csgo/breach_charge.mdl", price = 9},
+            ["wep_jack_job_drpradio"] = {model = "models/radio/w_radio.mdl", price = 12},
+        }
+    }
     function gbrp.SpawnNPCs()
         local bank1 = ents.Create("gbrp_bank_receptionist")
         bank1.gender = "female"
@@ -1038,6 +1050,8 @@ if SERVER then
         bar:SetPos(Vector(4955,8042,210))
         bar:SetAngles(Angle(0,0,0))
         bar:SetShopName("bar")
+        bar:SetPrice(100000)
+        bar:SetValue(100000)
         bar:Spawn()
         bar.niceName = "Bar"
 
@@ -1322,6 +1336,25 @@ if SERVER then
     end
 end
 if CLIENT then
+    gbrp.hardwarestore = {
+        crowbar = Material("gui/gbrp/hardwarestore/crowbar.png"),
+        peinture = Material("gui/gbrp/hardwarestore/peinture.png"),
+        slam = Material("gui/gbrp/hardwarestore/slam.png"),
+        hookMat = Material("gui/gbrp/hardwarestore/hook.png"),
+        handscuffs = Material("gui/gbrp/hardwarestore/handscuffs.png"),
+        c4 = Material("gui/gbrp/hardwarestore/c4.png"),
+        walkieTalkie = Material("gui/gbrp/hardwarestore/walkie-talkie.png"),
+        trace = Material("gui/gbrp/hardwarestore/trace.png"),
+        items = {
+            [1] = {name = "lockpick", price = 15, y = 393},
+            [2] = {name = "weapon_spraymhs", price = 7, y = 435},
+            [3] = {name = "weapon_slam", price = 10, y = 476},
+            [4] = {name = "weapon_rope_knife", price = 3, y = 516},
+            [5] = {name = "weapon_handcuffs", price = 8, y = 551},
+            [6] = {name = "weapon_breachingcharge", price = 9, y = 590},
+            [7] = {name = "wep_jack_job_drpradio", price = 12, y = 643},
+        }
+    }
     gbrp.gangpanel = {}
     gbrp.gangpanel.properties = {
         ["house"] = {mat = Material("gui/gbrp/gangpanel/house.png"),x = 12,y = 30},

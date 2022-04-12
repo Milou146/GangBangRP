@@ -14,7 +14,7 @@ surface.CreateFont("PricedownLarge", {
 })
 
 hook.Add("OnContextMenuOpen", "GBRPContext", function()
-    ContextMenuBase = vgui.Create("DFrame")
+    local ContextMenuBase = vgui.Create("DFrame")
     ContextMenuBase:SetSize(ScrW(), ScrH())
     ContextMenuBase:SetPos(0, 0)
     ContextMenuBase:SetTitle("")
