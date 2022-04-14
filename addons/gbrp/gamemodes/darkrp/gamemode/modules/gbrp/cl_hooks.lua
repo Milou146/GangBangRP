@@ -1,5 +1,3 @@
-local ft = 0
-local gangPanelOpen = false
 local frame
 local hide = {
     ["CHudHealth"] = true,
@@ -155,36 +153,22 @@ hook.Add("onKeysMenuOpened","GBRP::DoorMenu",function(ent,darkrpframe)
         end
     end
 end)
-hook.Add("StartChat","GBRP::StartChat",function()
-    gangPanelOpen = true
-end)
-hook.Add("FinishChat","GBRP::FinishChat",function()
-    gangPanelOpen = false
-end)
-hook.Add("OnSpawnMenuOpen","GBRP::OnSpawnMenuOpen",function()
-    gangPanelOpen = true
-end)
-hook.Add("OnSpawnMenuClose","GBRP::OnSpawnMenuClose",function()
-    gangPanelOpen = false
-end)
 hook.Add("Think","GBRP::GangMenu",function()
     local ply = LocalPlayer()
-    if input.IsKeyDown(KEY_M) and not gangPanelOpen and CurTime() - ft > 2 then
-        ft = CurTime()
+    if input.IsKeyDown(KEY_M) and not vgui.GetKeyboardFocus() then
         if not ply:IsGangLeader() then ply:ChatPrint("Ce menu est réservé au chef de gang ;)") return end
-        gangPanelOpen = true
         local gang = ply:GetGang()
         local gangHousesTypes = gang:GetHousesTypes()
         local gangshops = gang:GetShopNames()
         local panelMat = Material("gui/gbrp/gangpanel/panel.png")
         local graduationMat = Material("gui/gbrp/gangpanel/graduation.png")
-        local panel = vgui.Create("EditablePanel",GetHUDPanel())
+        frame = vgui.Create("EditablePanel",GetHUDPanel())
         local membersbarMat = Material("gui/gbrp/gangpanel/membersbar.png")
         local earningsbarMat = Material("gui/gbrp/gangpanel/earningsbar.png")
         local expensesbarMat = Material("gui/gbrp/gangpanel/expensesbar.png")
-        panel:SetSize(1080,720)
-        panel:Center()
-        function panel:Paint(w,h)
+        frame:SetSize(1080,720)
+        frame:Center()
+        function frame:Paint(w,h)
             Derma_DrawBackgroundBlur(self, CurTime())
             surface.SetDrawColor(255,255,255)
             surface.SetMaterial(panelMat)
@@ -234,8 +218,8 @@ hook.Add("Think","GBRP::GangMenu",function()
             surface.SetMaterial(graduationMat)
             surface.DrawTexturedRect(388,205,570,75)
         end
-        panel:MakePopup()
-        local remove = vgui.Create("DImageButton",panel)
+        frame:MakePopup()
+        local remove = vgui.Create("DImageButton",frame)
         remove:SetPos(1034,20)
         remove:SetSize(46,46)
         remove.mat = Material("gui/gbrp/gangpanel/remove.png")
@@ -254,8 +238,7 @@ hook.Add("Think","GBRP::GangMenu",function()
             surface.DrawTexturedRect(0,0,w,h)
         end
         function remove:DoClick()
-            panel:Remove()
-            gangPanelOpen = false
+            frame:Remove()
         end
     end
 end)
